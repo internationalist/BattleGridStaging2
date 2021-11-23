@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1703a65cd2e6f7c47bd0ee65c5f309ca, type: 3}
+  m_Name: MovementCommand
+  m_EditorClassIdentifier: 
+  effectFlashPrefab: {fileID: 0}
+  soundEffects: []
+  payloadPrefab: {fileID: 1202536974330713061, guid: 0c9667cd195c69a4fa3546e16154bd6b, type: 3}
+  impactFlashPrefab: {fileID: 2300089161946121287, guid: 5548bba504c456740b6ff2c0041134d9, type: 3}
+  payLoadSpeed: 60
+  RweaponPrefab: {fileID: 5665017128938091278, guid: 6160c7568600c5440a1d36a27cda79a8, type: 3}
+  LweaponPrefab: {fileID: 0}
+  weaponAudioSource: {fileID: 0}
+  R_WeaponHolder_Position: {x: 0.027, y: -0.041, z: 0.007}
+  R_WeaponHolder_Rotation: {x: 344.88, y: 89.4, z: 85.7}
+  apNeeded: 0
+  enemyLayer: 11
+  maxBurstFire: 2
+  maxAmmo: 12
+  isDefault: 0
+  maxRuns: 1
+  damageParameters:
+    optimalRange: 10
+    fallOff: 5
+    baseDamage: 10
+    criticalDamageMultiplier: 3
+    criticalDamageChance: 0.1

@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80d56feadf96caf4097791c1bb35f7b2, type: 3}
+  m_Name: Ricochet
+  m_EditorClassIdentifier: 
+  leading:
+  - {fileID: 8300000, guid: 9c78deb0e8409474abf9449077991fb0, type: 3}
+  - {fileID: 8300000, guid: 7ec58ef8d88ce7c4d9a88a1da7d59435, type: 3}
+  - {fileID: 8300000, guid: 6947da6c470e3f749a1519901cfd50d1, type: 3}
+  - {fileID: 8300000, guid: 23888705c44da954d963cf264030709a, type: 3}
+  - {fileID: 8300000, guid: 1c19152e61145df418d9508cf0ad075f, type: 3}
+  - {fileID: 8300000, guid: 8e80d5725f2921945a53fe632a67249b, type: 3}
+  - {fileID: 8300000, guid: 7fa102d587197d5459d297e734603b88, type: 3}
+  - {fileID: 8300000, guid: 295b0b9df3c3af64280e618191c31141, type: 3}
+  - {fileID: 8300000, guid: b58606887ce21114c9d1e25167045b79, type: 3}
+  - {fileID: 8300000, guid: de82ce683f1cbbf49a76a401a44a9822, type: 3}
+  trailing:
+  - {fileID: 8300000, guid: ec358c8970189674cb9d62ea438e132d, type: 3}
+  - {fileID: 8300000, guid: d8e6f03ada80f554693d91382a694a23, type: 3}
+  - {fileID: 8300000, guid: 8bc2e367358b18345a4d6933657a14ba, type: 3}
+  - {fileID: 8300000, guid: 44b69f22aa3c37b46bf639abf365b495, type: 3}
+  - {fileID: 8300000, guid: 4b7a0ef7f5adbfd4c9fe794e692a3bb5, type: 3}

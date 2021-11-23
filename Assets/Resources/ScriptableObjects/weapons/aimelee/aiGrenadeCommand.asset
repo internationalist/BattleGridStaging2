@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a343c976641b0445bfc4ec491c0da07, type: 3}
+  m_Name: aiGrenadeCommand
+  m_EditorClassIdentifier: 
+  effectFlashPrefab: {fileID: 0}
+  soundEffects: []
+  payloadPrefab: {fileID: 2294015272401237634, guid: e2acf46264013434a931cb7cccb8134d, type: 3}
+  impactFlashPrefab: {fileID: 7871240245939812583, guid: 93cc0f7f92e6e9e43be5f5c9c48b9fd0, type: 3}
+  payLoadSpeed: 60
+  RweaponPrefab: {fileID: 2275402718760502648, guid: 202c6079c00a34940975f3c14e512a83, type: 3}
+  LweaponPrefab: {fileID: 3998771426078006545, guid: e5d8a128497cb3e4199577680626df9b, type: 3}
+  weaponAudioSource: {fileID: 0}
+  R_WeaponHolder_Position: {x: -0.047, y: -0.057, z: 0.102}
+  R_WeaponHolder_Rotation: {x: -13.806, y: 89.295, z: 77.336}
+  apNeeded: 0
+  enemyLayer: 11
+  maxBurstFire: 2
+  maxAmmo: 12
+  isDefault: 0
+  maxRuns: 1
+  damageParameters:
+    optimalRange: 8
+    fallOff: 0
+    baseDamage: 40
+    criticalDamageMultiplier: 0
+    criticalDamageChance: 0
