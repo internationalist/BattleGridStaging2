@@ -178,7 +178,7 @@ public class PlayerController : MonoBehaviour
 
     private IEnumerator deathBloodGush()
     {
-        yield return new WaitForSeconds(.1f);
+        yield return new WaitForSeconds(.05f);
         deathHeadBlood.Play();
         ParticleSystem deathBlood = deathBloods[Random.Range(0, 2)];
         deathBlood.Play();
