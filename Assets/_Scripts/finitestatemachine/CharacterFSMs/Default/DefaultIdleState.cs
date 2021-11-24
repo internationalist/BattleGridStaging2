@@ -175,7 +175,7 @@ public class DefaultIdleState : BaseState
             {
                 if (!t.teamID.Equals(command.playerController.teamID))
                 {
-                    closest = GeneralUtils.FindClosest(command.playerController.transform.position,
+                    closest = GeneralUtils.FindClosest(command.playerController,
                                              t,
                                              out distanceToClosestEnemy);
                     if (closest != null)
@@ -194,7 +194,8 @@ public class DefaultIdleState : BaseState
         Command.type enemyCommand = closest.getCurrentCommand().commandType;
         enemyPos = closest.transform.position;
 
-        if (distanceToClosestEnemy <= 5 && !enemyCommand.Equals(Command.type.move))
+        //if (distanceToClosestEnemy <= 5 && !enemyCommand.Equals(Command.type.move))
+        if (!enemyCommand.Equals(Command.type.move))
         {
             return true;
         }

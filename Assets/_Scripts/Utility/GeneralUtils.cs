@@ -42,7 +42,6 @@ public static class GeneralUtils {
         float distance = (target - origin).magnitude;
         bool wallInBetween = Physics.Raycast(origin, direction, distance, layerMask);
         Debug.DrawRay(origin, direction * distance, Color.green, 5f);
-        Debug.LogFormat("Wall In Betwween {0}", wallInBetween);
         return wallInBetween;
     }
 
@@ -519,18 +518,44 @@ public static class GeneralUtils {
         line.SetPositions(points);
     }
 
-    public static PlayerController FindClosest(Vector3 origin, Team team, out float distance)
+    public static PlayerController FindClosest(PlayerController player, Team team, out float distance)
     {
+        Vector3 origin = player.transform.position;
         float minDistance = float.MaxValue;
         PlayerController pc = null;
 
         foreach (PlayerController agent in team.players)
         {
-            distance = Vector3.Distance(origin, agent.transform.position);
-            if (distance < minDistance)
+            bool isApplicable = false;
+            //first check if there is no cover in between
+            CoverFramework[] covers = CheckCoversBetweenPoints(origin, agent.transform.position);
+            isApplicable = (covers == null || covers.Length == 0);
+            if(!isApplicable)
             {
-                minDistance = distance;
-                pc = agent;
+                for (int i =0; i < covers.Length; i++)
+                {
+                    if(covers[i] != null && (player.cover != null
+                        && covers[i].name.Equals(player.cover.name)))
+                    {
+                        Debug.LogFormat("Player in cover {0}", player.cover.name);
+                        isApplicable = false;
+                        break;
+                    } else if(covers[i] != null && covers[i].coverType.Equals(CoverFramework.TYPE.full)) {
+                        isApplicable = false;
+                        break;
+                    }
+                    isApplicable = true;
+                }
+            }
+
+            if(isApplicable) //Only consider this enemy if there is no cover in between
+            {
+                distance = Vector3.Distance(origin, agent.transform.position);
+                if (distance < minDistance)
+                {
+                    minDistance = distance;
+                    pc = agent;
+                }
             }
         }
         distance = minDistance;

@@ -8774,7 +8774,7 @@ PrefabInstance:
       objectReference: {fileID: 633549829}
     - target: {fileID: 43654203916842109, guid: a82355acbf468834bb967076fde0a77b, type: 3}
       propertyPath: playerMetaData.maxHP
-      value: 20
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 2901712332248624171, guid: a82355acbf468834bb967076fde0a77b, type: 3}
       propertyPath: m_Priority
@@ -9750,7 +9750,7 @@ PrefabInstance:
       objectReference: {fileID: 633549829}
     - target: {fileID: 43654203916842109, guid: a82355acbf468834bb967076fde0a77b, type: 3}
       propertyPath: playerMetaData.maxHP
-      value: 20
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 3204819976882227702, guid: a82355acbf468834bb967076fde0a77b, type: 3}
       propertyPath: m_ConnectedAnchor.x
