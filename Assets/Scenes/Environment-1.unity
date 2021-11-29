@@ -1408,17 +1408,6 @@ Transform:
   m_Father: {fileID: 455244525}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 89.464, y: 0, z: 0}
---- !u!114 &274074390 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 43654203916842109, guid: a82355acbf468834bb967076fde0a77b, type: 3}
-  m_PrefabInstance: {fileID: 2132163667}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bd87cfa04ebe3c04e94124c1251f61d5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &287124864
 GameObject:
   m_ObjectHideFlags: 0
@@ -8529,7 +8518,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8701500568258011919, guid: 8f8f1b4fe531feb4599ad909ac23cf0a, type: 3}
       propertyPath: teams.Array.data[1].players.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8701500568258011919, guid: 8f8f1b4fe531feb4599ad909ac23cf0a, type: 3}
       propertyPath: teams.Array.data[0].players.Array.data[0]
@@ -8542,11 +8531,11 @@ PrefabInstance:
     - target: {fileID: 8701500568258011919, guid: 8f8f1b4fe531feb4599ad909ac23cf0a, type: 3}
       propertyPath: teams.Array.data[1].players.Array.data[0]
       value: 
-      objectReference: {fileID: 274074390}
+      objectReference: {fileID: 294619672}
     - target: {fileID: 8701500568258011919, guid: 8f8f1b4fe531feb4599ad909ac23cf0a, type: 3}
       propertyPath: teams.Array.data[1].players.Array.data[1]
       value: 
-      objectReference: {fileID: 294619672}
+      objectReference: {fileID: 1967740217}
     - target: {fileID: 8701500568258011919, guid: 8f8f1b4fe531feb4599ad909ac23cf0a, type: 3}
       propertyPath: teams.Array.data[1].players.Array.data[2]
       value: 
@@ -9082,6 +9071,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a82355acbf468834bb967076fde0a77b, type: 3}
+--- !u!114 &1967740217 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 43654203916842109, guid: a82355acbf468834bb967076fde0a77b, type: 3}
+  m_PrefabInstance: {fileID: 2132163667}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd87cfa04ebe3c04e94124c1251f61d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2007231901 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4452736966023276024, guid: 8274a221f727f4041b72e6f0c4b13425, type: 3}
@@ -9864,6 +9864,10 @@ PrefabInstance:
     - target: {fileID: 43654203916842053, guid: a82355acbf468834bb967076fde0a77b, type: 3}
       propertyPath: m_Name
       value: pbr_soldier_ai
+      objectReference: {fileID: 0}
+    - target: {fileID: 43654203916842053, guid: a82355acbf468834bb967076fde0a77b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 43654203916842109, guid: a82355acbf468834bb967076fde0a77b, type: 3}
       propertyPath: pathVisualizer

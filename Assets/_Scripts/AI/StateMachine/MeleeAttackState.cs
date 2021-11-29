@@ -23,7 +23,8 @@ public class MeleeAttackState : RangedAttackState
             {
                 if (aim._controller.playerMetaData.CanMove())
                 {
-                    AIUtils.RushEnemy(aim._aiState, aim._controller, cf, true);
+                    //AIUtils.RushEnemy(aim._aiState, aim._controller, cf, true);
+                    RushOrApproach();
                     TriggerCommand(aim._aiState, aim._controller);
                 }
                 else
@@ -38,9 +39,10 @@ public class MeleeAttackState : RangedAttackState
                     //check if target behind partial cover.
                     if(aim._aiState.target.inCover)
                     {
-                        CoverFramework cf = aim._aiState.target.cover;
-                        AIUtils.RushEnemy(aim._aiState, aim._controller, cf); //If enemy is in partial cover then flank them close.
-                    } else
+                        //check to see if there is cover in the middle.
+                        RushOrApproach();
+                    }
+                    else
                     {
                         //if not in cover then simply approach
                         AIUtils.ApproachEnemy(aim._aiState, aim._controller);
@@ -62,8 +64,15 @@ public class MeleeAttackState : RangedAttackState
                     
                     if (aim._aiState.target.inCover) //if enemy in cover and can move then rush
                     {
-                        CoverFramework cf = aim._aiState.target.cover;
-                        AIUtils.RushEnemy(aim._aiState, aim._controller, cf, true);
+                        if(GeneralUtils.IsThereCoverBetween(aim._controller.transform.position, aim._aiState.target.transform.position, aim._aiState.target.cover.name))
+                        {
+                            CoverFramework cf = aim._aiState.target.cover;
+                            AIUtils.RushEnemy(aim._aiState, aim._controller, cf, true);
+                        } else
+                        {
+                            aim._aiState.cmdType = Command.type.primaryattack;
+                        }
+
                     } else //else just shoot
                     {
                         aim._aiState.cmdType = Command.type.primaryattack;
@@ -87,4 +96,18 @@ public class MeleeAttackState : RangedAttackState
             aim.TransitionToState(aim.states["end"]);
         }
     }
+
+    private void RushOrApproach()
+    {
+        if (!GeneralUtils.IsThereCoverBetween(aim._controller.transform.position, aim._aiState.target.transform.position, aim._aiState.target.cover.name))
+        {
+            AIUtils.ApproachEnemy(aim._aiState, aim._controller);
+        } else
+        {
+            CoverFramework cf = aim._aiState.target.cover;
+            AIUtils.RushEnemy(aim._aiState, aim._controller, cf);
+        }
+    }
+
+
 }

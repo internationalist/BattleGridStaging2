@@ -331,6 +331,22 @@ public static class GeneralUtils {
         return cm;
     }
 
+    public static bool IsThereCoverBetween(Vector3 origin, Vector3 target, string coverName)
+    {
+        bool isInCover = false;
+        CoverFramework[] covers = GeneralUtils.CheckCoversBetweenPoints(origin, target);
+        for (int i = 0; i < covers.Length; i++)
+        {
+            if (covers[i].name.Equals(coverName))
+            {
+                isInCover = true;
+                break;
+            }
+        }
+        return isInCover;
+    }
+
+
     /// <summary>
     /// <para>
     ///     If character is in cover this logic evaluates if the cover detected is not the one which the player is already in.
