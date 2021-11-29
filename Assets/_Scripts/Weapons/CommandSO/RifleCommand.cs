@@ -16,7 +16,7 @@ public class RifleCommand : CommandTemplate
     }
     public override void Launch(Command command, CommandDataInstance wd)
     {
-        if(wd.rlaunchPoint != null)
+        if (wd.rlaunchPoint != null)
         {
             wd.rlaunchPoint = wd.r_weapon.gameObject.transform.Find("LaunchPoint");
             wd.MuzzleLight = wd.rlaunchPoint.gameObject.transform.Find("MuzzleLight").gameObject;

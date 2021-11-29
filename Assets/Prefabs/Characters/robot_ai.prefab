@@ -20572,7 +20572,7 @@ GameObject:
   - component: {fileID: 3222915654763356575}
   - component: {fileID: 7431522759347361025}
   - component: {fileID: 711879989848416799}
-  m_Layer: 11
+  m_Layer: 15
   m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20760,7 +20760,7 @@ GameObject:
   - component: {fileID: 1507101369133266942}
   - component: {fileID: 6785859595077967300}
   - component: {fileID: 1461043642066762483}
-  m_Layer: 11
+  m_Layer: 15
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -21923,7 +21923,7 @@ GameObject:
   - component: {fileID: 4699986933332908986}
   - component: {fileID: 4201192368032895022}
   - component: {fileID: 3706978473447573033}
-  m_Layer: 11
+  m_Layer: 15
   m_Name: EnemyStatsPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -36,8 +36,16 @@ public class Grenade : Payload
             foreach (var hitCollider in hitColliders)
             {
                 PlayerController pc = hitCollider.gameObject.GetComponent<PlayerController>();
-                if(pc != null)
+
+                if (pc != null)
                 {
+                    ParticleSystem bloodMist = Instantiate(pc.bloodMist,
+                                       pc.transform.position + Vector3.up * .5f,
+                                       Quaternion.identity);
+                    int cnt = pc.bloodEffects.Count;
+                    ParticleSystem bloodEffectPrfab = pc.bloodEffects[Random.Range(0, cnt)];
+                    Instantiate(bloodEffectPrfab, pc.transform.position + Vector3.up * .5f, Quaternion.identity).Play();
+                    bloodMist.Play();
                     pc.TakeDamage(damageParameters.baseDamage);
                 }
             }
