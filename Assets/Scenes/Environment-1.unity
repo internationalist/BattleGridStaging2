@@ -601,6 +601,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: pbr-soldier
       objectReference: {fileID: 0}
+    - target: {fileID: 6113677777266783178, guid: b28dbb0226ecd464a9f06f1a4c8ec94a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6569588040517946873, guid: b28dbb0226ecd464a9f06f1a4c8ec94a, type: 3}
       propertyPath: m_ConnectedAnchor.x
       value: 0.014486691
@@ -1792,8 +1796,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dbd74dafdedb24e41b5dcf714b71bcb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shelterMarkerPrefab: {fileID: 0}
-  cornerMarkerPrefab: {fileID: 0}
+  shelterMarkerPrefab: {fileID: 1904043210118000525, guid: f37bc09355add3e4c81725f055b73a0c, type: 3}
+  cornerMarkerPrefab: {fileID: 1904043210118000525, guid: f37bc09355add3e4c81725f055b73a0c, type: 3}
   coverCollider: {fileID: 0}
   coverDockPoints: []
   cornerPoints: []
@@ -1955,8 +1959,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dbd74dafdedb24e41b5dcf714b71bcb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shelterMarkerPrefab: {fileID: 0}
-  cornerMarkerPrefab: {fileID: 0}
+  shelterMarkerPrefab: {fileID: 1904043210118000525, guid: f37bc09355add3e4c81725f055b73a0c, type: 3}
+  cornerMarkerPrefab: {fileID: 1904043210118000525, guid: f37bc09355add3e4c81725f055b73a0c, type: 3}
   coverCollider: {fileID: 0}
   coverDockPoints: []
   cornerPoints: []
@@ -2534,8 +2538,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dbd74dafdedb24e41b5dcf714b71bcb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shelterMarkerPrefab: {fileID: 0}
-  cornerMarkerPrefab: {fileID: 0}
+  shelterMarkerPrefab: {fileID: 1904043210118000525, guid: f37bc09355add3e4c81725f055b73a0c, type: 3}
+  cornerMarkerPrefab: {fileID: 1904043210118000525, guid: f37bc09355add3e4c81725f055b73a0c, type: 3}
   coverCollider: {fileID: 0}
   coverDockPoints: []
   cornerPoints: []
@@ -2689,8 +2693,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dbd74dafdedb24e41b5dcf714b71bcb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shelterMarkerPrefab: {fileID: 0}
-  cornerMarkerPrefab: {fileID: 0}
+  shelterMarkerPrefab: {fileID: 1904043210118000525, guid: f37bc09355add3e4c81725f055b73a0c, type: 3}
+  cornerMarkerPrefab: {fileID: 1904043210118000525, guid: f37bc09355add3e4c81725f055b73a0c, type: 3}
   coverCollider: {fileID: 0}
   coverDockPoints: []
   cornerPoints: []
@@ -3655,8 +3659,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dbd74dafdedb24e41b5dcf714b71bcb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shelterMarkerPrefab: {fileID: 0}
-  cornerMarkerPrefab: {fileID: 0}
+  shelterMarkerPrefab: {fileID: 1904043210118000525, guid: f37bc09355add3e4c81725f055b73a0c, type: 3}
+  cornerMarkerPrefab: {fileID: 1904043210118000525, guid: f37bc09355add3e4c81725f055b73a0c, type: 3}
   coverCollider: {fileID: 0}
   coverDockPoints: []
   cornerPoints: []
@@ -4556,8 +4560,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dbd74dafdedb24e41b5dcf714b71bcb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shelterMarkerPrefab: {fileID: 0}
-  cornerMarkerPrefab: {fileID: 0}
+  shelterMarkerPrefab: {fileID: 1904043210118000525, guid: f37bc09355add3e4c81725f055b73a0c, type: 3}
+  cornerMarkerPrefab: {fileID: 1904043210118000525, guid: f37bc09355add3e4c81725f055b73a0c, type: 3}
   coverCollider: {fileID: 0}
   coverDockPoints: []
   cornerPoints: []
@@ -5118,8 +5122,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dbd74dafdedb24e41b5dcf714b71bcb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shelterMarkerPrefab: {fileID: 0}
-  cornerMarkerPrefab: {fileID: 0}
+  shelterMarkerPrefab: {fileID: 1904043210118000525, guid: f37bc09355add3e4c81725f055b73a0c, type: 3}
+  cornerMarkerPrefab: {fileID: 1904043210118000525, guid: f37bc09355add3e4c81725f055b73a0c, type: 3}
   coverCollider: {fileID: 0}
   coverDockPoints: []
   cornerPoints: []
@@ -5693,17 +5697,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4211531182794166, guid: 885922377c54c4cf185ccb4f5d3b3e0c, type: 3}
   m_PrefabInstance: {fileID: 1121969806}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1142584856 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6113677777266783159, guid: b28dbb0226ecd464a9f06f1a4c8ec94a, type: 3}
-  m_PrefabInstance: {fileID: 100159487}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bd87cfa04ebe3c04e94124c1251f61d5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &1149001322 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4245984269440238, guid: 37f16a7beb3cae449a4885b50959b6ae, type: 3}
@@ -7152,8 +7145,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dbd74dafdedb24e41b5dcf714b71bcb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shelterMarkerPrefab: {fileID: 0}
-  cornerMarkerPrefab: {fileID: 0}
+  shelterMarkerPrefab: {fileID: 1904043210118000525, guid: f37bc09355add3e4c81725f055b73a0c, type: 3}
+  cornerMarkerPrefab: {fileID: 1904043210118000525, guid: f37bc09355add3e4c81725f055b73a0c, type: 3}
   coverCollider: {fileID: 0}
   coverDockPoints: []
   cornerPoints: []
@@ -8529,16 +8522,16 @@ PrefabInstance:
       objectReference: {fileID: 1460422368}
     - target: {fileID: 8701500568258011919, guid: 8f8f1b4fe531feb4599ad909ac23cf0a, type: 3}
       propertyPath: teams.Array.data[0].players.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8701500568258011919, guid: 8f8f1b4fe531feb4599ad909ac23cf0a, type: 3}
       propertyPath: teams.Array.data[1].players.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8701500568258011919, guid: 8f8f1b4fe531feb4599ad909ac23cf0a, type: 3}
       propertyPath: teams.Array.data[0].players.Array.data[0]
       value: 
-      objectReference: {fileID: 1142584856}
+      objectReference: {fileID: 1376205250}
     - target: {fileID: 8701500568258011919, guid: 8f8f1b4fe531feb4599ad909ac23cf0a, type: 3}
       propertyPath: teams.Array.data[0].players.Array.data[1]
       value: 
@@ -9335,8 +9328,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dbd74dafdedb24e41b5dcf714b71bcb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shelterMarkerPrefab: {fileID: 0}
-  cornerMarkerPrefab: {fileID: 0}
+  shelterMarkerPrefab: {fileID: 1904043210118000525, guid: f37bc09355add3e4c81725f055b73a0c, type: 3}
+  cornerMarkerPrefab: {fileID: 1904043210118000525, guid: f37bc09355add3e4c81725f055b73a0c, type: 3}
   coverCollider: {fileID: 0}
   coverDockPoints: []
   cornerPoints: []
@@ -9587,8 +9580,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dbd74dafdedb24e41b5dcf714b71bcb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shelterMarkerPrefab: {fileID: 0}
-  cornerMarkerPrefab: {fileID: 0}
+  shelterMarkerPrefab: {fileID: 1904043210118000525, guid: f37bc09355add3e4c81725f055b73a0c, type: 3}
+  cornerMarkerPrefab: {fileID: 1904043210118000525, guid: f37bc09355add3e4c81725f055b73a0c, type: 3}
   coverCollider: {fileID: 0}
   coverDockPoints: []
   cornerPoints: []
@@ -9882,7 +9875,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 43654203916842053, guid: a82355acbf468834bb967076fde0a77b, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 43654203916842109, guid: a82355acbf468834bb967076fde0a77b, type: 3}
       propertyPath: pathVisualizer
