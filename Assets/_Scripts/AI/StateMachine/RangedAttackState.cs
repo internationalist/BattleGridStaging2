@@ -48,11 +48,6 @@ public class RangedAttackState : AIActionState
 
     public override void Update()
     {
-/*        if(aim._controller.turnActive)
-        {
-            Debug.LogFormat("{0} Ranged Attack State running turn active {1} and isRunning:{2}"
-                , aim._controller.name, aim._controller.turnActive, isRunning);
-        }*/
 
         if (aim._controller.turnActive && !isRunning)
         {
