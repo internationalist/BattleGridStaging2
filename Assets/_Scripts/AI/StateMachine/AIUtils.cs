@@ -295,6 +295,7 @@ public static class AIUtils
     private static bool EvaluateIfFlankCover(AIState state, CoverFramework thisCover, bool aggressive)
     {
         bool ableToDock = false;
+        DockPoint chosenDockPoint = null;
         List<DockPoint> dockPointClone = new List<DockPoint>(thisCover.coverDockPoints);
         //sort by ascending so that closest location comes first.
         DockPointCompareAscending lc = new DockPointCompareAscending(state.agent.transform.position);
@@ -308,35 +309,45 @@ public static class AIUtils
             {
                 //run a raycast from this dock point to the closest enemy. And make sure there is the cover in between.
                 Vector3 dockPos = dockPointClone[i].position;
-                string[] covernames = GeneralUtils.CheckCoversBetweenTwoPoints(dockPos, state.target.transform.position);
+                CoverFramework[] covers = GeneralUtils.CheckCoversBetweenPoints(dockPos, state.target.transform.position);
                 //if(covernames.Length == 1) 
-                for(int j = 0; j < covernames.Length; j++) //Next we need to make sure there is a clear shot from this position to the enemy
+                for(int j = 0; j < covers.Length; j++) //Next we need to make sure there is a clear shot from this position to the enemy
                 {
-                    if(thisCover.name.Equals(covernames[0]))
+                    if(CoverFramework.TYPE.full.Equals(covers[j].coverType)) // No clear shot from this dockpoint
                     {
-                        state.moveLocation = dockPos;
-                        DirectionAndDistanceToLocation(state, state.agent);
-                        ValidateMoveLocationForAPAndNavMesh(state, false);
-
-                        //TODO At this point perform a further check on all other enemy units for clear line of sight.
+                        ableToDock = false;
+                        break;
+                    }
+                    if(chosenDockPoint == null && thisCover.name.Equals(covers[0]))
+                    {
                         if(!aggressive && IsExposedToEnemy(state, state.moveLocation))
                         {
                             continue;
                         } else
                         {
-                            state.cmdType = Command.type.move;
-                            state.achievedCover = true;
-                            RecordCover(state, dockPointClone[i]);
+                            chosenDockPoint = dockPointClone[i];
                             ableToDock = true;
-                            break;
                         }
                     }
                 }
             }
+            if(ableToDock)
+            {
+                MoveToDockPoint(state, chosenDockPoint);
+            }
         }
-        //At this point there is no cover left to dock with
-        //state.noCoverToDockTo = true;
+        //At this point we cannot dock at this cover.
         return ableToDock;
+    }
+
+    private static void MoveToDockPoint(AIState state, DockPoint chosen)
+    {
+        state.moveLocation = chosen.position;
+        DirectionAndDistanceToLocation(state, state.agent);
+        ValidateMoveLocationForAPAndNavMesh(state, false);
+        state.cmdType = Command.type.move;
+        state.achievedCover = true;
+        RecordCover(state, chosen);
     }
 
     private static bool IsExposedToEnemy(AIState state, Vector3 dockPos)

@@ -603,7 +603,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6113677777266783178, guid: b28dbb0226ecd464a9f06f1a4c8ec94a, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6569588040517946873, guid: b28dbb0226ecd464a9f06f1a4c8ec94a, type: 3}
       propertyPath: m_ConnectedAnchor.x
@@ -3079,6 +3079,17 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &619552162 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 43654203916842109, guid: a82355acbf468834bb967076fde0a77b, type: 3}
+  m_PrefabInstance: {fileID: 1952700221}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd87cfa04ebe3c04e94124c1251f61d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!120 &633549829 stripped
 LineRenderer:
   m_CorrespondingSourceObject: {fileID: 8180346915780068476, guid: 9b3d7ab0adb729e48b0d3aa978a6190f, type: 3}
@@ -4785,6 +4796,17 @@ Transform:
   m_Father: {fileID: 455244525}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &929701685 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6113677777266783159, guid: b28dbb0226ecd464a9f06f1a4c8ec94a, type: 3}
+  m_PrefabInstance: {fileID: 100159487}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd87cfa04ebe3c04e94124c1251f61d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &930383438
 GameObject:
   m_ObjectHideFlags: 0
@@ -8511,16 +8533,16 @@ PrefabInstance:
       objectReference: {fileID: 1460422368}
     - target: {fileID: 8701500568258011919, guid: 8f8f1b4fe531feb4599ad909ac23cf0a, type: 3}
       propertyPath: teams.Array.data[0].players.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8701500568258011919, guid: 8f8f1b4fe531feb4599ad909ac23cf0a, type: 3}
       propertyPath: teams.Array.data[1].players.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8701500568258011919, guid: 8f8f1b4fe531feb4599ad909ac23cf0a, type: 3}
       propertyPath: teams.Array.data[0].players.Array.data[0]
       value: 
-      objectReference: {fileID: 1376205250}
+      objectReference: {fileID: 929701685}
     - target: {fileID: 8701500568258011919, guid: 8f8f1b4fe531feb4599ad909ac23cf0a, type: 3}
       propertyPath: teams.Array.data[0].players.Array.data[1]
       value: 
@@ -8532,7 +8554,7 @@ PrefabInstance:
     - target: {fileID: 8701500568258011919, guid: 8f8f1b4fe531feb4599ad909ac23cf0a, type: 3}
       propertyPath: teams.Array.data[1].players.Array.data[1]
       value: 
-      objectReference: {fileID: 1967740217}
+      objectReference: {fileID: 619552162}
     - target: {fileID: 8701500568258011919, guid: 8f8f1b4fe531feb4599ad909ac23cf0a, type: 3}
       propertyPath: teams.Array.data[1].players.Array.data[2]
       value: 
@@ -8880,7 +8902,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 43654203916842053, guid: a82355acbf468834bb967076fde0a77b, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 43654203916842109, guid: a82355acbf468834bb967076fde0a77b, type: 3}
       propertyPath: ID
