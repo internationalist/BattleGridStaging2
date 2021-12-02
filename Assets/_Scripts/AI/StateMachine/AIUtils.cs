@@ -300,14 +300,14 @@ public static class AIUtils
         DockPointCompareAscending lc = new DockPointCompareAscending(state.agent.transform.position);
         dockPointClone.Sort(lc.Compare);
         //PrintDockPointList(dockPointClone);
-        foreach (DockPoint dockPoint in dockPointClone)
+        for (int i = 0; i <  dockPointClone.Count && !ableToDock; i++)
         {
             bool selfOccupied;
             //Debug.LogFormat("checking dockpoint {0} with enemy {1}", dockPoint.position, state.target.name);
-            if (!GeneralUtils.IsSpotOccupied(dockPoint.position, state.agent.ID, out selfOccupied) && !selfOccupied)
+            if (!GeneralUtils.IsSpotOccupied(dockPointClone[i].position, state.agent.ID, out selfOccupied) && !selfOccupied)
             {
                 //run a raycast from this dock point to the closest enemy. And make sure there is the cover in between.
-                Vector3 dockPos = dockPoint.position;
+                Vector3 dockPos = dockPointClone[i].position;
                 string[] covernames = GeneralUtils.CheckCoversBetweenTwoPoints(dockPos, state.target.transform.position);
                 //if(covernames.Length == 1) 
                 for(int j = 0; j < covernames.Length; j++) //Next we need to make sure there is a clear shot from this position to the enemy
@@ -326,7 +326,7 @@ public static class AIUtils
                         {
                             state.cmdType = Command.type.move;
                             state.achievedCover = true;
-                            RecordCover(state, dockPoint);
+                            RecordCover(state, dockPointClone[i]);
                             ableToDock = true;
                             break;
                         }

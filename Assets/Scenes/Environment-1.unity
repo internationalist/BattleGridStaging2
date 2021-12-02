@@ -3640,7 +3640,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 794158431}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 10.46, y: 0, z: -4.131}
+  m_LocalPosition: {x: 10.46, y: 0, z: -3.625}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1553211258}
@@ -6030,17 +6030,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1247655876}
   m_Mesh: {fileID: 4300000, guid: e926e4d5204b44d87ac4b794a7bfb82a, type: 3}
---- !u!114 &1262691300 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 43654203916842109, guid: a82355acbf468834bb967076fde0a77b, type: 3}
-  m_PrefabInstance: {fileID: 1952700221}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bd87cfa04ebe3c04e94124c1251f61d5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1273826404
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6908,7 +6897,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4056258851214172, guid: 6fb3c3ccbbfe80a40a52c06a792263c7, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.53999996
+      value: 0.495
       objectReference: {fileID: 0}
     - target: {fileID: 4056258851214172, guid: 6fb3c3ccbbfe80a40a52c06a792263c7, type: 3}
       propertyPath: m_LocalPosition.y
@@ -6916,7 +6905,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4056258851214172, guid: 6fb3c3ccbbfe80a40a52c06a792263c7, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.02
+      value: -0.482
       objectReference: {fileID: 0}
     - target: {fileID: 4056258851214172, guid: 6fb3c3ccbbfe80a40a52c06a792263c7, type: 3}
       propertyPath: m_LocalRotation.w
@@ -8539,7 +8528,7 @@ PrefabInstance:
     - target: {fileID: 8701500568258011919, guid: 8f8f1b4fe531feb4599ad909ac23cf0a, type: 3}
       propertyPath: teams.Array.data[1].players.Array.data[0]
       value: 
-      objectReference: {fileID: 1262691300}
+      objectReference: {fileID: 1967740217}
     - target: {fileID: 8701500568258011919, guid: 8f8f1b4fe531feb4599ad909ac23cf0a, type: 3}
       propertyPath: teams.Array.data[1].players.Array.data[1]
       value: 
@@ -8891,7 +8880,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 43654203916842053, guid: a82355acbf468834bb967076fde0a77b, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 43654203916842109, guid: a82355acbf468834bb967076fde0a77b, type: 3}
       propertyPath: ID
@@ -9875,7 +9864,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 43654203916842053, guid: a82355acbf468834bb967076fde0a77b, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 43654203916842109, guid: a82355acbf468834bb967076fde0a77b, type: 3}
       propertyPath: pathVisualizer

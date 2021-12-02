@@ -235,6 +235,7 @@ public static class GeneralUtils {
         RaycastHit[] hits;
         // Does the ray intersect any cover
         hits = Physics.RaycastAll(origin, direction, distance, coverLayerMask);
+        Debug.DrawRay(origin, direction, Color.green);
         if (hits != null)
         {
             retValues = new string[hits.Length];
