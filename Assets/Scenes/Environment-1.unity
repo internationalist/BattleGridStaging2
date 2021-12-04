@@ -844,7 +844,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6113677777266783178, guid: b28dbb0226ecd464a9f06f1a4c8ec94a, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6569588040517946873, guid: b28dbb0226ecd464a9f06f1a4c8ec94a, type: 3}
       propertyPath: m_ConnectedAnchor.x
@@ -4453,7 +4453,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8736960492209586443, guid: d4c85ab8dda9c0240a57b8742ab346b5, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -3
       objectReference: {fileID: 0}
     - target: {fileID: 8736960492209586443, guid: d4c85ab8dda9c0240a57b8742ab346b5, type: 3}
       propertyPath: m_LocalRotation.w
@@ -8533,11 +8533,11 @@ PrefabInstance:
       objectReference: {fileID: 1460422368}
     - target: {fileID: 8701500568258011919, guid: 8f8f1b4fe531feb4599ad909ac23cf0a, type: 3}
       propertyPath: teams.Array.data[0].players.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8701500568258011919, guid: 8f8f1b4fe531feb4599ad909ac23cf0a, type: 3}
       propertyPath: teams.Array.data[1].players.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8701500568258011919, guid: 8f8f1b4fe531feb4599ad909ac23cf0a, type: 3}
       propertyPath: teams.Array.data[0].players.Array.data[0]
@@ -8902,7 +8902,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 43654203916842053, guid: a82355acbf468834bb967076fde0a77b, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 43654203916842109, guid: a82355acbf468834bb967076fde0a77b, type: 3}
       propertyPath: ID
