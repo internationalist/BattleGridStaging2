@@ -338,7 +338,7 @@ public static class GeneralUtils {
         CoverFramework[] covers = GeneralUtils.CheckCoversBetweenPoints(origin, target);
         for (int i = 0; i < covers.Length; i++)
         {
-            if (covers[i].name.Equals(coverName))
+            if (covers[i].name.Equals(coverName) || CoverFramework.TYPE.full.Equals(covers[i].coverType))
             {
                 isInCover = true;
                 break;
