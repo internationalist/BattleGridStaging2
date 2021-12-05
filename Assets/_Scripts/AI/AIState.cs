@@ -8,6 +8,7 @@ public class AIState
     public PlayerController agent;
     public List<PlayerController> friends;
     public List<PlayerController> foes;
+    public List<PlayerController> targets;
     public PlayerController target;
     public float distanceToTarget;
     public Vector3 dirToTarget;
@@ -28,8 +29,6 @@ public class AIState
         this.friends = new List<PlayerController>();
         this.foes = new List<PlayerController>();
         this.agent = agent;
-        List<PlayerController> foes = new List<PlayerController>();
-        List<PlayerController> friends = new List<PlayerController>();
         if(TurnBasedSystem.I != null
             && TurnBasedSystem.I.teams != null
             &  TurnBasedSystem.I.teams.Count > 0)
@@ -48,12 +47,13 @@ public class AIState
                     }
                 }
             }
+            targets = new List<PlayerController>(foes);
         }
     }
     /// <summary>
     /// Commands are contained within Turns.
     /// </summary>
-    public void InitForCommand()
+    public void InitForNewTurn()
     {
         target = null;
         weaponTemplate = null;
@@ -61,6 +61,7 @@ public class AIState
         movementDistance = 0;
         cmdType = null;
         achievedCover = false;
+        targets = new List<PlayerController>(foes); //refresh target list at start of turn
     }
 
     public void RemoveDockPoint()
@@ -72,13 +73,6 @@ public class AIState
         }
     }
 
-    public void InitForTurn()
-    {
-        achievedAttack = false;
-        
-        //noCoverToDockTo = false;
-        RemoveDockPoint();
-    }
 
     public override string ToString()
     {

@@ -12,7 +12,7 @@ public static class AIUtils
         float distance = float.MaxValue;
         PlayerController closest = null;
         List<EntityScoreMap> targetList = new List<EntityScoreMap>();
-        foreach (PlayerController foe in state.foes)
+        foreach (PlayerController foe in state.targets)
         {
             float thisDistance = Vector3.Distance(agent.rangeMarker.transform.position, foe.transform.position);
             //Calculate closest

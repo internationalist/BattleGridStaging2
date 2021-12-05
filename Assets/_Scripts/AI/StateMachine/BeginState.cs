@@ -6,7 +6,6 @@ public class BeginState : AIActionState
 {
     public override void EnterState(AIStateMachine aiMachine)
     {
-        //Debug.LogFormat("{0} BeginState:EnterState->Start AI decision machine", aiMachine._controller.name);
         aim = aiMachine;
     }
 
@@ -14,9 +13,10 @@ public class BeginState : AIActionState
     {
         if(aim._controller.turnActive)
         {
-            //Debug.LogFormat("{0} BeginState:Update->turn active", aim._controller.name);
-            //aim.isCommandRunning = true;
-            if(aim._aiState.target == null)
+            if(aim._aiState.targets.Count == 0) //All targets have been exhausted. End turn
+            {
+                aim.TransitionToState(aim.states["end"]);
+            } else if(aim._aiState.target == null)
             {
                 aim.TransitionToState(aim.states["findtarget"]);
             } else if(aim._aiState.weaponTemplate == null)
@@ -24,12 +24,7 @@ public class BeginState : AIActionState
                 aim.TransitionToState(aim.states["selectaction"]);
             } else
             {
-                switch(aim._aiState.cmdType)
-                {
-                    case Command.type.primaryattack:
-                        aim.TransitionToState(aim.states["action"]);
-                        break;
-                }
+                aim.TransitionToState(aim.states["action"]);
             }
         } 
     }

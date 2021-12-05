@@ -253,7 +253,7 @@ public class PlayerController : MonoBehaviour
         GameManager.OnSelected -= OnSelect;
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
         currentState = currentCommand.currentState.GetType().Name;
         if (currentCommand != null && (isSelected || currentCommand.isActivated))

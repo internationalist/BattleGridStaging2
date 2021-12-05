@@ -12,7 +12,7 @@ public class MeleeAttackState : RangedAttackState
         {
             aim.TransitionToState(aim.states["start"]);
         }
-        else if (aim._controller.playerMetaData.CanAttack() && !aim._aiState.weaponInstance.isAmmoLeft())
+        else if (aim._controller.playerMetaData.CanAttack() && !aim._aiState.weaponInstance.isAmmoLeft())//No ammo
         {
             aim._aiState.cmdType = Command.type.reload;
             TriggerCommand(aim._aiState, aim._controller);
@@ -29,7 +29,9 @@ public class MeleeAttackState : RangedAttackState
                 }
                 else
                 {
-                    aim.TransitionToState(aim.states["end"]);
+                    //Target invalid. Go Back to beginning of AI loop
+                    DiscardTargetAndBeginAILoop();
+                    //aim.TransitionToState(aim.states["end"]);
                 }
             }
             else if (Mathf.Round(aim._aiState.distanceToTarget) > aim._aiState.weaponTemplate.damageParameters.optimalRange) //Attack command is out of range

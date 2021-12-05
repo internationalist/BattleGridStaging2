@@ -14,9 +14,8 @@ public class EndState : AIActionState
     {
         if(aim._controller.turnActive)
         {
-            //Debug.LogFormat("{0} EndState:Update->Command Ending", aim._controller.name);
             aim._controller.EndTurn();
-            aim._aiState.InitForCommand();
+            aim._aiState.InitForNewTurn();
             aim.TransitionToState(aim.defaultState);
         } 
     }

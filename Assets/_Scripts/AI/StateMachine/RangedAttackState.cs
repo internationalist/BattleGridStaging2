@@ -82,7 +82,8 @@ public class RangedAttackState : AIActionState
                 }
                 else
                 {
-                    aim.TransitionToState(aim.states["end"]);
+                    //Discard this target and start from begin of AI loop
+                    DiscardTargetAndBeginAILoop();
                 }
             }
             else if (Mathf.Round(aim._aiState.distanceToTarget) > aim._aiState.weaponTemplate.damageParameters.optimalRange) //Attack command is out of range
@@ -104,6 +105,7 @@ public class RangedAttackState : AIActionState
             }
             else //Enemy in optimal range.
             {
+                //shoot
                 aim._aiState.cmdType = Command.type.primaryattack;
                 TriggerCommand(aim._aiState, aim._controller);
             }

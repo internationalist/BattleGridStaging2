@@ -15,7 +15,6 @@ public class FindTarget : AIActionState
     {
         if (aim._controller.turnActive)
         {
-            //AIUtils.ChooseEnemy(aim._aiState, aim._controller, 90);
             AIUtils.ChooseEnemyV2(aim._aiState, aim._controller, aim.decisionMatrix);
             aim.TransitionToState(next);
         }
