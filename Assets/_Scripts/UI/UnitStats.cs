@@ -7,18 +7,19 @@ public class UnitStats : MonoBehaviour
 {
     public RectTransform statsPanel;
     public Transform hostUnit;
-    private Camera cam;
+    public Camera cam;
     // Start is called before the first frame update
     void Start()
     {
         statsPanel = GetComponent<RectTransform>();
-        cam = Camera.main;
+        //cam = Camera.main;
     }
 
     // Update is called once per frame
     void Update()
     {
-        Vector3 screenPos = cam.WorldToScreenPoint(hostUnit.position + Vector3.up*1.2f);
-        statsPanel.position = new Vector3(screenPos.x, screenPos.y, 0);
+        
+        Vector3 screenPos = cam.WorldToScreenPoint(hostUnit.position);
+        statsPanel.position = screenPos;
     }
 }

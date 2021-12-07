@@ -545,10 +545,10 @@ RectTransform:
   m_Father: {fileID: 5959344308726358431}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 1260, y: -269}
-  m_SizeDelta: {x: -3596.5813, y: -1839.9702}
+  m_AnchorMin: {x: 0.5, y: 0}
+  m_AnchorMax: {x: 0.5, y: 0}
+  m_AnchoredPosition: {x: 2576.3594, y: -535.9435}
+  m_SizeDelta: {x: 100, y: 110.5842}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &89443147
 MonoBehaviour:
@@ -564,6 +564,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   statsPanel: {fileID: 0}
   hostUnit: {fileID: 43654202659719191}
+  cam: {fileID: 9009959482519686797}
 --- !u!114 &89443148
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -577,7 +578,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0}
+  m_Color: {r: 0.504, g: 0.673863, b: 1, a: 0.050980393}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -6845,6 +6846,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1076003599}
     m_Modifications:
+    - target: {fileID: 6349118685395915724, guid: c8b2d9b72ce5e764c8ab725979e1f7ab, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6349118686257221292, guid: c8b2d9b72ce5e764c8ab725979e1f7ab, type: 3}
       propertyPath: m_Name
       value: UICanvas
@@ -13385,10 +13390,10 @@ RectTransform:
   m_Father: {fileID: 89443146}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -3.9140625, y: 82.121826}
-  m_SizeDelta: {x: -94.211426, y: -289.13184}
+  m_AnchorMin: {x: 0.5, y: 0}
+  m_AnchorMax: {x: 0.5, y: 0}
+  m_AnchoredPosition: {x: 0.30859375, y: 116.51335}
+  m_SizeDelta: {x: 37.34909, y: 8.85849}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1311374514226210997
 GameObject:
@@ -15991,10 +15996,10 @@ RectTransform:
   m_Father: {fileID: 89443146}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -3.9143066, y: 82.121826}
-  m_SizeDelta: {x: -94.211426, y: -289.13184}
+  m_AnchorMin: {x: 0.5, y: 0}
+  m_AnchorMax: {x: 0.5, y: 0}
+  m_AnchoredPosition: {x: 0.3088379, y: 116.51335}
+  m_SizeDelta: {x: 37.34909, y: 8.85849}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!4 &3138276086629240418
 Transform:
@@ -17647,6 +17652,10 @@ PrefabInstance:
       propertyPath: m_RenderingPath
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 5338674086647295009, guid: ba3e3bb79eda333418d0958dc0feb19f, type: 3}
+      propertyPath: m_CullingMask.m_Bits
+      value: 1698615
+      objectReference: {fileID: 0}
     - target: {fileID: 5338674086647295020, guid: ba3e3bb79eda333418d0958dc0feb19f, type: 3}
       propertyPath: m_Name
       value: Main Camera
@@ -17654,6 +17663,14 @@ PrefabInstance:
     - target: {fileID: 5338674086772542244, guid: ba3e3bb79eda333418d0958dc0feb19f, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5338674086772542247, guid: ba3e3bb79eda333418d0958dc0feb19f, type: 3}
+      propertyPath: orthographic
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5338674086772542247, guid: ba3e3bb79eda333418d0958dc0feb19f, type: 3}
+      propertyPath: m_CullingMask.m_Bits
+      value: 32768
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ba3e3bb79eda333418d0958dc0feb19f, type: 3}
@@ -17778,12 +17795,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 800, y: 600}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0
+  m_MatchWidthOrHeight: 1
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
@@ -18475,14 +18492,14 @@ Canvas:
   m_Enabled: 1
   serializedVersion: 3
   m_RenderMode: 0
-  m_Camera: {fileID: 0}
+  m_Camera: {fileID: 9009959482519686797}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_AdditionalShaderChannelsFlag: 25
+  m_AdditionalShaderChannelsFlag: 1
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
