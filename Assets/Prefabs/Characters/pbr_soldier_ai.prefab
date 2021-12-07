@@ -198,6 +198,7 @@ MonoBehaviour:
     agent: {fileID: 0}
     friends: []
     foes: []
+    targets: []
     target: {fileID: 0}
     distanceToTarget: 0
     dirToTarget: {x: 0, y: 0, z: 0}
@@ -2975,7 +2976,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -8.700012, y: 97}
+  m_AnchoredPosition: {x: -8.699951, y: 97}
   m_SizeDelta: {x: -102.7, y: -220.6}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7049686104922127942
@@ -8072,7 +8073,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -8.700012, y: 97}
+  m_AnchoredPosition: {x: -8.699951, y: 97}
   m_SizeDelta: {x: -102.7, y: -220.6}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6402889293623129731
