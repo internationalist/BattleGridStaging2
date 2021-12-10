@@ -113,7 +113,7 @@ public class RangedAttackState : AIActionState
         else if (aim._controller.playerMetaData.CanMove()
                                     && !aim._aiState.achievedCover) //Attack command used up but can still move. 
         {
-            if(aim._aiState.agent.inCover) //already in cover
+            if(aim._aiState.agent.InCover) //already in cover
             {
                 string coverName = aim._aiState.agent.cover.name;
                 if(GeneralUtils.CheckCoverBetweenPointsByName(aim._aiState.agent.transform.position, aim._aiState.target.transform.position, coverName))

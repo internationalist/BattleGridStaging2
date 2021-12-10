@@ -7,7 +7,7 @@ public class ReloadState : BaseState
     public override void EnterState(BaseFSMController controller)
     {
         command = (ReloadFSM)controller;
-        if(command.playerController.inCover)
+        if(command.playerController.InCover)
         {
             AnimatorStateInfo currentAnimState = command.anim.GetCurrentAnimatorStateInfo(0);
             if (command.playerController.cover.coverType.Equals(CoverFramework.TYPE.full))
@@ -39,7 +39,7 @@ public class ReloadState : BaseState
             command.anim.SetTrigger("Reload");
         }
         float yDisplacement = 2.5f;
-        if(command.playerController.inCover
+        if(command.playerController.InCover
             && CoverFramework.TYPE.half.Equals(command.playerController.cover.coverType))
         {
             yDisplacement -= .7F;

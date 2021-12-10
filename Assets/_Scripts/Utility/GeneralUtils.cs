@@ -365,7 +365,7 @@ public static class GeneralUtils {
         {
             coverInTheWay = true;
         }
-        else if (command.enemyController.inCover)
+        else if (command.enemyController.InCover)
         {
             if (command.enemyController.cover.name.Equals(cf.name))
             {

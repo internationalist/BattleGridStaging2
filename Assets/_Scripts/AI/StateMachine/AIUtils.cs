@@ -204,7 +204,7 @@ public static class AIUtils
         coverCloneList.Sort(cca.Compare);
         foreach (CoverFramework cover in coverCloneList)
         {
-            if (state.target.inCover)
+            if (state.target.InCover)
             {
                 if (state.target.cover.name.Equals(cover.name) && !state.target.cover.coverType.Equals(CoverFramework.TYPE.full)) //Cover found is the same one that enemy has taken shelter in.
                 {

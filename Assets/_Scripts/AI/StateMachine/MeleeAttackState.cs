@@ -39,7 +39,7 @@ public class MeleeAttackState : RangedAttackState
                 if (aim._controller.playerMetaData.CanMove())
                 {
                     //check if target behind partial cover.
-                    if(aim._aiState.target.inCover)
+                    if(aim._aiState.target.InCover)
                     {
                         //check to see if there is cover in the middle.
                         RushOrApproach();
@@ -64,7 +64,7 @@ public class MeleeAttackState : RangedAttackState
                 if(aim._controller.playerMetaData.CanMove())
                 {
                     
-                    if (aim._aiState.target.inCover) //if enemy in cover and can move then rush
+                    if (aim._aiState.target.InCover) //if enemy in cover and can move then rush
                     {
                         if(GeneralUtils.IsThereCoverBetween(aim._controller.transform.position, aim._aiState.target.transform.position, aim._aiState.target.cover.name))
                         {

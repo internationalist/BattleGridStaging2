@@ -26,8 +26,7 @@ public class CoverProbe : MonoBehaviour
             CoverFramework cf = other.GetComponent<CoverFramework>();
             if (cf != null)
             {
-                hostPlayer.cover = cf;
-                hostPlayer.inCover = true;
+                hostPlayer.EnableCover(true, cf);
             }
         }
     }
@@ -43,11 +42,11 @@ public class CoverProbe : MonoBehaviour
                 CoverFramework cf = other.GetComponent<CoverFramework>();
                 if (hostPlayer.cover.name.Equals(cf.name))
                 {
-                    hostPlayer.inCover = false;
+                    hostPlayer.EnableCover(false);
                 }
             } else
             {
-                hostPlayer.inCover = false;
+                hostPlayer.EnableCover(false);
             }
         }
     }

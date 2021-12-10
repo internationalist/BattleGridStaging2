@@ -13,7 +13,7 @@ public class CoverFactor : Factor
         int retValue = 10;
         string targetCoverName = null;
         CoverFramework targetCover = target.cover;
-        if (target.inCover)
+        if (target.InCover)
         {
             targetCoverName = targetCover.name;
         }

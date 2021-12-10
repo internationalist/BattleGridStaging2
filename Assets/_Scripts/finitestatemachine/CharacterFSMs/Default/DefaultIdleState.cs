@@ -50,7 +50,7 @@ public class DefaultIdleState : BaseState
             else
             {
                 AnimatorStateInfo currentAnimState = cmd.anim.GetCurrentAnimatorStateInfo(0);
-                if (currentAnimState.IsName("Idle") && cmd.playerController.inCover
+                if (currentAnimState.IsName("Idle") && cmd.playerController.InCover
                     && !transitioning)
                 {
                     ActivateCoverAnimation(cmd);
@@ -89,7 +89,7 @@ public class DefaultIdleState : BaseState
         }
         else
         {
-            if (pc.inCover)
+            if (pc.InCover)
             {
                 if (CoverFramework.TYPE.full.Equals(pc.cover.coverType))
                 {

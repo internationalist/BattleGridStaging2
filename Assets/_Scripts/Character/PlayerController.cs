@@ -52,7 +52,7 @@ public class PlayerController : MonoBehaviour
     public bool isAgent;
 
     [Tooltip("A boolean indicating if this character is in a cover position or not")]
-    public bool inCover;
+    private bool inCover;
 
     public CoverFramework cover;
 
@@ -87,6 +87,7 @@ public class PlayerController : MonoBehaviour
     public NavMeshAgent nav;
     GameObject marker;
     public Image healthBar;
+    public Image coverStatus;
 
     public bool barrelGripIK = true;
 
@@ -118,6 +119,22 @@ public class PlayerController : MonoBehaviour
     public AudioSource audioSource;
 
     public AudioSource weaponAudio;
+
+    public bool InCover { get => inCover; }
+
+    public void EnableCover(bool inCover, CoverFramework cf = null)
+    {
+        this.cover = cf;
+        this.inCover = inCover;
+        if(cf != null)
+        {
+            this.coverStatus.fillAmount = cf.damageReductionPct;
+        } else
+        {
+            this.coverStatus.fillAmount = 0;
+        }
+        
+    }
 
     /// <summary>
     /// Event that is invoked for weapon effects launch from a certain point in the

@@ -42899,7 +42899,6 @@ MonoBehaviour:
     grunts: {fileID: 11400000, guid: 707820041a3b6484184b5bc14bb124ed, type: 2}
   _agent: {fileID: 0}
   isAgent: 0
-  inCover: 0
   cover: {fileID: 0}
   bloodEffects:
   - {fileID: 2242024600439991184, guid: 802ce61aa3e41544d8f3e408dfa6c7f5, type: 3}
@@ -42912,6 +42911,7 @@ MonoBehaviour:
   currentState: 
   nav: {fileID: 0}
   healthBar: {fileID: 2382686627558274657}
+  coverStatus: {fileID: 3316775176240363403}
   barrelGripIK: 1
   actionCamHook: {fileID: 2753451700638049826}
   audioSource: {fileID: 8736960492209586445}
@@ -48102,16 +48102,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5d420f7fff7f76147aa1e92d970a95da, type: 3}
---- !u!224 &8985901028474184437 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 4223712685430750708, guid: 5d420f7fff7f76147aa1e92d970a95da, type: 3}
+--- !u!114 &3316775176240363403 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7507074364774262922, guid: 5d420f7fff7f76147aa1e92d970a95da, type: 3}
   m_PrefabInstance: {fileID: 5055837242701668097}
   m_PrefabAsset: {fileID: 0}
---- !u!223 &7622816258726662084 stripped
-Canvas:
-  m_CorrespondingSourceObject: {fileID: 3449862664008093893, guid: 5d420f7fff7f76147aa1e92d970a95da, type: 3}
-  m_PrefabInstance: {fileID: 5055837242701668097}
-  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &2382686627558274657 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7437960808228940128, guid: 5d420f7fff7f76147aa1e92d970a95da, type: 3}
@@ -48123,6 +48124,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!223 &7622816258726662084 stripped
+Canvas:
+  m_CorrespondingSourceObject: {fileID: 3449862664008093893, guid: 5d420f7fff7f76147aa1e92d970a95da, type: 3}
+  m_PrefabInstance: {fileID: 5055837242701668097}
+  m_PrefabAsset: {fileID: 0}
+--- !u!224 &8985901028474184437 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 4223712685430750708, guid: 5d420f7fff7f76147aa1e92d970a95da, type: 3}
+  m_PrefabInstance: {fileID: 5055837242701668097}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8472699694950917062
 PrefabInstance:
   m_ObjectHideFlags: 0
