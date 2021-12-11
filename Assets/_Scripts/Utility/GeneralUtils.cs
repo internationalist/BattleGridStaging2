@@ -23,6 +23,23 @@ public static class GeneralUtils {
         return Physics.Raycast(ray, out hit, Mathf.Infinity, finalLayerMask);
     }
 
+    public static PlayerController MousePointerOnCharacter(out RaycastHit hit)
+    {
+        PlayerController pc = null;
+        var ray = Camera.main.ScreenPointToRay(PCInputManager.Instance.hoverPosition());
+        int enemyLayerMask = 1 << 11;
+        int playerLayerMask = 1 << 8;
+
+        int finalLayerMask = enemyLayerMask | playerLayerMask;
+
+        if(Physics.Raycast(ray, out hit, Mathf.Infinity, finalLayerMask))
+        {
+            pc = hit.collider.GetComponent<PlayerController>();
+            Debug.LogFormat("Character: {0}", pc.name);
+        }
+        return pc;
+    }
+
     public static bool MousePointerOverCover(out RaycastHit hit)
     {
         var ray = Camera.main.ScreenPointToRay(PCInputManager.Instance.hoverPosition());
@@ -554,7 +571,6 @@ public static class GeneralUtils {
                     if(covers[i] != null && (player.cover != null
                         && covers[i].name.Equals(player.cover.name)))
                     {
-                        Debug.LogFormat("Player in cover {0}", player.cover.name);
                         isApplicable = false;
                         break;
                     } else if(covers[i] != null && covers[i].coverType.Equals(CoverFramework.TYPE.full)) {

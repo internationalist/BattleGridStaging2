@@ -6,6 +6,7 @@ using UnityEngine.EventSystems;
 
 public class PointAndClickController : MonoBehaviour
 {
+    PlayerController pc = null;
     private void Update()
     {
         if (PCInputManager.Instance.ClickOnDestination() && !EventSystem.current.IsPointerOverGameObject())
@@ -14,11 +15,32 @@ public class PointAndClickController : MonoBehaviour
             {
                 Clicked();
             }
-        }
-
-        if (PCInputManager.Instance.RightClickOnDestination() && !EventSystem.current.IsPointerOverGameObject())
+        } else if (PCInputManager.Instance.RightClickOnDestination() && !EventSystem.current.IsPointerOverGameObject())
         {
             RightClicked();
+        } else
+        {
+            RaycastHit hit = new RaycastHit();
+            PlayerController thisPc = GeneralUtils.MousePointerOnCharacter(out hit);
+            if(thisPc != null)
+            {
+                pc = thisPc;
+                Command cmd = pc.getCurrentCommand();
+                
+                if("IdleFSM".Equals(cmd.GetType().ToString())) {
+                    pc.ShowInfoPanel();
+                } else
+                {
+                    pc.HideInfoPanel();
+                }
+            } else
+            {
+                //Debug.Log("NO hover over character");
+                if (pc != null)
+                {
+                    pc.HideInfoPanel();
+                }
+            }
         }
     }
 

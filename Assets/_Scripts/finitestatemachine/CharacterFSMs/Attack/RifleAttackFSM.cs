@@ -78,7 +78,6 @@ public class RifleAttackFSM : Command
 
                 string attackMeta = string.Format("CRITICAL DAMAGE:{0}%\nHIT CHANCE: {1}%\n DMG MULTIPLIER:{2}", dm.criticalDmgChance.ToString("0.##"), dm.dmgChance.ToString("0.##"), dm.dmgMultiplier.ToString("0.##"));
                 
-
                 UIManager.ShowAttackData(attackMeta, hit.transform.gameObject);
             } else
             {

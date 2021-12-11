@@ -63,6 +63,8 @@ public class PlayerController : MonoBehaviour
 
     public ParticleSystem deathHeadBlood;
 
+    public InfoPanel infoPanel;
+
 
 
     #region internal state
@@ -412,6 +414,17 @@ public class PlayerController : MonoBehaviour
         UIManager.DisplayAmmo(wi.ammoCount);
         UIManager.DisplayTurnsLeftForItemUse(playerMetaData.turnsLeftForItemUse);
         //UIManager.GenerateUIForCommands(this);
+    }
+
+    public void ShowInfoPanel()
+    {
+        infoPanel.Show();
+        infoPanel.SetInfo("5", this.name);
+    }
+
+    public void HideInfoPanel()
+    {
+        infoPanel.Hide();
     }
 
 
