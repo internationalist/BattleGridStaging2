@@ -48634,15 +48634,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7437960808228940128, guid: 5d420f7fff7f76147aa1e92d970a95da, type: 3}
       propertyPath: m_Color.b
-      value: 1
+      value: 0.7254902
       objectReference: {fileID: 0}
     - target: {fileID: 7437960808228940128, guid: 5d420f7fff7f76147aa1e92d970a95da, type: 3}
       propertyPath: m_Color.g
-      value: 0.43529412
+      value: 0.5019608
       objectReference: {fileID: 0}
     - target: {fileID: 7437960808228940128, guid: 5d420f7fff7f76147aa1e92d970a95da, type: 3}
       propertyPath: m_Color.r
-      value: 0.14117648
+      value: 0.16078432
       objectReference: {fileID: 0}
     - target: {fileID: 7507074363634259744, guid: 5d420f7fff7f76147aa1e92d970a95da, type: 3}
       propertyPath: cam
@@ -48652,6 +48652,10 @@ PrefabInstance:
       propertyPath: hostUnit
       value: 
       objectReference: {fileID: 973063781272057715}
+    - target: {fileID: 7507074364803393714, guid: 5d420f7fff7f76147aa1e92d970a95da, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5d420f7fff7f76147aa1e92d970a95da, type: 3}
 --- !u!114 &8743892536779965534 stripped

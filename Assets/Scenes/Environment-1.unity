@@ -7329,7 +7329,7 @@ PrefabInstance:
       objectReference: {fileID: 2026096768}
     - target: {fileID: 8736960492209586441, guid: d4c85ab8dda9c0240a57b8742ab346b5, type: 3}
       propertyPath: m_Name
-      value: robot_ai
+      value: officer
       objectReference: {fileID: 0}
     - target: {fileID: 8736960492209586443, guid: d4c85ab8dda9c0240a57b8742ab346b5, type: 3}
       propertyPath: m_RootOrder
@@ -8259,7 +8259,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 973063781272057610, guid: 3a09bcde966418e458aad6c358d0b655, type: 3}
       propertyPath: m_Name
-      value: pbr-soldier-2
+      value: soldierB
       objectReference: {fileID: 0}
     - target: {fileID: 973063781272057715, guid: 3a09bcde966418e458aad6c358d0b655, type: 3}
       propertyPath: m_RootOrder
@@ -13292,7 +13292,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 973063781272057610, guid: 3a09bcde966418e458aad6c358d0b655, type: 3}
       propertyPath: m_Name
-      value: pbr-soldier
+      value: soldierA
       objectReference: {fileID: 0}
     - target: {fileID: 973063781272057715, guid: 3a09bcde966418e458aad6c358d0b655, type: 3}
       propertyPath: m_RootOrder
@@ -13677,7 +13677,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7488266450533309383, guid: c42b0729f71d76741958c27d3bf91ae6, type: 3}
       propertyPath: m_Name
-      value: pbr_soldier_ai
+      value: grunt
       objectReference: {fileID: 0}
     - target: {fileID: 7488266450533309439, guid: c42b0729f71d76741958c27d3bf91ae6, type: 3}
       propertyPath: pathVisualizer

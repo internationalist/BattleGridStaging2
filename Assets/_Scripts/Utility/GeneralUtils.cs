@@ -35,7 +35,6 @@ public static class GeneralUtils {
         if(Physics.Raycast(ray, out hit, Mathf.Infinity, finalLayerMask))
         {
             pc = hit.collider.GetComponent<PlayerController>();
-            Debug.LogFormat("Character: {0}", pc.name);
         }
         return pc;
     }

@@ -14,10 +14,13 @@ public class InfoPanel
     public TMP_Text levelBg;
     public TMP_Text usernameBg;
 
+    public GameObject hitChancePanel;
+
+
     public void SetInfo(string level, string userName)
     {
-        this.level.text = level;
-        this.levelBg.text = level;
+        this.level.text = string.Format("Level:{0}",level);
+        this.levelBg.text = this.level.text;
         this.username.text = userName;
         this.usernameBg.text = userName;
     }

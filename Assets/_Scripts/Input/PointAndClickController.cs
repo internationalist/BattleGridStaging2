@@ -25,9 +25,10 @@ public class PointAndClickController : MonoBehaviour
             if(thisPc != null)
             {
                 pc = thisPc;
-                Command cmd = pc.getCurrentCommand();
-                
-                if("IdleFSM".Equals(cmd.GetType().ToString())) {
+                if(GameManager._currentPlayer == null
+                    || "IdleFSM".Equals(GameManager._currentPlayer.getCurrentCommand().GetType().ToString())) { 
+                //Command cmd = pc.getCurrentCommand();
+                //if("IdleFSM".Equals(cmd.GetType().ToString())) {
                     pc.ShowInfoPanel();
                 } else
                 {

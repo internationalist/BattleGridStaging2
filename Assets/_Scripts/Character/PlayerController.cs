@@ -130,9 +130,11 @@ public class PlayerController : MonoBehaviour
         this.inCover = inCover;
         if(cf != null)
         {
+            this.coverStatus.transform.parent.gameObject.SetActive(true);
             this.coverStatus.fillAmount = cf.damageReductionPct;
         } else
         {
+            this.coverStatus.transform.parent.gameObject.SetActive(false);
             this.coverStatus.fillAmount = 0;
         }
         
@@ -384,7 +386,6 @@ public class PlayerController : MonoBehaviour
 
     public void CreateRangeIndicator(float range)
     {
-        //float range = this.GetWeaponTemplateForCommand(cmdType).damageParameters.optimalRange;
         rangeVisualizer.gameObject.SetActive(true);
         GeneralUtils.DrawCircle(transform.position, rangeVisualizer, range, .1f);
     }
@@ -413,7 +414,6 @@ public class PlayerController : MonoBehaviour
         CommandDataInstance wi = commands[GeneralUtils.ATTACKSLOT].commandDataInstance;
         UIManager.DisplayAmmo(wi.ammoCount);
         UIManager.DisplayTurnsLeftForItemUse(playerMetaData.turnsLeftForItemUse);
-        //UIManager.GenerateUIForCommands(this);
     }
 
     public void ShowInfoPanel()
