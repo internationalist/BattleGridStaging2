@@ -15,7 +15,12 @@ public class InfoPanel
     public TMP_Text usernameBg;
 
     public GameObject hitChancePanel;
-
+    public TMP_Text criticalDmg;
+    public TMP_Text criticalDmgBg;
+    public TMP_Text hitChance;
+    public TMP_Text hitChanceBg;
+    public TMP_Text dmgMultiplier;
+    public TMP_Text dmgMultiplierBg;
 
     public void SetInfo(string level, string userName)
     {
@@ -23,6 +28,18 @@ public class InfoPanel
         this.levelBg.text = this.level.text;
         this.username.text = userName;
         this.usernameBg.text = userName;
+    }
+
+    public void SetAttackInfo(string criticalDmg,
+                        string hitChance,
+                        string dmgMultiplier)
+    {
+        this.criticalDmg.text = string.Format("Critical Damage:{0}%", criticalDmg);
+        this.criticalDmgBg.text = this.criticalDmg.text;
+        this.hitChance.text = string.Format("Hit Chance:{0}%", hitChance);
+        this.hitChance.text = this.hitChance.text;
+        this.dmgMultiplier.text = string.Format("Dmg Multiplier:{0}", dmgMultiplier);
+        this.dmgMultiplierBg.text = this.dmgMultiplier.text;
     }
 
     public void Show()
@@ -33,5 +50,15 @@ public class InfoPanel
     public void Hide()
     {
         panel.SetActive(false);
+    }
+
+    public void ShowHitChance()
+    {
+        hitChancePanel.SetActive(true);
+    }
+
+    public void HideHitChance()
+    {
+        hitChancePanel.SetActive(false);
     }
 }

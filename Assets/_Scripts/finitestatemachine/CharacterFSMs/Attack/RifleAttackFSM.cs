@@ -9,6 +9,7 @@ public class RifleAttackFSM : Command
 
     public Queue<ApplicableDamage> attackAmounts;
     public bool actionCam;
+    PlayerController enemyPC;
     
     public RifleAttackFSM(Animator anim, NavMeshAgent nav, PlayerController controller, CommandTemplate weaponData) : base(anim, nav, controller, weaponData)
     {
@@ -76,27 +77,40 @@ public class RifleAttackFSM : Command
                     dm = GeneralUtils.CalculateDamageChance(commandTemplate.damageParameters, distance, null);
                 }
 
-                string attackMeta = string.Format("CRITICAL DAMAGE:{0}%\nHIT CHANCE: {1}%\n DMG MULTIPLIER:{2}", dm.criticalDmgChance.ToString("0.##"), dm.dmgChance.ToString("0.##"), dm.dmgMultiplier.ToString("0.##"));
-                
-                UIManager.ShowAttackData(attackMeta, hit.transform.gameObject);
+                //string attackMeta = string.Format("CRITICAL DAMAGE:{0}%\nHIT CHANCE: {1}%\n DMG MULTIPLIER:{2}", dm.criticalDmgChance.ToString("0.##"), dm.dmgChance.ToString("0.##"), dm.dmgMultiplier.ToString("0.##"));
+                enemyPC = hit.transform.GetComponent<PlayerController>();
+                enemyPC.infoPanel.SetAttackInfo(dm.criticalDmgChance.ToString("0.##"), dm.dmgChance.ToString("0.##"), dm.dmgMultiplier.ToString("0.##"));
+                enemyPC.infoPanel.ShowHitChance();
+                //UIManager.ShowAttackData(attackMeta, hit.transform.gameObject);
             } else
             {
                 TurnOffMarker();
                 playerController.rangeMarker.active = false;
-                UIManager.HideAttackData();
+                HideAttackData();
+                //UIManager.HideAttackData();
             }
         } else
         {
             playerController.rangeMarker.active = false;
             TurnOffMarker();
-            UIManager.HideAttackData();
+            HideAttackData();
+            //UIManager.HideAttackData();
+        }
+    }
+
+    private void HideAttackData()
+    {
+        if (enemyPC != null)
+        {
+            enemyPC.infoPanel.HideHitChance();
         }
     }
 
     protected override void Activated()
     {
         TurnOffMarker();
-        UIManager.HideAttackData();
+        //UIManager.HideAttackData();
+        HideAttackData();
         playerController.rangeMarker.active = false;
     }
 
@@ -105,7 +119,8 @@ public class RifleAttackFSM : Command
         base.Complete();
         playerController.playerMetaData.IncrementAttackCount();
         TurnOffMarker();
-        UIManager.HideAttackData();
+        //UIManager.HideAttackData();
+        HideAttackData();
         playerController.rangeMarker.active = false;
     }
 
@@ -113,7 +128,8 @@ public class RifleAttackFSM : Command
     {
         base.Cancel();
         TurnOffMarker();
-        UIManager.HideAttackData();
+        //UIManager.HideAttackData();
+        HideAttackData();
         playerController.rangeMarker.active = false;
     }
 
