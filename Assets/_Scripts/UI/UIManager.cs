@@ -84,7 +84,6 @@ public class UIManager : MonoBehaviour
                     }
                 }
             }
-        //}
         I.mainPanel.SetActive(true);
     }
 

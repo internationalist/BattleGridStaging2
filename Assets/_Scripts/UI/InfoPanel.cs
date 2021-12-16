@@ -22,6 +22,9 @@ public class InfoPanel
     public TMP_Text dmgMultiplier;
     public TMP_Text dmgMultiplierBg;
 
+    public GameObject dialogPanel;
+    public TMP_Text dialog;
+
     public void SetInfo(string level, string userName)
     {
         this.level.text = string.Format("Level:{0}",level);
@@ -42,6 +45,11 @@ public class InfoPanel
         this.dmgMultiplierBg.text = this.dmgMultiplier.text;
     }
 
+    public void SetDialog(string dialog)
+    {
+        this.dialog.text = dialog;
+    }
+
     public void Show()
     {
         panel.SetActive(true);
@@ -60,5 +68,12 @@ public class InfoPanel
     public void HideHitChance()
     {
         hitChancePanel.SetActive(false);
+    }
+
+    public IEnumerator ShowDialog()
+    {
+        this.dialogPanel.SetActive(true);
+        yield return new WaitForSeconds(1f);
+        this.dialogPanel.SetActive(false);
     }
 }

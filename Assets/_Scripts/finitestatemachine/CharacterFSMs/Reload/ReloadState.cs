@@ -44,7 +44,8 @@ public class ReloadState : BaseState
         {
             yDisplacement -= .7F;
         }
-        UIManager.Talk("!!Reloading!!", command.playerController.transform.position + (Vector3.up * yDisplacement) + (Vector3.left * -1f));
+        command.playerController.infoPanel.SetDialog("!!Reloading!!");
+        command.playerController.StartCoroutine(command.playerController.infoPanel.ShowDialog());
         reloadComplete = false;
         PlayerController.OnAnimationComplete += OnComplete;
     }
