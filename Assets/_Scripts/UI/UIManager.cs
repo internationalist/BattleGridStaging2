@@ -179,6 +179,7 @@ public class UIManager : MonoBehaviour
     public static void DisplayAmmo(int ammo)
     {
         I.ammoCounter.text = ammo.ToString();
+        //TODO: Add ammo depletion effect here.
     }
 
     public static void DisplayTurnsLeftForItemUse(int turnsLeft)
