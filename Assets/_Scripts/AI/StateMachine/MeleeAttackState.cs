@@ -101,7 +101,8 @@ public class MeleeAttackState : RangedAttackState
 
     private void RushOrApproach()
     {
-        if (!GeneralUtils.IsThereCoverBetween(aim._controller.transform.position, aim._aiState.target.transform.position, aim._aiState.target.cover.name))
+        if (aim._aiState.target.cover == null ||
+            !GeneralUtils.IsThereCoverBetween(aim._controller.transform.position, aim._aiState.target.transform.position, aim._aiState.target.cover.name))
         {
             AIUtils.ApproachEnemy(aim._aiState, aim._controller);
         } else
