@@ -37,3 +37,4 @@ MonoBehaviour:
     criticalDamageMultiplier: 3
     criticalDamageChance: 0.1
   bulletTrailPrefab: {fileID: 5024224829995560158, guid: a6346d327f250ae499d03f6354482e21, type: 3}
+  uiImageName: Gun

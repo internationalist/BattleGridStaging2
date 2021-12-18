@@ -40,9 +40,11 @@ public class UIManager : MonoBehaviour
     public TMP_Text beginTurnMsg;
     public TMP_Text beginTurnMsgAI;
 
-    public TMP_Text ammoCounter;
+    public Image attackImage;
 
     public TMP_Text turnsLeftForItemUse;
+
+    public TMP_Text turnComplete;
 
     public UINotifications uiNotifications;
 
@@ -176,10 +178,10 @@ public class UIManager : MonoBehaviour
         floatTextObj.GetComponent<FloatingText>().SetText(dmgMesg);
     }
 
-    public static void DisplayAmmo(int ammo)
+    public static void DisplayAmmo(float ammo)
     {
-        I.ammoCounter.text = ammo.ToString();
-        //TODO: Add ammo depletion effect here.
+        CommandDataInstance wi = GameManager._currentPlayer.commands[GeneralUtils.ATTACKSLOT].commandDataInstance;
+        I.attackImage.fillAmount = ammo/wi.maxAmmo;   
     }
 
     public static void DisplayTurnsLeftForItemUse(int turnsLeft)
@@ -191,6 +193,11 @@ public class UIManager : MonoBehaviour
         {
             I.turnsLeftForItemUse.text = String.Format(" in {0} turns", turnsLeft);
         }
+    }
+
+    public static void DisplayTurnOver(bool show)
+    {
+        I.turnComplete.gameObject.SetActive(show);
     }
 
     public static void ShowAttackData(string content, GameObject host)

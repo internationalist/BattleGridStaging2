@@ -10,9 +10,10 @@ public class RifleCommand : CommandTemplate
     ParticleSystem impactEffect;
     public BulletTrail bulletTrailPrefab;
     BulletTrail bullet;
+    public string uiImageName;
     public override UIMetaData getUIMetadata()
     {
-        return new UIMetaData("primaryattack", "Attack");
+        return new UIMetaData("primaryattack", uiImageName);
     }
     public override void Launch(Command command, CommandDataInstance wd)
     {

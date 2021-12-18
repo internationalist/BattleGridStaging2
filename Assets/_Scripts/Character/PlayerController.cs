@@ -414,6 +414,13 @@ public class PlayerController : MonoBehaviour
         CommandDataInstance wi = commands[GeneralUtils.ATTACKSLOT].commandDataInstance;
         UIManager.DisplayAmmo(wi.ammoCount);
         UIManager.DisplayTurnsLeftForItemUse(playerMetaData.turnsLeftForItemUse);
+        if(!turnActive || !playerMetaData.CanRunCommand())
+        {
+            UIManager.DisplayTurnOver(true);
+        } else
+        {
+            UIManager.DisplayTurnOver(false);
+        }
     }
 
     public void ShowInfoPanel()
