@@ -19,6 +19,8 @@ public class PlayerMetaData
     public int maxAttackCount;
     [SerializeField]
     private int attackCount;
+    [SerializeField]
+    private int itemUseCount;
     public int maxMoveCount;
     [SerializeField]
     private int moveCount;
@@ -32,7 +34,7 @@ public class PlayerMetaData
     public float grenadeTargetDistance;
 
     public int maxCommands;
-    private int numCommandsCompleted;
+    //private int numCommandsCompleted;
 
     public int maxReloadCommands = 1;
     private int reloadCommandsGiven;
@@ -51,6 +53,7 @@ public class PlayerMetaData
     public int Hp { get => hp; set => hp = value; }
     public int AttackCount { get => attackCount; set => attackCount = value; }
     public int MoveCount { get => moveCount; set => moveCount = value; }
+    public int ItemUseCount { get => itemUseCount; set => itemUseCount = value; }
 
     public void Initialize()
     {
@@ -65,26 +68,24 @@ public class PlayerMetaData
 
     public void IncrementAttackCount()
     {
+        //TODO: We should not maintain two different variables here.
         ++AttackCount;
-        ++numCommandsCompleted;
     }
 
     public void IncrementMoveCount()
     {
         ++MoveCount;
-        ++numCommandsCompleted;
     }
 
     public void IncrementItemUseCount()
     {
         turnsLeftForItemUse = itemCoolDown;
-        ++numCommandsCompleted;
+        ++ItemUseCount;
     }
 
     public void IncrementReloadCount()
     {
         ++reloadCommandsGiven;
-        ++numCommandsCompleted;
     }
 
     public bool CanUseItem()
@@ -109,7 +110,7 @@ public class PlayerMetaData
 
     public bool CanRunCommand()
     {
-        return maxCommands - numCommandsCompleted > 0;
+        return maxCommands - (attackCount + moveCount + reloadCommandsGiven + itemUseCount) > 0;
     }
 
     public void TakeDamage(int damageAmt)
@@ -132,7 +133,7 @@ public class PlayerMetaData
     {
         AttackCount = 0;
         MoveCount = 0;
-        numCommandsCompleted = 0;
+        itemUseCount = 0;
         reloadCommandsGiven = 0;
         if(turnsLeftForItemUse > 0)
         {

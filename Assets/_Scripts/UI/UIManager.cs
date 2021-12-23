@@ -180,8 +180,11 @@ public class UIManager : MonoBehaviour
 
     public static void DisplayAmmo(float ammo)
     {
-        CommandDataInstance wi = GameManager._currentPlayer.commands[GeneralUtils.ATTACKSLOT].commandDataInstance;
-        I.attackImage.fillAmount = ammo/wi.maxAmmo;   
+        if(GameManager._currentPlayer != null && GameManager._currentPlayer.commands[GeneralUtils.ATTACKSLOT] != null)
+        {
+            CommandDataInstance wi = GameManager._currentPlayer.commands[GeneralUtils.ATTACKSLOT].commandDataInstance;
+            I.attackImage.fillAmount = ammo / wi.maxAmmo;
+        }
     }
 
     public static void DisplayTurnsLeftForItemUse(int turnsLeft)
