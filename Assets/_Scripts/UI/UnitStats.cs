@@ -12,14 +12,24 @@ public class UnitStats : MonoBehaviour
     void Start()
     {
         statsPanel = GetComponent<RectTransform>();
-        //cam = Camera.main;
+        UIManager.I.OnActionCamChange += ActionCamChange;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
         Vector3 screenPos = cam.WorldToScreenPoint(hostUnit.position);
         statsPanel.position = screenPos;
     }
+    private void ActionCamChange(bool active)
+    {
+        this.gameObject.SetActive(active);
+    }
+
+    private void OnDestroy()
+    {
+        UIManager.I.OnActionCamChange -= ActionCamChange;
+    }
+
+
 }

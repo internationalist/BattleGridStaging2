@@ -10,6 +10,7 @@ using Cinemachine;
 [RequireComponent(typeof(AudioSource))]
 public class PlayerController : MonoBehaviour
 {
+    #region state
     public Dictionary<int, Command> commands;
 
     [Tooltip("Transform within the rig that acts as the parent of the right hand weapon.")]
@@ -67,7 +68,7 @@ public class PlayerController : MonoBehaviour
 
 
 
-    #region internal state
+    
     private Command currentCommand;
 
     public Command getCurrentCommand() { return currentCommand;}
@@ -433,36 +434,5 @@ public class PlayerController : MonoBehaviour
     {
         infoPanel.Hide();
     }
-
-
-
-    public bool IsAmmoFull()
-    {
-        CommandDataInstance wi = currentCommand.commandDataInstance;
-        return wi.isAmmoFull();
-    }
     #endregion
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }

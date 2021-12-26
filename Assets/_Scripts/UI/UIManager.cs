@@ -94,21 +94,6 @@ public class UIManager : MonoBehaviour
         I.mainPanel.SetActive(false);
     }
 
-    public static void GenerateUIForCommands(PlayerController pc)
-    {
-        for(int i = 0; i < pc.commandList.Count; i++)
-        {
-            CommandTemplate ct = pc.GetWeaponTemplateForCommand(pc.commandList[i].slot);
-            UIMetaData uid = ct.getUIMetadata();
-            if(pc.commandList[i].button != null)
-            {
-                Image img = pc.commandList[i].button.GetComponent<Image>();
-                Sprite cmdImg = Resources.Load<Sprite>("Images/" + uid.commandImage);
-                img.sprite = cmdImg;
-            }
-        }
-    }
-
     public static void ShowMessage(string message)
     {
         LeanTween.scale(I.messagePanel.GetComponent<RectTransform>(), Vector3.one, .25f);
@@ -177,7 +162,9 @@ public class UIManager : MonoBehaviour
         GameObject floatTextObj = Instantiate(notification, position, Quaternion.identity);
         floatTextObj.GetComponent<FloatingText>().SetText(dmgMesg);
     }
+    #endregion
 
+    #region Player UI related
     public static void DisplayAmmo(float ammo)
     {
         if(GameManager._currentPlayer != null && GameManager._currentPlayer.commands[GeneralUtils.ATTACKSLOT] != null)
@@ -203,23 +190,38 @@ public class UIManager : MonoBehaviour
         I.turnComplete.gameObject.SetActive(show);
     }
 
-    public static void ShowAttackData(string content, GameObject host)
+    public static void GenerateUIForCommands(PlayerController pc)
     {
-        I.attackData.trackedObject = host;
-        I.attackData.content.text = content;
-        I.attackData.Show();
+        for (int i = 0; i < pc.commandList.Count; i++)
+        {
+            CommandTemplate ct = pc.GetWeaponTemplateForCommand(pc.commandList[i].slot);
+            UIMetaData uid = ct.getUIMetadata();
+            if (pc.commandList[i].button != null)
+            {
+                Image img = pc.commandList[i].button.GetComponent<Image>();
+                Sprite cmdImg = Resources.Load<Sprite>("Images/" + uid.commandImage);
+                img.sprite = cmdImg;
+            }
+        }
     }
+    #endregion
 
-    public static void HideAttackData()
-    {
-        I.attackData.Hide();
-    }
+    #region Action Cam
+
+    public delegate void ActionCamChange(bool active);
+
+    public event ActionCamChange OnActionCamChange;
+
 
     public static void ShowActionCam()
     {
         Time.timeScale = .7f;
         I.cmActionCam.Priority = CM_MAX_PRIORITY;
         I.actionCam.gameObject.SetActive(true);
+        if(I.OnActionCamChange != null)
+        {
+            I.OnActionCamChange(false);
+        }
     }
 
     public static bool ActionCamObstructed(Transform origin)
@@ -242,25 +244,11 @@ public class UIManager : MonoBehaviour
         I.cmActionCam.Priority = CM_MIN_PRIORITY;
         I.actionCam.gameObject.SetActive(false);
         I.fadePanel.gameObject.SetActive(false);
+        if (I.OnActionCamChange != null)
+        {
+            I.OnActionCamChange(true);
+        }
     }
-
-    public static void StartCamShake()
-    {
-        CinemachineBasicMultiChannelPerlin noise = I.cmGameCam.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
-        CinemachineBasicMultiChannelPerlin actionCamNoise = I.cmActionCam.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
-        noise.m_AmplitudeGain = 1;
-        actionCamNoise.m_AmplitudeGain = 1;
-    }
-
-    public static void StopCamShake()
-    {
-        CinemachineBasicMultiChannelPerlin noise = I.cmGameCam.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
-        CinemachineBasicMultiChannelPerlin actionCamNoise = I.cmActionCam.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
-        noise.m_AmplitudeGain = 0;
-        actionCamNoise.m_AmplitudeGain = 0;
-    }
-
-
 
     public delegate void OnBlack<T>(T payload);
     public delegate void OnComplete<T>(T payload);
@@ -294,8 +282,27 @@ public class UIManager : MonoBehaviour
         }
         onComplete(g);
     }
-
     #endregion
+
+    #region CamEffects
+    public static void StartCamShake()
+    {
+        CinemachineBasicMultiChannelPerlin noise = I.cmGameCam.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
+        CinemachineBasicMultiChannelPerlin actionCamNoise = I.cmActionCam.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
+        noise.m_AmplitudeGain = 1;
+        actionCamNoise.m_AmplitudeGain = 1;
+    }
+
+    public static void StopCamShake()
+    {
+        CinemachineBasicMultiChannelPerlin noise = I.cmGameCam.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
+        CinemachineBasicMultiChannelPerlin actionCamNoise = I.cmActionCam.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
+        noise.m_AmplitudeGain = 0;
+        actionCamNoise.m_AmplitudeGain = 0;
+    }
+    #endregion
+
+    #region Unity events
 
     private void Update()
     {
@@ -311,9 +318,5 @@ public class UIManager : MonoBehaviour
             }
         }   
     }
-
-
-
-
-
+    #endregion
 }
