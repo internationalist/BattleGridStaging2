@@ -167,7 +167,6 @@ public class PlayerController : MonoBehaviour
         
         playerMetaData.TakeDamage(dmgAmt);
         healthBar.fillAmount = playerMetaData.NormalizedHealthRemaining();
-        UIManager.DamageNotification(dmgAmt, critical, transform.position + Vector3.up * 1.8f);
 
         if (playerMetaData.Hp <= 0)
         {

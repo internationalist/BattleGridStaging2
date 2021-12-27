@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class AIManager : MonoBehaviour
 {
-    #region singleton code
+    #region singleton code + Unity events
     private static AIManager _instance;
     public static AIManager I
     {
@@ -28,6 +28,37 @@ public class AIManager : MonoBehaviour
         {
             covers.Add(cover.GetComponent<CoverFramework>());
         }
+        UIManager.I.OnActionCamChange += AIPause;
+    }
+
+    private void OnDestroy()
+    {
+        UIManager.I.OnActionCamChange -= AIPause;
+    }
+
+    private void Update()
+    {
+        if (IsTeamTurnActive())
+        {
+            if (!aiPause && (activeAgent == null || !activeAgent.turnActive))
+            {
+                if (friends.Count > 0)
+                {
+                    activeAgent = friends.Pop();
+                    GameManager.SelectPlayer(activeAgent);
+                    activeAgent.StartTurn();
+                }
+                else //All agents exhausted, end turn
+                {
+                    currentTeam.isTurnActive = false;
+                }
+            }
+        }
+        else
+        {
+            //Turn over, reset agent.
+            activeAgent = null;
+        }
     }
 
 
@@ -38,35 +69,13 @@ public class AIManager : MonoBehaviour
     Stack<PlayerController> friends;
     PlayerController activeAgent;
     public Team currentTeam;
-
     public List<CoverFramework> covers;
+    public bool aiPause;
 
 
     #endregion
 
-    private void Update()
-    {
-        if (IsTeamTurnActive())
-        {
-            if (activeAgent == null || !activeAgent.turnActive)
-            {
-                if(friends.Count > 0)
-                {
-                    activeAgent = friends.Pop();
-                    GameManager.SelectPlayer(activeAgent);
-                    activeAgent.StartTurn();
-                } else //All agents exhausted, end turn
-                {
-                    currentTeam.isTurnActive = false;
-                }
-            }
-        } else
-        {
-            //Turn over, reset agent.
-            activeAgent = null;
-        }
-    }
-
+    #region Team related code
     private bool IsTeamTurnActive()
     {
         return currentTeam != null && currentTeam.isTurnActive;
@@ -77,15 +86,16 @@ public class AIManager : MonoBehaviour
         friends = new Stack<PlayerController>(currentTeam.players);
         currentTeam.isTurnActive = true;
     }
-    #region commented code
-    /*    public static void PrintValues(IEnumerable myCollection, char mySeparator)
-        {
-            foreach (Object obj in myCollection)
-                Debug.LogFormat("{0}{1}", mySeparator, obj);
-        }*/
-    #endregion
+
     public static void Init(Team team)
     {
         I.currentTeam = team;
     }
+
+    private void AIPause(bool pause)
+    {
+        //AI turn pauses when action cam is on and is active when action cam is off.
+        this.aiPause = !pause;
+    }
+    #endregion
 }

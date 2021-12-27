@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 23541409378773148}
   - component: {fileID: 102784364447782448}
   - component: {fileID: 114760616058248724}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: MIssedShot
   m_TagString: Untagged
   m_Icon: {fileID: 0}

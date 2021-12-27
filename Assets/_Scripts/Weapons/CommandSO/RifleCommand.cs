@@ -70,6 +70,8 @@ public class RifleCommand : CommandTemplate
     {
 
         command.enemyController.TakeDamage(damageAmt, critical);
+        //Create damage notification floating text.
+        UIManager.DamageNotification(damageAmt, critical, command.enemyController.transform.position + Vector3.up * 1.8f);
         if (damageAmt > 0)
         {
             Quaternion lookRot = OrientParticleEffect(impactEffect, command, command.enemyController.transform.position);
@@ -89,7 +91,6 @@ public class RifleCommand : CommandTemplate
                     ParticleSystem psInstance = Instantiate(cm.cover.ricochetEffects[i]);
                     OrientParticleEffect(psInstance, command, cm.coverPosition);
                 }
-                //OrientParticleEffect(impactEffect, command, cm.coverPosition);
                 cm.cover.PlayRicochet();
             }
         }
