@@ -133,7 +133,7 @@ public class RangedAttackState : AIActionState
                         MoveToAttackingPosition(this.agressionLevel);
                     } else if (chance < effectiveCamp)
                     {
-                        //Camp here
+                        //End turn. Camp here
                         aim.TransitionToState(aim.states["end"]);
                     } else
                     {

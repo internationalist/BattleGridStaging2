@@ -81,20 +81,17 @@ public class RifleAttackFSM : Command
                 enemyPC = hit.transform.GetComponent<PlayerController>();
                 enemyPC.infoPanel.SetAttackInfo(dm.criticalDmgChance.ToString("0.##"), dm.dmgChance.ToString("0.##"), dm.dmgMultiplier.ToString("0.##"));
                 enemyPC.infoPanel.ShowHitChance();
-                //UIManager.ShowAttackData(attackMeta, hit.transform.gameObject);
             } else
             {
                 TurnOffMarker();
                 playerController.rangeMarker.active = false;
                 HideAttackData();
-                //UIManager.HideAttackData();
             }
         } else
         {
             playerController.rangeMarker.active = false;
             TurnOffMarker();
             HideAttackData();
-            //UIManager.HideAttackData();
         }
     }
 
@@ -109,7 +106,6 @@ public class RifleAttackFSM : Command
     protected override void Activated()
     {
         TurnOffMarker();
-        //UIManager.HideAttackData();
         HideAttackData();
         playerController.rangeMarker.active = false;
     }
@@ -119,7 +115,6 @@ public class RifleAttackFSM : Command
         base.Complete();
         playerController.playerMetaData.IncrementAttackCount();
         TurnOffMarker();
-        //UIManager.HideAttackData();
         HideAttackData();
         playerController.rangeMarker.active = false;
     }

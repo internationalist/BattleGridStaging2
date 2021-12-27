@@ -74,15 +74,25 @@ public class RifleAttackState : BaseState
         Time.timeScale = 1;
     }
 
+    /// <summary>
+    /// The rifle attack animation is a looping one that auto repeats. In animation loop the OnAnimationComplete event is called.
+    /// This eventually calls this method. We use the maxBurstFire variable to terminate the loop.
+    /// Since the looping animation is handled in Unity and this loop can be multi-threaded, the update to the maxBurstFire variable
+    /// can become dirty if not thread synchronized. For this reason we put this update inside an object lock.
+    /// </summary>
+    /// <param name="name"></param>
     public void OnComplete(string name)
     {
         if ("attack".Equals(name)) 
         {
-            ++fireCounter;
-            CommandTemplate wt = command.commandTemplate;
-            if(wt.maxBurstFire == fireCounter)
+            lock(this) //Thread synchronize.
             {
-                attackComplete = true;
+                ++fireCounter;
+                CommandTemplate wt = command.commandTemplate;
+                if (wt.maxBurstFire == fireCounter)
+                {
+                    attackComplete = true;
+                }
             }
         }
     }

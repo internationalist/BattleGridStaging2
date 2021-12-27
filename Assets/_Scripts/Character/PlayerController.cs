@@ -292,7 +292,9 @@ public class PlayerController : MonoBehaviour
             UpdatePlayerHUD();
         }
 
-        if(turnActive && !playerMetaData.CanRunCommand()) {
+        if(turnActive
+            && !playerMetaData.CanRunCommand()
+            && !isAgent) {//For AI the AI code will end turn
             EndTurn();
         }
     }

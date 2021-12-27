@@ -41,7 +41,7 @@ public class TurnBasedSystem:MonoBehaviour
         turnChanging = true;
         if (activeTeam != null)
         {
-            //Add the team that whose turn ended back into the turn queue.
+            //Add the team whose turn ended back into the turn queue.
             turnQueue.Enqueue(activeTeam);
         }
         //Pop the next team in line from the queue.
