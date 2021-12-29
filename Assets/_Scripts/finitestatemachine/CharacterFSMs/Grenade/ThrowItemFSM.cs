@@ -81,10 +81,10 @@ public class ThrowItemFSM : Command
 
     protected override void Activate(Transform enemyTransform, Vector3? destination)
     {
-        if (playerController.playerMetaData.responseOnAction != null && playerController.playerMetaData.responseOnAction.Count > 0)
+        if (playerController.playerMetaData.voice.responseOnAction != null && playerController.playerMetaData.voice.responseOnAction.Count > 0)
         {
-            int audioIndex = Random.Range(0, playerController.playerMetaData.responseOnAction.Count);
-            playerController.audioSource.PlayOneShot(playerController.playerMetaData.responseOnAction[audioIndex]);
+            int audioIndex = Random.Range(0, playerController.playerMetaData.voice.responseOnAction.Count);
+            playerController.audioSource.PlayOneShot(playerController.playerMetaData.voice.responseOnAction[audioIndex]);
         }
         base.Activate(enemyTransform, destination);
         if (enemyTransform != null)

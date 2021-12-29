@@ -130,9 +130,9 @@ public class RifleAttackFSM : Command
 
     protected override void Activate(Transform enemyTransform, Vector3? destination)
     {
-        if (playerController.playerMetaData.responseOnAction != null && playerController.playerMetaData.responseOnAction.Count > 0)
+        if (playerController.playerMetaData.voice.responseOnAction != null && playerController.playerMetaData.voice.responseOnAction.Count > 0)
         {
-            AudioManager.PlayHurtSound(playerController.playerMetaData.responseOnAction, playerController.audioSource);
+            AudioManager.PlayHurtSound(playerController.playerMetaData.voice.responseOnAction, playerController.audioSource);
         }
         base.Activate(enemyTransform, destination);
         if (enemyTransform != null && destination.HasValue)

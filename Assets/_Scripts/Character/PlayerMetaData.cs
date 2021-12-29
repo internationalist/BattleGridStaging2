@@ -38,12 +38,13 @@ public class PlayerMetaData
 
     public int maxReloadCommands = 1;
     private int reloadCommandsGiven;
-    public List<AudioClip> responseOnSelect;
-    public List<AudioClip> responseOnMove;
-    public List<AudioClip> responseOnAction;
-    public List<AudioClip> responseOnThrowItem;
-    public List<AudioClip> responseOnUseItem;
-    public List<AudioClip> responseOnReload;
+    /*    public List<AudioClip> responseOnSelect;
+        public List<AudioClip> responseOnMove;
+        public List<AudioClip> responseOnAction;
+        public List<AudioClip> responseOnThrowItem;
+        public List<AudioClip> responseOnUseItem;
+        public List<AudioClip> responseOnReload;*/
+    public VoiceModule voice;
 
     public Grunts grunts;
 

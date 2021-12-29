@@ -15,9 +15,9 @@ public class UseItemFSM : Command
 
     protected override void Activate(Transform enemyTransform, Vector3? destination)
     {
-        if (playerController.playerMetaData.responseOnUseItem != null && playerController.playerMetaData.responseOnUseItem.Count > 0)
+        if (playerController.playerMetaData.voice.responseOnUseItem != null && playerController.playerMetaData.voice.responseOnUseItem.Count > 0)
         {
-            AudioManager.PlayHurtSound(playerController.playerMetaData.responseOnUseItem, playerController.audioSource);
+            AudioManager.PlayHurtSound(playerController.playerMetaData.voice.responseOnUseItem, playerController.audioSource);
         }
         base.Activate(enemyTransform, destination);
         isActivated = true;

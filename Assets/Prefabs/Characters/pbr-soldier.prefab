@@ -105,7 +105,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: -0.014826361, y: 0.045694076, z: 0.9988454}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0.46015343, y: -0.008685513, z: 0.004293021}
+  m_ConnectedAnchor: {x: 0.4601534, y: -0.008685421, z: 0.004293257}
   serializedVersion: 2
   m_SwingAxis: {x: -0.01279442, y: -0.99888206, z: 0.045505866}
   m_TwistLimitSpring:
@@ -672,86 +672,7 @@ MonoBehaviour:
     grenadeTargetDistance: 0
     maxCommands: 2
     maxReloadCommands: 1
-    responseOnSelect:
-    - {fileID: 8300000, guid: 857411ce1a276ec4e9f287b0ca91b203, type: 3}
-    - {fileID: 8300000, guid: 7ccb12fd01f481f438026fa702dd059a, type: 3}
-    - {fileID: 8300000, guid: b7ad880ea9ed62544ba7e795fb4639c1, type: 3}
-    - {fileID: 8300000, guid: 07f5c75c08099314cad56dfea984faf1, type: 3}
-    - {fileID: 8300000, guid: 9c8d02ff64ca2da429ffc767b054a514, type: 3}
-    - {fileID: 8300000, guid: e6eeb2c7282dd7d45982d6518f09339a, type: 3}
-    - {fileID: 8300000, guid: 81f01bde9ca411645b58edefd0d96d85, type: 3}
-    - {fileID: 8300000, guid: f92808590edbf5249a781e3524f55d52, type: 3}
-    - {fileID: 8300000, guid: 2ed3181a260245b4e92c158ae124379f, type: 3}
-    - {fileID: 8300000, guid: 8a9edda53ff65ea43a2e68ded2be0264, type: 3}
-    - {fileID: 8300000, guid: f0d04a45c9382414f8ec3e829a86fc46, type: 3}
-    - {fileID: 8300000, guid: 2edc10afea0c1304f81cd9c2f1cff21c, type: 3}
-    - {fileID: 8300000, guid: 111966a6818af604e8aed2df9b69b8cd, type: 3}
-    - {fileID: 8300000, guid: c673843849b1e1d41ac7990b9a7e72d2, type: 3}
-    responseOnMove:
-    - {fileID: 8300000, guid: fc61a0b29bfcfde479e5708e6253d89d, type: 3}
-    - {fileID: 8300000, guid: 35728aab519e5c142b149da959a52091, type: 3}
-    - {fileID: 8300000, guid: 5273f3aca3dd8aa43a6e68232d8c40e0, type: 3}
-    - {fileID: 8300000, guid: 2a2b5f6e4ca81e642af1fb23338ed174, type: 3}
-    - {fileID: 8300000, guid: 80478c4688c55c04c9b98d226393de9b, type: 3}
-    - {fileID: 8300000, guid: f5dd06f96c69faf44b86820ed844bf8d, type: 3}
-    - {fileID: 8300000, guid: 5b53242ef11926a4cb7077fbb8735295, type: 3}
-    - {fileID: 8300000, guid: f92ba6935d3a11042984153c25e2912b, type: 3}
-    - {fileID: 8300000, guid: 29718efbc73af434287335a380a84f59, type: 3}
-    - {fileID: 8300000, guid: 1fc99a653b4fcaf4bb19b59ee1d8de91, type: 3}
-    - {fileID: 8300000, guid: cb98f4d6ebdf81748813c1874bdd259a, type: 3}
-    - {fileID: 8300000, guid: ad68f11c7e0c16246b99167515ce38f2, type: 3}
-    - {fileID: 8300000, guid: 1a8c78f73b1cee342afa4d44b5af6e5f, type: 3}
-    - {fileID: 8300000, guid: 92f33a4c76040614484eac3a357c0614, type: 3}
-    - {fileID: 8300000, guid: e85965279ffddd34d98bbf3d6b8730dd, type: 3}
-    - {fileID: 8300000, guid: 0d92e02f291a4be419108eaec49f0126, type: 3}
-    - {fileID: 8300000, guid: 9a047d29629656f49bfe943012bd725b, type: 3}
-    - {fileID: 8300000, guid: 980a08e314acd684da81d3bc1698ea5a, type: 3}
-    - {fileID: 8300000, guid: 519e7c4adbf85d54fb449b2f5ce93a93, type: 3}
-    - {fileID: 8300000, guid: 0004f84402e54704f8201d3e81812585, type: 3}
-    - {fileID: 8300000, guid: 403edd6a433436048822653108f368ee, type: 3}
-    responseOnAction:
-    - {fileID: 8300000, guid: 35728aab519e5c142b149da959a52091, type: 3}
-    - {fileID: 8300000, guid: 473e561ac08950e49956601b8784f7dd, type: 3}
-    - {fileID: 8300000, guid: 5273f3aca3dd8aa43a6e68232d8c40e0, type: 3}
-    - {fileID: 8300000, guid: a2791594016b2c74d9c258c2c5ebbcd1, type: 3}
-    - {fileID: 8300000, guid: 2a2b5f6e4ca81e642af1fb23338ed174, type: 3}
-    - {fileID: 8300000, guid: 80478c4688c55c04c9b98d226393de9b, type: 3}
-    - {fileID: 8300000, guid: f5dd06f96c69faf44b86820ed844bf8d, type: 3}
-    - {fileID: 8300000, guid: 5b53242ef11926a4cb7077fbb8735295, type: 3}
-    - {fileID: 8300000, guid: a812c1b7a8ae30b4bba60bd59e702e66, type: 3}
-    - {fileID: 8300000, guid: 18d25ff3b9517c14183fb0f490f198e1, type: 3}
-    - {fileID: 8300000, guid: 1fc99a653b4fcaf4bb19b59ee1d8de91, type: 3}
-    - {fileID: 8300000, guid: ae756c2b7d0521b429409cf4c2e64489, type: 3}
-    - {fileID: 8300000, guid: 62c5e529a77b2754890f5f0c144db62c, type: 3}
-    - {fileID: 8300000, guid: cb98f4d6ebdf81748813c1874bdd259a, type: 3}
-    - {fileID: 8300000, guid: 33a607eb998847a468acef4a5ac42fcb, type: 3}
-    - {fileID: 8300000, guid: daafa4e3308b4d745b7b12d7cb60e63a, type: 3}
-    - {fileID: 8300000, guid: 980a08e314acd684da81d3bc1698ea5a, type: 3}
-    - {fileID: 8300000, guid: 519e7c4adbf85d54fb449b2f5ce93a93, type: 3}
-    - {fileID: 8300000, guid: 0004f84402e54704f8201d3e81812585, type: 3}
-    - {fileID: 8300000, guid: 403edd6a433436048822653108f368ee, type: 3}
-    responseOnThrowItem: []
-    responseOnUseItem:
-    - {fileID: 8300000, guid: 473e561ac08950e49956601b8784f7dd, type: 3}
-    - {fileID: 8300000, guid: 35728aab519e5c142b149da959a52091, type: 3}
-    - {fileID: 8300000, guid: 5273f3aca3dd8aa43a6e68232d8c40e0, type: 3}
-    - {fileID: 8300000, guid: 80478c4688c55c04c9b98d226393de9b, type: 3}
-    - {fileID: 8300000, guid: f5dd06f96c69faf44b86820ed844bf8d, type: 3}
-    - {fileID: 8300000, guid: 5b53242ef11926a4cb7077fbb8735295, type: 3}
-    - {fileID: 8300000, guid: 1fc99a653b4fcaf4bb19b59ee1d8de91, type: 3}
-    - {fileID: 8300000, guid: cb98f4d6ebdf81748813c1874bdd259a, type: 3}
-    - {fileID: 8300000, guid: 33a607eb998847a468acef4a5ac42fcb, type: 3}
-    - {fileID: 8300000, guid: daafa4e3308b4d745b7b12d7cb60e63a, type: 3}
-    responseOnReload:
-    - {fileID: 8300000, guid: eab1c4245475c6f45a43fbef7a8d34ad, type: 3}
-    - {fileID: 8300000, guid: 9566b0103be336d418b271a6e7bc2297, type: 3}
-    - {fileID: 8300000, guid: 5fd24ba89aa4a67408103bb8e2a7bded, type: 3}
-    - {fileID: 8300000, guid: 7019de917e5cdb448b8d6770cea76ce4, type: 3}
-    - {fileID: 8300000, guid: b399dc636a0778948acb702969f48947, type: 3}
-    - {fileID: 8300000, guid: 96c1088a32d6e254bb458f1d2706b89e, type: 3}
-    - {fileID: 8300000, guid: 81120b5a2ebb80849a7771e60e747707, type: 3}
-    - {fileID: 8300000, guid: 4eb52d6603636d6468a73fad37e19aeb, type: 3}
-    - {fileID: 8300000, guid: 259c4d54910382d49a8543cbe9122920, type: 3}
+    voice: {fileID: 11400000, guid: cb575e372dd52e14e8faec6043d96511, type: 2}
     grunts: {fileID: 11400000, guid: 707820041a3b6484184b5bc14bb124ed, type: 2}
   _agent: {fileID: 0}
   isAgent: 0
@@ -5945,7 +5866,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: -0.1224289, y: 0.14778456, z: 0.98141265}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0.014488494, y: -0.005314196, z: -0.090058304}
+  m_ConnectedAnchor: {x: 0.014488494, y: -0.0053141364, z: -0.09005807}
   serializedVersion: 2
   m_SwingAxis: {x: -0.029854512, y: -0.98895234, z: 0.14519565}
   m_TwistLimitSpring:
@@ -6251,7 +6172,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: -0.12242805, y: 0.14778516, z: 0.98141265}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0.014486691, y: -0.0053141303, z: 0.090058215}
+  m_ConnectedAnchor: {x: 0.014486691, y: -0.00531419, z: 0.09005799}
   serializedVersion: 2
   m_SwingAxis: {x: 0.029854015, y: 0.9889523, z: -0.1451963}
   m_TwistLimitSpring:
@@ -11348,7 +11269,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 0.0015565939, y: 0.050124932, z: -0.28854853}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0.24625623, y: -0.035124976, z: -0.0047233887}
+  m_ConnectedAnchor: {x: 0.24625602, y: -0.035124872, z: -0.0047233314}
   serializedVersion: 2
   m_SwingAxis: {x: 0.18083158, y: 0.96883744, z: 0.1692763}
   m_TwistLimitSpring:
@@ -11661,7 +11582,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: -0.07111083, y: 0.06353169, z: 0.99544305}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0.3892357, y: -0.0052026487, z: -0.0015480223}
+  m_ConnectedAnchor: {x: 0.38923573, y: -0.005202743, z: -0.0015482475}
   serializedVersion: 2
   m_SwingAxis: {x: -0.15601215, y: -0.98639536, z: 0.051809326}
   m_TwistLimitSpring:
@@ -12458,7 +12379,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: -0.00000011926913, y: 0.0000000012828956, z: 0.99999994}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -0.36993653, y: -0.016411694, z: 0.00000016708509}
+  m_ConnectedAnchor: {x: -0.36993653, y: -0.016411694, z: -0.00000007133348}
   serializedVersion: 2
   m_SwingAxis: {x: 0.023060918, y: -0.999734, z: 0.0000000042335593}
   m_TwistLimitSpring:
@@ -13245,7 +13166,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: -0.014852371, y: 0.045695618, z: 0.9988449}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -0.46015343, y: 0.00868536, z: -0.004292396}
+  m_ConnectedAnchor: {x: -0.46015337, y: 0.008685414, z: -0.0042926385}
   serializedVersion: 2
   m_SwingAxis: {x: 0.012794942, y: 0.99888194, z: -0.04550705}
   m_TwistLimitSpring:
@@ -33226,7 +33147,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: -0.003610975, y: 0.0073582456, z: -0.2429732}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -0.21649407, y: 0.056959588, z: 0.19100021}
+  m_ConnectedAnchor: {x: -0.21649407, y: 0.056959588, z: 0.19100009}
   serializedVersion: 2
   m_SwingAxis: {x: -0.07188049, y: 0.99692357, z: 0.03125936}
   m_TwistLimitSpring:
@@ -33336,7 +33257,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: -0.00000012021054, y: 0.0000000053556093, z: 0.99999994}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -0.30010644, y: 0.005695495, z: 0.00000014901161}
+  m_ConnectedAnchor: {x: -0.30010644, y: 0.005695495, z: -0.00000008940697}
   serializedVersion: 2
   m_SwingAxis: {x: 0.116694905, y: -0.99316776, z: 0.000000019547546}
   m_TwistLimitSpring:
@@ -34006,7 +33927,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 0.02847981, y: 0.16976963, z: -0.030185387}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0.30137432, y: 0.018988322, z: 0.004924478}
+  m_ConnectedAnchor: {x: 0.3013742, y: 0.018988324, z: 0.004924454}
   serializedVersion: 2
   m_SwingAxis: {x: 0.2021257, y: 0.138475, z: 0.9695207}
   m_TwistLimitSpring:
@@ -34531,7 +34452,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 0.0036096366, y: -0.007358418, z: 0.24297333}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -0.21649407, y: 0.056959465, z: -0.19100018}
+  m_ConnectedAnchor: {x: -0.21649407, y: 0.056959588, z: -0.19099997}
   serializedVersion: 2
   m_SwingAxis: {x: 0.07188073, y: -0.99692315, z: -0.031259667}
   m_TwistLimitSpring:

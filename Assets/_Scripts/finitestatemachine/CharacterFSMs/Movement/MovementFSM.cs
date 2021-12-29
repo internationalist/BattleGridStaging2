@@ -94,9 +94,9 @@ public class MovementFSM : Command
         base.Activate(enemyTransform, destination);
         if (destination.HasValue)
         {
-            if (playerController.playerMetaData.responseOnMove != null && playerController.playerMetaData.responseOnMove.Count > 0)
+            if (playerController.playerMetaData.voice.responseOnMove != null && playerController.playerMetaData.voice.responseOnMove.Count > 0)
             {
-                AudioManager.PlayHurtSound(playerController.playerMetaData.responseOnMove, playerController.audioSource);
+                AudioManager.PlayHurtSound(playerController.playerMetaData.voice.responseOnMove, playerController.audioSource);
                 //int audioIndex = Random.Range(0, playerController.playerMetaData.responseOnMove.Count);
                 //playerController.audioSource.PlayOneShot(playerController.playerMetaData.responseOnMove[audioIndex]);
 
