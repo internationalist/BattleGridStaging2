@@ -114,7 +114,15 @@
 	#define DECLARE_STATIC_LIGHTMAP_INPUT(i) float2 staticLightmapUV : TEXCOORD##i
 
 	#if defined(MK_URP) || defined(MK_LWRP)
-		#define DECLARE_DYNAMIC_LIGHTMAP_INPUT(i)
+		float4 MKGetShadowCoord(VertexPositionInputs vertexInput)
+		{
+			#if defined(_MAIN_LIGHT_SHADOWS_SCREEN) && !defined(MK_SURFACE_TYPE_TRANSPARENT)
+				return ComputeScreenPos(vertexInput.positionCS);
+			#else
+				return TransformWorldToShadowCoord(vertexInput.positionWS);
+			#endif
+		}
+		#define DECLARE_DYNAMIC_LIGHTMAP_INPUT(i) float2 dynamicLightmapUV : TEXCOORD##i;
 		/*
 		#if !defined(_MAIN_LIGHT_SHADOWS_CASCADE)
 			#define DECLARE_LIGHTING_COORDS(i, j) float4 _ShadowCoord : TEXCOORD##i;
@@ -124,12 +132,14 @@
 		*/
 		//lighting coords are currently also used for later PS usage when cascade is enabled, so always set shadow coord
 		#define DECLARE_LIGHTING_COORDS(i, j) float4 _ShadowCoord : TEXCOORD##i;
-		#if !defined(_MAIN_LIGHT_SHADOWS_CASCADE) && defined(_MAIN_LIGHT_SHADOWS_SCREEN)
-			#define TRANSFORM_WORLD_TO_SHADOW_COORDS(o, i, l) l._ShadowCoord = ComputeScreenPos(l.SV_CLIP_POS);
-		#elif !defined(_MAIN_LIGHT_SHADOWS_CASCADE)
-			#define TRANSFORM_WORLD_TO_SHADOW_COORDS(o, i, l) l._ShadowCoord = TransformWorldToShadowCoord(o.positionWorld.xyz);
+		#ifdef MK_SHADOW_COORD_INTERPOLATOR
+			#if defined(_MAIN_LIGHT_SHADOWS_SCREEN) && !defined(MK_SURFACE_TYPE_TRANSPARENT)
+				#define TRANSFORM_WORLD_TO_SHADOW_COORDS(o, i, l) l._ShadowCoord = ComputeScreenPos(l.SV_CLIP_POS);
+			#else
+				#define TRANSFORM_WORLD_TO_SHADOW_COORDS(o, i, l) l._ShadowCoord = TransformWorldToShadowCoord(o.positionWorld.xyz);
+			#endif
 		#else
-			#define TRANSFORM_WORLD_TO_SHADOW_COORDS(o, i, l) l._ShadowCoord = 1;
+			#define TRANSFORM_WORLD_TO_SHADOW_COORDS(o, i, l) l._ShadowCoord = float4(0, 0, 0, 0);
 		#endif
 	#else
 		#define DECLARE_DYNAMIC_LIGHTMAP_INPUT(i) float2 dynamicLightmapUV : TEXCOORD##i;
@@ -153,7 +163,7 @@
 				//should be automatically clamped (0 - 1) at a 8bit precision, still enough for a simple vertex lighting
 				autoLP3 vertexLighting : COLOR1;
 			#endif
-			#ifdef MK_ENVIRONMENT_REFLECTIONS
+			#ifdef MK_LIGHTMAP_UV
 				DECLARE_LIGHTMAP_UV(5);
 			#endif
 			DECLARE_LIGHTING_COORDS(6, 7)
@@ -290,7 +300,8 @@
 			#if defined(LIGHTMAP_ON) || defined(DYNAMICLIGHTMAP_ON)
 				giInput.ambient = 0;
 				giInput.lightmapUV = lightmapUVAndSH;
-			#else
+			#endif
+			#if UNITY_SHOULD_SAMPLE_SH && !UNITY_SAMPLE_FULL_SH_PER_PIXEL
 				giInput.ambient = lightmapUVAndSH.rgb;
 				giInput.lightmapUV = 0;
 			#endif
@@ -442,14 +453,12 @@
 			INITIALIZE_STRUCT(MKLight, mkLight);
 
 			#if defined(MK_URP) || defined(MK_LWRP)
-				#if !defined(_MAIN_LIGHT_SHADOWS_CASCADE)
-					//
-				#elif defined(MAIN_LIGHT_CALCULATE_SHADOWS) && defined(_MAIN_LIGHT_SHADOWS_SCREEN)
-					vertexOutputLight._ShadowCoord = ComputeScreenPos(vertexOutputLight.SV_CLIP_POS);
-				#elif defined(MAIN_LIGHT_CALCULATE_SHADOWS)
+				#if defined(MK_SHADOW_COORD_INTERPOLATOR)
+					//skip interpolator...
+				#elif defined(MK_MAIN_LIGHT_CALCULATE_SHADOWS)
 					vertexOutputLight._ShadowCoord = TransformWorldToShadowCoord(surfaceData.positionWorld);
 				#else
-					//vertexOutputLight.shadowCoords = 0;
+					vertexOutputLight._ShadowCoord = float4(0, 0, 0, 0);
 				#endif
 			#endif
 			
@@ -457,12 +466,10 @@
 				Light light;
 				INITIALIZE_STRUCT(Light, light);
 
-				#if defined(MK_URP_2020_2_Or_Newer) && defined(MAIN_LIGHT_CALCULATE_SHADOWS)
+				#if defined(MK_URP_2020_2_Or_Newer)
 					light = GetMainLight(vertexOutputLight._ShadowCoord, surfaceData.positionWorld, surfaceData.shadowMask);
-				#elif defined(MAIN_LIGHT_CALCULATE_SHADOWS)
-					light = GetMainLight(vertexOutputLight._ShadowCoord);
 				#else
-					light = GetMainLight();
+					light = GetMainLight(vertexOutputLight._ShadowCoord);
 				#endif
 
 				mkLight.color = light.color;
@@ -763,17 +770,17 @@
 	/////////////////////////////////////////////////////////////////////////////////////////////
 	// Lighting Direct
 	/////////////////////////////////////////////////////////////////////////////////////////////
-	inline half LightingDirectAdditional(inout Surface surface, in MKSurfaceData surfaceData, in MKPBSData pbsData, in MKLight light, in MKLightData lightData, out half4 finalLightColor)
+	inline half MKLightingDiffuse(inout Surface surface, in MKSurfaceData surfaceData, in MKPBSData pbsData, in MKLight light, in MKLightData lightData)
 	{
 		#ifdef MK_LIT
-			half4 diffuse;
+			half diffuse;
 			#if defined(MK_DIFFUSE_MINNAERT)
-				diffuse.a = Minnaert(lightData.NoL, surfaceData.VoN, pbsData.roughnessPow2);
+				diffuse = Minnaert(lightData.NoL, surfaceData.VoN, pbsData.roughnessPow2);
 			#elif defined(MK_DIFFUSE_OREN_NAYAR)
-				diffuse.a = OrenNayar(lightData.NoL, surfaceData.VoN, lightData.VoL, pbsData.roughnessPow2);
+				diffuse = OrenNayar(lightData.NoL, surfaceData.VoN, lightData.VoL, pbsData.roughnessPow2);
 			#else
 				//MK_SIMPLE
-				diffuse.a = lightData.NoL;
+				diffuse = lightData.NoL;
 			#endif
 
 			//Customize light atten
@@ -783,33 +790,26 @@
 			//diffuse.a = lerp(diffuse.a, diffuse.a * light.attenuation, step(0, diffuse.a));
 
 			#if defined(MK_WRAPPED_DIFFUSE)
-				diffuse.a = HalfWrap(diffuse.a, 0.5);
+				diffuse = HalfWrap(diffuse, 0.5);
 			#endif
 
 			#ifdef MK_THRESHOLD_MAP
-				diffuse.a -= _DiffuseThresholdOffset * surface.thresholdOffset;
-				diffuse.a += _DiffuseThresholdOffset * THRESHOLD_OFFSET_NORMALIZER;
+				diffuse -= _DiffuseThresholdOffset * surface.thresholdOffset;
+				diffuse += _DiffuseThresholdOffset * THRESHOLD_OFFSET_NORMALIZER;
 			#endif
 
 			//Lighting could be optimized by combining every component (diffuse, specular, lightTransmission, indirect/direct), may break gooch
-			LIGHT_STYLE_RAW_2D(diffuse.a, light.distanceAttenuation, _LightThreshold, _DiffuseSmoothness * 0.5, _DiffuseSmoothness * 0.5, _DiffuseRamp, SAMPLER_CLAMPED_MAIN);
-			#ifdef MK_LEGACY_RP
-				#ifdef USING_DIRECTIONAL_LIGHT
-					#if defined(MK_SHADOW_BLEND_GI)
-						half giLightBlend = UnityComputeShadowFade(UnityComputeShadowFadeDistance(surfaceData.positionWorld, dot(CAMERA_POSITION_WORLD - surfaceData.positionWorld, MATRIX_V[2].xyz)));
-						diffuse.a *= light.shadowAttenuation * giLightBlend;
-					#else
-						diffuse.a *= light.attenuation;
-					#endif
-				#else
-					diffuse.a *= light.attenuation;
-				#endif
-			#else
-				diffuse.a *= light.attenuation;
-			#endif
-			ARTISTIC_RAW(diffuse.a);
-			TRANSFER_SCALAR_TO_VECTOR(diffuse);
-			
+			LIGHT_STYLE_RAW_2D(diffuse, light.distanceAttenuation, _LightThreshold, _DiffuseSmoothness * 0.5, _DiffuseSmoothness * 0.5, _DiffuseRamp, SAMPLER_CLAMPED_MAIN);
+			diffuse *= light.attenuation;
+			return diffuse;
+		#else
+			return 1;
+		#endif
+	}
+
+	inline void MKLightingSFX(inout Surface surface, in MKSurfaceData surfaceData, in MKPBSData pbsData, in MKLight light, in MKLightData lightData, in half4 diffuse, inout half4 finalLightColor)
+	{
+		#ifdef MK_LIT
 			half3 goochRamp;
 			#ifdef MK_GOOCH_RAMP
 				goochRamp = lerp(1.0, SampleRamp2D(PASS_TEXTURE_2D(_GoochRamp, SAMPLER_CLAMPED_MAIN), half2(diffuse.a, light.distanceAttenuation)).rgb, _GoochRampIntensity);
@@ -823,7 +823,7 @@
 			//#ifdef MK_GOOCH_RAMP
 			//	gooch.rgb = lerp(gooch.rgb, SampleRamp2D(PASS_TEXTURE_2D(_GoochRamp, SAMPLER_CLAMPED_MAIN), half2(diffuse.a, light.distanceAttenuation)).rgb, _GoochRampIntensity);
 			//#endif
-			
+
 			//Surface Direct + Gooch
 			#ifdef MK_SPECULAR
 				half4 specular;
@@ -913,18 +913,35 @@
 			#else
 				finalLightColor.a = 1;
 			#endif
+		#endif
+	}
+
+	inline void LightingDirectAdditional(inout Surface surface, in MKSurfaceData surfaceData, in MKPBSData pbsData, in MKLight light, in MKLightData lightData, out half4 finalLightColor)
+	{
+		#ifdef MK_LIT
+			half diffuseRaw = MKLightingDiffuse(surface, surfaceData, pbsData, light, lightData);
+			half4 diffuse = half4(0, 0, 0, diffuseRaw);
+			ARTISTIC_RAW(diffuse.a);
+			diffuse.a *= diffuseRaw;
+			TRANSFER_SCALAR_TO_VECTOR(diffuse);
 			
-			return diffuse.a;
+			MKLightingSFX(surface, surfaceData, pbsData, light, lightData, diffuse, finalLightColor);
 		#endif
 	}
 
 	inline void LightingDirect(inout Surface surface, in MKSurfaceData surfaceData, in MKPBSData pbsData, in MKLight light, in MKLightData lightData, out half4 finalLightColor)
 	{
 		#ifdef MK_LIT
-			half diffuseAttenuation = LightingDirectAdditional(surface, surfaceData, pbsData, light, lightData, finalLightColor);
+			half diffuseRaw = MKLightingDiffuse(surface, surfaceData, pbsData, light, lightData);
+			half4 diffuse = half4(0, 0, 0, diffuseRaw);
+			ARTISTIC_RAW(diffuse.a);
+			TRANSFER_SCALAR_TO_VECTOR(diffuse);
+			
+			MKLightingSFX(surface, surfaceData, pbsData, light, lightData, diffuse, finalLightColor);
+
 			#if defined(MK_RIM_SPLIT)
 				#ifndef MK_ADDITIONAL_LIGHTS
-					surface.rim += RimRawBright(diffuseAttenuation, _RimSize, surfaceData.OneMinusVoN, _RimSmoothness * 0.5, surface, light);
+					surface.rim += RimRawBright(diffuse.a, _RimSize, surfaceData.OneMinusVoN, _RimSmoothness * 0.5, surface, light);
 				#endif
 				//surface.rimDark = RimRawDark(1.0 - saturate(diffuse.a), _RimSize, surfaceData.OneMinusVoN, _RimSmoothness * 0.5, surface, light);
 			#endif

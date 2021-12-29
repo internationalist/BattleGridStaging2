@@ -48,7 +48,7 @@
 	/////////////////////////////////////////////////////////////////////////////////////////////
 	struct VertexOutputMeta
 	{
-		#ifdef MK_TCM
+		#if defined(MK_TCM) || defined(MK_TCD)
 			float4 uv : TEXCOORD0;
 		#endif
 		float4 svPositionClip : SV_POSITION;

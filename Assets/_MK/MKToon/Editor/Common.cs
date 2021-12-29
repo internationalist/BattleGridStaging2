@@ -12,12 +12,12 @@ namespace MK.Toon.Editor
     internal enum RenderPipeline
     {
         Built_in,
-        Lightweight,
+        //Lightweight,
         Universal
     }
     internal enum RenderPipelineUpgrade
     {
-        Lightweight,
+        //Lightweight,
         Universal
     }
     internal enum ShaderTemplate

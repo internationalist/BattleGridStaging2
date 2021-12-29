@@ -37,10 +37,14 @@
 			vertexOutput.uv = 0;
 		#endif
 		#if defined(MK_TCM)
-			vertexOutput.uv.xy = vertexInput.texcoord0.xy * _AlbedoMap_ST.xy + _AlbedoMap_ST.zw;
+			vertexOutput.uv.xy = vertexInput.texcoord0.xy;
 		#endif
 		#if defined(MK_TCD)
-			vertexOutput.uv.zw = vertexOutput.uv.xy = vertexInput.texcoord0.xy * _DetailMap_ST.xy + _DetailMap_ST.zw;
+			#if defined(MK_OCCLUSION_UV_SECOND)
+				vertexOutput.uv.zw = vertexInput.texcoord0.zw;
+			#else
+				vertexOutput.uv.zw = 0;
+			#endif
 		#endif
 
 		#if defined(MK_VERTCLR) || defined(MK_POLYBRUSH)
@@ -78,7 +82,7 @@
 		(
 			PASS_POSITION_WORLD_ARG(0)
 			PASS_FOG_FACTOR_WORLD_ARG(0)
-			PASS_BASE_UV_ARG(float4(vertexOutput.uv.xy, 0, 0))
+			PASS_BASE_UV_ARG(vertexOutput.uv)
 			PASS_LIGHTMAP_UV_ARG(0)
 			PASS_VERTEX_COLOR_ARG(vertexOutput.color)
 			PASS_NORMAL_WORLD_ARG(1)
@@ -101,9 +105,9 @@
 				mkMetaData.vizUV = vertexOutput.vizUV;
 				mkMetaData.lightCoords = vertexOutput.lightCoords;
 			#else
-				mkMetaData.albedo = mkPBSData.diffuseRadiance + mkPBSData.specularRadiance * mkPBSData.roughness * 0.5;
+				mkMetaData.albedo = mkPBSData.diffuseRadiance;
 			#endif
-			mkMetaData.specular = mkPBSData.specularRadiance;
+			mkMetaData.specular = mkPBSData.specularRadiance * mkPBSData.roughness * 0.5;
 		#else
 			#ifdef EDITOR_VISUALIZATION
 				mkMetaData.albedo = surface.albedo;

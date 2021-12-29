@@ -50,15 +50,12 @@
 
 		//texcoords
 		#if defined(MK_TCM) || defined(MK_TCD)
-			#if defined(MK_TCM)
-				//XY always RAW Coords
-				//interpolated in pixel shader, artistic UV would take an additional texcoord, could be optimized some day...
-				vertexOutput.uv.xy = VERTEX_INPUT.texcoord0.xy;
-			#else
-				vertexOutput.uv.xy = 0;
-			#endif
-			#if defined(MK_TCD)
-				vertexOutput.uv.zw = VERTEX_INPUT.texcoord0.xy * _DetailMap_ST.xy + _DetailMap_ST.zw;
+			//XY always RAW Coords
+			//interpolated in pixel shader, artistic UV would take an additional texcoord, could be optimized some day...
+			vertexOutput.uv.xy = VERTEX_INPUT.texcoord0.xy;
+			
+			#if defined(MK_OCCLUSION_UV_SECOND)
+				vertexOutput.uv.zw = VERTEX_INPUT.texcoord0.zw;
 			#else
 				vertexOutput.uv.zw = 0;
 			#endif
@@ -82,7 +79,7 @@
 					vertexOutputLight.vertexLighting = ComputeVertexLighting(vertexOutput.positionWorld.xyz, vertexOutput.normalWorld.xyz);
 				#endif
 
-				#ifdef MK_ENVIRONMENT_REFLECTIONS
+				#ifdef MK_LIGHTMAP_UV
 					vertexOutputLight.lightmapUV = 0;
 					#if defined(MK_URP) || defined(MK_LWRP)
 						#if defined(LIGHTMAP_ON)

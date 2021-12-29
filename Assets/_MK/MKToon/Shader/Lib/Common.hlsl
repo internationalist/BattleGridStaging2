@@ -126,7 +126,7 @@
 	//threshold based lighting type
 	inline half Cel(half threshold, half smoothnessMin, half smoothnessMax, half value)
 	{
-		#if SHADER_TARGET >= 35 && !defined(SHADER_API_GLES) && !defined(SHADER_API_GLES3)
+		#ifdef MK_LOCAL_ANTIALIASING
 			half ddxy = fwidth(value);
 			return smoothstep(threshold - smoothnessMin - ddxy, threshold + smoothnessMax + ddxy, value);
 		#else
@@ -201,7 +201,7 @@
 	inline half Drawn(half value, half artistic, half artisticClampMin, half artisticClampMax)
 	{			
 		//currently implemented as soft pattern, see repo for hard pattern prototype
-		#if SHADER_TARGET >= 35
+		#ifdef MK_LOCAL_ANTIALIASING
 			half ddxy = fwidth(value);
 			return lerp(artisticClampMin, 1, value) * smoothstep(artistic - HALF_MIN - ddxy, artistic + ddxy, clamp(value, artisticClampMin, artisticClampMax));
 			//return lerp(artisticClampMin, 1, value) * smoothstep(artistic - T_H - ddxy, artistic, clamp(value, artisticClampMin, artisticClampMax));
@@ -219,7 +219,7 @@
 		//value of 0 = black, no strokes visible
 		half stepMax = clamp(value, threshold, 1.0h) * 6.0h;
 		half3 darkCoeff, brightCoeff;
-		#if SHADER_TARGET >= 35
+		#ifdef MK_LOCAL_ANTIALIASING
 			half ddxy = fwidth(value);
 			darkCoeff = saturate(stepMax - half3(0, 1, 2) - ddxy); //half3(0, 1, 2));  7 step
 			brightCoeff = saturate(stepMax - half3(3, 4, 5) - ddxy);
@@ -246,7 +246,7 @@
 
 	inline half Sketch(half vMin, half vMax, half value)
 	{
-		#if SHADER_TARGET >= 35
+		#ifdef MK_LOCAL_ANTIALIASING
 			half ddxy = fwidth(value);
 			return max(lerp(vMin - T_V - ddxy, vMax, value), 0);
 		#else

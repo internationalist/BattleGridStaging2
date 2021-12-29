@@ -29,7 +29,11 @@
 				float4 texcoord0 : TEXCOORD0;
 				float texcoordBlend : TEXCOORD3;
 			#else
-				float2 texcoord0 : TEXCOORD0;
+				#ifdef MK_OCCLUSION_UV_SECOND
+					float4 texcoord0 : TEXCOORD0;
+				#else
+					float2 texcoord0 : TEXCOORD0;
+				#endif
 			#endif
 		#endif
 		#if defined(MK_FORWARD_BASE_PASS) && defined(DYNAMICLIGHTMAP_ON)

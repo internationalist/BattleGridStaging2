@@ -12,7 +12,10 @@ public class UnitStats : MonoBehaviour
     void Start()
     {
         statsPanel = GetComponent<RectTransform>();
-        UIManager.I.OnActionCamChange += ActionCamChange;
+        if(UIManager.I != null)
+        {
+            UIManager.I.OnActionCamChange += ActionCamChange;
+        }
     }
 
     // Update is called once per frame
@@ -28,7 +31,10 @@ public class UnitStats : MonoBehaviour
 
     private void OnDestroy()
     {
-        UIManager.I.OnActionCamChange -= ActionCamChange;
+        if (UIManager.I != null)
+        {
+            UIManager.I.OnActionCamChange -= ActionCamChange;
+        }
     }
 
 

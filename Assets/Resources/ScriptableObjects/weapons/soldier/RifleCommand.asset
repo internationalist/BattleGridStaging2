@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14fd49cd26f93ae4b914215e98997396, type: 3}
+  m_Name: RifleCommand
+  m_EditorClassIdentifier: 
+  effectFlashPrefab:
+  - {fileID: 19800002, guid: e5feeed6f10499145acb9f7725552742, type: 3}
+  soundEffects:
+  - {fileID: 8300000, guid: 52eee3472cd0d7744a172523797ea3ea, type: 3}
+  payloadPrefab: {fileID: 0}
+  impactFlashPrefab: {fileID: 2300089161946121287, guid: 5548bba504c456740b6ff2c0041134d9, type: 3}
+  payLoadSpeed: 60
+  RweaponPrefab: {fileID: 5665017128938091278, guid: 6160c7568600c5440a1d36a27cda79a8, type: 3}
+  LweaponPrefab: {fileID: 0}
+  weaponAudioSource: {fileID: 0}
+  R_WeaponHolder_Position: {x: 0.027, y: -0.041, z: 0.007}
+  R_WeaponHolder_Rotation: {x: 344.88, y: 89.4, z: 85.7}
+  apNeeded: 20
+  enemyLayer: 11
+  maxBurstFire: 3
+  maxAmmo: 12
+  isDefault: 0
+  maxRuns: 1
+  damageParameters:
+    optimalRange: 10
+    fallOff: 5
+    baseDamage: 10
+    criticalDamageMultiplier: 3
+    criticalDamageChance: 0.1
+  bulletTrailPrefab: {fileID: 5024224829995560158, guid: a6346d327f250ae499d03f6354482e21, type: 3}
+  uiImageName: Gun

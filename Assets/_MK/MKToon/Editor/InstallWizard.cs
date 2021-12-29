@@ -17,7 +17,7 @@ namespace MK.Toon.Editor.InstallWizard
     public sealed class InstallWizard : EditorWindow
     {
         #pragma warning disable CS0414
-        private static readonly string _version = "3.0.11.4";
+        private static readonly string _version = "3.0.12.5";
         #pragma warning restore CS0414
         
         private static readonly Vector2Int _referenceResolution = new Vector2Int(2560, 1440);
@@ -117,6 +117,7 @@ namespace MK.Toon.Editor.InstallWizard
                 Divider();
                 VerticalSpace();
                 int readMeNumber = 4;
+                /*
                 if(_targetRenderPipeline == RenderPipeline.Lightweight)
                 {
                     readMeNumber = 3;
@@ -125,6 +126,7 @@ namespace MK.Toon.Editor.InstallWizard
                     Divider();
                 }
                 else
+                */
                 {
                     EditorGUILayout.LabelField("3. Import Examples (optional)", UnityEditor.EditorStyles.boldLabel);
                     switch(_targetRenderPipeline)
@@ -132,9 +134,9 @@ namespace MK.Toon.Editor.InstallWizard
                         case RenderPipeline.Built_in:
                         EditorGUILayout.LabelField("Make sure Postprocessing Stack v2 and Text Mesh Pro is installed first!", _flowTextStyle);
                         break;
-                        case RenderPipeline.Lightweight:
-                        EditorGUILayout.LabelField("Make sure Text Mesh Pro is installed first!", _flowTextStyle);
-                        break;
+                        //case RenderPipeline.Lightweight:
+                        //EditorGUILayout.LabelField("Make sure Text Mesh Pro is installed first!", _flowTextStyle);
+                        //break;
                         case RenderPipeline.Universal:
                         EditorGUILayout.LabelField("Make sure Text Mesh Pro is installed first!", _flowTextStyle);
                         break;

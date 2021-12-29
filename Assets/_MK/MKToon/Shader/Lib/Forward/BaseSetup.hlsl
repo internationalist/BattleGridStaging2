@@ -12,10 +12,6 @@
 	#ifndef MK_FORWARD_BASE_PASS
 		#define MK_FORWARD_BASE_PASS
 	#endif
-
-	#if defined(MK_URP) && defined(MK_PARTICLES) && UNITY_VERSION >= 202020
-		#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/ParticlesInstancing.hlsl"
-	#endif
 	
 	//Internal keyword for environment reflections
 	#if !defined(_MK_ENVIRONMENT_REFLECTIONS_ADVANCED)
@@ -33,7 +29,7 @@
 
 	//if particles are used disable dynamic lightmap
 	#if defined(DYNAMICLIGHTMAP_ON) && defined(MK_PARTICLES)
-		#undef DYNAMICLIGHTMAP_ON
+		//#undef DYNAMICLIGHTMAP_ON
 	#endif
 
 	#if defined(MK_URP) || defined(MK_LWRP)
@@ -50,8 +46,8 @@
 
 	#include "../Core.hlsl"
 
-	#if defined(SHADOWS_SCREEN) && defined(LIGHTMAP_ON)
-		#define MK_SHADOW_BLEND_GI
+	#if defined(MK_URP) && defined(MK_PARTICLES) && UNITY_VERSION >= 202020
+		#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/ParticlesInstancing.hlsl"
 	#endif
 
 	#include "ProgramForward.hlsl"

@@ -58,6 +58,20 @@
 	#endif
 	*/
 
+	//Enable a secondary UV set for occlusion (Z and W channels of the main UV are used)
+	/*
+	#ifndef MK_OCCLUSION_UV_SECOND
+		#define MK_OCCLUSION_UV_SECOND
+	#endif
+	*/
+
+	//Disable Local Antialiasing
+	/*
+	#ifndef MK_LOCAL_ANTIALIASING_OFF
+		#define MK_LOCAL_ANTIALIASING_OFF
+	#endif
+	*/
+
 	// ------------------------------------------------------------------------------------------
 
 	#if defined(MK_URP)
@@ -110,6 +124,17 @@
 		#endif
 	#endif
 
+	#if SHADER_TARGET >= 35 && !defined(SHADER_API_GLES) && !defined(SHADER_API_GLES3) && !defined(MK_LOCAL_ANTIALIASING_OFF)
+		#ifndef MK_LOCAL_ANTIALIASING
+			#define MK_LOCAL_ANTIALIASING
+		#endif
+	#endif
+
+	#if defined(MK_URP) && UNITY_VERSION >= 202110
+		#ifndef MK_URP_2021_1_Or_Newer
+			#define MK_URP_2021_1_Or_Newer
+		#endif
+	#endif
 	#if defined(MK_URP) && UNITY_VERSION >= 202020
 		#ifndef MK_URP_2020_2_Or_Newer
 			#define MK_URP_2020_2_Or_Newer
@@ -334,7 +359,7 @@
 	#endif
 	
 	#ifdef MK_LIT
-		#if (UNITY_VERSION >= 202120 || defined(_SCREEN_SPACE_OCCLUSION)) && !defined(MK_SURFACE_TYPE_TRANSPARENT)
+		#if (UNITY_VERSION >= 202020 && defined(_SCREEN_SPACE_OCCLUSION)) && !defined(MK_SURFACE_TYPE_TRANSPARENT)
 			#ifndef MK_SCREEN_SPACE_OCCLUSION
 				#define MK_SCREEN_SPACE_OCCLUSION
 			#endif
@@ -969,6 +994,34 @@
 	#if defined(MK_FORWARD_BASE_PASS) || defined(MK_OUTLINE_PASS)
 		#ifndef MK_FOG
 			#define MK_FOG
+		#endif
+	#endif
+
+	#if defined(LIGHTMAP_ON) || defined(DYNAMICLIGHTMAP_ON) || defined(MK_ENVIRONMENT_REFLECTIONS)
+		#ifndef MK_LIGHTMAP_UV
+			#define MK_LIGHTMAP_UV
+		#endif
+	#endif
+
+	#ifdef MK_LIT
+		#if defined(MK_RECEIVE_SHADOWS)
+			#if defined(MK_URP_2021_1_Or_Newer)
+				#if defined(_MAIN_LIGHT_SHADOWS) || defined(_MAIN_LIGHT_SHADOWS_CASCADE) || defined(_MAIN_LIGHT_SHADOWS_SCREEN)
+					#define MK_MAIN_LIGHT_CALCULATE_SHADOWS
+
+					#if !defined(_MAIN_LIGHT_SHADOWS_CASCADE)
+						#define MK_SHADOW_COORD_INTERPOLATOR
+					#endif
+				#endif
+			#else
+				#if defined(_MAIN_LIGHT_SHADOWS)
+					#define MK_MAIN_LIGHT_CALCULATE_SHADOWS
+
+					#if !defined(_MAIN_LIGHT_SHADOWS_CASCADE)
+						#define MK_SHADOW_COORD_INTERPOLATOR
+					#endif
+				#endif
+			#endif
 		#endif
 	#endif
 #endif

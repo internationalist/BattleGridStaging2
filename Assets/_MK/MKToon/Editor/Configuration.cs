@@ -196,9 +196,9 @@ namespace MK.Toon.Editor.InstallWizard
                     case RenderPipeline.Built_in:
                         AssetDatabase.ImportPackage(AssetDatabase.GetAssetPath(_instance._basePackageBuiltin), false);
                     break;
-                    case RenderPipeline.Lightweight:
-                        AssetDatabase.ImportPackage(AssetDatabase.GetAssetPath(_instance._basePackageLWRP), false);
-                    break;
+                    //case RenderPipeline.Lightweight:
+                    //    AssetDatabase.ImportPackage(AssetDatabase.GetAssetPath(_instance._basePackageLWRP), false);
+                    //break;
                     case RenderPipeline.Universal:
                         AssetDatabase.ImportPackage(AssetDatabase.GetAssetPath(_instance._EditorURP), false);
                         #if UNITY_2021_2_OR_NEWER

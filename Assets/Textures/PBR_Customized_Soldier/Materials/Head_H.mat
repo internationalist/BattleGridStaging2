@@ -21,12 +21,12 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Head_H
-  m_Shader: {fileID: 4800000, guid: 371dee73dabc89140878360402049bfc, type: 3}
-  m_ShaderKeywords: _EMISSION _FRESNELHIGHLIGHTS_ON _METALLICSPECGLOSSMAP _MK_ALBEDO_MAP
-    _MK_ARTISTIC_PROJECTION_SCREEN_SPACE _MK_DETAIL_BLEND_MIX _MK_EMISSION _MK_ENVIRONMENT_REFLECTIONS_AMBIENT
-    _MK_FRESNEL_HIGHLIGHTS _MK_LIGHT_CEL _MK_NORMAL_MAP _MK_OCCLUSION_MAP _MK_OUTLINE_HULL_CLIP
-    _MK_PBS_MAP_0 _MK_RECEIVE_SHADOWS _MK_SPECULAR_ISOTROPIC _MK_WRAPPED_DIFFUSE
-    _NORMALMAP _OCCLUSIONMAP _RECEIVESHADOWS_ON _WRAPPEDLIGHTING_ON
+  m_Shader: {fileID: 4800000, guid: fedf1067191c49548ad94e6287a8610d, type: 3}
+  m_ShaderKeywords: _EMISSION _FRESNELHIGHLIGHTS_ON _GLOSSYREFLECTIONS_OFF _METALLICSPECGLOSSMAP
+    _MK_ALBEDO_MAP _MK_ARTISTIC_PROJECTION_SCREEN_SPACE _MK_DETAIL_BLEND_MIX _MK_EMISSION
+    _MK_ENVIRONMENT_REFLECTIONS_AMBIENT _MK_FRESNEL_HIGHLIGHTS _MK_LIGHT_CEL _MK_NORMAL_MAP
+    _MK_OCCLUSION_MAP _MK_OUTLINE_HULL_CLIP _MK_PBS_MAP_0 _MK_RECEIVE_SHADOWS _MK_SPECULAR_ISOTROPIC
+    _MK_WRAPPED_DIFFUSE _NORMALMAP _OCCLUSIONMAP _RECEIVESHADOWS_ON _WRAPPEDLIGHTING_ON
   m_LightmapFlags: 2
   m_EnableInstancingVariants: 1
   m_DoubleSidedGI: 0
@@ -282,6 +282,7 @@ Material:
     - _LightmapDirectionPitch: 0
     - _LightmapDirectionYaw: 0
     - _Metallic: 0
+    - _Mode: 0
     - _NormalMapIntensity: 1
     - _OcclusionMapIntensity: 1
     - _OcclusionStrength: 1
@@ -337,6 +338,7 @@ Material:
     - _TextureBlendingMode: 0
     - _TextureImpact: 1
     - _ThresholdMapScale: 1
+    - _UVSec: 0
     - _UnityShadowMode: 0
     - _UnityShadowOcclusion: 0
     - _UnityShadowPower: 0.2

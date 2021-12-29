@@ -26,7 +26,7 @@ MonoBehaviour:
   R_WeaponHolder_Rotation: {x: -13.806, y: 89.295, z: 77.336}
   apNeeded: 0
   enemyLayer: 11
-  maxBurstFire: 2
+  maxBurstFire: 3
   maxAmmo: 6
   isDefault: 0
   maxRuns: 1

@@ -49,9 +49,13 @@
 		#if defined(MK_URP) || defined(MK_LWRP)
 			MetaInput metaInput;
 
-			metaInput.Albedo = mkMetaData.albedo;
 			metaInput.Emission = mkMetaData.emission;
-			metaInput.SpecularColor = mkMetaData.specular;
+			#if UNITY_VERSION >= 202120
+				metaInput.Albedo = mkMetaData.albedo + mkMetaData.specular;
+			#else
+				metaInput.Albedo = mkMetaData.albedo;
+				metaInput.SpecularColor = mkMetaData.specular;
+			#endif
 
 			return MetaFragment(metaInput);
 		#else

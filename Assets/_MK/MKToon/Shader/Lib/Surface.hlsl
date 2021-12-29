@@ -21,7 +21,7 @@
 			half3 vertexNormalWorld;
 		#endif
 		#ifdef MK_LIT
-			#ifdef MK_ENVIRONMENT_REFLECTIONS
+			#ifdef MK_LIGHTMAP_UV
 				float4 lightmapUV;
 			#endif
 			#ifdef MK_VERTEX_LIGHTING
@@ -63,8 +63,14 @@
 			autoLP4 vertexColor;
 		#endif
 
-		#if defined(MK_TCM) || defined(MK_TCD)
-			float4 baseUV;
+		#if defined(MK_TCM)
+			float2 baseUV;
+		#endif
+		#if defined(MK_TCD)
+			float2 detailUV;
+		#endif
+		#ifdef MK_OCCLUSION_UV_SECOND
+			float2 secondUV;
 		#endif
 		#ifdef MK_THRESHOLD_MAP
 			float2 thresholdUV;
@@ -224,7 +230,7 @@
 		#define PASS_BITANGENT_WORLD_ARG(bitangentWorld)
 	#endif
 
-	#ifdef MK_ENVIRONMENT_REFLECTIONS
+	#ifdef MK_LIGHTMAP_UV
 		#define PASS_LIGHTMAP_UV_ARG(lightmapUV) ,lightmapUV
 	#else
 		#define PASS_LIGHTMAP_UV_ARG(lightmapUV)
@@ -322,7 +328,7 @@
 		#if defined(MK_TCM) || defined(MK_TCD)
 			, in float4 baseUV
 		#endif
-		#ifdef MK_ENVIRONMENT_REFLECTIONS
+		#ifdef MK_LIGHTMAP_UV
 			, in float4 lightmapUV
 		#endif
 		#if defined(MK_VERTCLR) || defined(MK_PARTICLES) || defined(MK_POLYBRUSH)
@@ -378,14 +384,24 @@
 			surfaceData.vertexColor = vertexColor;
 		#endif
 
-		#if defined(MK_TCM) || defined(MK_TCD)
+		#if defined(MK_TCM)
 			surfaceData.baseUV = 0;
 		#endif
+		#if defined(MK_TCD)
+			surfaceData.detailUV = 0;
+		#endif
+		#if defined(MK_OCCLUSION_UV_SECOND)
+			surfaceData.secondUV = 0;
+		#endif
+
 		#if defined(MK_TCM)
 			surfaceData.baseUV.xy = baseUV.xy * _AlbedoMap_ST.xy + _AlbedoMap_ST.zw;
 		#endif
+		#if defined(MK_TCM) && defined(MK_OCCLUSION_UV_SECOND)
+			surfaceData.secondUV = baseUV.zw * _AlbedoMap_ST.xy + _AlbedoMap_ST.zw;
+		#endif
 		#if defined(MK_TCD)
-			surfaceData.baseUV.zw = baseUV.zw;
+			surfaceData.detailUV = baseUV.xy * _DetailMap_ST.xy + _DetailMap_ST.zw;
 		#endif
 
 		#ifdef MK_FLIPBOOK
@@ -408,7 +424,7 @@
 				surfaceData.baseUV.xy += parallaxUVOffset;
 			#endif
 			#if defined(MK_TCD)
-				surfaceData.baseUV.zw += parallaxUVOffset;
+				surfaceData.detailUV += parallaxUVOffset;
 			#endif
 		#endif
 
@@ -476,9 +492,9 @@
 				#if defined(MK_NORMAL_MAP) && !defined(MK_DETAIL_NORMAL_MAP)
 					surfaceData.normalWorld = NormalMappingWorld(PASS_TEXTURE_2D(_NormalMap, SAMPLER_REPEAT_MAIN), surfaceData.baseUV.xy, SURFACE_FLIPBOOK_UV, _NormalMapIntensity, half3x3(surfaceData.tangentWorld, surfaceData.bitangentWorld, surfaceData.vertexNormalWorld));
 				#elif defined(MK_NORMAL_MAP) && defined(MK_DETAIL_NORMAL_MAP)
-					surfaceData.normalWorld = NormalMappingWorld(PASS_TEXTURE_2D(_NormalMap, SAMPLER_REPEAT_MAIN), surfaceData.baseUV.xy, SURFACE_FLIPBOOK_UV, _NormalMapIntensity, PASS_TEXTURE_2D(_DetailNormalMap, SAMPLER_REPEAT_MAIN), surfaceData.baseUV.zw, _DetailNormalMapIntensity, half3x3(surfaceData.tangentWorld, surfaceData.bitangentWorld, surfaceData.vertexNormalWorld));
+					surfaceData.normalWorld = NormalMappingWorld(PASS_TEXTURE_2D(_NormalMap, SAMPLER_REPEAT_MAIN), surfaceData.baseUV.xy, SURFACE_FLIPBOOK_UV, _NormalMapIntensity, PASS_TEXTURE_2D(_DetailNormalMap, SAMPLER_REPEAT_MAIN), surfaceData.detailUV, _DetailNormalMapIntensity, half3x3(surfaceData.tangentWorld, surfaceData.bitangentWorld, surfaceData.vertexNormalWorld));
 				#elif !defined(MK_NORMAL_MAP) && defined(MK_DETAIL_NORMAL_MAP)
-					surfaceData.normalWorld = NormalMappingWorld(PASS_TEXTURE_2D(_DetailNormalMap, SAMPLER_REPEAT_MAIN), surfaceData.baseUV.xy, SURFACE_FLIPBOOK_UV, _DetailNormalMapIntensity, half3x3(surfaceData.tangentWorld, surfaceData.bitangentWorld, surfaceData.vertexNormalWorld));
+					surfaceData.normalWorld = NormalMappingWorld(PASS_TEXTURE_2D(_DetailNormalMap, SAMPLER_REPEAT_MAIN), surfaceData.detailUV, SURFACE_FLIPBOOK_UV, _DetailNormalMapIntensity, half3x3(surfaceData.tangentWorld, surfaceData.bitangentWorld, surfaceData.vertexNormalWorld));
 				#else
 					surfaceData.normalWorld = surfaceData.vertexNormalWorld;
 				#endif
@@ -495,7 +511,7 @@
 			#ifdef MK_VERTEX_LIGHTING
 				surfaceData.vertexLighting = vertexLighting;
 			#endif
-			#ifdef MK_ENVIRONMENT_REFLECTIONS
+			#ifdef MK_LIGHTMAP_UV
 				surfaceData.lightmapUV = lightmapUV;
 			#endif
 		#endif
@@ -548,7 +564,7 @@
 				#ifdef MK_FRESNEL_HIGHLIGHTS
 					premulGISpec = dot(pbsData.fresnel, REL_LUMA);
 				#else
-					premulGISpec = pbsData.specularRadiance;
+					premulGISpec = dot(pbsData.specularRadiance, REL_LUMA);
 				#endif
 				surface.alpha = surface.alpha * pbsData.oneMinusReflectivity + premulGISpec;
 			#else
@@ -699,7 +715,7 @@
 
 		//add detail
 		#ifdef MK_DETAIL_MAP
-			MixAlbedoDetail(surface.albedo, PASS_TEXTURE_2D(_DetailMap, SAMPLER_REPEAT_MAIN), surfaceData.baseUV.zw, SURFACE_FLIPBOOK_UV);
+			MixAlbedoDetail(surface.albedo, PASS_TEXTURE_2D(_DetailMap, SAMPLER_REPEAT_MAIN), surfaceData.detailUV, SURFACE_FLIPBOOK_UV);
 		#endif
 
 		#ifdef _DBUFFER
@@ -773,7 +789,13 @@
 			#endif
 
 			#ifdef MK_OCCLUSION_MAP
-				surface.occlusion = (1.0 - _OcclusionMapIntensity) + SAMPLE_TEX2D_FLIPBOOK(_OcclusionMap, SAMPLER_REPEAT_MAIN, surfaceData.baseUV.xy, SURFACE_FLIPBOOK_UV).rg * _OcclusionMapIntensity;
+				float2 occlusionUV;
+				#if defined(MK_TCM) && defined(MK_OCCLUSION_UV_SECOND)
+					occlusionUV = surfaceData.secondUV;
+				#else
+					occlusionUV = surfaceData.baseUV;
+				#endif
+				surface.occlusion = (1.0 - _OcclusionMapIntensity) + SAMPLE_TEX2D_FLIPBOOK(_OcclusionMap, SAMPLER_REPEAT_MAIN, occlusionUV, SURFACE_FLIPBOOK_UV).rg * _OcclusionMapIntensity;
 			#else
 				surface.occlusion = 1.0;
 			#endif
@@ -789,7 +811,7 @@
 
 		#ifdef MK_COLOR
 			#if defined(MK_COLOR_BLEND_ADDITIVE)
-				surface.albedo = surface.albedo + surfaceData.vertexColor;
+				surface.albedo = surface.albedo + surfaceData.vertexColor.rgb;
 				surface.alpha *= surfaceData.vertexColor.a;
 			#elif defined(MK_COLOR_BLEND_SUBTRACTIVE)
 				surface.albedo = surface.albedo + surfaceData.vertexColor * (-1.0h);
