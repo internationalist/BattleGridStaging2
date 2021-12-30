@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e180441ded0a84d409bff809a6ac52fa, type: 3}
+  m_Name: Grunts_Female
+  m_EditorClassIdentifier: 
+  lightHurt:
+  - {fileID: 8300000, guid: 277a1b27ddb41704ea62541e0dcb486c, type: 3}
+  - {fileID: 8300000, guid: a4b0a4dcbedde8d41a5e5a003c8fb882, type: 3}
+  - {fileID: 8300000, guid: bf18a9a35a67c174a90c7327f1b7ffa9, type: 3}
+  - {fileID: 8300000, guid: 5dbc0046e00400f42800584befc638a1, type: 3}
+  - {fileID: 8300000, guid: 84b6203c973680f45abf93db5c963277, type: 3}
+  heavyHurt:
+  - {fileID: 8300000, guid: a4b0a4dcbedde8d41a5e5a003c8fb882, type: 3}
+  - {fileID: 8300000, guid: 0769e4ff4b1b9bf4c83ac5b539ac083e, type: 3}
+  - {fileID: 8300000, guid: 37ee3741fb83a5b46bc5642d5194a114, type: 3}
+  - {fileID: 8300000, guid: 901b5d0e00e76354a8a1fa9619613f69, type: 3}
+  - {fileID: 8300000, guid: 5dbc0046e00400f42800584befc638a1, type: 3}
+  - {fileID: 8300000, guid: 3979cf778f929994488b1eb58cb13bd3, type: 3}
+  screams:
+  - {fileID: 8300000, guid: 2ce8c03fe55fb274bbd8437ecfba825f, type: 3}
+  - {fileID: 8300000, guid: 24649b0d24e72b443868bf70bead0733, type: 3}
+  - {fileID: 8300000, guid: 458be823858fe4546a127da0acf4beed, type: 3}
+  - {fileID: 8300000, guid: a7981b99ff202b44f80dd31e95e8a139, type: 3}
+  - {fileID: 8300000, guid: 73e739a8dea1ab04285d38f0bb8858db, type: 3}
+  - {fileID: 8300000, guid: 46f72db1ae1c4da449fc557227968732, type: 3}
+  - {fileID: 8300000, guid: 74384014fe663ac41a200ec4537b32c0, type: 3}
+  - {fileID: 8300000, guid: 63522aa16f8988348a61d5db7259be71, type: 3}

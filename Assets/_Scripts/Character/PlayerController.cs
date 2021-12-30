@@ -320,8 +320,6 @@ public class PlayerController : MonoBehaviour
             if(playerMetaData.voice.responseOnSelect != null && playerMetaData.voice.responseOnSelect.Count > 0)
             {
                 AudioManager.PlayHurtSound(playerMetaData.voice.responseOnSelect, audioSource);
-                //int audioIndex = Random.Range(0, playerMetaData.responseOnSelect.Count);
-                //audioSource.PlayOneShot(playerMetaData.responseOnSelect[audioIndex]);
             }
             marker.SetActive(true);
             isSelected = true;

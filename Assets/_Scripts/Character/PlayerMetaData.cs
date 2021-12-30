@@ -5,14 +5,11 @@ using UnityEngine;
 [System.Serializable]
 public class PlayerMetaData 
 {
-    //[SerializeField]
-    //private float ap;
     [SerializeField]
     private int hp;
     [SerializeField]
     public int maxHP;
     public int maxActionPoints;
-    //[SerializeField]
     public float distanceToMove;
     public float movementRange;
     public Vector3 moveLocation;
@@ -24,9 +21,7 @@ public class PlayerMetaData
     public int maxMoveCount;
     [SerializeField]
     private int moveCount;
-    /*public int maxItemUseCount;*/
     public int itemCoolDown;
-    //private int itemUseCount;
     [SerializeField]
     public int turnsLeftForItemUse;
     [Range(0,1)]
@@ -34,16 +29,9 @@ public class PlayerMetaData
     public float grenadeTargetDistance;
 
     public int maxCommands;
-    //private int numCommandsCompleted;
 
     public int maxReloadCommands = 1;
     private int reloadCommandsGiven;
-    /*    public List<AudioClip> responseOnSelect;
-        public List<AudioClip> responseOnMove;
-        public List<AudioClip> responseOnAction;
-        public List<AudioClip> responseOnThrowItem;
-        public List<AudioClip> responseOnUseItem;
-        public List<AudioClip> responseOnReload;*/
     public VoiceModule voice;
 
     public Grunts grunts;

@@ -11676,7 +11676,7 @@ MonoBehaviour:
     maxCommands: 2
     maxReloadCommands: 1
     voice: {fileID: 11400000, guid: 0af5aae135d0ce44a9bcfa4c9421f5ad, type: 2}
-    grunts: {fileID: 11400000, guid: 707820041a3b6484184b5bc14bb124ed, type: 2}
+    grunts: {fileID: 11400000, guid: 82265a03073b1ab42bb1187cb8e23b65, type: 2}
   _agent: {fileID: 0}
   isAgent: 0
   cover: {fileID: 0}

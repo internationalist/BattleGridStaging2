@@ -42890,7 +42890,7 @@ MonoBehaviour:
     grenadeTargetDistance: 0
     maxCommands: 2
     maxReloadCommands: 1
-    voice: {fileID: 11400000, guid: cb575e372dd52e14e8faec6043d96511, type: 2}
+    voice: {fileID: 11400000, guid: ee0a76d5c877771419ac767b27ac6385, type: 2}
     grunts: {fileID: 11400000, guid: 707820041a3b6484184b5bc14bb124ed, type: 2}
   _agent: {fileID: 0}
   isAgent: 0

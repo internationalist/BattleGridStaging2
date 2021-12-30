@@ -270,12 +270,9 @@ public static class AIUtils
             if (!GeneralUtils.IsSpotOccupied(dockPoint.position, state.agent.ID, out selfOccupied) && !selfOccupied)
             {
                 //run a raycast from this dock point to the closest enemy. And make sure there is the cover in between.
-                //Debug.LogFormat("checking dockpoint {0} with enemy {1}", dockPoint.position, state.closestEnemy.name);
                 Vector3 dockPos = dockPoint.position;
                 if (GeneralUtils.CheckCoverBetweenPointsByName(dockPos, state.closestEnemy.transform.position, closestCover.name))
                 {
-                    //Log("DockWithCover", "{0} Found cover to dock at {1} for cover name {2}", agent.name, dockPoint.position, closestCover.name);
-                    //Debug.LogFormat("dock point chosen is {0} cover name is {1}", dockPoint.position, closestCover.name);
                     state.moveLocation = dockPos;
                     DirectionAndDistanceToLocation(state, state.agent);
                     ValidateMoveLocationForAPAndNavMesh(state, false);
