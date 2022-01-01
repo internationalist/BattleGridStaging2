@@ -65,7 +65,7 @@ public class RifleCommand : CommandTemplate
 
 
 
-    protected virtual void TakeDamage(Command command, int damageAmt, bool critical, CoverMeta cm)
+    protected void TakeDamage(Command command, int damageAmt, bool critical, CoverMeta cm)
     {
 
         command.enemyController.TakeDamage(damageAmt, critical);
@@ -95,7 +95,7 @@ public class RifleCommand : CommandTemplate
         }
     }
 
-    protected Quaternion OrientParticleEffect(ParticleSystem ps, Command command, Vector3 impactPoint)
+    private Quaternion OrientParticleEffect(ParticleSystem ps, Command command, Vector3 impactPoint)
     {
         Quaternion lookRot = Quaternion.LookRotation(command.playerController.transform.position - impactPoint);
         ps.transform.position = impactPoint + command.enemyController.transform.up;

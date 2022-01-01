@@ -125,7 +125,6 @@ public class RifleAttackFSM : Command
     {
         base.Cancel();
         TurnOffMarker();
-        //UIManager.HideAttackData();
         HideAttackData();
         playerController.rangeMarker.active = false;
     }

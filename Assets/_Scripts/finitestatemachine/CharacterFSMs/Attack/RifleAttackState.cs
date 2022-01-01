@@ -45,13 +45,14 @@ public class RifleAttackState : BaseState
         }
     }
 
-    bool attackComplete;
-    RifleAttackFSM command;
-    int fireCounter;
+    protected bool attackComplete;
+    protected RifleAttackFSM command;
+    protected int fireCounter;
 
     public override void Update(BaseFSMController controller)
     {
         if (attackComplete) {
+            Debug.Log("Commnad " +  command);
             command.anim.ResetTrigger("Single_Shot");
             command.TransitionToState(command.StateMap[Command.state.idle.ToString()]);
             command.isActivated = false;

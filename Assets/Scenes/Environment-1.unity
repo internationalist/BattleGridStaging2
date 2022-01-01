@@ -8790,6 +8790,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 592253353}
     - target: {fileID: 4363349666906251906, guid: 7e5e37aadd8b0f54e95a4e35ef81b84f, type: 3}
+      propertyPath: commandList.Array.data[2].weaponTemplate
+      value: 
+      objectReference: {fileID: 11400000, guid: 6accf906db206bc4cab37dee1e88b350, type: 2}
+    - target: {fileID: 4363349666906251906, guid: 7e5e37aadd8b0f54e95a4e35ef81b84f, type: 3}
       propertyPath: commandList.Array.data[4].weaponTemplate
       value: 
       objectReference: {fileID: 11400000, guid: 6082b20e32368cd4aa05bc7c9b506853, type: 2}
