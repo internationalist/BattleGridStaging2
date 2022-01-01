@@ -10,7 +10,9 @@ public class RifleAttackFSM : Command
     public Queue<ApplicableDamage> attackAmounts;
     public bool actionCam;
     PlayerController enemyPC;
-    
+    protected string TAG = "Enemy";
+
+
     public RifleAttackFSM(Animator anim, NavMeshAgent nav, PlayerController controller, CommandTemplate weaponData) : base(anim, nav, controller, weaponData)
     {
         currentState = new IdleState();
@@ -34,7 +36,7 @@ public class RifleAttackFSM : Command
 
         if (!playerController.isAgent && !EventSystem.current.IsPointerOverGameObject() && GeneralUtils.MousePointerOnGroundAndCharacters(out hit))
         {
-            if ("Enemy".Equals(hit.transform.gameObject.tag))
+            if (TAG.Equals(hit.transform.gameObject.tag))
             {      
                 Vector3 targetDir = new Vector3(hit.transform.position.x, playerController.rangeMarker.transform.position.y, hit.transform.position.z);
                 Vector3 direction = (targetDir - playerController.rangeMarker.transform.position).normalized;
@@ -132,7 +134,7 @@ public class RifleAttackFSM : Command
     {
         if (playerController.playerMetaData.voice.responseOnAction != null && playerController.playerMetaData.voice.responseOnAction.Count > 0)
         {
-            AudioManager.PlayHurtSound(playerController.playerMetaData.voice.responseOnAction, playerController.audioSource);
+            AudioManager.PlayVoice(playerController.playerMetaData.voice.responseOnAction, playerController.audioSource);
         }
         base.Activate(enemyTransform, destination);
         if (enemyTransform != null && destination.HasValue)

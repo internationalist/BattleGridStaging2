@@ -6,8 +6,7 @@ using UnityEngine.AI;
 [CreateAssetMenu(fileName = "RifleCommand", menuName = "Commands/Rifle", order = 1)]
 public class RifleCommand : CommandTemplate
 {
-    //CoverMeta cm;
-    ParticleSystem impactEffect;
+    protected ParticleSystem impactEffect;
     public BulletTrail bulletTrailPrefab;
     BulletTrail bullet;
     public string uiImageName;
@@ -52,7 +51,7 @@ public class RifleCommand : CommandTemplate
         UIManager.StopCamShake();
     }
 
-    private IEnumerator ApplyDamage(Command command)
+    protected IEnumerator ApplyDamage(Command command)
     {
         yield return new WaitUntil(()=> { return effectComplete; });
         effectComplete = false;
@@ -66,7 +65,7 @@ public class RifleCommand : CommandTemplate
 
 
 
-    public void TakeDamage(Command command, int damageAmt, bool critical, CoverMeta cm)
+    protected virtual void TakeDamage(Command command, int damageAmt, bool critical, CoverMeta cm)
     {
 
         command.enemyController.TakeDamage(damageAmt, critical);
@@ -96,7 +95,7 @@ public class RifleCommand : CommandTemplate
         }
     }
 
-    private Quaternion OrientParticleEffect(ParticleSystem ps, Command command, Vector3 impactPoint)
+    protected Quaternion OrientParticleEffect(ParticleSystem ps, Command command, Vector3 impactPoint)
     {
         Quaternion lookRot = Quaternion.LookRotation(command.playerController.transform.position - impactPoint);
         ps.transform.position = impactPoint + command.enemyController.transform.up;

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
 
-
 public class RifleAttackState : BaseState
 {
     public override void EnterState(BaseFSMController controller)

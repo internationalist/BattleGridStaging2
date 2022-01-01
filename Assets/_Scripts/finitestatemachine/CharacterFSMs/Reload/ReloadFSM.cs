@@ -10,14 +10,14 @@ public class ReloadFSM : Command
     {
         currentState = new ReloadState();
         StateMap.Add(state.idle.ToString(), this.currentState);
-        commandType = type.idle;
+        commandType = type.reload;
         invokeImmediate = true;
     }
     protected override void Activate(Transform enemyTransform, Vector3? destination)
     {
         if (playerController.playerMetaData.voice.responseOnReload != null && playerController.playerMetaData.voice.responseOnReload.Count > 0)
         {
-            AudioManager.PlayHurtSound(playerController.playerMetaData.voice.responseOnReload, playerController.audioSource);
+            AudioManager.PlayVoice(playerController.playerMetaData.voice.responseOnReload, playerController.audioSource);
             //int audioIndex = Random.Range(0, playerController.playerMetaData.responseOnReload.Count);
             //playerController.audioSource.PlayOneShot(playerController.playerMetaData.responseOnReload[audioIndex]);
         }

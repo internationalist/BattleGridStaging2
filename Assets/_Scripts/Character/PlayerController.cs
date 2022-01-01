@@ -170,7 +170,7 @@ public class PlayerController : MonoBehaviour
 
         if (playerMetaData.Hp <= 0)
         {
-            AudioManager.PlayHurtSound(playerMetaData.grunts.screams, audioSource);
+            AudioManager.PlayVoice(playerMetaData.grunts.screams, audioSource);
             StartCoroutine(deathBloodGush());
             isDead = true;
             if (OnDeath != null)
@@ -184,10 +184,10 @@ public class PlayerController : MonoBehaviour
             //Debug.Log("Damage percent " + dmgPercent);
             if(dmgPercent > .3)
             {
-                AudioManager.PlayHurtSound(playerMetaData.grunts.heavyHurt, audioSource);
+                AudioManager.PlayVoice(playerMetaData.grunts.heavyHurt, audioSource);
             } else
             {
-                AudioManager.PlayHurtSound(playerMetaData.grunts.lightHurt, audioSource);
+                AudioManager.PlayVoice(playerMetaData.grunts.lightHurt, audioSource);
             }
             
             if (OnDamage != null)
@@ -195,6 +195,20 @@ public class PlayerController : MonoBehaviour
                 OnDamage(dmgAmt);
             }
         }
+    }
+
+    public void Heal(int healAmt, bool critical = false)
+    {
+
+        if(playerMetaData.Hp + healAmt > playerMetaData.maxHP)
+        {
+            playerMetaData.Hp = playerMetaData.maxHP;
+        } else
+        {
+            playerMetaData.Hp += healAmt;
+        }
+        
+        healthBar.fillAmount = playerMetaData.NormalizedHealthRemaining();
     }
 
     private IEnumerator deathBloodGush()
@@ -319,7 +333,7 @@ public class PlayerController : MonoBehaviour
         {
             if(playerMetaData.voice.responseOnSelect != null && playerMetaData.voice.responseOnSelect.Count > 0)
             {
-                AudioManager.PlayHurtSound(playerMetaData.voice.responseOnSelect, audioSource);
+                AudioManager.PlayVoice(playerMetaData.voice.responseOnSelect, audioSource);
             }
             marker.SetActive(true);
             isSelected = true;

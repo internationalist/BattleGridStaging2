@@ -47,7 +47,8 @@ public abstract class Command : BaseFSMController
         move,
         primaryattack,
         throwItem,
-        reload
+        reload,
+        buff
     };
 
     public Vector3? Destination {

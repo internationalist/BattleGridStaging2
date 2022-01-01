@@ -17,7 +17,7 @@ public class UseItemFSM : Command
     {
         if (playerController.playerMetaData.voice.responseOnUseItem != null && playerController.playerMetaData.voice.responseOnUseItem.Count > 0)
         {
-            AudioManager.PlayHurtSound(playerController.playerMetaData.voice.responseOnUseItem, playerController.audioSource);
+            AudioManager.PlayVoice(playerController.playerMetaData.voice.responseOnUseItem, playerController.audioSource);
         }
         base.Activate(enemyTransform, destination);
         isActivated = true;

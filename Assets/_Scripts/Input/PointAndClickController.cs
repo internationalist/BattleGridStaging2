@@ -53,7 +53,15 @@ public class PointAndClickController : MonoBehaviour
         {
             if ("Friendly".Equals(hit.transform.gameObject.tag))
             {
-                GameManager.SelectPlayer(hit.transform.gameObject.GetComponent<PlayerController>());
+                if(GameManager.playerSelected 
+                    && Command.type.buff
+                        .Equals(GameManager._currentPlayer.getCurrentCommand().commandType))
+                {
+                    GameManager.ActivateCommand(hit.transform, hit.point);
+                } else
+                {
+                    GameManager.SelectPlayer(hit.transform.gameObject.GetComponent<PlayerController>());
+                }
             }
             else if (GameManager.playerSelected && "Ground".Equals(hit.transform.gameObject.tag) &&
                     !GameManager._currentPlayer.isAgent)

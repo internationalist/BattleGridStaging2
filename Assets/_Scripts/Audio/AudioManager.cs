@@ -114,10 +114,10 @@ public class AudioManager : MonoBehaviour
         auSrc.PlayOneShot(ricochetTrailing);
     }
 
-    public static void PlayHurtSound(List<AudioClip> groans, AudioSource auSrc)
+    public static void PlayVoice(List<AudioClip> voices, AudioSource auSrc)
     {
-        int idx = Random.Range(0, groans.Count);
-        AudioClip groan = groans[idx];
+        int idx = Random.Range(0, voices.Count);
+        AudioClip groan = voices[idx];
         I.StartCoroutine(TransitionToActionAndBack(groan.length));
         auSrc.PlayOneShot(groan);
     }
