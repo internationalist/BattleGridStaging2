@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: HealGunCommand
   m_EditorClassIdentifier: 
   effectFlashPrefab:
-  - {fileID: 19800002, guid: e5feeed6f10499145acb9f7725552742, type: 3}
+  - {fileID: 198176989825005876, guid: 106c742177ad6604ba3c7a1bc3fa768f, type: 3}
   soundEffects:
   - {fileID: 8300000, guid: 52eee3472cd0d7744a172523797ea3ea, type: 3}
   payloadPrefab: {fileID: 0}

@@ -30,6 +30,7 @@ public class HealGunCommand : CommandTemplate
         MuzzleFlash(wd);
         command.playerController.StartCoroutine(RunNoiseEffect(wd));
         command.playerController.StartCoroutine(ApplyDamage(command));
+        GenerateBulletTrail(command, wd);
     }
     public override Command getCommand(Animator anim, NavMeshAgent nav, PlayerController controller)
     {
@@ -104,5 +105,14 @@ public class HealGunCommand : CommandTemplate
             muzzleFlashInstance.transform.localRotation = Quaternion.identity;
             muzzleFlashInstance.Play();
         }
+    }
+
+    private void GenerateBulletTrail(Command command, CommandDataInstance wd)
+    {
+        bullet = GameObject.Instantiate(bulletTrailPrefab, Vector3.zero, Quaternion.identity);
+        bullet.transform.position = wd.rlaunchPoint.transform.position;
+        bullet.transform.rotation = Quaternion.identity;
+        bullet.end = command.EnemyTransform.position + Vector3.up * 1.8f;
+        bullet.activate = true;
     }
 }

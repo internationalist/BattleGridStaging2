@@ -37,6 +37,8 @@ public class RifleCommand : CommandTemplate
         bullet = GameObject.Instantiate(bulletTrailPrefab, Vector3.zero, Quaternion.identity);
         bullet.transform.position = wd.rlaunchPoint.transform.position;
         bullet.transform.rotation = Quaternion.identity;
+        bullet.end = command.EnemyTransform.position + Vector3.up * 1.8f;
+        bullet.activate = true;
     }
 
     #region private methods
