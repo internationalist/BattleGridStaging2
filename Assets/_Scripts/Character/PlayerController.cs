@@ -197,18 +197,25 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void Heal(int healAmt, bool critical = false)
+    public IEnumerator Heal(int healAmt, int duration, bool critical = false)
     {
-
-        if(playerMetaData.Hp + healAmt > playerMetaData.maxHP)
+        int deltaHealAmount = healAmt / duration;
+        int totalHealed = 0;
+        while(totalHealed < healAmt)
         {
-            playerMetaData.Hp = playerMetaData.maxHP;
-        } else
-        {
-            playerMetaData.Hp += healAmt;
+            if (playerMetaData.Hp + deltaHealAmount > playerMetaData.maxHP)
+            {
+                playerMetaData.Hp = playerMetaData.maxHP;
+            }
+            else
+            {
+                playerMetaData.Hp += deltaHealAmount;
+            }
+            totalHealed += deltaHealAmount;
+            UIManager.DamageNotification(deltaHealAmount, critical, transform.position + Vector3.up * 1.8f);
+            healthBar.fillAmount = playerMetaData.NormalizedHealthRemaining();
+            yield return new WaitForSeconds(1);
         }
-        
-        healthBar.fillAmount = playerMetaData.NormalizedHealthRemaining();
     }
 
     private IEnumerator deathBloodGush()

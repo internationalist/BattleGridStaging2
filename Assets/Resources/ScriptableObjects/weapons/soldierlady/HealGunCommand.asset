@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: HealGunCommand
   m_EditorClassIdentifier: 
   effectFlashPrefab:
-  - {fileID: 198176989825005876, guid: 106c742177ad6604ba3c7a1bc3fa768f, type: 3}
+  - {fileID: 198377077788693992, guid: cd4867f5ef1f0b74ab617514d9e5e18f, type: 3}
   soundEffects:
-  - {fileID: 8300000, guid: 52eee3472cd0d7744a172523797ea3ea, type: 3}
+  - {fileID: 8300000, guid: f57433081fa314a438e34cfcc97a604b, type: 3}
   payloadPrefab: {fileID: 0}
-  impactFlashPrefab: {fileID: 2300089161946121287, guid: 5548bba504c456740b6ff2c0041134d9, type: 3}
+  impactFlashPrefab: {fileID: 19833758, guid: 1ed56f4c486ff6141a344e5e5714e1b9, type: 3}
   payLoadSpeed: 60
   RweaponPrefab: {fileID: 5665017128938091278, guid: 6160c7568600c5440a1d36a27cda79a8, type: 3}
   LweaponPrefab: {fileID: 0}
@@ -26,15 +26,15 @@ MonoBehaviour:
   R_WeaponHolder_Rotation: {x: 300.88, y: 89.4, z: 85.7}
   apNeeded: 20
   enemyLayer: 11
-  maxBurstFire: 2
+  maxBurstFire: 1
   maxAmmo: 12
   isDefault: 0
   maxRuns: 1
   damageParameters:
     optimalRange: 10
     fallOff: 5
-    baseDamage: 20
+    baseDamage: 40
     criticalDamageMultiplier: 3
     criticalDamageChance: 0.1
-  bulletTrailPrefab: {fileID: 5024224829995560158, guid: a6346d327f250ae499d03f6354482e21, type: 3}
+  beamTrailPrefab: {fileID: 2952543561414903895, guid: d2c0567664ea24f4caf19e5528addc11, type: 3}
   uiImageName: Gun

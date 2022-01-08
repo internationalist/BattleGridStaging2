@@ -7,9 +7,10 @@ using UnityEngine.AI;
 public class HealGunCommand : CommandTemplate
 {
     protected ParticleSystem impactEffect;
-    public BulletTrail bulletTrailPrefab;
-    BulletTrail bullet;
+    public LaserBeam beamTrailPrefab;
+    LaserBeam beamTrail;
     public string uiImageName;
+    List<ParticleSystem> muzzleFlashes;
     public override UIMetaData getUIMetadata()
     {
         return new UIMetaData("primaryattack", uiImageName);
@@ -24,29 +25,50 @@ public class HealGunCommand : CommandTemplate
 
         if (impactEffect == null)
         {
-            impactEffect = GameObject.Instantiate(impactFlashPrefab, Vector3.zero, Quaternion.identity);
+            impactEffect = GameObject.Instantiate(impactFlashPrefab,
+                                                  command.enemyController.transform.position, Quaternion.identity);
         }
-        command.playerController.StartCoroutine(ActivateMuzzleLight(wd.MuzzleLight));
+        StartEffects(command, wd);
+    }
+
+    private void StartEffects(Command command, CommandDataInstance wd)
+    {
+        ActivateMuzzleLight(wd.MuzzleLight);
         MuzzleFlash(wd);
         command.playerController.StartCoroutine(RunNoiseEffect(wd));
-        command.playerController.StartCoroutine(ApplyDamage(command));
+        command.playerController.StartCoroutine(ApplyHeal(command));
         GenerateBulletTrail(command, wd);
     }
+
+    public void DeActivateEffects(Command command, CommandDataInstance wd)
+    {
+        DeActivateMuzzleLight(wd.MuzzleLight);
+        DestroyBulletTrail(command, wd);
+        for(int i = 0; i < muzzleFlashes.Count; i++)
+        {
+            MonoBehaviour.Destroy(muzzleFlashes[i].gameObject);
+        }
+        MonoBehaviour.Destroy(impactEffect.gameObject);
+    }
+
     public override Command getCommand(Animator anim, NavMeshAgent nav, PlayerController controller)
     {
         return new HealGunFSM(anim, nav, controller, this);
     }
 
-    private IEnumerator ActivateMuzzleLight(GameObject muzzleLight)
+    private void ActivateMuzzleLight(GameObject muzzleLight)
     {
         muzzleLight.SetActive(true);
         UIManager.StartCamShake();
-        yield return new WaitForSeconds(.5f);
+    }
+
+    private void DeActivateMuzzleLight(GameObject muzzleLight)
+    {
         muzzleLight.SetActive(false);
         UIManager.StopCamShake();
     }
 
-    protected IEnumerator ApplyDamage(Command command)
+    protected IEnumerator ApplyHeal(Command command)
     {
         yield return new WaitUntil(() => { return effectComplete; });
         effectComplete = false;
@@ -54,24 +76,18 @@ public class HealGunCommand : CommandTemplate
         if (healGunFSM.attackAmounts.Count > 0)
         {
             ApplicableDamage ad = healGunFSM.attackAmounts.Dequeue();
-            TakeDamage(command, ad.damageAmt, ad.critical, ad.cm);
+            Heal(command, ad.damageAmt, ad.critical, ad.cm);
         }
     }
 
-    protected void TakeDamage(Command command, int damageAmt, bool critical, CoverMeta cm)
+    protected void Heal(Command command, int damageAmt, bool critical, CoverMeta cm)
     {
-        command.enemyController.Heal(damageAmt, critical);
+        command.enemyController.StartCoroutine(command.enemyController.Heal(damageAmt, 2, critical));
         //Create damage notification floating text.
-        UIManager.DamageNotification(damageAmt, critical, command.enemyController.transform.position + Vector3.up * 1.8f);
+        //UIManager.DamageNotification(damageAmt, critical, command.enemyController.transform.position + Vector3.up * 1.8f);
         if (damageAmt > 0)
         {
             Quaternion lookRot = OrientParticleEffect(impactEffect, command, command.enemyController.transform.position);
-            /*int cnt = command.enemyController.bloodEffects.Count;
-            ParticleSystem bloodEffectPrfab = command.enemyController.bloodEffects[Random.Range(0, cnt)];
-            ParticleSystem bloodInstance = Instantiate(bloodEffectPrfab, command.enemyController.transform.position, lookRot);
-            ParticleSystem bloodMist = Instantiate(command.enemyController.bloodMist, command.enemyController.transform.position, lookRot);
-            bloodInstance.Play();
-            bloodMist.Play();*/
         }
         else
         {
@@ -88,7 +104,7 @@ public class HealGunCommand : CommandTemplate
 
     private Quaternion OrientParticleEffect(ParticleSystem ps, Command command, Vector3 impactPoint)
     {
-        Quaternion lookRot = Quaternion.LookRotation(command.playerController.transform.position - impactPoint);
+        Quaternion lookRot = Quaternion.LookRotation(command.enemyController.transform.up);
         ps.transform.position = impactPoint + command.enemyController.transform.up;
         ps.transform.rotation = lookRot;
         ps.Play();
@@ -97,6 +113,7 @@ public class HealGunCommand : CommandTemplate
 
     private void MuzzleFlash(CommandDataInstance wd)
     {
+        muzzleFlashes = new List<ParticleSystem>();
         for (int i = 0; i < effectFlashPrefab.Length; i++)
         {
             ParticleSystem muzzleFlashInstance = GameObject.Instantiate(effectFlashPrefab[i], Vector3.zero, Quaternion.identity);
@@ -104,15 +121,19 @@ public class HealGunCommand : CommandTemplate
             muzzleFlashInstance.transform.localPosition = Vector3.zero;
             muzzleFlashInstance.transform.localRotation = Quaternion.identity;
             muzzleFlashInstance.Play();
+            muzzleFlashes.Add(muzzleFlashInstance);
         }
     }
 
     private void GenerateBulletTrail(Command command, CommandDataInstance wd)
     {
-        bullet = GameObject.Instantiate(bulletTrailPrefab, Vector3.zero, Quaternion.identity);
-        bullet.transform.position = wd.rlaunchPoint.transform.position;
-        bullet.transform.rotation = Quaternion.identity;
-        bullet.end = command.EnemyTransform.position + Vector3.up * 1.8f;
-        bullet.activate = true;
+        beamTrail = GameObject.Instantiate(beamTrailPrefab, Vector3.zero, Quaternion.identity);
+        beamTrail.endPoint = command.EnemyTransform.position + Vector3.up * 1.5f;
+        beamTrail.startPoint = wd.rlaunchPoint.transform;
+    }
+
+    private void DestroyBulletTrail(Command command, CommandDataInstance wd)
+    {
+        MonoBehaviour.Destroy(beamTrail.gameObject);
     }
 }

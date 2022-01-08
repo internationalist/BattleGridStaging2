@@ -8,7 +8,7 @@ public class HealGunState : BaseState
     public override void EnterState(BaseFSMController controller)
     {
         command = (HealGunFSM)controller;
-        command.anim.SetTrigger("Single_Shot");
+        command.anim.SetTrigger("Beam_Shot");
         attackComplete = false;
         fireCounter = 0;
         PlayerController.OnAnimationComplete += OnComplete;
@@ -22,7 +22,7 @@ public class HealGunState : BaseState
     {
         if (attackComplete)
         {
-            command.anim.ResetTrigger("Single_Shot");
+            command.anim.ResetTrigger("Beam_Shot");
             command.TransitionToState(command.StateMap[Command.state.idle.ToString()]);
             command.isActivated = false;
             PlayerController.OnAnimationComplete -= OnComplete;
@@ -45,16 +45,17 @@ public class HealGunState : BaseState
 
     public void OnComplete(string name)
     {
-        if ("attack".Equals(name))
+        if ("heal".Equals(name))
         {
             lock (this) //Thread synchronize.
             {
                 ++fireCounter;
-                CommandTemplate wt = command.commandTemplate;
+                HealGunCommand wt = (HealGunCommand)command.commandTemplate;
                 if (wt.maxBurstFire == fireCounter)
                 {
                     attackComplete = true;
                 }
+                wt.DeActivateEffects(command, command.commandDataInstance);
             }
         }
     }
