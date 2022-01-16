@@ -83,4 +83,11 @@ public class AIStateMachine : MonoBehaviour
         public string name;
         public AIActionState aiActionState;
     }
+
+    public void DiscardTargetAndBeginAILoop()
+    {
+        _aiState.targets.Remove(_aiState.target);
+        _aiState.target = null;
+        TransitionToState(defaultState);
+    }
 }

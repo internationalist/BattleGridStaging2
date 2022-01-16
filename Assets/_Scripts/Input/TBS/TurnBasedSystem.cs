@@ -172,6 +172,7 @@ public class TurnBasedSystem:MonoBehaviour
                 foreach (PlayerController aiChar in AIManager.I.currentTeam.players)
                 {
                     aiChar._agent.InitState();
+                    aiChar._agent.TransitionToState(aiChar._agent.defaultState);
                 }
             }
         }

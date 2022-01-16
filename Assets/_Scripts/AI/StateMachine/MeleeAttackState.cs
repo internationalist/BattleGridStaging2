@@ -30,7 +30,7 @@ public class MeleeAttackState : RangedAttackState
                 else
                 {
                     //Target invalid. Go Back to beginning of AI loop
-                    DiscardTargetAndBeginAILoop();
+                    aim.DiscardTargetAndBeginAILoop();
                     //aim.TransitionToState(aim.states["end"]);
                 }
             }
@@ -70,7 +70,8 @@ public class MeleeAttackState : RangedAttackState
                         {
                             CoverFramework cf = aim._aiState.target.cover;
                             AIUtils.RushEnemy(aim._aiState, aim._controller, cf, true);
-                        } else
+                        }
+                        else //else just shoot
                         {
                             aim._aiState.cmdType = Command.type.primaryaction;
                         }

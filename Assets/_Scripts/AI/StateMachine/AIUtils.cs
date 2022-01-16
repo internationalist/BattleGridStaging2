@@ -69,7 +69,7 @@ public static class AIUtils
         state.distanceToTarget = Vector3.Distance(agent.transform.position, state.target.transform.position);
     }
 
-    public static void SelectAttack(AIStateMachine aim)
+   /* public static void SelectAttack(AIStateMachine aim)
     {
         PlayerController controller = aim._controller;
         float chance = Random.Range(0, 1);
@@ -98,7 +98,7 @@ public static class AIUtils
             state.weaponInstance = primaryAttack.commandDataInstance;
             state.attackType = Command.type.primaryaction;
         }
-    }
+    }*/
 
 
     public static void ValidateMoveLocationForAPAndNavMesh(AIState state, bool snapToGrid)

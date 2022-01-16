@@ -12,10 +12,10 @@ public class AIActionState : ScriptableObject
 
     public virtual void Update() { }
 
-    protected void DiscardTargetAndBeginAILoop()
+    /*protected void DiscardTargetAndBeginAILoop()
     {
         aim._aiState.targets.Remove(aim._aiState.target);
         aim._aiState.target = null;
         aim.TransitionToState(aim.defaultState);
-    }
+    }*/
 }

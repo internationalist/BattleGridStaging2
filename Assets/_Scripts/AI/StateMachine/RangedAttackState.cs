@@ -89,7 +89,7 @@ public class RangedAttackState : AIActionState
                 else
                 {
                     //Discard this target and start from begin of AI loop
-                    DiscardTargetAndBeginAILoop();
+                    aim.DiscardTargetAndBeginAILoop();
                 }
             }
             else if (Mathf.Round(aim._aiState.distanceToTarget) > aim._aiState.weaponTemplate.damageParameters.optimalRange) //Attack command is out of range
@@ -187,7 +187,7 @@ public class RangedAttackState : AIActionState
                 else
                 {
                     //Discard this target and start from begin of AI loop
-                    DiscardTargetAndBeginAILoop();
+                    aim.DiscardTargetAndBeginAILoop();
                 }
             }
             else if (Mathf.Round(aim._aiState.distanceToTarget) > aim._aiState.weaponTemplate.damageParameters.optimalRange) //Attack command is out of range
