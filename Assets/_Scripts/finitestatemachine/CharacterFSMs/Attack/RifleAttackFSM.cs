@@ -16,12 +16,12 @@ public class RifleAttackFSM : Command
     public RifleAttackFSM(Animator anim, NavMeshAgent nav, PlayerController controller, CommandTemplate weaponData) : base(anim, nav, controller, weaponData)
     {
         currentState = new IdleState();
-        StateMap.Add(state.idle.ToString(), this.currentState);
-        StateMap.Add(state.turnLeft.ToString(), new TurnForMoveState(TurnForMoveState.Dir.left, state.attack));
-        StateMap.Add(state.turnRight.ToString(), new TurnForMoveState(TurnForMoveState.Dir.right, state.attack));
-        StateMap.Add(state.attack.ToString(), new RifleAttackState());
+        StateMap.Add(InternalState.idle.ToString(), this.currentState);
+        StateMap.Add(InternalState.turnLeft.ToString(), new TurnForMoveState(TurnForMoveState.Dir.left, InternalState.attack));
+        StateMap.Add(InternalState.turnRight.ToString(), new TurnForMoveState(TurnForMoveState.Dir.right, InternalState.attack));
+        StateMap.Add(InternalState.attack.ToString(), new RifleAttackState());
         actionData = Resources.Load<ScriptableObject>("ScriptableObjects/AttackData");
-        commandType = type.primaryattack;
+        commandType = type.primaryaction;
         attackAmounts = new Queue<ApplicableDamage>();
     }
 

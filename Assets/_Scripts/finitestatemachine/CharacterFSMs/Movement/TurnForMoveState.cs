@@ -7,15 +7,15 @@ public class TurnForMoveState : BaseState
     PlayerController pc;
     public enum Dir { left, right }
     public Dir turnDir;
-    private Command.state nextState;
+    private Command.InternalState nextState;
 
     public TurnForMoveState(Dir turnDir)
     {
         this.turnDir = turnDir;
-        nextState = Command.state.approach;
+        nextState = Command.InternalState.approach;
     }
 
-    public TurnForMoveState(Dir turnDir, Command.state state)
+    public TurnForMoveState(Dir turnDir, Command.InternalState state)
     {
         this.turnDir = turnDir;
         nextState = state;

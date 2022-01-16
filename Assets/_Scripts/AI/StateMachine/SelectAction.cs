@@ -13,7 +13,7 @@ public class SelectAction : AIActionState
     {
         if (aim._controller.turnActive)
         {
-            AIUtils.SelectAttack(aim._aiState, aim._controller);
+            AIUtils.SelectAttack(aim);
             aim.TransitionToState(next);
         }
     }

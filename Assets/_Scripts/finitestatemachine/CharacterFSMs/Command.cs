@@ -45,8 +45,8 @@ public abstract class Command : BaseFSMController
     public enum type {
         idle,
         move,
-        primaryattack,
-        throwItem,
+        primaryaction,
+        specialaction,
         reload,
         buff
     };
@@ -95,7 +95,7 @@ public abstract class Command : BaseFSMController
     /// This list of states are the ones that are internal to the FSM. Each value in this enum represents different state classes that make up the FSMs.
     /// The list of states here is a global list of all states that are used by all different FSM child objects of Command.
     /// </summary>
-    public enum state { idle, turnLeft, turnRight, approach, attack, throwItem, lightdamage, heavydamage, death, useItem};
+    public enum InternalState { idle, turnLeft, turnRight, approach, attack, throwItem, lightdamage, heavydamage, death, useItem };
 
 
 

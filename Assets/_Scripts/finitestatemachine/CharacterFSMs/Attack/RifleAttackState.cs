@@ -54,7 +54,7 @@ public class RifleAttackState : BaseState
         if (attackComplete) {
             Debug.Log("Commnad " +  command);
             command.anim.ResetTrigger("Single_Shot");
-            command.TransitionToState(command.StateMap[Command.state.idle.ToString()]);
+            command.TransitionToState(command.StateMap[Command.InternalState.idle.ToString()]);
             command.isActivated = false;
             PlayerController.OnAnimationComplete -= OnComplete;
             command.complete = true;

@@ -51,7 +51,13 @@ public class RangedAttackState : AIActionState
 
         if (aim._controller.turnActive && !isRunning)
         {
-            NewAILogic();
+            if(Command.type.primaryaction.Equals(aim._aiState.attackType))
+            {
+                NewAILogic();
+            } else if(Command.type.specialaction.Equals(aim._aiState.attackType))
+            {
+                ThrowItem();
+            }
         }
     }
 
@@ -99,14 +105,14 @@ public class RangedAttackState : AIActionState
                 else //Enemy might not be in optimal range and move command spent.
                 {
                     //just shoot
-                    aim._aiState.cmdType = Command.type.primaryattack;
+                    aim._aiState.cmdType = Command.type.primaryaction;
                     TriggerCommand(aim._aiState, aim._controller);
                 }
             }
             else //Enemy in optimal range.
             {
                 //shoot
-                aim._aiState.cmdType = Command.type.primaryattack;
+                aim._aiState.cmdType = Command.type.primaryaction;
                 TriggerCommand(aim._aiState, aim._controller);
             }
         }
@@ -150,6 +156,108 @@ public class RangedAttackState : AIActionState
                 Retreat();
             }
             
+            TriggerCommand(aim._aiState, aim._controller);
+        }
+        else // End turn
+        {
+            aim.TransitionToState(aim.states["end"]);
+        }
+    }
+
+    protected virtual void ThrowItem()
+    {
+        AIUtils.DirectionAndDistanceToTarget(aim._aiState, aim._aiState.agent);
+        //Debug.LogFormat("{0} AIAttackState:Update->turn active", aim._controller.name);
+        if (aim._aiState.target == null) //Enemy has already died, start over turn
+        {
+            aim.TransitionToState(aim.states["start"]);
+        } else if (aim._controller.playerMetaData.CanUseItem())
+        {
+            if ((cf = isEnemyBehindHighCover()) != null)
+            {
+                if (aim._controller.playerMetaData.CanMove())
+                {
+                    //Intelligently flank enemy if they are behind high cover. Otherwise rush them.
+                    if (!AIUtils.FlankEnemyFromCover(aim._aiState, aim._controller, this.agressionLevel))
+                    {
+                        AIUtils.RushEnemy(aim._aiState, aim._controller, cf);
+                    }
+                    TriggerCommand(aim._aiState, aim._controller);
+                }
+                else
+                {
+                    //Discard this target and start from begin of AI loop
+                    DiscardTargetAndBeginAILoop();
+                }
+            }
+            else if (Mathf.Round(aim._aiState.distanceToTarget) > aim._aiState.weaponTemplate.damageParameters.optimalRange) //Attack command is out of range
+            {
+                if (aim._controller.playerMetaData.CanMove())
+                {
+                    if (!MoveToAttackingPosition(this.agressionLevel))
+                    {//did not find any cover to shoot from. Just move as close as possible to optimal range.
+                        AIUtils.ApproachEnemy(aim._aiState, aim._controller);
+                    }
+                    TriggerCommand(aim._aiState, aim._controller);
+                }
+                else //Enemy might not be in optimal range and move command spent.
+                {
+                    //just shoot
+                    aim._aiState.cmdType = Command.type.primaryaction;
+                    TriggerCommand(aim._aiState, aim._controller);
+                }
+            }
+            else //Enemy in optimal range.
+            {
+                //throw item
+                aim._aiState.cmdType = Command.type.specialaction;
+                TriggerCommand(aim._aiState, aim._controller);
+            }
+        }
+        else if (aim._controller.playerMetaData.CanMove()
+                                    && !aim._aiState.achievedCover) //Attack command used up but can still move. 
+        {
+            if (aim._aiState.agent.InCover) //already in cover
+            {
+                string coverName = aim._aiState.agent.cover.name;
+                if (GeneralUtils.CheckCoverBetweenPointsByName(aim._aiState.agent.transform.position, aim._aiState.target.transform.position, coverName))
+                {
+                    float effectiveCamp = camp + rush;
+                    float chance = Random.value;
+                    /**
+                     * Run a probability check between three options:
+                     * 
+                     *  ++ Camp here since already in cover.
+                     *  ++ Attempt to move to an attacking position.
+                     *  ++ Attempt tp retreat to a defensive position.
+                     * 
+                    **/
+                    if (chance <= rush)
+                    {
+                        MoveToAttackingPosition(this.agressionLevel);
+                    }
+                    else if (chance < effectiveCamp)
+                    {
+                        //End turn. Camp here
+                        aim.TransitionToState(aim.states["end"]);
+                    }
+                    else
+                    {
+                        Retreat();
+                    }
+                }
+                else //In cover but not aligned to enemy. In other words, enemy has clear shot.
+                {
+                    //Escape to cover.
+                    Retreat();
+                }
+            }
+            else
+            {
+                //Escape to cover.
+                Retreat();
+            }
+
             TriggerCommand(aim._aiState, aim._controller);
         }
         else // End turn
@@ -203,14 +311,21 @@ public class RangedAttackState : AIActionState
                     isRunning = false;
                 });
                 break;
-            case Command.type.primaryattack:
+            case Command.type.primaryaction:
                 GameManager.AssignCommand(GeneralUtils.ATTACKSLOT);
                 //Debug.Log("TriggerCommand::Running attack command and  setting attack achieved flag to true");
                 state.achievedAttack = true;
                 GameManager.ActivateCommand(state.target.transform, state.target.transform.position, () =>
                 {
-                    //Debug.Log("TriggerCommand::Attack done");
-                    //AIUtils.DirectionAndDistanceToTarget(state, agent);
+                    isRunning = false;
+                });
+                break;
+            case Command.type.specialaction:
+                GameManager.AssignCommand(GeneralUtils.ITEMSLOT);
+                //Debug.Log("TriggerCommand::Running special attack command and  setting attack achieved flag to true");
+                state.achievedAttack = true;
+                GameManager.ActivateCommand(state.target.transform, state.target.transform.position, () =>
+                {
                     isRunning = false;
                 });
                 break;

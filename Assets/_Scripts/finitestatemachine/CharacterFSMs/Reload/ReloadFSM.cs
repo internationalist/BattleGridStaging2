@@ -9,7 +9,7 @@ public class ReloadFSM : Command
     public ReloadFSM(Animator anim, NavMeshAgent nav, PlayerController controller, CommandTemplate weaponData) : base(anim, nav, controller, weaponData)
     {
         currentState = new ReloadState();
-        StateMap.Add(state.idle.ToString(), this.currentState);
+        StateMap.Add(InternalState.idle.ToString(), this.currentState);
         commandType = type.reload;
         invokeImmediate = true;
     }

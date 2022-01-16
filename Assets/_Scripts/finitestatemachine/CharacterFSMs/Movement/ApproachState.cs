@@ -29,7 +29,7 @@ public class ApproachState : BaseState
             {
                 if (!command.nav.hasPath || command.nav.velocity.sqrMagnitude == 0f)
                 {
-                    command.TransitionToState(command.StateMap[Command.state.idle.ToString()]);
+                    command.TransitionToState(command.StateMap[Command.InternalState.idle.ToString()]);
                     if (command.playerController.InCover)
                     {
                         //Debug.LogFormat("{0} Reached cover {1} of type {2}", command.playerController.name, command.playerController.cover.name, command.playerController.cover.coverType);

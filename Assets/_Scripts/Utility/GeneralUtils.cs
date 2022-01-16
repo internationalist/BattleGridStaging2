@@ -494,7 +494,7 @@ public static class GeneralUtils {
         }
         return sound;
     }
-    public static Command.state GetTurnDirection(Transform transform, Vector3 target, out Vector3 targetDirection)
+    public static Command.InternalState GetTurnDirection(Transform transform, Vector3 target, out Vector3 targetDirection)
     {
         Vector3 fwd = transform.forward;
         targetDirection = (target - transform.position).normalized;
@@ -502,11 +502,11 @@ public static class GeneralUtils {
         //Debug.LogFormat("Idle::cross.y {0}", cross.y);
         if (cross.y >= 0)
         {
-            return Command.state.turnRight;
+            return Command.InternalState.turnRight;
         }
         else
         {
-            return Command.state.turnLeft;
+            return Command.InternalState.turnLeft;
         }
     }
 

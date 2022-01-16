@@ -24,7 +24,7 @@ public class LightDamageState : BaseState
         lock (this) // For damage events from multiple threads, we have to use synchronization
         {
             Command command = (Command)controller;
-            command.TransitionToState(command.StateMap[Command.state.idle.ToString()]);
+            command.TransitionToState(command.StateMap[Command.InternalState.idle.ToString()]);
             PlayerController.OnAnimationComplete -= OnComplete;
         }
     }

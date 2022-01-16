@@ -55,7 +55,7 @@ public class MeleeAttackState : RangedAttackState
                 else //Enemy might not be in optimal range and move command spent.
                 {
                     //just shoot
-                    aim._aiState.cmdType = Command.type.primaryattack;
+                    aim._aiState.cmdType = Command.type.primaryaction;
                     TriggerCommand(aim._aiState, aim._controller);
                 }
             }
@@ -72,18 +72,18 @@ public class MeleeAttackState : RangedAttackState
                             AIUtils.RushEnemy(aim._aiState, aim._controller, cf, true);
                         } else
                         {
-                            aim._aiState.cmdType = Command.type.primaryattack;
+                            aim._aiState.cmdType = Command.type.primaryaction;
                         }
 
                     } else //else just shoot
                     {
-                        aim._aiState.cmdType = Command.type.primaryattack;
+                        aim._aiState.cmdType = Command.type.primaryaction;
                     }
                     TriggerCommand(aim._aiState, aim._controller);
                 } else 
                 {
                     //if move command spent then just shoot.
-                    aim._aiState.cmdType = Command.type.primaryattack;
+                    aim._aiState.cmdType = Command.type.primaryaction;
                     TriggerCommand(aim._aiState, aim._controller);
                 }
             }

@@ -9,12 +9,12 @@ public class ThrowItemFSM : Command
     public ThrowItemFSM(Animator anim, NavMeshAgent nav, PlayerController controller, CommandTemplate weaponData) : base(anim, nav, controller, weaponData)
     {
         currentState = new IdleState();
-        StateMap.Add(state.idle.ToString(), this.currentState);
-        StateMap.Add(state.turnLeft.ToString(), new TurnForMoveState(TurnForMoveState.Dir.left, state.throwItem));
-        StateMap.Add(state.turnRight.ToString(), new TurnForMoveState(TurnForMoveState.Dir.right, state.throwItem));
-        StateMap.Add(state.throwItem.ToString(), new ThrowItemState());
+        StateMap.Add(InternalState.idle.ToString(), this.currentState);
+        StateMap.Add(InternalState.turnLeft.ToString(), new TurnForMoveState(TurnForMoveState.Dir.left, InternalState.throwItem));
+        StateMap.Add(InternalState.turnRight.ToString(), new TurnForMoveState(TurnForMoveState.Dir.right, InternalState.throwItem));
+        StateMap.Add(InternalState.throwItem.ToString(), new ThrowItemState());
         actionData = Resources.Load<ScriptableObject>("ScriptableObjects/AttackData");
-        commandType = type.throwItem;
+        commandType = type.specialaction;
     }
 
     protected override void BeforeActivate()

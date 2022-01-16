@@ -11,10 +11,10 @@ public class MovementFSM : Command
     public MovementFSM(Animator anim, NavMeshAgent nav, PlayerController controller, CommandTemplate weaponData) : base(anim, nav, controller, weaponData)
     {
         currentState = new IdleState();
-        StateMap.Add(state.idle.ToString(), this.currentState);
-        StateMap.Add(state.turnLeft.ToString(), new TurnForMoveState(TurnForMoveState.Dir.left));
-        StateMap.Add(state.turnRight.ToString(), new TurnForMoveState(TurnForMoveState.Dir.right));
-        StateMap.Add(state.approach.ToString(), new ApproachState());
+        StateMap.Add(InternalState.idle.ToString(), this.currentState);
+        StateMap.Add(InternalState.turnLeft.ToString(), new TurnForMoveState(TurnForMoveState.Dir.left));
+        StateMap.Add(InternalState.turnRight.ToString(), new TurnForMoveState(TurnForMoveState.Dir.right));
+        StateMap.Add(InternalState.approach.ToString(), new ApproachState());
         actionData = Resources.Load<ScriptableObject>("ScriptableObjects/MovementData");
         commandType = type.move;
     }

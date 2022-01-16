@@ -69,15 +69,35 @@ public static class AIUtils
         state.distanceToTarget = Vector3.Distance(agent.transform.position, state.target.transform.position);
     }
 
-    public static void SelectAttack(AIState state, PlayerController controller)
+    public static void SelectAttack(AIStateMachine aim)
     {
-        RifleAttackFSM primaryAttack = (RifleAttackFSM)controller.commands[GeneralUtils.ATTACKSLOT];
+        PlayerController controller = aim._controller;
+        float chance = Random.Range(0, 1);
+        AIState state = aim._aiState;
 
-        state.cmdType = Command.type.primaryattack;
+        if (controller.playerMetaData.CanUseItem() &&
+            chance < aim.specialAttackChance)
+        {
+            Command specialCmd = controller.commands[GeneralUtils.ITEMSLOT];
+            if(specialCmd is ThrowItemFSM)
+            {
+                ThrowItemFSM throwItem = specialCmd as ThrowItemFSM;
+            }
+            state.cmdType = Command.type.specialaction;
+            state.weaponTemplate = controller.GetWeaponTemplateForCommand(GeneralUtils.ITEMSLOT);
+            state.weaponInstance = specialCmd.commandDataInstance;
+            state.attackType = Command.type.specialaction;
+        } else {
 
-        state.weaponTemplate = controller.GetWeaponTemplateForCommand(GeneralUtils.ATTACKSLOT);
-        
-        state.weaponInstance = primaryAttack.commandDataInstance;
+            RifleAttackFSM primaryAttack = (RifleAttackFSM)controller.commands[GeneralUtils.ATTACKSLOT];
+
+            state.cmdType = Command.type.primaryaction;
+
+            state.weaponTemplate = controller.GetWeaponTemplateForCommand(GeneralUtils.ATTACKSLOT);
+
+            state.weaponInstance = primaryAttack.commandDataInstance;
+            state.attackType = Command.type.primaryaction;
+        }
     }
 
 

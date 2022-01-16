@@ -25,18 +25,18 @@ public class DefaultIdleState : BaseState
         {
             //Debug.Log("Character is dead moving to death state");
             ResetIdleAnims(cmd);
-            cmd.TransitionToState(cmd.StateMap[Command.state.death.ToString()]);
+            cmd.TransitionToState(cmd.StateMap[Command.InternalState.death.ToString()]);
         }
         else if (takeDamage)
         {
             ResetIdleAnims(cmd);
             if (damageAmt < 40)
             {
-                cmd.TransitionToState(cmd.StateMap[Command.state.lightdamage.ToString()]);
+                cmd.TransitionToState(cmd.StateMap[Command.InternalState.lightdamage.ToString()]);
             }
             else
             {
-                cmd.TransitionToState(cmd.StateMap[Command.state.heavydamage.ToString()]);
+                cmd.TransitionToState(cmd.StateMap[Command.InternalState.heavydamage.ToString()]);
             }
             takeDamage = false;
             pc.OnDamage -= TakeDamage;
@@ -82,7 +82,7 @@ public class DefaultIdleState : BaseState
         if (enemyPositionChange)
         {
             command.turnToEnemy = true;
-            Command.state turnDir = GeneralUtils.GetTurnDirection(command.playerTransform,
+            Command.InternalState turnDir = GeneralUtils.GetTurnDirection(command.playerTransform,
                                                                     enemyPosition,
                                                                     out command.targetDirection);
             command.TransitionToState(command.StateMap[turnDir.ToString()]);
@@ -114,7 +114,7 @@ public class DefaultIdleState : BaseState
         previousClosestCoverPosition = closestCoverPoint;
         if(coverChange)
         {
-            Command.state turnDir = GeneralUtils.GetTurnDirection(command.playerTransform,
+            Command.InternalState turnDir = GeneralUtils.GetTurnDirection(command.playerTransform,
                                                                     closestCoverPoint,
                                                                     out command.targetDirection);
             command.TransitionToState(command.StateMap[turnDir.ToString()]);

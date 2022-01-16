@@ -23,7 +23,7 @@ public class IdleState : BaseState
             {
                 //Debug.Log("Idle::dest has value");
 
-                Command.state turnDir = GeneralUtils.GetTurnDirection(command.playerTransform,
+                Command.InternalState turnDir = GeneralUtils.GetTurnDirection(command.playerTransform,
                                                                         command.Destination.Value,
                                                                         out command.targetDirection);
                 //Debug.LogFormat("{0}IdleState.Update::going to reset Idle trigger", command.playerController.name);

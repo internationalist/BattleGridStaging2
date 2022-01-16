@@ -10,12 +10,12 @@ public class IdleFSM : Command
     {
         currentState = new DefaultIdleState();
         currentState.EnterState(this);
-        StateMap.Add(state.idle.ToString(), this.currentState);
-        StateMap.Add(state.lightdamage.ToString(), new LightDamageState());
-        StateMap.Add(state.heavydamage.ToString(), new HeavyDamage());
-        StateMap.Add(state.death.ToString(), new DeathState());
-        StateMap.Add(state.turnLeft.ToString(), new TurnForMoveState(TurnForMoveState.Dir.left, state.idle));
-        StateMap.Add(state.turnRight.ToString(), new TurnForMoveState(TurnForMoveState.Dir.right, state.idle));
+        StateMap.Add(InternalState.idle.ToString(), this.currentState);
+        StateMap.Add(InternalState.lightdamage.ToString(), new LightDamageState());
+        StateMap.Add(InternalState.heavydamage.ToString(), new HeavyDamage());
+        StateMap.Add(InternalState.death.ToString(), new DeathState());
+        StateMap.Add(InternalState.turnLeft.ToString(), new TurnForMoveState(TurnForMoveState.Dir.left, InternalState.idle));
+        StateMap.Add(InternalState.turnRight.ToString(), new TurnForMoveState(TurnForMoveState.Dir.right, InternalState.idle));
         commandType = type.idle;
     }
     protected override void Activate(Transform enemyTransform, Vector3? destination)

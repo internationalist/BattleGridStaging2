@@ -23,7 +23,7 @@ public class HealGunState : BaseState
         if (attackComplete)
         {
             command.anim.ResetTrigger("Beam_Shot");
-            command.TransitionToState(command.StateMap[Command.state.idle.ToString()]);
+            command.TransitionToState(command.StateMap[Command.InternalState.idle.ToString()]);
             command.isActivated = false;
             PlayerController.OnAnimationComplete -= OnComplete;
             command.complete = true;

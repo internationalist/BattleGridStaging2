@@ -23,7 +23,7 @@ public class ThrowItemState : BaseState
         if (timeElapsed >= 1)
         {
             command.complete = true;
-            command.TransitionToState(command.StateMap[Command.state.idle.ToString()]);
+            command.TransitionToState(command.StateMap[Command.InternalState.idle.ToString()]);
         }
     }
 }

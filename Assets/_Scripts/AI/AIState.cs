@@ -15,11 +15,11 @@ public class AIState
     public Vector3 moveLocation;
     public float movementDistance;
     public Command.type? cmdType;
+    public Command.type attackType;
     public CommandTemplate weaponTemplate;
     public CommandDataInstance weaponInstance;
     public bool achievedAttack;
     public bool achievedCover;
-    //public bool noCoverToDockTo;
     public PlayerController closestEnemy;
     public DockPoint occupiedDockPoint;
 

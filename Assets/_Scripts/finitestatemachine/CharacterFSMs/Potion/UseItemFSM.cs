@@ -8,8 +8,8 @@ public class UseItemFSM : Command
     public UseItemFSM(Animator anim, NavMeshAgent nav, PlayerController controller, CommandTemplate commandTemplate) : base(anim, nav, controller, commandTemplate)
     {
         currentState = new UseItemState();
-        StateMap.Add(state.idle.ToString(), this.currentState);
-        commandType = type.throwItem;
+        StateMap.Add(InternalState.idle.ToString(), this.currentState);
+        commandType = type.specialaction;
         invokeImmediate = true;
     }
 
