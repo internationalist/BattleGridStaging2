@@ -13955,6 +13955,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1370515776}
     - target: {fileID: 7488266450533309439, guid: c42b0729f71d76741958c27d3bf91ae6, type: 3}
+      propertyPath: playerMetaData.itemCoolDown
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7488266450533309439, guid: c42b0729f71d76741958c27d3bf91ae6, type: 3}
       propertyPath: commandList.Array.data[3].weaponTemplate
       value: 
       objectReference: {fileID: 11400000, guid: 131d1f82e39676f429003260a45a34a3, type: 2}

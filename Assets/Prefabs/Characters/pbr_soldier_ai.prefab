@@ -32490,7 +32490,7 @@ MonoBehaviour:
     weaponTemplate: {fileID: 11400000, guid: c5af1bc7b050e6548a37504b1f487e7b, type: 2}
     button: {fileID: 0}
   - slot: 4
-    weaponTemplate: {fileID: 11400000, guid: fdfd4d41e43f01e41b3b66f8716d47fb, type: 2}
+    weaponTemplate: {fileID: 11400000, guid: 131d1f82e39676f429003260a45a34a3, type: 2}
     button: {fileID: 0}
   - slot: 1
     weaponTemplate: {fileID: 11400000, guid: 523e8e917263dfd45ab6c8afa3d66e54, type: 2}
@@ -32516,7 +32516,7 @@ MonoBehaviour:
     itemUseCount: 0
     maxMoveCount: 1
     moveCount: 0
-    itemCoolDown: 2
+    itemCoolDown: 4
     turnsLeftForItemUse: 0
     decimateChance: 1
     grenadeTargetDistance: 0
@@ -32583,6 +32583,7 @@ MonoBehaviour:
     dirToTarget: {x: 0, y: 0, z: 0}
     moveLocation: {x: 0, y: 0, z: 0}
     movementDistance: 0
+    attackType: 0
     weaponTemplate: {fileID: 0}
     weaponInstance:
       muzzleFlashInstance: {fileID: 0}
@@ -32610,6 +32611,7 @@ MonoBehaviour:
   isCommandRunning: 0
   agressionLevel: 0
   decisionMatrix: []
+  specialAttackChance: 0
 --- !u!114 &7488266450533309437
 MonoBehaviour:
   m_ObjectHideFlags: 0
