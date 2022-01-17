@@ -21,7 +21,8 @@ public class SelectAction : AIActionState
     public static void SelectAttack(AIStateMachine aim)
     {
         PlayerController controller = aim._controller;
-        float chance = Random.Range(0, 1);
+        float chance = Random.Range(0f, 1f);
+        Debug.LogFormat("Grenade throw chance {0}", chance);
         AIState state = aim._aiState;
 
         if (controller.playerMetaData.CanUseItem() &&

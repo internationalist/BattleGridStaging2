@@ -51,13 +51,21 @@ public class RangedAttackState : AIActionState
 
         if (aim._controller.turnActive && !isRunning)
         {
-            if(Command.type.primaryaction.Equals(aim._aiState.attackType))
+            if(aim._controller.playerMetaData.CanRunCommand())
             {
-                NewAILogic();
-            } else if(Command.type.specialaction.Equals(aim._aiState.attackType))
+                if (Command.type.primaryaction.Equals(aim._aiState.attackType))
+                {
+                    NewAILogic();
+                }
+                else if (Command.type.specialaction.Equals(aim._aiState.attackType))
+                {
+                    ThrowItem();
+                }
+            } else
             {
-                ThrowItem();
+                aim.TransitionToState(aim.states["end"]); // End turn
             }
+
         }
     }
 
@@ -213,59 +221,74 @@ public class RangedAttackState : AIActionState
                 aim._aiState.cmdType = Command.type.specialaction;
                 TriggerCommand(aim._aiState, aim._controller);
             }
-        }
-        else if (aim._controller.playerMetaData.CanMove()
-                                    && !aim._aiState.achievedCover) //Attack command used up but can still move. 
+        } else if(aim._controller.playerMetaData.CanAttack())
         {
-            if (aim._aiState.agent.InCover) //already in cover
+            if (Mathf.Round(aim._aiState.distanceToTarget) <=
+                aim._aiState.weaponTemplate.damageParameters.optimalRange)//In optimal range
             {
-                string coverName = aim._aiState.agent.cover.name;
-                if (GeneralUtils.CheckCoverBetweenPointsByName(aim._aiState.agent.transform.position, aim._aiState.target.transform.position, coverName))
-                {
-                    float effectiveCamp = camp + rush;
-                    float chance = Random.value;
-                    /**
-                     * Run a probability check between three options:
-                     * 
-                     *  ++ Camp here since already in cover.
-                     *  ++ Attempt to move to an attacking position.
-                     *  ++ Attempt tp retreat to a defensive position.
-                     * 
-                    **/
-                    if (chance <= rush)
-                    {
-                        MoveToAttackingPosition(this.agressionLevel);
-                    }
-                    else if (chance < effectiveCamp)
-                    {
-                        //End turn. Camp here
-                        aim.TransitionToState(aim.states["end"]);
-                    }
-                    else
-                    {
-                        Retreat();
-                    }
-                }
-                else //In cover but not aligned to enemy. In other words, enemy has clear shot.
-                {
-                    //Escape to cover.
-                    Retreat();
-                }
+                aim._aiState.cmdType = Command.type.primaryaction; //shoot
+                TriggerCommand(aim._aiState, aim._controller);
             }
-            else
+            else if (aim._controller.playerMetaData.CanMove()
+                                    && !aim._aiState.achievedCover) //Attack command used up but can still move. 
             {
-                //Escape to cover.
-                Retreat();
+                PerformRetreat();
+                TriggerCommand(aim._aiState, aim._controller);
+            }
+            else // end turn
+            {
+                aim.TransitionToState(aim.states["end"]);
             }
 
-            TriggerCommand(aim._aiState, aim._controller);
-        }
-        else // End turn
+        } else // End turn
         {
             aim.TransitionToState(aim.states["end"]);
         }
     }
 
+    private void PerformRetreat()
+    {
+        if (aim._aiState.agent.InCover) //already in cover
+        {
+            string coverName = aim._aiState.agent.cover.name;
+            if (GeneralUtils.CheckCoverBetweenPointsByName(aim._aiState.agent.transform.position, aim._aiState.target.transform.position, coverName))
+            {
+                float effectiveCamp = camp + rush;
+                float chance = Random.value;
+                /**
+                 * Run a probability check between three options:
+                 * 
+                 *  ++ Camp here since already in cover.
+                 *  ++ Attempt to move to an attacking position.
+                 *  ++ Attempt tp retreat to a defensive position.
+                 * 
+                **/
+                if (chance <= rush)
+                {
+                    MoveToAttackingPosition(this.agressionLevel);
+                }
+                else if (chance < effectiveCamp)
+                {
+                    //End turn. Camp here
+                    aim.TransitionToState(aim.states["end"]);
+                }
+                else
+                {
+                    Retreat();
+                }
+            }
+            else //In cover but not aligned to enemy. In other words, enemy has clear shot.
+            {
+                //Escape to cover.
+                Retreat();
+            }
+        }
+        else
+        {
+            //Escape to cover.
+            Retreat();
+        }
+    }
 
     protected void Retreat()
     {
