@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Grenade : Payload
+public class GrenadePayload : Payload
 {
     public float blastRadius;
     private AudioSource audioSource;
@@ -21,7 +21,7 @@ public class Grenade : Payload
 
     private void OnTriggerEnter(Collider collider)
     {
-        if(!collider.gameObject.name.Equals(this.ownerObject) && !exploded)
+        if(!collider.gameObject.name.Equals(this.ownerObject.name) && !exploded)
         {
             exploded = true;
             Vector3 hitPoint = collider.gameObject.GetComponent<Collider>().ClosestPointOnBounds(transform.position);
@@ -49,6 +49,7 @@ public class Grenade : Payload
                     pc.TakeDamage(damageParameters.baseDamage);
                 }
             }
+            this.ownerObject.AnimationComplete("grenade");
         }
     }
 

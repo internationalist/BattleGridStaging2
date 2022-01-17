@@ -26,7 +26,7 @@ public class Payload : MonoBehaviour
     /// <summary>
     /// Identity of the object that is using this payload so we don't generate any trigger events with it.
     /// </summary>
-    public string ownerObject;
+    public PlayerController ownerObject;
 
     public bool coverInWay;
     public Vector3 coverPosition;

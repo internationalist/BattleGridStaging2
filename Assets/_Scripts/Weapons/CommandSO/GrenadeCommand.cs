@@ -23,7 +23,7 @@ public class GrenadeCommand : CommandTemplate
             wd.rlaunchPoint = wd.l_weapon.gameObject.transform.Find("LaunchPoint");
             wd.payload = GameObject.Instantiate(payloadPrefab, wd.rlaunchPoint.position, Quaternion.identity);
             wd.payload.impactEffect = GameObject.Instantiate(impactFlashPrefab, Vector3.zero, Quaternion.identity);
-            wd.payload.ownerObject = command.playerTransform.name;
+            wd.payload.ownerObject = command.playerController;
             wd.payload.damageParameters = damageParameters;
         } else
         {
