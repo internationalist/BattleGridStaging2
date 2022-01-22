@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a343c976641b0445bfc4ec491c0da07, type: 3}
   m_Name: aiGrenadeCommand
   m_EditorClassIdentifier: 
-  effectFlashPrefab: {fileID: 0}
+  effectFlashPrefab:
+  - {fileID: 0}
   soundEffects: []
   payloadPrefab: {fileID: 2294015272401237634, guid: e2acf46264013434a931cb7cccb8134d, type: 3}
   impactFlashPrefab: {fileID: 7871240245939812583, guid: 93cc0f7f92e6e9e43be5f5c9c48b9fd0, type: 3}
@@ -31,6 +32,6 @@ MonoBehaviour:
   damageParameters:
     optimalRange: 8
     fallOff: 0
-    baseDamage: 40
+    baseDamage: 35
     criticalDamageMultiplier: 0
     criticalDamageChance: 0
