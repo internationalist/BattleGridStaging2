@@ -331,7 +331,8 @@ public class RangedAttackState : AIActionState
                 {
                     //Debug.LogFormat("{0} AIAttackState:TriggerCommand->Command done", aim._controller.name);
                     AIUtils.DirectionAndDistanceToLocation(state, agent);
-                    isRunning = false;
+                    state.agent.StartCoroutine(PauseAIEngine());
+                    //isRunning = false;
                 });
                 break;
             case Command.type.primaryaction:
@@ -340,7 +341,8 @@ public class RangedAttackState : AIActionState
                 state.achievedAttack = true;
                 GameManager.ActivateCommand(state.target.transform, state.target.transform.position, () =>
                 {
-                    isRunning = false;
+                    state.agent.StartCoroutine(PauseAIEngine());
+                    //isRunning = false;
                 });
                 break;
             case Command.type.specialaction:
@@ -349,7 +351,8 @@ public class RangedAttackState : AIActionState
                 state.achievedAttack = true;
                 GameManager.ActivateCommand(state.target.transform, state.target.transform.position, () =>
                 {
-                    isRunning = false;
+                    state.agent.StartCoroutine(PauseAIEngine());
+                    //isRunning = false;
                 });
                 break;
             case Command.type.reload:
@@ -357,9 +360,18 @@ public class RangedAttackState : AIActionState
                 GameManager.ActivateCommand(null, null, () =>
                 {
                     //Debug.LogFormat("{0} AIAttackState:TriggerCommand->Command done", aim._controller.name);
-                    isRunning = false;
+                    state.agent.StartCoroutine(PauseAIEngine());
+                    //isRunning = false;
                 });
                 break;
         }
+    }
+
+
+    public IEnumerator PauseAIEngine()
+    {
+        yield return new WaitForSeconds(AIManager.I.aiPauseValue);
+        Debug.Log("Starting AI Engine after pause");
+        isRunning = false;
     }
 }

@@ -9001,6 +9001,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8701500568258011912, guid: 8f8f1b4fe531feb4599ad909ac23cf0a, type: 3}
+      propertyPath: aiPauseValue
+      value: 0.3
+      objectReference: {fileID: 0}
     - target: {fileID: 8701500568258011917, guid: 8f8f1b4fe531feb4599ad909ac23cf0a, type: 3}
       propertyPath: points
       value: 
