@@ -115,6 +115,7 @@ public class RifleAttackFSM : Command
     public override void Complete()
     {
         base.Complete();
+        Debug.LogFormat("{0} Incrementing rifl attack count", playerController.name);
         playerController.playerMetaData.IncrementAttackCount();
         TurnOffMarker();
         HideAttackData();

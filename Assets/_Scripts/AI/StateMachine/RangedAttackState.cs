@@ -13,8 +13,17 @@ public class RangedAttackState : AIActionState
     //bool aggBeforeAttack, aggAfterAttack;
     float camp, rush;
 
-    protected bool isRunning;
+    private bool isRunning;
     protected CoverFramework cf;
+
+    public bool IsRunning { get => isRunning;
+        set
+        {
+            isRunning = value;
+            Debug.LogFormat("IsRunning set to {0}", isRunning);
+        }
+    }
+
     public override void EnterState(AIStateMachine aiMachine)
     {
         aim = aiMachine;
@@ -49,9 +58,8 @@ public class RangedAttackState : AIActionState
     public override void Update()
     {
 
-        if (aim._controller.turnActive && !isRunning)
-        {
-            if(aim._controller.playerMetaData.CanRunCommand())
+        if (aim._controller.playerMetaData.CanRunCommand()) { 
+            if (aim._controller.turnActive && !IsRunning)
             {
                 if (Command.type.primaryaction.Equals(aim._aiState.attackType))
                 {
@@ -61,11 +69,11 @@ public class RangedAttackState : AIActionState
                 {
                     ThrowItem();
                 }
-            } else
-            {
-                aim.TransitionToState(aim.states["end"]); // End turn
             }
-
+        }
+        else
+        {
+            aim.TransitionToState(aim.states["end"]); // End turn
         }
     }
 
@@ -320,7 +328,7 @@ public class RangedAttackState : AIActionState
     {
         //agent.playerMetaData.ApNeeded = state.apNeeded;
         
-        isRunning = true;
+        IsRunning = true;
         switch (state.cmdType)
         {
             case Command.type.move:
@@ -371,7 +379,7 @@ public class RangedAttackState : AIActionState
     public IEnumerator PauseAIEngine()
     {
         yield return new WaitForSeconds(AIManager.I.aiPauseValue);
-        Debug.Log("Starting AI Engine after pause");
-        isRunning = false;
+        IsRunning = false;
+        Debug.LogFormat("Starting AI Engine after pause isRunning: {0}", IsRunning);
     }
 }
