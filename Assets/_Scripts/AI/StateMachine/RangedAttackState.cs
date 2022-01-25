@@ -339,8 +339,8 @@ public class RangedAttackState : AIActionState
                 {
                     //Debug.LogFormat("{0} AIAttackState:TriggerCommand->Command done", aim._controller.name);
                     AIUtils.DirectionAndDistanceToLocation(state, agent);
-                    state.agent.StartCoroutine(PauseAIEngine());
-                    //isRunning = false;
+                    //state.agent.StartCoroutine(PauseAIEngine());
+                    isRunning = false;
                 });
                 break;
             case Command.type.primaryaction:
@@ -349,8 +349,8 @@ public class RangedAttackState : AIActionState
                 state.achievedAttack = true;
                 GameManager.ActivateCommand(state.target.transform, state.target.transform.position, () =>
                 {
-                    state.agent.StartCoroutine(PauseAIEngine());
-                    //isRunning = false;
+                    //state.agent.StartCoroutine(PauseAIEngine());
+                    isRunning = false;
                 });
                 break;
             case Command.type.specialaction:
@@ -359,8 +359,8 @@ public class RangedAttackState : AIActionState
                 state.achievedAttack = true;
                 GameManager.ActivateCommand(state.target.transform, state.target.transform.position, () =>
                 {
-                    state.agent.StartCoroutine(PauseAIEngine());
-                    //isRunning = false;
+                    //state.agent.StartCoroutine(PauseAIEngine());
+                    isRunning = false;
                 });
                 break;
             case Command.type.reload:
@@ -368,8 +368,8 @@ public class RangedAttackState : AIActionState
                 GameManager.ActivateCommand(null, null, () =>
                 {
                     //Debug.LogFormat("{0} AIAttackState:TriggerCommand->Command done", aim._controller.name);
-                    state.agent.StartCoroutine(PauseAIEngine());
-                    //isRunning = false;
+                    //state.agent.StartCoroutine(PauseAIEngine());
+                    isRunning = false;
                 });
                 break;
         }
