@@ -243,6 +243,7 @@ public class PlayerController : MonoBehaviour
     /// <param name="id"></param>
     public void AnimationComplete(string id)
     {
+        Debug.LogFormat("{0}PlayerController received event {1}", name, id);
         if (OnAnimationComplete != null)
         {
             OnAnimationComplete(id);
