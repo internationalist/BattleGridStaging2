@@ -15,7 +15,6 @@ public class ApproachState : BaseState
         float distance = Vector3.Distance(command.playerController.transform.position,
                          command.Destination.Value);
         expectedTimeToComplete = distance / command.nav.speed;
-        Debug.LogFormat("Time to complete move is {0}", expectedTimeToComplete);
         startTime = Time.realtimeSinceStartup;
     }
 

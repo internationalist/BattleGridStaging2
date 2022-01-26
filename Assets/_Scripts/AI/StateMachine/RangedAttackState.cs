@@ -14,13 +14,14 @@ public class RangedAttackState : AIActionState
     float camp, rush;
 
     private bool isRunning;
+    private bool commandComplete;
+    private float commandCompleteTimeInSec;
     protected CoverFramework cf;
 
     public bool IsRunning { get => isRunning;
         set
         {
             isRunning = value;
-            Debug.LogFormat("IsRunning set to {0}", isRunning);
         }
     }
 
@@ -57,7 +58,16 @@ public class RangedAttackState : AIActionState
 
     public override void Update()
     {
-
+        if(commandComplete)
+        {
+            float currentTimeInSecs = Time.realtimeSinceStartup;
+            float timeElapsedInSecs = currentTimeInSecs - commandCompleteTimeInSec;
+            if(timeElapsedInSecs >= AIManager.I.aiPauseValue)
+            {
+                isRunning = false;
+                commandComplete = false;
+            }
+        }
         if (aim._controller.playerMetaData.CanRunCommand()) { 
             if (aim._controller.turnActive && !IsRunning)
             {
@@ -340,7 +350,9 @@ public class RangedAttackState : AIActionState
                     //Debug.LogFormat("{0} AIAttackState:TriggerCommand->Command done", aim._controller.name);
                     AIUtils.DirectionAndDistanceToLocation(state, agent);
                     //state.agent.StartCoroutine(PauseAIEngine());
-                    isRunning = false;
+                    //isRunning = false;
+                    commandComplete = true;
+                    commandCompleteTimeInSec = Time.realtimeSinceStartup;
                 });
                 break;
             case Command.type.primaryaction:
@@ -350,7 +362,9 @@ public class RangedAttackState : AIActionState
                 GameManager.ActivateCommand(state.target.transform, state.target.transform.position, () =>
                 {
                     //state.agent.StartCoroutine(PauseAIEngine());
-                    isRunning = false;
+                    //isRunning = false;
+                    commandComplete = true;
+                    commandCompleteTimeInSec = Time.realtimeSinceStartup;
                 });
                 break;
             case Command.type.specialaction:
@@ -360,7 +374,9 @@ public class RangedAttackState : AIActionState
                 GameManager.ActivateCommand(state.target.transform, state.target.transform.position, () =>
                 {
                     //state.agent.StartCoroutine(PauseAIEngine());
-                    isRunning = false;
+                    //isRunning = false;
+                    commandComplete = true;
+                    commandCompleteTimeInSec = Time.realtimeSinceStartup;
                 });
                 break;
             case Command.type.reload:
@@ -369,7 +385,9 @@ public class RangedAttackState : AIActionState
                 {
                     //Debug.LogFormat("{0} AIAttackState:TriggerCommand->Command done", aim._controller.name);
                     //state.agent.StartCoroutine(PauseAIEngine());
-                    isRunning = false;
+                    //isRunning = false;
+                    commandComplete = true;
+                    commandCompleteTimeInSec = Time.realtimeSinceStartup;
                 });
                 break;
         }
