@@ -220,8 +220,9 @@ public class RangedAttackState : AIActionState
                 else //Enemy might not be in optimal range and move command spent.
                 {
                     //just shoot
-                    aim._aiState.cmdType = Command.type.primaryaction;
-                    TriggerCommand(aim._aiState, aim._controller);
+                    //aim._aiState.cmdType = Command.type.primaryaction;
+                    //TriggerCommand(aim._aiState, aim._controller);
+                    aim.DiscardTargetAndBeginAILoop();
                 }
             }
             else //Enemy in optimal range.
@@ -230,6 +231,15 @@ public class RangedAttackState : AIActionState
                 aim._aiState.cmdType = Command.type.specialaction;
                 TriggerCommand(aim._aiState, aim._controller);
             }
+        } else
+        {
+            aim.DiscardTargetAndBeginAILoop();
+        }
+        
+        /*else if (aim._controller.playerMetaData.CanAttack() && !aim._aiState.weaponInstance.isAmmoLeft())
+        {
+            aim._aiState.cmdType = Command.type.reload;
+            TriggerCommand(aim._aiState, aim._controller);
         } else if(aim._controller.playerMetaData.CanAttack())
         {
             if (Mathf.Round(aim._aiState.distanceToTarget) <=
@@ -252,7 +262,8 @@ public class RangedAttackState : AIActionState
         } else // End turn
         {
             aim.TransitionToState(aim.states["end"]);
-        }
+        }*/
+        
     }
 
     private void PerformRetreat()

@@ -11,7 +11,7 @@ public class UseItemState : BaseState
         command = (UseItemFSM)controller;
         command.anim.SetTrigger("useitem");
         commandComplete = false;
-        PlayerController.OnAnimationComplete += OnComplete;
+        command.playerController.OnAnimationComplete += OnComplete;
     }
 
     public override void Update(BaseFSMController controller)
@@ -20,7 +20,7 @@ public class UseItemState : BaseState
         {
             command.anim.ResetTrigger("useitem");
             command.isActivated = false;
-            PlayerController.OnAnimationComplete -= OnComplete;
+            command.playerController.OnAnimationComplete -= OnComplete;
             command.complete = true;
         }
     }

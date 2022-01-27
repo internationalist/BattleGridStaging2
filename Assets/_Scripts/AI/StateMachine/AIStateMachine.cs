@@ -88,6 +88,7 @@ public class AIStateMachine : MonoBehaviour
     {
         _aiState.targets.Remove(_aiState.target);
         _aiState.target = null;
+        _aiState.weaponTemplate = null;
         TransitionToState(defaultState);
     }
 }

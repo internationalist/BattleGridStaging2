@@ -33,7 +33,8 @@ public class CommandDataInstance
 
     public bool isAmmoLeft()
     {
-        return ammoCount >= maxBurstFire;
+        bool ammoLeft = ammoCount >= maxBurstFire;
+        return ammoLeft;
     }
 
     public bool isAmmoFull()

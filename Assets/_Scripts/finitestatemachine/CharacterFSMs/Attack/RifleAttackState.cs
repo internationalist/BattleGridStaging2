@@ -21,7 +21,7 @@ public class RifleAttackState : BaseState
         
         attackComplete = false;
         fireCounter = 0;
-        PlayerController.OnAnimationComplete += OnComplete;
+        command.playerController.OnAnimationComplete += OnComplete;
     }
 
     private void TriggerActionCam()
@@ -55,7 +55,7 @@ public class RifleAttackState : BaseState
             command.anim.ResetTrigger("Single_Shot");
             command.TransitionToState(command.StateMap[Command.InternalState.idle.ToString()]);
             command.isActivated = false;
-            PlayerController.OnAnimationComplete -= OnComplete;
+            command.playerController.OnAnimationComplete -= OnComplete;
             command.complete = true;
             command.playerController.StartCoroutine(HideActionCam());
         }

@@ -105,7 +105,7 @@ public class PlayerController : MonoBehaviour
     #region Events
     public delegate void StateAnimationCompleted(string id);
 
-    public static event StateAnimationCompleted OnAnimationComplete;
+    public event StateAnimationCompleted OnAnimationComplete;
 
     public delegate void DamageSustained(float damageAmt);
 
@@ -387,7 +387,7 @@ public class PlayerController : MonoBehaviour
     {
         currentCommand.Complete();
         setCurrentCommand(defaultCommand);
-        currentCommand.TransitionToState(currentCommand.currentState);
+        currentCommand.TransitionToState(defaultCommand.currentState);
     }
 
     public void CreatePath()
