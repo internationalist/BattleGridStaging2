@@ -83,8 +83,8 @@ public class RifleAttackState : BaseState
     public void OnComplete(string name)
     {
         Debug.LogFormat("{0} Animation complete: {1}", command.playerController.name, name);
-        //if ("attack".Equals(name)) 
-        //{
+        if ("attack".Equals(name)) 
+        {
             lock(this) //Thread synchronize.
             {
                 ++fireCounter;
@@ -94,6 +94,6 @@ public class RifleAttackState : BaseState
                     attackComplete = true;
                 }
             }
-        //}
+        }
     }
 }

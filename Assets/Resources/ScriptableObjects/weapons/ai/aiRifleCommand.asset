@@ -27,7 +27,7 @@ MonoBehaviour:
   apNeeded: 0
   enemyLayer: 11
   maxBurstFire: 2
-  maxAmmo: 12
+  maxAmmo: 2
   isDefault: 0
   maxRuns: 1
   damageParameters:

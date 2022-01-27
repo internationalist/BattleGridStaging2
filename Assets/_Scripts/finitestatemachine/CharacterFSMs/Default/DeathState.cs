@@ -39,10 +39,13 @@ public class DeathState : BaseState
 
     public void OnComplete(string name)
     {
-        Debug.Log("DeathState::OnComplete::Character just died");
-        if ("death".Equals(name))
+        lock (this) //Thread synchronize.
         {
-            complete = true;
+            Debug.Log("DeathState::OnComplete::Character just died");
+            if ("death".Equals(name))
+            {
+                complete = true;
+            }
         }
     }
 }
