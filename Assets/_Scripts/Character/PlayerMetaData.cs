@@ -84,7 +84,8 @@ public class PlayerMetaData
 
     public bool CanAttack()
     {
-        return maxAttackCount - AttackCount > 0;
+        bool canAttack = maxAttackCount - AttackCount > 0;
+        return canAttack;
     }
 
     public bool CanReload()

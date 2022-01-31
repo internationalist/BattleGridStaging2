@@ -47,7 +47,7 @@ public class ReloadState : BaseState
         command.playerController.infoPanel.SetDialog("!!Reloading!!");
         command.playerController.StartCoroutine(command.playerController.infoPanel.ShowDialog());
         reloadComplete = false;
-        PlayerController.OnAnimationComplete += OnComplete;
+        command.playerController.OnAnimationComplete += OnComplete;
     }
 
     bool reloadComplete;
@@ -60,7 +60,7 @@ public class ReloadState : BaseState
             command.anim.ResetTrigger("Reload");
             command.anim.ResetTrigger("Crouch_Reload");
             command.isActivated = false;
-            PlayerController.OnAnimationComplete -= OnComplete;
+            command.playerController.OnAnimationComplete -= OnComplete;
             command.complete = true;
         }
     }

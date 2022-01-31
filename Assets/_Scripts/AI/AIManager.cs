@@ -71,6 +71,7 @@ public class AIManager : MonoBehaviour
     public Team currentTeam;
     public List<CoverFramework> covers;
     public bool aiPause;
+    public float aiPauseValue;
 
 
     #endregion

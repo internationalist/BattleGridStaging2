@@ -11,7 +11,7 @@ public class HealGunState : BaseState
         command.anim.SetTrigger("Beam_Shot");
         attackComplete = false;
         fireCounter = 0;
-        PlayerController.OnAnimationComplete += OnComplete;
+        command.playerController.OnAnimationComplete += OnComplete;
     }
 
     protected bool attackComplete;
@@ -25,7 +25,7 @@ public class HealGunState : BaseState
             command.anim.ResetTrigger("Beam_Shot");
             command.TransitionToState(command.StateMap[Command.InternalState.idle.ToString()]);
             command.isActivated = false;
-            PlayerController.OnAnimationComplete -= OnComplete;
+            command.playerController.OnAnimationComplete -= OnComplete;
             command.complete = true;
         }
     }

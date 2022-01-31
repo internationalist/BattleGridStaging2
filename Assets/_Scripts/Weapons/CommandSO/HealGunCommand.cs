@@ -134,6 +134,9 @@ public class HealGunCommand : CommandTemplate
 
     private void DestroyBulletTrail(Command command, CommandDataInstance wd)
     {
-        MonoBehaviour.Destroy(beamTrail.gameObject);
+        if(beamTrail && beamTrail.gameObject)
+        {
+            MonoBehaviour.Destroy(beamTrail.gameObject);
+        }
     }
 }

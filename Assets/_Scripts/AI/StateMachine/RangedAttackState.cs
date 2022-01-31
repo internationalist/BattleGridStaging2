@@ -10,11 +10,21 @@ public class RangedAttackState : AIActionState
 
     public Agression agressionLevel;
 
-    //bool aggBeforeAttack, aggAfterAttack;
+    float updateDelayInSecs;
+    float lastRanInSecs;
+
     float camp, rush;
 
-    protected bool isRunning;
+    private bool isRunning;
     protected CoverFramework cf;
+
+    public bool IsRunning { get => isRunning;
+        set
+        {
+            isRunning = value;
+        }
+    }
+
     public override void EnterState(AIStateMachine aiMachine)
     {
         aim = aiMachine;
@@ -24,6 +34,7 @@ public class RangedAttackState : AIActionState
 
     private void Initialize()
     {
+        lastRanInSecs = -1;
         this.agressionLevel = aim.agressionLevel;
         switch (this.agressionLevel)
         {
@@ -48,10 +59,8 @@ public class RangedAttackState : AIActionState
 
     public override void Update()
     {
-
-        if (aim._controller.turnActive && !isRunning)
-        {
-            if(aim._controller.playerMetaData.CanRunCommand())
+        if (aim._controller.playerMetaData.CanRunCommand()) { 
+            if (aim._controller.turnActive && !IsRunning)
             {
                 if (Command.type.primaryaction.Equals(aim._aiState.attackType))
                 {
@@ -61,11 +70,11 @@ public class RangedAttackState : AIActionState
                 {
                     ThrowItem();
                 }
-            } else
-            {
-                aim.TransitionToState(aim.states["end"]); // End turn
             }
-
+        }
+        else
+        {
+            aim.TransitionToState(aim.states["end"]); // End turn
         }
     }
 
@@ -210,6 +219,9 @@ public class RangedAttackState : AIActionState
                 }
                 else //Enemy might not be in optimal range and move command spent.
                 {
+                    //just shoot
+                    //aim._aiState.cmdType = Command.type.primaryaction;
+                    //TriggerCommand(aim._aiState, aim._controller);
                     aim.DiscardTargetAndBeginAILoop();
                 }
             }
@@ -219,6 +231,15 @@ public class RangedAttackState : AIActionState
                 aim._aiState.cmdType = Command.type.specialaction;
                 TriggerCommand(aim._aiState, aim._controller);
             }
+        } else
+        {
+            aim.DiscardTargetAndBeginAILoop();
+        }
+        
+        /*else if (aim._controller.playerMetaData.CanAttack() && !aim._aiState.weaponInstance.isAmmoLeft())
+        {
+            aim._aiState.cmdType = Command.type.reload;
+            TriggerCommand(aim._aiState, aim._controller);
         } else if(aim._controller.playerMetaData.CanAttack())
         {
             aim.DiscardTargetAndBeginAILoop();
@@ -226,7 +247,8 @@ public class RangedAttackState : AIActionState
         } else // End turn
         {
             aim.TransitionToState(aim.states["end"]);
-        }
+        }*/
+        
     }
 
     private void PerformRetreat()
@@ -303,7 +325,7 @@ public class RangedAttackState : AIActionState
     {
         //agent.playerMetaData.ApNeeded = state.apNeeded;
         
-        isRunning = true;
+        IsRunning = true;
         switch (state.cmdType)
         {
             case Command.type.move:

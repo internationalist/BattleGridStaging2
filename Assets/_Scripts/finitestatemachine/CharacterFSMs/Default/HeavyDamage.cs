@@ -6,9 +6,9 @@ public class HeavyDamage : LightDamageState
 {
     public override void EnterState(BaseFSMController controller)
     {
-        Command characterPlayer = (Command)controller;
-        characterPlayer.anim.CrossFade("front_damage", 0.2f);
+        command = (Command)controller;
+        command.anim.CrossFade("front_damage", 0.2f);
         complete = false;
-        PlayerController.OnAnimationComplete += OnComplete;
+        command.playerController.OnAnimationComplete += OnComplete;
     }
 }

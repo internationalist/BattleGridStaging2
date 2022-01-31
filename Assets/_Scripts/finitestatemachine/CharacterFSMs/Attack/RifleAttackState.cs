@@ -21,7 +21,7 @@ public class RifleAttackState : BaseState
         
         attackComplete = false;
         fireCounter = 0;
-        PlayerController.OnAnimationComplete += OnComplete;
+        command.playerController.OnAnimationComplete += OnComplete;
     }
 
     private void TriggerActionCam()
@@ -52,11 +52,10 @@ public class RifleAttackState : BaseState
     public override void Update(BaseFSMController controller)
     {
         if (attackComplete) {
-            Debug.Log("Commnad " +  command);
             command.anim.ResetTrigger("Single_Shot");
             command.TransitionToState(command.StateMap[Command.InternalState.idle.ToString()]);
             command.isActivated = false;
-            PlayerController.OnAnimationComplete -= OnComplete;
+            command.playerController.OnAnimationComplete -= OnComplete;
             command.complete = true;
             command.playerController.StartCoroutine(HideActionCam());
         }
@@ -83,6 +82,7 @@ public class RifleAttackState : BaseState
     /// <param name="name"></param>
     public void OnComplete(string name)
     {
+        Debug.LogFormat("{0} Animation complete: {1}", command.playerController.name, name);
         if ("attack".Equals(name)) 
         {
             lock(this) //Thread synchronize.

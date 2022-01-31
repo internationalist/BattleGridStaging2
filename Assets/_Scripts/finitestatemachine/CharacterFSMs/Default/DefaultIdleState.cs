@@ -8,6 +8,7 @@ public class DefaultIdleState : BaseState
     bool coverAnimComplete;
     Vector3 previousEnemyPosition = Vector3.zero;
     Vector3 previousClosestCoverPosition = Vector3.zero;
+    private bool enemyDetectionBusy = false;
 
     private enum CoverAnimType { LEFT, RIGHT }
     public override void EnterState(BaseFSMController controller)
@@ -42,25 +43,36 @@ public class DefaultIdleState : BaseState
             pc.OnDamage -= TakeDamage;
         } else
         {
-            Vector3 enemyPosition;
-            if (DetectEnemyCloseby(cmd, out enemyPosition))
+            if(!enemyDetectionBusy)
             {
-                TurnToEnemy(cmd, enemyPosition);
-            }
-            else
-            {
-                AnimatorStateInfo currentAnimState = cmd.anim.GetCurrentAnimatorStateInfo(0);
-                if (currentAnimState.IsName("Idle") && cmd.playerController.InCover
-                    && !transitioning)
-                {
-                    ActivateCoverAnimation(cmd);
-                }
-                else if (!currentAnimState.IsName("Idle"))
-                {
-                  transitioning = false;
-                }
+                pc.StartCoroutine(DetectEnemy(cmd));
             }
         }
+    }
+
+    private IEnumerator DetectEnemy(IdleFSM cmd)
+    {
+        enemyDetectionBusy = true;
+        yield return new WaitForSeconds(.3f);
+        Vector3 enemyPosition;
+        if (DetectEnemyCloseby(cmd, out enemyPosition))
+        {
+            TurnToEnemy(cmd, enemyPosition);
+        }
+        else
+        {
+            AnimatorStateInfo currentAnimState = cmd.anim.GetCurrentAnimatorStateInfo(0);
+            if (currentAnimState.IsName("Idle") && cmd.playerController.InCover
+                && !transitioning)
+            {
+                ActivateCoverAnimation(cmd);
+            }
+            else if (!currentAnimState.IsName("Idle"))
+            {
+                transitioning = false;
+            }
+        }
+        enemyDetectionBusy = false;
     }
 
     private static void ResetIdleAnims(IdleFSM cmd)

@@ -16,7 +16,7 @@ public class DeathState : BaseState
         } else
         {
             characterPlayer.anim.SetTrigger("Death");
-            PlayerController.OnAnimationComplete += OnComplete;
+            characterPlayer.playerController.OnAnimationComplete += OnComplete;
         }
     }
     protected bool complete;
@@ -27,7 +27,7 @@ public class DeathState : BaseState
         if (complete)
         {
             characterPlayer.playerController.Die();
-            PlayerController.OnAnimationComplete -= OnComplete;
+            characterPlayer.playerController.OnAnimationComplete -= OnComplete;
         }
     }
 
@@ -39,10 +39,13 @@ public class DeathState : BaseState
 
     public void OnComplete(string name)
     {
-        Debug.Log("DeathState::OnComplete::Character just died");
-        if ("death".Equals(name))
+        lock (this) //Thread synchronize.
         {
-            complete = true;
+            Debug.Log("DeathState::OnComplete::Character just died");
+            if ("death".Equals(name))
+            {
+                complete = true;
+            }
         }
     }
 }
