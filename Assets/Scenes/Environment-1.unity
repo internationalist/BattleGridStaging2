@@ -3565,7 +3565,7 @@ PrefabInstance:
       objectReference: {fileID: 9009959482519686797}
     - target: {fileID: 7488266450533309379, guid: c42b0729f71d76741958c27d3bf91ae6, type: 3}
       propertyPath: specialAttackChance
-      value: 0
+      value: 0.6
       objectReference: {fileID: 0}
     - target: {fileID: 7488266450533309382, guid: c42b0729f71d76741958c27d3bf91ae6, type: 3}
       propertyPath: m_RootOrder
@@ -9532,6 +9532,10 @@ PrefabInstance:
       objectReference: {fileID: 726573751}
     - target: {fileID: 8701500568258011919, guid: 8f8f1b4fe531feb4599ad909ac23cf0a, type: 3}
       propertyPath: teams.Array.data[1].players.Array.data[2]
+      value: 
+      objectReference: {fileID: 2015782774}
+    - target: {fileID: 8701500568258011919, guid: 8f8f1b4fe531feb4599ad909ac23cf0a, type: 3}
+      propertyPath: teams.Array.data[1].players.Array.data[3]
       value: 
       objectReference: {fileID: 2015782774}
     m_RemovedComponents: []
