@@ -523,7 +523,6 @@ public static class GeneralUtils {
     {
         for (float ft = 1f; ft >= 0; ft -= 0.1f)
         {
-            //Debug.LogFormat("Fade::ft {0}", ft);
             Color c = material.color;
             c.a = ft;
             material.color = c;

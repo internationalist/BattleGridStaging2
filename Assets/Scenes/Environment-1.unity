@@ -2940,7 +2940,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6370047644347148171, guid: f32527b2358a59240957f9d48be5fd0c, type: 3}
       propertyPath: m_Name
-      value: Barrels (2)
+      value: Barrels-2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f32527b2358a59240957f9d48be5fd0c, type: 3}
@@ -11306,7 +11306,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6370047644347148171, guid: f32527b2358a59240957f9d48be5fd0c, type: 3}
       propertyPath: m_Name
-      value: Barrels (1)
+      value: Barrels-3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f32527b2358a59240957f9d48be5fd0c, type: 3}

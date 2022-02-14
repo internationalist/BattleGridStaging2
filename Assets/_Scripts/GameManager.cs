@@ -108,42 +108,100 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
+        FadeCover();
+    }
+
+    private void FadeCover()
+    {
         RaycastHit hit;
-        if(GeneralUtils.MousePointerOverCover(out hit))
+        if (GeneralUtils.MousePointerOverCover(out hit))
         {
-            //Debug.LogFormat("Mouse hove over cover {0}", hit.collider.gameObject.name);
             GameObject coverObject = hit.collider.gameObject;
-            if(transparentCover != null)
+            if (transparentCover != null)
             {
-                if(!transparentCover.name.Equals(coverObject.name))
+                if (!transparentCover.name.Equals(coverObject.name))
                 {
-                    GetRenderer(transparentCover).material = regularCoverMaterial;
-                    MeshRenderer mr = GetRenderer(coverObject);
-                    regularCoverMaterial = mr.material;
-                    mr.material = transparentCoverMaterial;
-                    StartCoroutine(GeneralUtils.Fade(transparentCoverMaterial));
-                    transparentCover = coverObject;
+                    MakePreviousCoverVisible(); //Make previous faded cover visible
+                    ActivateFade(coverObject);
                 }
-            } else
-            {
-                MeshRenderer mr = GetRenderer(coverObject);
-                regularCoverMaterial = mr.material;
-                mr.material = transparentCoverMaterial;
-                StartCoroutine(GeneralUtils.Fade(transparentCoverMaterial));
-                transparentCover = coverObject;
             }
-        } else
-        {
-            if(transparentCover != null)
+            else
             {
-                GetRenderer(transparentCover).material = regularCoverMaterial;
-                Color c = transparentCoverMaterial.color;
-                c.a = 1;
-                transparentCoverMaterial.color = c;
-                transparentCover = null;
+                ActivateFade(coverObject);
+            }
+        }
+        else
+        {
+            if (transparentCover != null)
+            {
+                MakePreviousCoverVisible(); //Make previous faded cover visible
+                ResetAlphaFadeMaterial();//Reset alpha of fade material for next fade.
             }
         }
     }
+
+    private void MakePreviousCoverVisible()
+    {
+        GetRenderer(transparentCover).material = regularCoverMaterial;
+    }
+
+    private void ResetAlphaFadeMaterial()
+    {
+        Color c = transparentCoverMaterial.color;
+        c.a = 1;
+        transparentCoverMaterial.color = c;
+        transparentCover = null;
+    }
+
+    private void ActivateFade(GameObject coverObject)
+    {
+        MeshRenderer mr = GetRenderer(coverObject);
+        regularCoverMaterial = mr.material; //cache the material of this renderer.
+        mr.material = transparentCoverMaterial;
+        StartCoroutine(GeneralUtils.Fade(transparentCoverMaterial));
+        transparentCover = coverObject;
+    }
+
+    /* private void FadeCover()
+     {
+         RaycastHit hit;
+         if (GeneralUtils.MousePointerOverCover(out hit))
+         {
+             //Debug.LogFormat("Mouse hove over cover {0}", hit.collider.gameObject.name);
+             GameObject coverObject = hit.collider.gameObject;
+             if (transparentCover != null)
+             {
+                 if (!transparentCover.name.Equals(coverObject.name))
+                 {
+                     GetRenderer(transparentCover).material = regularCoverMaterial;
+                     MeshRenderer mr = GetRenderer(coverObject);
+                     regularCoverMaterial = mr.material;
+                     mr.material = transparentCoverMaterial;
+                     StartCoroutine(GeneralUtils.Fade(transparentCoverMaterial));
+                     transparentCover = coverObject;
+                 }
+             }
+             else
+             {
+                 MeshRenderer mr = GetRenderer(coverObject);
+                 regularCoverMaterial = mr.material;
+                 mr.material = transparentCoverMaterial;
+                 StartCoroutine(GeneralUtils.Fade(transparentCoverMaterial));
+                 transparentCover = coverObject;
+             }
+         }
+         else
+         {
+             if (transparentCover != null)
+             {
+                 GetRenderer(transparentCover).material = regularCoverMaterial;
+                 Color c = transparentCoverMaterial.color;
+                 c.a = 1;
+                 transparentCoverMaterial.color = c;
+                 transparentCover = null;
+             }
+         }
+     }*/
 
     private static MeshRenderer GetRenderer(GameObject coverObject)
     {
