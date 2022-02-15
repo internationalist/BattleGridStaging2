@@ -198,7 +198,8 @@ MonoBehaviour:
   - {fileID: 3088086561818561513, guid: 86991083bf70246cab4905f681be4c36, type: 3}
   damageReductionPct: 0.5
   coverType: 2
-  renderer: {fileID: 2152682579856099331}
+  coverRenderer:
+  - {fileID: 2152682579856099331}
   flankOffset: 4
   auSrc: {fileID: 0}
   ricochet: {fileID: 11400000, guid: 0db460fc7f4007d48b0e3ef664e431cc, type: 2}
@@ -367,7 +368,8 @@ MonoBehaviour:
   - {fileID: 3088086561818561513, guid: 86991083bf70246cab4905f681be4c36, type: 3}
   damageReductionPct: 0.6
   coverType: 2
-  renderer: {fileID: 2152682579856099331}
+  coverRenderer:
+  - {fileID: 2152682579856099331}
   flankOffset: 4
   auSrc: {fileID: 0}
   ricochet: {fileID: 11400000, guid: 0db460fc7f4007d48b0e3ef664e431cc, type: 2}

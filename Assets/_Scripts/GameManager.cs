@@ -24,6 +24,7 @@ public class GameManager : MonoBehaviour
         _instance = this;
         universalAgent = GetComponent<NavMeshAgent>();
         Cursor.SetCursor(cursorGroup.select, Vector3.zero, CursorMode.Auto);
+        regularCoverMaterial = new Dictionary<MeshRenderer, Material>();
     }
     #endregion
 
@@ -46,7 +47,7 @@ public class GameManager : MonoBehaviour
 
     private static GameObject transparentCover;
     public Material transparentCoverMaterial;
-    private Material regularCoverMaterial;
+    private Dictionary<MeshRenderer, Material> regularCoverMaterial;
     public CursorGroup cursorGroup;
     [Range(0,1)]
     public float actionCamChance;
@@ -142,7 +143,12 @@ public class GameManager : MonoBehaviour
 
     private void MakePreviousCoverVisible()
     {
-        GetRenderer(transparentCover).material = regularCoverMaterial;
+        MeshRenderer[] mr = GetRenderer(transparentCover);
+        for(int i = 0; i < mr.Length; i++)
+        {
+            mr[i].material = regularCoverMaterial[mr[i]];
+        }
+        regularCoverMaterial.Clear();
     }
 
     private void ResetAlphaFadeMaterial()
@@ -155,9 +161,14 @@ public class GameManager : MonoBehaviour
 
     private void ActivateFade(GameObject coverObject)
     {
-        MeshRenderer mr = GetRenderer(coverObject);
-        regularCoverMaterial = mr.material; //cache the material of this renderer.
-        mr.material = transparentCoverMaterial;
+        MeshRenderer[] mr = GetRenderer(coverObject);
+        for(int i = 0; i < mr.Length; i++)
+        {
+            regularCoverMaterial.Add(mr[i], mr[i].material); //cache the material of this renderer.
+            mr[i].material = transparentCoverMaterial;
+        }
+        //regularCoverMaterial = mr.material; 
+        
         StartCoroutine(GeneralUtils.Fade(transparentCoverMaterial));
         transparentCover = coverObject;
     }
@@ -203,13 +214,13 @@ public class GameManager : MonoBehaviour
          }
      }*/
 
-    private static MeshRenderer GetRenderer(GameObject coverObject)
+    private static MeshRenderer[] GetRenderer(GameObject coverObject)
     {
-        MeshRenderer mr = coverObject.GetComponentInChildren<MeshRenderer>();
-        if (mr == null)
-        {
-            mr = coverObject.GetComponent<CoverFramework>().renderer;
-        }
+        //MeshRenderer mr = coverObject.GetComponentInChildren<MeshRenderer>();
+        //if (mr == null)
+        //{
+            MeshRenderer[] mr = coverObject.GetComponent<CoverFramework>().coverRenderer;
+        //}
 
         return mr;
     }

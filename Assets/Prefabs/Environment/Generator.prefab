@@ -152,7 +152,8 @@ MonoBehaviour:
   - {fileID: 3088086561818561513, guid: 86991083bf70246cab4905f681be4c36, type: 3}
   damageReductionPct: 0.8
   coverType: 2
-  renderer: {fileID: 3746056320034322296}
+  coverRenderer:
+  - {fileID: 3746056320034322296}
   flankOffset: 4
   auSrc: {fileID: 0}
   ricochet: {fileID: 11400000, guid: 0db460fc7f4007d48b0e3ef664e431cc, type: 2}

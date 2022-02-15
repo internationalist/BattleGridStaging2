@@ -20,7 +20,7 @@ public class CoverFramework : MonoBehaviour
 
     public TYPE coverType;
 
-    public MeshRenderer renderer;
+    public MeshRenderer[] coverRenderer;
 
     public float flankOffset = 3f;
 
