@@ -21,4 +21,15 @@ public class Team
             }
         }
     }
+
+    public void Remove(PlayerController player)
+    {
+        players.Remove(player);
+        memberMap.Remove(player.ID);
+    }
+
+    public bool isWiped()
+    {
+        return players.Count == 0;
+    }
 }

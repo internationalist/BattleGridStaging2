@@ -52,7 +52,6 @@ public class RifleAttackState : BaseState
     public override void Update(BaseFSMController controller)
     {
         if (attackComplete) {
-            Debug.Log("Commnad " +  command);
             command.anim.ResetTrigger("Single_Shot");
             command.TransitionToState(command.StateMap[Command.InternalState.idle.ToString()]);
             command.isActivated = false;

@@ -84,7 +84,6 @@ public class TurnBasedSystem:MonoBehaviour
 
     public void CharacterDied(int ID)
     {
-        //Debug.LogFormat("Character {0} just died", ID);
         RemoveFromTeam(ID);
     }
 
@@ -165,8 +164,17 @@ public class TurnBasedSystem:MonoBehaviour
         }
         if(pc != null)
         {
-            team.players.Remove(pc);
-            team.memberMap.Remove(ID);
+            team.Remove(pc);
+            if(team.isWiped())
+            {
+                if(team.aiAgent)
+                {
+                    Debug.Log("Stage clear!");
+                } else
+                {
+                    Debug.Log("Team wiped!");
+                }
+            }
             if (!pc.isAgent) //dead character is player controlled
             {
                 foreach (PlayerController aiChar in AIManager.I.currentTeam.players)
