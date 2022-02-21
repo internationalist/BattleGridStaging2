@@ -131,11 +131,11 @@ public class RifleAttackFSM : Command
 
     protected override void Activate(Transform enemyTransform, Vector3? destination)
     {
+        base.Activate(enemyTransform, destination);
         if (playerController.playerMetaData.voice.responseOnAction != null && playerController.playerMetaData.voice.responseOnAction.Count > 0)
         {
             AudioManager.PlayVoice(playerController.playerMetaData.voice.responseOnAction, playerController.audioSource);
         }
-        base.Activate(enemyTransform, destination);
         if (enemyTransform != null && destination.HasValue)
         {
             this.Destination = destination.Value;

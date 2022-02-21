@@ -21,7 +21,7 @@ public class PCInputManager : AbstractInputManager
     }
 
 
-    public override bool ClickOnDestination()
+    public override bool MouseClick()
     {
         return Input.GetMouseButtonDown(0);
     }

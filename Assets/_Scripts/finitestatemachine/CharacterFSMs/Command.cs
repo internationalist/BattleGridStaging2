@@ -120,6 +120,7 @@ public abstract class Command : BaseFSMController
 
     protected virtual void Activate(Transform enemyTransform, Vector3? destination)
     {
+        GameManager.I.readOnly = true;
         currentState.EnterState(this);
     }
 
@@ -147,6 +148,7 @@ public abstract class Command : BaseFSMController
 
     public virtual void Complete()
     {
+        GameManager.I.readOnly = false;
 //        Debug.LogFormat("{0} incrementing run count", this.GetType().Name);
         commandDataInstance.IncrementRunCount();
         if (commandTemplate != null)

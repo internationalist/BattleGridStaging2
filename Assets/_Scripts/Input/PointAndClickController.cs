@@ -9,9 +9,9 @@ public class PointAndClickController : MonoBehaviour
     PlayerController pc = null;
     private void Update()
     {
-        if (PCInputManager.Instance.ClickOnDestination() && !EventSystem.current.IsPointerOverGameObject())
+        if (PCInputManager.Instance.MouseClick() && !EventSystem.current.IsPointerOverGameObject())
         {
-            if(!TurnBasedSystem.I.activeTeam.aiAgent)
+            if(!TurnBasedSystem.I.activeTeam.aiAgent && !GameManager.I.readOnly)
             {
                 Clicked();
             }
@@ -27,8 +27,6 @@ public class PointAndClickController : MonoBehaviour
                 pc = thisPc;
                 if(GameManager._currentPlayer == null
                     || "IdleFSM".Equals(GameManager._currentPlayer.getCurrentCommand().GetType().ToString())) { 
-                //Command cmd = pc.getCurrentCommand();
-                //if("IdleFSM".Equals(cmd.GetType().ToString())) {
                     pc.ShowInfoPanel();
                 } else
                 {

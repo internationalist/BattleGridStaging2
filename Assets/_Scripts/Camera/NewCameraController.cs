@@ -66,10 +66,6 @@ public class NewCameraController : MonoBehaviour
     CameraState m_TargetCameraState = new CameraState();
     CameraState m_InterpolatingCameraState = new CameraState();
 
-    [Header("Input")]
-    public AbstractCameraInputManager cameraInputManager;
-
-
 
     [Header("Movement Settings")]
     [Tooltip("Exponential boost factor on translation, controllable by mouse wheel.")]
