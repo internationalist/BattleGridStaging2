@@ -121,7 +121,7 @@ public class TurnBasedSystem:MonoBehaviour
     {
         if(!turnChanging)
         {
-            if (!activeTeam.isTurnActive) //turn is over.
+            if (!activeTeam.isTurnActive && !GameManager.I.levelComplete) //turn is over.
             {
                 StartCoroutine(NextTurn());
             }
@@ -167,12 +167,14 @@ public class TurnBasedSystem:MonoBehaviour
             team.Remove(pc);
             if(team.isWiped())
             {
+                //End the game here
+                GameManager.I.levelComplete = true;
                 if(team.aiAgent)
                 {
-                    Debug.Log("Stage clear!");
+                    UIManager.ActivateStageClearMessage();
                 } else
                 {
-                    Debug.Log("Team wiped!");
+                    UIManager.ActivategameOverMessage();
                 }
             }
             if (!pc.isAgent) //dead character is player controlled

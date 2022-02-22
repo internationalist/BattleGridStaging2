@@ -53,6 +53,8 @@ public class GameManager : MonoBehaviour
     public float actionCamChance;
     public bool readOnly;
 
+    public bool levelComplete;
+
     #endregion
 
     #region select and activate command

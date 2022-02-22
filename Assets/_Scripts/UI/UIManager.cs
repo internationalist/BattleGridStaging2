@@ -40,6 +40,10 @@ public class UIManager : MonoBehaviour
     public TMP_Text beginTurnMsg;
     public TMP_Text beginTurnMsgAI;
 
+    public TMP_Text stageClear;
+
+    public TMP_Text gameOver;
+
     public Image attackImage;
 
     public TMP_Text turnsLeftForItemUse;
@@ -114,6 +118,22 @@ public class UIManager : MonoBehaviour
             ()=>{
                 LeanTweenExt.LeanAlphaText(I.beginTurnMsg, 0, 1.5f);
         });
+    }
+
+    public static void ActivateStageClearMessage()
+    {
+        LeanTweenExt.LeanAlphaText(I.stageClear, 1, 1.5f).setOnComplete(
+            () => {
+                LeanTweenExt.LeanAlphaText(I.stageClear, 0, 1.5f);
+            });
+    }
+
+    public static void ActivategameOverMessage()
+    {
+        LeanTweenExt.LeanAlphaText(I.gameOver, 1, 1.5f).setOnComplete(
+            () => {
+                LeanTweenExt.LeanAlphaText(I.gameOver, 0, 1.5f);
+            });
     }
 
     public static void ActivateBeginTurnMessageAI()
