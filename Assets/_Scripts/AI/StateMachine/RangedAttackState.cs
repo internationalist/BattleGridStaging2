@@ -15,6 +15,9 @@ public class RangedAttackState : AIActionState
 
     protected bool isRunning;
     protected CoverFramework cf;
+    private float commandStartTimeInSec=-1f;
+    private float commandTimeOutInSecs=15;
+
     public override void EnterState(AIStateMachine aiMachine)
     {
         aim = aiMachine;
@@ -49,9 +52,11 @@ public class RangedAttackState : AIActionState
     public override void Update()
     {
 
-        if(Time.realtimeSinceStartup - commandStartTimeInSec > commandTimeOutInSecs) //Check if command has been running past the timeout specified.
+        if(commandStartTimeInSec != -1  //Check if command has been running past the timeout specified.
+           && Time.realtimeSinceStartup - commandStartTimeInSec > commandTimeOutInSecs)
         {
             isRunning = false; //terminate command.
+            commandStartTimeInSec = -1f;
         }
 
         if (aim._controller.turnActive && !isRunning)
@@ -308,9 +313,7 @@ public class RangedAttackState : AIActionState
     /// <param name="state"></param>
     /// <param name="agent"></param>
     protected void TriggerCommand(AIState state, PlayerController agent)
-    {
-        //agent.playerMetaData.ApNeeded = state.apNeeded;
-        
+    {   
         commandStartTimeInSec = Time.realtimeSinceStartup; // We will enforce a timeout on the command due to a vague problem of commands not finishing.
 
         isRunning = true;

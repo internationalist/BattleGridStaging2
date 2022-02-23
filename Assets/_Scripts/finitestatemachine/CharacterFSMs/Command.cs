@@ -36,6 +36,9 @@ public abstract class Command : BaseFSMController
 
     public bool invokeImmediate;
 
+    protected float timeOutInSecs;
+    protected float commandStartTimeInSecs = -1;
+
     public PlayerController playerController;
 
     /// <summary>
@@ -80,6 +83,7 @@ public abstract class Command : BaseFSMController
         this.commandDataInstance.ammoCount = weaponAction.maxAmmo;
         this.commandDataInstance.maxBurstFire = weaponAction.maxBurstFire;
         this.commandDataInstance.maxCommands = weaponAction.maxRuns;
+        this.timeOutInSecs = weaponAction.timeOutInSecs;
     }
 
     public Command(Animator anim, NavMeshAgent nav, PlayerController controller) : this(anim, nav, controller, null)
@@ -120,6 +124,8 @@ public abstract class Command : BaseFSMController
 
     protected virtual void Activate(Transform enemyTransform, Vector3? destination)
     {
+        Debug.Log("Activating Command");
+        commandStartTimeInSecs = Time.realtimeSinceStartup;
         GameManager.I.readOnly = true;
         currentState.EnterState(this);
     }
@@ -148,8 +154,8 @@ public abstract class Command : BaseFSMController
 
     public virtual void Complete()
     {
+        commandStartTimeInSecs = -1f;
         GameManager.I.readOnly = false;
-//        Debug.LogFormat("{0} incrementing run count", this.GetType().Name);
         commandDataInstance.IncrementRunCount();
         if (commandTemplate != null)
         {
@@ -169,6 +175,17 @@ public abstract class Command : BaseFSMController
 
     public override void Update()
     {
+        if(timeOutInSecs > 0 && commandStartTimeInSecs > -1f)
+        {
+            float timeSinceCommandStart = Time.realtimeSinceStartup - commandStartTimeInSecs;
+            if (timeSinceCommandStart > timeOutInSecs)
+            {
+                Debug.LogFormat("{0} Timeout exceeded with {1} seconds. Terminating command", timeOutInSecs, timeSinceCommandStart);
+                complete = true;
+            }
+        }
+
+
         if(!complete && !cancel)
         {
             base.Update();

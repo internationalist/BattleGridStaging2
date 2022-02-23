@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 348d1b9d4b88ad740ba17fe0dafae1cd, type: 3}
   m_Name: aiReloadCommand
   m_EditorClassIdentifier: 
-  effectFlashPrefab: {fileID: 0}
+  effectFlashPrefab:
+  - {fileID: 0}
   soundEffects:
   - {fileID: 8300000, guid: 81120b5a2ebb80849a7771e60e747707, type: 3}
   - {fileID: 8300000, guid: 4eb52d6603636d6468a73fad37e19aeb, type: 3}
@@ -30,6 +31,7 @@ MonoBehaviour:
   maxAmmo: 12
   isDefault: 0
   maxRuns: 1
+  timeOutInSecs: 10
   damageParameters:
     optimalRange: 10
     fallOff: 5

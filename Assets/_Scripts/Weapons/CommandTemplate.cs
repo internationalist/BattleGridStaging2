@@ -36,6 +36,9 @@ public abstract class CommandTemplate : ScriptableObject
     [Tooltip("Max number of commands in one turn")]
     public int maxRuns;
 
+    [Tooltip("A timeout value on the command. Usually set it to the time of the animation clip.")]
+    public float timeOutInSecs;
+
     protected bool effectComplete =false;
 
     public DamageParameters damageParameters;
