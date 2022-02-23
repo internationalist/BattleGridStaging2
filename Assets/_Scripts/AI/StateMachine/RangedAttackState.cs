@@ -49,6 +49,11 @@ public class RangedAttackState : AIActionState
     public override void Update()
     {
 
+        if(Time.realtimeSinceStartup - commandStartTimeInSec > commandTimeOutInSecs) //Check if command has been running past the timeout specified.
+        {
+            isRunning = false; //terminate command.
+        }
+
         if (aim._controller.turnActive && !isRunning)
         {
             if(aim._controller.playerMetaData.CanRunCommand())
@@ -225,22 +230,6 @@ public class RangedAttackState : AIActionState
         } else if(aim._controller.playerMetaData.CanAttack())
         {
             aim.DiscardTargetAndBeginAILoop();
-         /*   if (Mathf.Round(aim._aiState.distanceToTarget) <=
-                aim._aiState.weaponTemplate.damageParameters.optimalRange)//In optimal range
-            {
-                aim._aiState.cmdType = Command.type.primaryaction; //shoot
-                TriggerCommand(aim._aiState, aim._controller);
-            }
-            else if (aim._controller.playerMetaData.CanMove()
-                                    && !aim._aiState.achievedCover) //Attack command used up but can still move. 
-            {
-                PerformRetreat();
-                TriggerCommand(aim._aiState, aim._controller);
-            }
-            else // end turn
-            {
-                aim.TransitionToState(aim.states["end"]);
-            }*/
 
         } else // End turn
         {
@@ -322,6 +311,8 @@ public class RangedAttackState : AIActionState
     {
         //agent.playerMetaData.ApNeeded = state.apNeeded;
         
+        commandStartTimeInSec = Time.realtimeSinceStartup; // We will enforce a timeout on the command due to a vague problem of commands not finishing.
+
         isRunning = true;
         switch (state.cmdType)
         {

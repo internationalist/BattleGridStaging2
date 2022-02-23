@@ -8,6 +8,10 @@ public class AIActionState : ScriptableObject
     protected AIStateMachine aim;
 
     public AIActionState next;
+
+    protected float commandStartTimeInSec;
+
+    public float commandTimeOutInSecs = 15f;
     public virtual void EnterState(AIStateMachine aiMachine) { }
 
     public virtual void Update() { }

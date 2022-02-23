@@ -9,6 +9,6 @@ public class HeavyDamage : LightDamageState
         Command characterPlayer = (Command)controller;
         characterPlayer.anim.CrossFade("front_damage", 0.2f);
         complete = false;
-        PlayerController.OnAnimationComplete += OnComplete;
+        characterPlayer.playerController.OnAnimationComplete += OnComplete;
     }
 }
