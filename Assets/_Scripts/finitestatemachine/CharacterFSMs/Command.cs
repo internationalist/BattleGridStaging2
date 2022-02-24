@@ -126,7 +126,7 @@ public abstract class Command : BaseFSMController
     {
         Debug.Log("Activating Command");
         commandStartTimeInSecs = Time.realtimeSinceStartup;
-        GameManager.I.readOnly = true;
+        //GameManager.I.readOnly = true;
         currentState.EnterState(this);
     }
 
@@ -155,7 +155,7 @@ public abstract class Command : BaseFSMController
     public virtual void Complete()
     {
         commandStartTimeInSecs = -1f;
-        GameManager.I.readOnly = false;
+        //GameManager.I.readOnly = false;
         commandDataInstance.IncrementRunCount();
         if (commandTemplate != null)
         {

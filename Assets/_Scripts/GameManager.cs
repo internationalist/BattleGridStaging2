@@ -51,7 +51,7 @@ public class GameManager : MonoBehaviour
     public CursorGroup cursorGroup;
     [Range(0,1)]
     public float actionCamChance;
-    public bool readOnly;
+    //public bool readOnly;
 
     public bool levelComplete;
 
