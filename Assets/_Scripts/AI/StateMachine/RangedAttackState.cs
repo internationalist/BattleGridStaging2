@@ -15,6 +15,9 @@ public class RangedAttackState : AIActionState
 
     protected bool isRunning;
     protected CoverFramework cf;
+    private float commandStartTimeInSec=-1f;
+    private float commandTimeOutInSecs=15;
+
     public override void EnterState(AIStateMachine aiMachine)
     {
         aim = aiMachine;
@@ -48,6 +51,13 @@ public class RangedAttackState : AIActionState
 
     public override void Update()
     {
+
+        if(commandStartTimeInSec != -1  //Check if command has been running past the timeout specified.
+           && Time.realtimeSinceStartup - commandStartTimeInSec > commandTimeOutInSecs)
+        {
+            isRunning = false; //terminate command.
+            commandStartTimeInSec = -1f;
+        }
 
         if (aim._controller.turnActive && !isRunning)
         {
@@ -225,22 +235,6 @@ public class RangedAttackState : AIActionState
         } else if(aim._controller.playerMetaData.CanAttack())
         {
             aim.DiscardTargetAndBeginAILoop();
-         /*   if (Mathf.Round(aim._aiState.distanceToTarget) <=
-                aim._aiState.weaponTemplate.damageParameters.optimalRange)//In optimal range
-            {
-                aim._aiState.cmdType = Command.type.primaryaction; //shoot
-                TriggerCommand(aim._aiState, aim._controller);
-            }
-            else if (aim._controller.playerMetaData.CanMove()
-                                    && !aim._aiState.achievedCover) //Attack command used up but can still move. 
-            {
-                PerformRetreat();
-                TriggerCommand(aim._aiState, aim._controller);
-            }
-            else // end turn
-            {
-                aim.TransitionToState(aim.states["end"]);
-            }*/
 
         } else // End turn
         {
@@ -319,9 +313,9 @@ public class RangedAttackState : AIActionState
     /// <param name="state"></param>
     /// <param name="agent"></param>
     protected void TriggerCommand(AIState state, PlayerController agent)
-    {
-        //agent.playerMetaData.ApNeeded = state.apNeeded;
-        
+    {   
+        commandStartTimeInSec = Time.realtimeSinceStartup; // We will enforce a timeout on the command due to a vague problem of commands not finishing.
+
         isRunning = true;
         switch (state.cmdType)
         {

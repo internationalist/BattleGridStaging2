@@ -12,7 +12,7 @@ public class LightDamageState : BaseState
             Command command = (Command)controller;
             command.anim.CrossFade("LightDamage", 0.2f);
             complete = false;
-            PlayerController.OnAnimationComplete += OnComplete;
+            command.playerController.OnAnimationComplete += OnComplete;
             pc = command.playerController;
         }
     }
@@ -25,7 +25,7 @@ public class LightDamageState : BaseState
         {
             Command command = (Command)controller;
             command.TransitionToState(command.StateMap[Command.InternalState.idle.ToString()]);
-            PlayerController.OnAnimationComplete -= OnComplete;
+            command.playerController.OnAnimationComplete -= OnComplete;
         }
     }
 

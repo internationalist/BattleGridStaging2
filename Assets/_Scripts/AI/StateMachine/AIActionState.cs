@@ -8,6 +8,7 @@ public class AIActionState : ScriptableObject
     protected AIStateMachine aim;
 
     public AIActionState next;
+
     public virtual void EnterState(AIStateMachine aiMachine) { }
 
     public virtual void Update() { }

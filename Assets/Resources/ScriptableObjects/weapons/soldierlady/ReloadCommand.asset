@@ -31,6 +31,7 @@ MonoBehaviour:
   maxAmmo: 12
   isDefault: 0
   maxRuns: 1
+  timeOutInSecs: 10
   damageParameters:
     optimalRange: 10
     fallOff: 5

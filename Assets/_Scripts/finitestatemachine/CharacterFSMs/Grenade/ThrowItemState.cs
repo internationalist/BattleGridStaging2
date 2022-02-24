@@ -14,7 +14,7 @@ public class ThrowItemState : BaseState
         command = (ThrowItemFSM)controller;
         command.anim.CrossFade("grenade_throw", 0.5f);
         timeStarted = Time.time;
-        PlayerController.OnAnimationComplete += OnComplete;
+        command.playerController.OnAnimationComplete += OnComplete;
     }
 
     public override void Update(BaseFSMController controller)
@@ -25,7 +25,7 @@ public class ThrowItemState : BaseState
         if(command.complete)
         {
             //command.complete = true;
-            PlayerController.OnAnimationComplete -= OnComplete;
+            command.playerController.OnAnimationComplete -= OnComplete;
             command.TransitionToState(command.StateMap[Command.InternalState.idle.ToString()]);
         }
     }
