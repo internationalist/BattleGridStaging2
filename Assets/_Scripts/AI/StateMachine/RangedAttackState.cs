@@ -327,7 +327,7 @@ public class RangedAttackState : AIActionState
                 {
                     //Debug.LogFormat("{0} AIAttackState:TriggerCommand->Command done", aim._controller.name);
                     AIUtils.DirectionAndDistanceToLocation(state, agent);
-                    isRunning = false;
+                    isRunning = false;    
                 });
                 break;
             case Command.type.primaryaction:
@@ -336,7 +336,8 @@ public class RangedAttackState : AIActionState
                 state.achievedAttack = true;
                 GameManager.ActivateCommand(state.target.transform, state.target.transform.position, () =>
                 {
-                    isRunning = false;
+                    //isRunning = false;
+                    GameManager.I.StartCoroutine(DelayedCommandComplete());
                 });
                 break;
             case Command.type.specialaction:
@@ -345,7 +346,8 @@ public class RangedAttackState : AIActionState
                 state.achievedAttack = true;
                 GameManager.ActivateCommand(state.target.transform, state.target.transform.position, () =>
                 {
-                    isRunning = false;
+                    //isRunning = false;
+                    GameManager.I.StartCoroutine(DelayedCommandComplete());
                 });
                 break;
             case Command.type.reload:
@@ -357,5 +359,11 @@ public class RangedAttackState : AIActionState
                 });
                 break;
         }
+    }
+
+    private IEnumerator DelayedCommandComplete()
+    {
+        yield return new WaitForSeconds(1f);
+        isRunning = false;
     }
 }
