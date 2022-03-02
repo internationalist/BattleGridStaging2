@@ -53,6 +53,8 @@ public class AIStateMachine : MonoBehaviour
 
     public List<Factor> decisionMatrix;
 
+    public float postCommandPauseInSecs;
+
     [Range(0,1)]
     public float specialAttackChance;
 

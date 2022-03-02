@@ -32611,6 +32611,7 @@ MonoBehaviour:
   isCommandRunning: 0
   agressionLevel: 0
   decisionMatrix: []
+  postCommandPauseInSecs: 1
   specialAttackChance: 0.5
 --- !u!114 &7488266450533309437
 MonoBehaviour:
