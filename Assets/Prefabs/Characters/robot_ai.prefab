@@ -42951,6 +42951,7 @@ MonoBehaviour:
     dirToTarget: {x: 0, y: 0, z: 0}
     moveLocation: {x: 0, y: 0, z: 0}
     movementDistance: 0
+    attackType: 0
     weaponTemplate: {fileID: 0}
     weaponInstance:
       muzzleFlashInstance: {fileID: 0}
@@ -42978,6 +42979,8 @@ MonoBehaviour:
   isCommandRunning: 0
   agressionLevel: 0
   decisionMatrix: []
+  postCommandPauseInSecs: 1
+  specialAttackChance: 0
 --- !u!114 &8736960492209586435
 MonoBehaviour:
   m_ObjectHideFlags: 0

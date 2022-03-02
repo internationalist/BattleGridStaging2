@@ -336,7 +336,6 @@ public class RangedAttackState : AIActionState
                 state.achievedAttack = true;
                 GameManager.ActivateCommand(state.target.transform, state.target.transform.position, () =>
                 {
-                    //isRunning = false;
                     GameManager.I.StartCoroutine(DelayedCommandComplete());
                 });
                 break;
@@ -346,7 +345,6 @@ public class RangedAttackState : AIActionState
                 state.achievedAttack = true;
                 GameManager.ActivateCommand(state.target.transform, state.target.transform.position, () =>
                 {
-                    //isRunning = false;
                     GameManager.I.StartCoroutine(DelayedCommandComplete());
                 });
                 break;
@@ -363,7 +361,7 @@ public class RangedAttackState : AIActionState
 
     private IEnumerator DelayedCommandComplete()
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(aim.postCommandPauseInSecs);
         isRunning = false;
     }
 }
