@@ -124,7 +124,6 @@ public abstract class Command : BaseFSMController
 
     protected virtual void Activate(Transform enemyTransform, Vector3? destination)
     {
-        Debug.Log("Activating Command");
         commandStartTimeInSecs = Time.realtimeSinceStartup;
         //GameManager.I.readOnly = true;
         currentState.EnterState(this);

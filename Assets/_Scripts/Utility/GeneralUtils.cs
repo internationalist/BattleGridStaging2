@@ -427,8 +427,23 @@ public static class GeneralUtils {
 
     public static bool IsSpotOccupied(Vector3 position)
     {
-        Vector2 location = new Vector2(Mathf.Floor(position.x), Mathf.Floor(position.z));
-        return GameManager.occupancyMap.ContainsValue(location);
+        //Vector2 location = new Vector2(Mathf.Floor(position.x), Mathf.Floor(position.z));
+
+        //return GameManager.occupancyMap.ContainsValue(location);
+        return AreInSameSpot(GameManager.occupancyMap, position);
+    }
+
+    private static bool AreInSameSpot(Dictionary<int, Vector2> occupancyMap, Vector3 position)
+    {
+        Vector2 position2d = new Vector2(position.x, position.z);
+        foreach(KeyValuePair<int, Vector2> entry in occupancyMap)
+        {
+            if(Vector2.Distance(entry.Value, position2d) < 1f)
+            {
+                return true;
+            }
+        }
+        return false;
     }
 
     public static bool IsSpotOccupied(Vector3 position, int ID, out bool selfOccupied)
@@ -437,7 +452,8 @@ public static class GeneralUtils {
         //PrintDictionary(GameManager.occupancyMap);
         Vector2 location = new Vector2(Mathf.Floor(position.x), Mathf.Floor(position.z));
 
-        bool isOccupied = GameManager.occupancyMap.ContainsValue(location);
+        //bool isOccupied = GameManager.occupancyMap.ContainsValue(location);
+        bool isOccupied = AreInSameSpot(GameManager.occupancyMap, position);
         //Debug.LogFormat("Character ID is {0}, location is {1} isOccupied is {2}", ID, location, isOccupied);
 
         if (isOccupied)
