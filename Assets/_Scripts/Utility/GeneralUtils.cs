@@ -452,7 +452,8 @@ public static class GeneralUtils {
         //PrintDictionary(GameManager.occupancyMap);
         Vector2 location = new Vector2(Mathf.Floor(position.x), Mathf.Floor(position.z));
 
-        bool isOccupied = GameManager.occupancyMap.ContainsValue(location);
+        //bool isOccupied = GameManager.occupancyMap.ContainsValue(location);
+        bool isOccupied = AreInSameSpot(GameManager.occupancyMap, position);
         //Debug.LogFormat("Character ID is {0}, location is {1} isOccupied is {2}", ID, location, isOccupied);
 
         if (isOccupied)
