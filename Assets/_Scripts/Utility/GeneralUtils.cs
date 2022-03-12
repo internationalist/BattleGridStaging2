@@ -395,7 +395,7 @@ public static class GeneralUtils {
     #region Resolving unique location and checking if spot occupied
     public static Vector3 GetUniqueLocation(PlayerController controller, Vector3 location)
     {
-      Dictionary<int, Vector2> occupancyMap = GameManager.occupancyMap;
+      Dictionary<string, Vector2> occupancyMap = GameManager.occupancyMap;
       float originalDistance = Vector3.Distance(controller.transform.position, location);
       Vector2 newLocation = new Vector2(Mathf.Floor(location.x), Mathf.Floor(location.z));
       //Debug.LogFormat("GetUniqueLocation::{0} getting unique location with {1}", controller.name, newLocation);
@@ -427,16 +427,13 @@ public static class GeneralUtils {
 
     public static bool IsSpotOccupied(Vector3 position)
     {
-        //Vector2 location = new Vector2(Mathf.Floor(position.x), Mathf.Floor(position.z));
-
-        //return GameManager.occupancyMap.ContainsValue(location);
         return AreInSameSpot(GameManager.occupancyMap, position);
     }
 
-    private static bool AreInSameSpot(Dictionary<int, Vector2> occupancyMap, Vector3 position)
+    private static bool AreInSameSpot(Dictionary<string, Vector2> occupancyMap, Vector3 position)
     {
         Vector2 position2d = new Vector2(position.x, position.z);
-        foreach(KeyValuePair<int, Vector2> entry in occupancyMap)
+        foreach(KeyValuePair<string, Vector2> entry in occupancyMap)
         {
             if(Vector2.Distance(entry.Value, position2d) < 1f)
             {
@@ -446,15 +443,13 @@ public static class GeneralUtils {
         return false;
     }
 
-    public static bool IsSpotOccupied(Vector3 position, int ID, out bool selfOccupied)
+    public static bool IsSpotOccupied(Vector3 position, string ID, out bool selfOccupied)
     {
         selfOccupied = false;
         //PrintDictionary(GameManager.occupancyMap);
         Vector2 location = new Vector2(Mathf.Floor(position.x), Mathf.Floor(position.z));
 
-        //bool isOccupied = GameManager.occupancyMap.ContainsValue(location);
         bool isOccupied = AreInSameSpot(GameManager.occupancyMap, position);
-        //Debug.LogFormat("Character ID is {0}, location is {1} isOccupied is {2}", ID, location, isOccupied);
 
         if (isOccupied)
         {

@@ -9,7 +9,7 @@ public class Team
     public bool aiAgent;
     public string name;
     public string teamID;
-    public Dictionary<int, PlayerController> memberMap = new Dictionary<int, PlayerController>();
+    public Dictionary<string, PlayerController> memberMap = new Dictionary<string, PlayerController>();
 
     public void init()
     {

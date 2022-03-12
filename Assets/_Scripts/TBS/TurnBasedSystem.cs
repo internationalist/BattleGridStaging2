@@ -82,7 +82,7 @@ public class TurnBasedSystem:MonoBehaviour
         turnChanging = false;
     }
 
-    public void CharacterDied(int ID)
+    public void CharacterDied(string ID)
     {
         RemoveFromTeam(ID);
     }
@@ -132,7 +132,7 @@ public class TurnBasedSystem:MonoBehaviour
     /// Turn end event only for human controlled team
     /// </summary>
     /// <param name="id"></param>
-    public void OnTurnEnd(int id)
+    public void OnTurnEnd(string id)
     {
         bool teamTurnActive = false;
         foreach (PlayerController pc in activeTeam.players)
@@ -146,7 +146,7 @@ public class TurnBasedSystem:MonoBehaviour
         activeTeam.isTurnActive = teamTurnActive;
     }
 
-    private void RemoveFromTeam(int ID)
+    private void RemoveFromTeam(string ID)
     {
         Team team = null;
         PlayerController pc = null;
@@ -159,7 +159,6 @@ public class TurnBasedSystem:MonoBehaviour
                 break;
             } catch(System.Exception exc)
             {
-                //Debug.Log(exc.StackTrace);
             }
         }
         if(pc != null)
@@ -168,14 +167,7 @@ public class TurnBasedSystem:MonoBehaviour
             if(team.isWiped())
             {
                 //End the game here
-                GameManager.I.levelComplete = true;
-                if(team.aiAgent)
-                {
-                    UIManager.ActivateStageClearMessage();
-                } else
-                {
-                    UIManager.ActivategameOverMessage();
-                }
+                HandleTeamDeath(team);
             }
             if (!pc.isAgent) //dead character is player controlled
             {
@@ -188,6 +180,16 @@ public class TurnBasedSystem:MonoBehaviour
         }
     }
 
-
-
+    private static void HandleTeamDeath(Team team)
+    {
+        GameManager.I.levelComplete = true;
+        if (team.aiAgent)
+        {
+            UIManager.ActivateStageClearMessage();
+        }
+        else
+        {
+            UIManager.ActivategameOverMessage();
+        }
+    }
 }
