@@ -32,4 +32,9 @@ public class Team
     {
         return players.Count == 0;
     }
+
+    public void AddPlayer(PlayerController pc)
+    {
+        players.Add(pc);
+    }
 }

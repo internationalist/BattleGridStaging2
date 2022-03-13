@@ -295,21 +295,33 @@ public class GameManager : MonoBehaviour
 
     public List<EnemyWave> waves;
     
-    /*public Team SpawnNextWave()
+    public Team SpawnNextWave()
     {
         
         if(waves != null && waves.Count > 0)
         {
             Team t = new Team();
+            t.aiAgent = true;
+            t.name = "AIWave";
             EnemyWave wave = waves[0];
+            Vector2 pt;
             for (int i = 0; i < wave.enemyPrefabs.Length; i++) 
             {
-                Vector2 pt = UnityEngine.Random.insideUnitCircle;
+                pt = UnityEngine.Random.insideUnitCircle * 5f;
+                Vector3 spawnLocation = wave.spawnZoneCenter + new Vector3(pt.x, wave.spawnZoneCenter.y, pt.y);
+                while(!GeneralUtils.InsideNavMesh(spawnLocation, universalAgent))
+                {
+                    pt = UnityEngine.Random.insideUnitCircle * 5f;
+                    spawnLocation = wave.spawnZoneCenter + new Vector3(pt.x, wave.spawnZoneCenter.y, pt.y);
+                }
+                PlayerController enemy = Instantiate(wave.enemyPrefabs[i], spawnLocation, Quaternion.identity);
+                
+
             }
-            t.players = wave.
+            
         }
     }
-    */
+    
 
 
 

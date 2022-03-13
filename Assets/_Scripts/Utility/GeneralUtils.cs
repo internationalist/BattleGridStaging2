@@ -398,14 +398,12 @@ public static class GeneralUtils {
       Dictionary<string, Vector2> occupancyMap = GameManager.occupancyMap;
       float originalDistance = Vector3.Distance(controller.transform.position, location);
       Vector2 newLocation = new Vector2(Mathf.Floor(location.x), Mathf.Floor(location.z));
-      //Debug.LogFormat("GetUniqueLocation::{0} getting unique location with {1}", controller.name, newLocation);
       //PrintDictionary(occupancyMap);
       int infiniteLoopCounter = 0;
       int maxLoops = 1000;
       float newDistance = originalDistance;
         bool logtest = newDistance < originalDistance;
-        //Debug.LogFormat("Location is inside occupancy map {0}, it is inside nav mesh {1}, new distance is less than original distance {2}",
-        //                 occupancyMap.ContainsValue(newLocation), InsideNavMesh(location, controller.nav), logtest);
+
       while (occupancyMap.ContainsValue(newLocation) || !InsideNavMesh(location, controller.nav)
             || newDistance < originalDistance)
       {
