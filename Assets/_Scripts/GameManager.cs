@@ -294,15 +294,20 @@ public class GameManager : MonoBehaviour
     #region Spawn Management
 
     public List<EnemyWave> waves;
-    
+    int waveCounter = 0;
+
+    public LineRenderer pathVisualizer;
+    public LineRenderer rangeVisualizer;
     public Team SpawnNextWave()
     {
-        
         if(waves != null && waves.Count > 0)
         {
+            ++waveCounter;
             Team t = new Team();
             t.aiAgent = true;
             t.name = "AIWave";
+            t.teamID = String.Format("{0}", waveCounter);
+            t.players = new List<PlayerController>();
             EnemyWave wave = waves[0];
             Vector2 pt;
             for (int i = 0; i < wave.enemyPrefabs.Length; i++) 
@@ -315,11 +320,14 @@ public class GameManager : MonoBehaviour
                     spawnLocation = wave.spawnZoneCenter + new Vector3(pt.x, wave.spawnZoneCenter.y, pt.y);
                 }
                 PlayerController enemy = Instantiate(wave.enemyPrefabs[i], spawnLocation, Quaternion.identity);
-                
-
+                enemy.pathVisualizer = pathVisualizer;
+                enemy.rangeVisualizer = rangeVisualizer;
+                enemy.ID = String.Format("EW{0}{1}", waveCounter, i); 
+                t.AddPlayer(enemy);
             }
-            
+            return t;
         }
+        return null;
     }
     
 
