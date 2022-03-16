@@ -314,15 +314,17 @@ public class GameManager : MonoBehaviour
             {
                 pt = UnityEngine.Random.insideUnitCircle * 5f;
                 Vector3 spawnLocation = wave.spawnZoneCenter + new Vector3(pt.x, wave.spawnZoneCenter.y, pt.y);
-                while(!GeneralUtils.InsideNavMesh(spawnLocation, universalAgent))
+                while(!GeneralUtils.InsideNavMesh(spawnLocation, universalAgent) && GeneralUtils.AreInSameSpot(GameManager.occupancyMap, spawnLocation))
                 {
                     pt = UnityEngine.Random.insideUnitCircle * 5f;
                     spawnLocation = wave.spawnZoneCenter + new Vector3(pt.x, wave.spawnZoneCenter.y, pt.y);
                 }
                 PlayerController enemy = Instantiate(wave.enemyPrefabs[i], spawnLocation, Quaternion.identity);
+                
                 enemy.pathVisualizer = pathVisualizer;
                 enemy.rangeVisualizer = rangeVisualizer;
-                enemy.ID = String.Format("EW{0}{1}", waveCounter, i); 
+                enemy.ID = String.Format("EW{0}{1}", waveCounter, i);
+                GameManager.occupancyMap[enemy.ID] = new Vector2(Mathf.Floor(spawnLocation.x), Mathf.Floor(spawnLocation.z));
                 t.AddPlayer(enemy);
             }
             return t;

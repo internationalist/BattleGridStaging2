@@ -428,7 +428,7 @@ public static class GeneralUtils {
         return AreInSameSpot(GameManager.occupancyMap, position);
     }
 
-    private static bool AreInSameSpot(Dictionary<string, Vector2> occupancyMap, Vector3 position)
+    public static bool AreInSameSpot(Dictionary<string, Vector2> occupancyMap, Vector3 position)
     {
         Vector2 position2d = new Vector2(position.x, position.z);
         foreach(KeyValuePair<string, Vector2> entry in occupancyMap)

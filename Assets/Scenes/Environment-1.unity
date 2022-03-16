@@ -695,7 +695,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh18692
+  m_Name: pb_Mesh19664
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -3923,7 +3923,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 698980603}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 23, y: 0, z: -0}
+  m_LocalPosition: {x: 22, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -10837,7 +10837,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8701500568258011906, guid: 8f8f1b4fe531feb4599ad909ac23cf0a, type: 3}
       propertyPath: waves.Array.data[0].spawnZoneCenter.x
-      value: 23
+      value: 22
       objectReference: {fileID: 0}
     - target: {fileID: 8701500568258011906, guid: 8f8f1b4fe531feb4599ad909ac23cf0a, type: 3}
       propertyPath: waves.Array.data[0].enemyPrefabs.Array.size
