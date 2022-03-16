@@ -331,6 +331,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  spawnMaterial: {fileID: 2100000, guid: ee2539770611b7d4b9baab24e00a0700, type: 2}
 --- !u!1 &492907549790906055
 GameObject:
   m_ObjectHideFlags: 0
