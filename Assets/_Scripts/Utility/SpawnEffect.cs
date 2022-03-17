@@ -39,8 +39,8 @@ public class SpawnEffect : MonoBehaviour {
             timer += Time.deltaTime;
 
             Color c = _renderer.material.color;
-            //c.a = Mathf.Lerp(0, 1, timer / (spawnEffectTime));
-            c.a = fadeIn.Evaluate(Mathf.InverseLerp(0, spawnEffectTime, timer));
+            c.a = Mathf.Lerp(0, 1, timer / (spawnEffectTime));
+            //c.a = fadeIn.Evaluate(Mathf.InverseLerp(0, spawnEffectTime, timer));
             _renderer.material.color = c;
 
             

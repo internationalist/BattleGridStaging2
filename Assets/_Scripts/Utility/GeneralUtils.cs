@@ -425,12 +425,12 @@ public static class GeneralUtils {
 
     public static bool IsSpotOccupied(Vector3 position)
     {
-        return AreInSameSpot(GameManager.occupancyMap, position);
+        return AreInSameSpot(GameManager.occupancyMap, position, 1f);
     }
 
     public static bool AreInSameSpot(Dictionary<string, Vector2> occupancyMap,
                                      Vector3 position,
-                                     float displacement = 1f)
+                                     float displacement)
     {
         Vector2 position2d = new Vector2(position.x, position.z);
         foreach(KeyValuePair<string, Vector2> entry in occupancyMap)
@@ -446,14 +446,12 @@ public static class GeneralUtils {
     public static bool IsSpotOccupied(Vector3 position, string ID, out bool selfOccupied)
     {
         selfOccupied = false;
-        //PrintDictionary(GameManager.occupancyMap);
         Vector2 location = new Vector2(Mathf.Floor(position.x), Mathf.Floor(position.z));
 
-        bool isOccupied = AreInSameSpot(GameManager.occupancyMap, position);
+        bool isOccupied = AreInSameSpot(GameManager.occupancyMap, position, 1f);
 
         if (isOccupied)
         {
-            //Debug.LogFormat("Checking for occupancy using {0}", ID);
             Vector2 locationForId = Vector2.zero;
             GameManager.occupancyMap.TryGetValue(ID, out locationForId);
 

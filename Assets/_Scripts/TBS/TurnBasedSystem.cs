@@ -90,8 +90,9 @@ public class TurnBasedSystem:MonoBehaviour
     private void Start()
     {
         turnQueue = new Queue<Team>();
-
-        teams.Insert(0, GameManager.I.SpawnNextWave());
+        Team t = new Team();
+        GameManager.I.SpawnNextWave(t);
+        teams.Insert(0, t);
 
         //teams.Add(GameManager.I.SpawnNextWave());
 

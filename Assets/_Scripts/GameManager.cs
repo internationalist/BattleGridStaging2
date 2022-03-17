@@ -298,12 +298,11 @@ public class GameManager : MonoBehaviour
 
     public LineRenderer pathVisualizer;
     public LineRenderer rangeVisualizer;
-    public Team SpawnNextWave()
+    public void SpawnNextWave(Team t)
     {
         if(waves != null && waves.Count > 0)
         {
             ++waveCounter;
-            Team t = new Team();
             t.aiAgent = true;
             t.name = "AIWave";
             t.teamID = String.Format("{0}", waveCounter);
@@ -315,7 +314,7 @@ public class GameManager : MonoBehaviour
                 pt = UnityEngine.Random.insideUnitCircle * 5f;
                 Vector3 spawnLocation = wave.spawnZoneCenter + new Vector3(pt.x, wave.spawnZoneCenter.y, pt.y);
                 while(!GeneralUtils.InsideNavMesh(spawnLocation, universalAgent)
-                        && GeneralUtils.AreInSameSpot(GameManager.occupancyMap, spawnLocation, 3f))
+                        || GeneralUtils.AreInSameSpot(GameManager.occupancyMap, spawnLocation, 3f))
                 {
                     pt = UnityEngine.Random.insideUnitCircle * 5f;
                     spawnLocation = wave.spawnZoneCenter + new Vector3(pt.x, wave.spawnZoneCenter.y, pt.y);
@@ -331,9 +330,7 @@ public class GameManager : MonoBehaviour
                 GameManager.occupancyMap[enemy.ID] = new Vector2(Mathf.Floor(spawnLocation.x), Mathf.Floor(spawnLocation.z));
                 t.AddPlayer(enemy);
             }
-            return t;
         }
-        return null;
     }
     
 
