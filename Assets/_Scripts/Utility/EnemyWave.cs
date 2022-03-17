@@ -9,4 +9,6 @@ public struct EnemyWave
 
     public Vector3 spawnZoneCenter;
 
+    public Vector3 unitLookAt;
+
 }

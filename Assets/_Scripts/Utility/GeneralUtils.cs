@@ -428,12 +428,14 @@ public static class GeneralUtils {
         return AreInSameSpot(GameManager.occupancyMap, position);
     }
 
-    public static bool AreInSameSpot(Dictionary<string, Vector2> occupancyMap, Vector3 position)
+    public static bool AreInSameSpot(Dictionary<string, Vector2> occupancyMap,
+                                     Vector3 position,
+                                     float displacement = 1f)
     {
         Vector2 position2d = new Vector2(position.x, position.z);
         foreach(KeyValuePair<string, Vector2> entry in occupancyMap)
         {
-            if(Vector2.Distance(entry.Value, position2d) < 1f)
+            if(Vector2.Distance(entry.Value, position2d) < displacement)
             {
                 return true;
             }
