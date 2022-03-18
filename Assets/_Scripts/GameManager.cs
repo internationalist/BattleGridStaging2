@@ -298,7 +298,7 @@ public class GameManager : MonoBehaviour
 
     public LineRenderer pathVisualizer;
     public LineRenderer rangeVisualizer;
-    public void SpawnNextWave(Team t)
+    public IEnumerator SpawnNextWave(Team t)
     {
         if(waves != null && waves.Count > 0)
         {
@@ -329,6 +329,7 @@ public class GameManager : MonoBehaviour
                 enemy.ID = String.Format("EW{0}{1}", waveCounter, i);
                 GameManager.occupancyMap[enemy.ID] = new Vector2(Mathf.Floor(spawnLocation.x), Mathf.Floor(spawnLocation.z));
                 t.AddPlayer(enemy);
+                yield return new WaitForSeconds(.5f); 
             }
         }
     }
