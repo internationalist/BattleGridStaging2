@@ -70,7 +70,6 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 519e7c4adbf85d54fb449b2f5ce93a93, type: 3}
   - {fileID: 8300000, guid: 0004f84402e54704f8201d3e81812585, type: 3}
   - {fileID: 8300000, guid: 403edd6a433436048822653108f368ee, type: 3}
-  responseOnThrowItem: []
   responseOnUseItem:
   - {fileID: 8300000, guid: 473e561ac08950e49956601b8784f7dd, type: 3}
   - {fileID: 8300000, guid: 35728aab519e5c142b149da959a52091, type: 3}

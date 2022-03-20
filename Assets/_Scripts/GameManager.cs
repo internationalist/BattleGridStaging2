@@ -327,6 +327,7 @@ public class GameManager : MonoBehaviour
                 enemy.pathVisualizer = pathVisualizer;
                 enemy.rangeVisualizer = rangeVisualizer;
                 enemy.ID = String.Format("EW{0}{1}", waveCounter, i);
+                AudioManager.I.PlayEnemySpawn(enemy.audioSource);
                 GameManager.occupancyMap[enemy.ID] = new Vector2(Mathf.Floor(spawnLocation.x), Mathf.Floor(spawnLocation.z));
                 t.AddPlayer(enemy);
                 yield return new WaitForSeconds(.5f); 

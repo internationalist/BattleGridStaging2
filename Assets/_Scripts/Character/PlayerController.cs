@@ -66,9 +66,8 @@ public class PlayerController : MonoBehaviour
 
     public InfoPanel infoPanel;
 
+    public AudioClip spawnSound;
 
-
-    
     private Command currentCommand;
 
     public Command getCurrentCommand() { return currentCommand;}
