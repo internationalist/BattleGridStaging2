@@ -94,8 +94,6 @@ public class TurnBasedSystem:MonoBehaviour
         StartCoroutine(GameManager.I.SpawnNextWave(t));
         teams.Insert(0, t);
 
-        //teams.Add(GameManager.I.SpawnNextWave());
-
         for(int i = 0; i < teams.Count; i++)
         {
             teams[i].init();
@@ -171,8 +169,23 @@ public class TurnBasedSystem:MonoBehaviour
             team.Remove(pc);
             if(team.isWiped())
             {
-                //End the game here
-                HandleTeamDeath(team);
+                if(team.aiAgent)
+                {
+                    if(GameManager.I.waves != null && GameManager.I.waves.Count > 0)
+                    {
+                        InitalizeNewWave();
+                    }
+                    else
+                    {
+                        //End the game here
+                        HandleGameOver(team);
+                    }
+
+                } else
+                {
+                    //End the game here
+                    HandleGameOver(team);
+                }
             }
             if (!pc.isAgent) //dead character is player controlled
             {
@@ -185,7 +198,20 @@ public class TurnBasedSystem:MonoBehaviour
         }
     }
 
-    private static void HandleTeamDeath(Team team)
+    private void InitalizeNewWave()
+    {
+        Team t = new Team();
+        StartCoroutine(GameManager.I.SpawnNextWave(t));
+        t.init();
+        turnQueue.Enqueue(t);
+        AIManager.Init(t);
+        foreach (PlayerController pc in t.players)
+        {
+            pc.OnDeath += CharacterDied;
+        }
+    }
+
+    private static void HandleGameOver(Team team)
     {
         GameManager.I.levelComplete = true;
         if (team.aiAgent)

@@ -567,34 +567,39 @@ public static class GeneralUtils {
 
         foreach (PlayerController agent in team.players)
         {
-            bool isApplicable = false;
-            //first check if there is no cover in between
-            CoverFramework[] covers = CheckCoversBetweenPoints(origin, agent.transform.position);
-            isApplicable = (covers == null || covers.Length == 0);
-            if(!isApplicable)
+            if(agent != null)
             {
-                for (int i =0; i < covers.Length; i++)
+                bool isApplicable = false;
+                //first check if there is no cover in between
+                CoverFramework[] covers = CheckCoversBetweenPoints(origin, agent.transform.position);
+                isApplicable = (covers == null || covers.Length == 0);
+                if (!isApplicable)
                 {
-                    if(covers[i] != null && (player.cover != null
-                        && covers[i].name.Equals(player.cover.name)))
+                    for (int i = 0; i < covers.Length; i++)
                     {
-                        isApplicable = false;
-                        break;
-                    } else if(covers[i] != null && covers[i].coverType.Equals(CoverFramework.TYPE.full)) {
-                        isApplicable = false;
-                        break;
+                        if (covers[i] != null && (player.cover != null
+                            && covers[i].name.Equals(player.cover.name)))
+                        {
+                            isApplicable = false;
+                            break;
+                        }
+                        else if (covers[i] != null && covers[i].coverType.Equals(CoverFramework.TYPE.full))
+                        {
+                            isApplicable = false;
+                            break;
+                        }
+                        isApplicable = true;
                     }
-                    isApplicable = true;
                 }
-            }
 
-            if(isApplicable) //Only consider this enemy if there is no cover in between
-            {
-                distance = Vector3.Distance(origin, agent.transform.position);
-                if (distance < minDistance)
+                if (isApplicable) //Only consider this enemy if there is no cover in between
                 {
-                    minDistance = distance;
-                    pc = agent;
+                    distance = Vector3.Distance(origin, agent.transform.position);
+                    if (distance < minDistance)
+                    {
+                        minDistance = distance;
+                        pc = agent;
+                    }
                 }
             }
         }

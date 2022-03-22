@@ -204,6 +204,9 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Called by UI
+    /// </summary>
     public static void EndPlayerTurn()
     {
         AudioManager.ClickButton();
@@ -308,6 +311,7 @@ public class GameManager : MonoBehaviour
             t.teamID = String.Format("{0}", waveCounter);
             t.players = new List<PlayerController>();
             EnemyWave wave = waves[0];
+            waves.Remove(wave);
             Vector2 pt;
             for (int i = 0; i < wave.enemyPrefabs.Length; i++) 
             {
