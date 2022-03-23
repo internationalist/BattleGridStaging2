@@ -12,6 +12,8 @@ public class TurnBasedSystem:MonoBehaviour
         get { return _instance; }
     }
 
+    public Team ActiveTeam { get => activeTeam; set => activeTeam = value; }
+
     void Awake()
     {
         //Debug.Log("TurnBased system awaking");
@@ -25,9 +27,10 @@ public class TurnBasedSystem:MonoBehaviour
     #endregion
 
     public List<Team> teams;
-    public Team activeTeam;
+    
+    private Team activeTeam;
 
-    public Queue<Team> turnQueue;
+    //public Queue<Team> turnQueue;
 
     [SerializeField]
     private bool turnChanging = false;
@@ -42,15 +45,19 @@ public class TurnBasedSystem:MonoBehaviour
         if (activeTeam != null)
         {
             //Add the team whose turn ended back into the turn queue.
-            turnQueue.Enqueue(activeTeam);
+            //turnQueue.Enqueue(activeTeam);
+            teams.Add(activeTeam);
         }
         //Pop the next team in line from the queue.
-        activeTeam = turnQueue.Dequeue();
+        //activeTeam = turnQueue.Dequeue();
+        activeTeam = teams[0];
+        teams.Remove(activeTeam); //POP
+
         //Weird bug that results in empty object being dequeued.
-        if(activeTeam.players.Count == 0)
-        {
-            activeTeam = turnQueue.Dequeue();
-        }
+        //if (activeTeam.players.Count == 0)
+        //{
+        //    activeTeam = turnQueue.Dequeue();
+        //}
         //if team is non-human controlled
         if (activeTeam.aiAgent)
         {
@@ -89,7 +96,7 @@ public class TurnBasedSystem:MonoBehaviour
 
     private void Start()
     {
-        turnQueue = new Queue<Team>();
+        //turnQueue = new Queue<Team>();
         Team t = new Team();
         StartCoroutine(GameManager.I.SpawnNextWave(t));
         teams.Insert(0, t);
@@ -97,7 +104,7 @@ public class TurnBasedSystem:MonoBehaviour
         for(int i = 0; i < teams.Count; i++)
         {
             teams[i].init();
-            turnQueue.Enqueue(teams[i]);
+            //turnQueue.Enqueue(teams[i]);
             /* if team controlled by non-human agent then register them
              * with AI Manager. At this point system only works for one non-human enemy team.
              * First implementation is with AI. Network agent will be added later.
@@ -169,6 +176,7 @@ public class TurnBasedSystem:MonoBehaviour
             team.Remove(pc);
             if(team.isWiped())
             {
+                teams.Remove(team);
                 if(team.aiAgent)
                 {
                     if(GameManager.I.waves != null && GameManager.I.waves.Count > 0)
@@ -203,7 +211,7 @@ public class TurnBasedSystem:MonoBehaviour
         Team t = new Team();
         StartCoroutine(GameManager.I.SpawnNextWave(t));
         t.init();
-        turnQueue.Enqueue(t);
+        teams.Add(t);
         AIManager.Init(t);
         foreach (PlayerController pc in t.players)
         {
