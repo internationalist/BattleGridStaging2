@@ -27,6 +27,7 @@ public class TurnBasedSystem:MonoBehaviour
     #endregion
 
     public List<Team> teams;
+    private List<Team> teamTurnQueue;
     
     private Team activeTeam;
 
@@ -45,13 +46,12 @@ public class TurnBasedSystem:MonoBehaviour
         if (activeTeam != null)
         {
             //Add the team whose turn ended back into the turn queue.
-            //turnQueue.Enqueue(activeTeam);
-            teams.Add(activeTeam);
+            teamTurnQueue.Add(activeTeam); //Enqueue
         }
         //Pop the next team in line from the queue.
         //activeTeam = turnQueue.Dequeue();
-        activeTeam = teams[0];
-        teams.Remove(activeTeam); //POP
+        activeTeam = teamTurnQueue[0];
+        teamTurnQueue.Remove(activeTeam); //POP
 
         //Weird bug that results in empty object being dequeued.
         //if (activeTeam.players.Count == 0)
@@ -96,15 +96,15 @@ public class TurnBasedSystem:MonoBehaviour
 
     private void Start()
     {
-        //turnQueue = new Queue<Team>();
+        teamTurnQueue = new List<Team>();
         Team t = new Team();
         StartCoroutine(GameManager.I.SpawnNextWave(t));
         teams.Insert(0, t);
 
-        for(int i = 0; i < teams.Count; i++)
+        for (int i = 0; i < teams.Count; i++)
         {
             teams[i].init();
-            //turnQueue.Enqueue(teams[i]);
+            teamTurnQueue.Add(teams[i]);
             /* if team controlled by non-human agent then register them
              * with AI Manager. At this point system only works for one non-human enemy team.
              * First implementation is with AI. Network agent will be added later.
@@ -177,6 +177,7 @@ public class TurnBasedSystem:MonoBehaviour
             if(team.isWiped())
             {
                 teams.Remove(team);
+                teamTurnQueue.Remove(team);
                 if(team.aiAgent)
                 {
                     if(GameManager.I.waves != null && GameManager.I.waves.Count > 0)
@@ -212,6 +213,7 @@ public class TurnBasedSystem:MonoBehaviour
         StartCoroutine(GameManager.I.SpawnNextWave(t));
         t.init();
         teams.Add(t);
+        teamTurnQueue.Add(t);
         AIManager.Init(t);
         foreach (PlayerController pc in t.players)
         {
