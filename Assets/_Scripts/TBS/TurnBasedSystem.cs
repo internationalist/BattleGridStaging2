@@ -53,12 +53,6 @@ public class TurnBasedSystem:MonoBehaviour
         activeTeam = teamTurnQueue[0];
         teamTurnQueue.Remove(activeTeam); //POP
 
-        //Weird bug that results in empty object being dequeued.
-        //if (activeTeam.players.Count == 0)
-        //{
-        //    activeTeam = turnQueue.Dequeue();
-        //}
-        //if team is non-human controlled
         if (activeTeam.aiAgent)
         {
             AudioManager.BeginEnemyTurn();
