@@ -22,7 +22,7 @@ public class GameManager : MonoBehaviour
             return;
         }
         _instance = this;
-        universalAgent = GetComponent<NavMeshAgent>();
+        UNIVERSAL_AGENT = GetComponent<NavMeshAgent>();
         Cursor.SetCursor(cursorGroup.select, Vector3.zero, CursorMode.Auto);
         regularCoverMaterial = new Dictionary<MeshRenderer, Material>();
     }
@@ -35,7 +35,7 @@ public class GameManager : MonoBehaviour
     public delegate void PlayerSelectAction(PlayerController playerController);
     public static event PlayerSelectAction OnSelected;
 
-    public static NavMeshAgent universalAgent;
+    public static NavMeshAgent UNIVERSAL_AGENT;
 
     public GameObject grenadeMarker;
 
@@ -291,58 +291,6 @@ public class GameManager : MonoBehaviour
             gravity: _instance.gravity,
             throwComplete));
     }
-
-    #endregion
-
-    #region Spawn Management
-
-    public List<EnemyWave> waves;
-    int waveCounter = 0;
-
-    public LineRenderer pathVisualizer;
-    public LineRenderer rangeVisualizer;
-    public IEnumerator SpawnNextWave(Team t)
-    {
-        if(waves != null && waves.Count > 0)
-        {
-            ++waveCounter;
-            t.aiAgent = true;
-            t.name = "AIWave";
-            t.teamID = String.Format("{0}", waveCounter);
-            t.players = new List<PlayerController>();
-            EnemyWave wave = waves[0];
-            waves.Remove(wave);
-            Vector2 pt;
-            for (int i = 0; i < wave.enemyPrefabs.Length; i++) 
-            {
-                pt = UnityEngine.Random.insideUnitCircle * 5f;
-                Vector3 spawnLocation = wave.spawnZoneCenter + new Vector3(pt.x, wave.spawnZoneCenter.y, pt.y);
-                while(!GeneralUtils.InsideNavMesh(spawnLocation, universalAgent)
-                        || GeneralUtils.AreInSameSpot(GameManager.occupancyMap, spawnLocation, 3f))
-                {
-                    pt = UnityEngine.Random.insideUnitCircle * 5f;
-                    spawnLocation = wave.spawnZoneCenter + new Vector3(pt.x, wave.spawnZoneCenter.y, pt.y);
-                }
-                
-                PlayerController enemy = Instantiate(wave.enemyPrefabs[i], 
-                                         spawnLocation, 
-                                         Quaternion.LookRotation(wave.unitLookAt - spawnLocation));
-                
-                enemy.pathVisualizer = pathVisualizer;
-                enemy.rangeVisualizer = rangeVisualizer;
-                enemy.ID = String.Format("EW{0}{1}", waveCounter, i);
-                AudioManager.I.PlayEnemySpawn(enemy.audioSource);
-                GameManager.occupancyMap[enemy.ID] = new Vector2(Mathf.Floor(spawnLocation.x), Mathf.Floor(spawnLocation.z));
-                t.AddPlayer(enemy);
-                yield return new WaitForSeconds(.5f); 
-            }
-        }
-    }
-    
-
-
-
-
 
     #endregion
 }

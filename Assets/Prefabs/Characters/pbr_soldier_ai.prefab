@@ -32529,7 +32529,7 @@ MonoBehaviour:
   isSelected: 0
   playerMetaData:
     hp: 0
-    maxHP: 100
+    maxHP: 20
     maxActionPoints: 10
     distanceToMove: 0
     movementRange: 10
@@ -32573,6 +32573,7 @@ MonoBehaviour:
     dmgMultiplierBg: {fileID: 6149712962909273660}
     dialogPanel: {fileID: 2219148565830143583}
     dialog: {fileID: 8090962355017226925}
+  spawnSound: {fileID: 0}
   currentState: 
   nav: {fileID: 0}
   healthBar: {fileID: 7522753295676614362}

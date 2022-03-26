@@ -67,7 +67,7 @@ public class CoverFramework : MonoBehaviour
         {
             foundXAxisPoints = true;
             Vector3 pos = new Vector3(transform.position.x + xIdx * xInvert, transform.position.y, transform.position.z + maxZ * zInvert);
-            if(GeneralUtils.InsideNavMesh(pos, GameManager.universalAgent))
+            if(GeneralUtils.InsideNavMesh(pos, GameManager.UNIVERSAL_AGENT))
             {
                 #if MARKER
                 Instantiate(shelterMarkerPrefab, pos + Vector3.up * .1f, Quaternion.identity);
@@ -78,7 +78,7 @@ public class CoverFramework : MonoBehaviour
 
             //calculate flank
             Vector3 flankPos = new Vector3(transform.position.x + xIdx * xInvert, transform.position.y, transform.position.z + (maxZ + flankOffset) * zInvert);
-            if (GeneralUtils.InsideNavMesh(flankPos, GameManager.universalAgent))
+            if (GeneralUtils.InsideNavMesh(flankPos, GameManager.UNIVERSAL_AGENT))
             {
                 #if MARKER
                 Instantiate(cornerMarkerPrefab, flankPos + Vector3.up * .1f, Quaternion.identity);
@@ -87,7 +87,7 @@ public class CoverFramework : MonoBehaviour
             }
 
             pos = new Vector3(transform.position.x + xIdx * xInvert, transform.position.y, transform.position.z + minZ * zInvert);
-            if (GeneralUtils.InsideNavMesh(pos, GameManager.universalAgent))
+            if (GeneralUtils.InsideNavMesh(pos, GameManager.UNIVERSAL_AGENT))
             {
                 #if MARKER
                 Instantiate(shelterMarkerPrefab, pos + Vector3.up * .1f, Quaternion.identity);
@@ -96,7 +96,7 @@ public class CoverFramework : MonoBehaviour
             }
 
             flankPos = new Vector3(transform.position.x + xIdx * xInvert, transform.position.y, transform.position.z + (minZ - flankOffset) * zInvert);
-            if (GeneralUtils.InsideNavMesh(flankPos, GameManager.universalAgent))
+            if (GeneralUtils.InsideNavMesh(flankPos, GameManager.UNIVERSAL_AGENT))
             {
                 #if MARKER
                 Instantiate(cornerMarkerPrefab, flankPos + Vector3.up * .1f, Quaternion.identity);
@@ -110,7 +110,7 @@ public class CoverFramework : MonoBehaviour
         {
             foundZAxisPoints = true;
             Vector3 pos = new Vector3(transform.position.x + maxX * xInvert, transform.position.y, transform.position.z + zIdx * zInvert);
-            if (GeneralUtils.InsideNavMesh(pos, GameManager.universalAgent)) {
+            if (GeneralUtils.InsideNavMesh(pos, GameManager.UNIVERSAL_AGENT)) {
                 #if MARKER
                 Instantiate(shelterMarkerPrefab, pos + Vector3.up * .1f, Quaternion.identity);
                 #endif
@@ -118,7 +118,7 @@ public class CoverFramework : MonoBehaviour
             }
 
             Vector3 flankPos = new Vector3(transform.position.x + (maxX + flankOffset) * xInvert, transform.position.y, transform.position.z + zIdx * zInvert);
-            if (GeneralUtils.InsideNavMesh(flankPos, GameManager.universalAgent))
+            if (GeneralUtils.InsideNavMesh(flankPos, GameManager.UNIVERSAL_AGENT))
             {
                 #if MARKER
                 Instantiate(cornerMarkerPrefab, flankPos + Vector3.up * .1f, Quaternion.identity);
@@ -128,7 +128,7 @@ public class CoverFramework : MonoBehaviour
 
 
             pos = new Vector3(transform.position.x + minX * xInvert, transform.position.y, transform.position.z + zIdx * zInvert);
-            if (GeneralUtils.InsideNavMesh(pos, GameManager.universalAgent))
+            if (GeneralUtils.InsideNavMesh(pos, GameManager.UNIVERSAL_AGENT))
             {
                 #if MARKER
                 Instantiate(shelterMarkerPrefab, pos + Vector3.up * .1f, Quaternion.identity);
@@ -137,7 +137,7 @@ public class CoverFramework : MonoBehaviour
             }
 
             flankPos = new Vector3(transform.position.x + (minX - flankOffset) * xInvert, transform.position.y, transform.position.z + zIdx * zInvert);
-            if (GeneralUtils.InsideNavMesh(flankPos, GameManager.universalAgent))
+            if (GeneralUtils.InsideNavMesh(flankPos, GameManager.UNIVERSAL_AGENT))
             {
                 #if MARKER
                 Instantiate(cornerMarkerPrefab, flankPos + Vector3.up * .1f, Quaternion.identity);
@@ -150,7 +150,7 @@ public class CoverFramework : MonoBehaviour
         if(!foundZAxisPoints) //Edge case when the cover is too narrow in a certain axis then generate one cover and flank point in the middle
         {
             Vector3 pos = new Vector3(transform.position.x + minX * xInvert, transform.position.y, center.z);
-            if (GeneralUtils.InsideNavMesh(pos, GameManager.universalAgent))
+            if (GeneralUtils.InsideNavMesh(pos, GameManager.UNIVERSAL_AGENT))
             {
                 #if MARKER
                 Instantiate(shelterMarkerPrefab, pos + Vector3.up * .1f, Quaternion.identity);
@@ -159,7 +159,7 @@ public class CoverFramework : MonoBehaviour
             }
 
             pos = new Vector3(transform.position.x + maxX * xInvert, transform.position.y, center.z);
-            if (GeneralUtils.InsideNavMesh(pos, GameManager.universalAgent))
+            if (GeneralUtils.InsideNavMesh(pos, GameManager.UNIVERSAL_AGENT))
             {
                 #if MARKER
                 Instantiate(shelterMarkerPrefab, pos + Vector3.up * .1f, Quaternion.identity);
@@ -171,7 +171,7 @@ public class CoverFramework : MonoBehaviour
         if (!foundXAxisPoints) //Edge case when the cover is too narrow in a certain axis then generate one cover and flank point in the middle
         {
             Vector3 pos = new Vector3(center.x, transform.position.y, transform.position.z + maxZ * zInvert);
-            if (GeneralUtils.InsideNavMesh(pos, GameManager.universalAgent))
+            if (GeneralUtils.InsideNavMesh(pos, GameManager.UNIVERSAL_AGENT))
             {
                 #if MARKER
                 Instantiate(shelterMarkerPrefab, pos + Vector3.up * .1f, Quaternion.identity);
@@ -180,7 +180,7 @@ public class CoverFramework : MonoBehaviour
             }
 
             pos = new Vector3(center.x, transform.position.y, transform.position.z + minZ * zInvert);
-            if (GeneralUtils.InsideNavMesh(pos, GameManager.universalAgent))
+            if (GeneralUtils.InsideNavMesh(pos, GameManager.UNIVERSAL_AGENT))
             {
                 #if MARKER
                 Instantiate(shelterMarkerPrefab, pos + Vector3.up * .1f, Quaternion.identity);
