@@ -36,6 +36,10 @@ public class TurnBasedSystem:MonoBehaviour
     private bool turnChanging = false;
 
     bool readyForNextTurn=true;
+
+    [Range(0, 1)]
+    public float aiFirstTurnProbability;
+
     #endregion
 
     #region events and delegates
@@ -107,13 +111,20 @@ public class TurnBasedSystem:MonoBehaviour
         teamTurnQueue = new List<Team>();
         Team t = new Team(); 
         StartCoroutine(SpawnNextWave(t));
-        teams.Insert(0, t); //Add team to 0th position of team list.
+        if(Random.value <= aiFirstTurnProbability)
+        {
+            teams.Insert(0, t); //Add team to 0th position of team list.
+        } else
+        {
+            teams.Add(t);
+        }
+        
 
         for (int i = 0; i < teams.Count; i++)
         {
-            if(!teams[i].aiAgent) { //Only for human player
+            teamTurnQueue.Add(teams[i]);
+            if (!teams[i].aiAgent) { //Only for human player
                 teams[i].init();
-                teamTurnQueue.Add(teams[i]);
                 //Subscribe to the death event of each player.
                 foreach (PlayerController pc in teams[i].players)
                 {
@@ -214,6 +225,7 @@ public class TurnBasedSystem:MonoBehaviour
         Team t = new Team();
         StartCoroutine(SpawnNextWave(t));
         teams.Add(t); //Add team to team list.
+        teamTurnQueue.Add(t); //Add team to command queue.
         /*        foreach (PlayerController pc in t.players)
                 {
                     pc.OnDeath += CharacterDied;
@@ -282,7 +294,6 @@ public class TurnBasedSystem:MonoBehaviour
             */
             AIManager.Init(t);
             t.init();
-            teamTurnQueue.Add(t); //Add team to command queue.
             readyForNextTurn = true; //Turns can proceed.
         }
     }
