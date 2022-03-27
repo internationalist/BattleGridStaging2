@@ -29,7 +29,7 @@ public class PlayerController : MonoBehaviour
     private Command defaultCommand;
 
 
-    public int ID;
+    public string ID;
     public string teamID;
 
 
@@ -66,9 +66,8 @@ public class PlayerController : MonoBehaviour
 
     public InfoPanel infoPanel;
 
+    public AudioClip spawnSound;
 
-
-    
     private Command currentCommand;
 
     public Command getCurrentCommand() { return currentCommand;}
@@ -111,11 +110,11 @@ public class PlayerController : MonoBehaviour
 
     public event DamageSustained OnDamage;
 
-    public delegate void CharacterDead(int id);
+    public delegate void CharacterDead(string id);
 
     public event CharacterDead OnDeath;
 
-    public delegate void TurnOver(int id);
+    public delegate void TurnOver(string id);
 
     public event TurnOver OnTurnEnd;
 

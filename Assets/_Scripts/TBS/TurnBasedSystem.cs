@@ -12,6 +12,8 @@ public class TurnBasedSystem:MonoBehaviour
         get { return _instance; }
     }
 
+    public Team ActiveTeam { get => activeTeam; set => activeTeam = value; }
+
     void Awake()
     {
         //Debug.Log("TurnBased system awaking");
@@ -24,13 +26,31 @@ public class TurnBasedSystem:MonoBehaviour
     }
     #endregion
 
+    #region state
     public List<Team> teams;
-    public Team activeTeam;
-
-    public Queue<Team> turnQueue;
+    private List<Team> teamTurnQueue;
+    
+    private Team activeTeam;
 
     [SerializeField]
     private bool turnChanging = false;
+
+    bool readyForNextTurn=true;
+
+    [Range(0, 1)]
+    public float aiFirstTurnProbability;
+
+    #endregion
+
+    #region events and delegates
+    public delegate bool ReadyForNextTurn();
+
+    bool ReadyForNextTurnImpl()
+    {
+        return readyForNextTurn;
+    }
+    #endregion
+
 
     /// <summary>
     /// Coroutine that starts a new turn.
@@ -39,19 +59,18 @@ public class TurnBasedSystem:MonoBehaviour
     public IEnumerator NextTurn()
     {
         turnChanging = true;
+        yield return new WaitUntil(()=> { return readyForNextTurn; });
+
         if (activeTeam != null)
         {
             //Add the team whose turn ended back into the turn queue.
-            turnQueue.Enqueue(activeTeam);
+            teamTurnQueue.Add(activeTeam); //Enqueue
         }
         //Pop the next team in line from the queue.
-        activeTeam = turnQueue.Dequeue();
-        //Weird bug that results in empty object being dequeued.
-        if(activeTeam.players.Count == 0)
-        {
-            activeTeam = turnQueue.Dequeue();
-        }
-        //if team is non-human controlled
+        //activeTeam = turnQueue.Dequeue();
+        activeTeam = teamTurnQueue[0];
+        teamTurnQueue.Remove(activeTeam); //POP
+
         if (activeTeam.aiAgent)
         {
             AudioManager.BeginEnemyTurn();
@@ -82,34 +101,38 @@ public class TurnBasedSystem:MonoBehaviour
         turnChanging = false;
     }
 
-    public void CharacterDied(int ID)
+    public void CharacterDied(string ID)
     {
         RemoveFromTeam(ID);
     }
 
     private void Start()
     {
-        turnQueue = new Queue<Team>();
-
-        for(int i = 0; i < teams.Count; i++)
+        teamTurnQueue = new List<Team>();
+        Team t = new Team(); 
+        StartCoroutine(SpawnNextWave(t));
+        if(Random.value <= aiFirstTurnProbability)
         {
-            teams[i].init();
-            turnQueue.Enqueue(teams[i]);
-            /* if team controlled by non-human agent then register them
-             * with AI Manager. At this point system only works for one non-human enemy team.
-             * First implementation is with AI. Network agent will be added later.
-            */
-            if (teams[i].aiAgent) 
-            {
-                AIManager.Init(teams[i]);
-            }
-            //Subscribe to the death event of each player.
-            foreach (PlayerController pc in teams[i].players)
-            {
-                pc.OnDeath += CharacterDied;
-                if(!teams[i].aiAgent) //Listen for turn end event only for human player
+            teams.Insert(0, t); //Add team to 0th position of team list.
+        } else
+        {
+            teams.Add(t);
+        }
+        
+
+        for (int i = 0; i < teams.Count; i++)
+        {
+            teamTurnQueue.Add(teams[i]);
+            if (!teams[i].aiAgent) { //Only for human player
+                teams[i].init();
+                //Subscribe to the death event of each player.
+                foreach (PlayerController pc in teams[i].players)
                 {
-                    pc.OnTurnEnd += OnTurnEnd;
+                    if (!teams[i].aiAgent) //Listen for turn end event only for human player
+                    {
+                        pc.OnDeath += CharacterDied;
+                        pc.OnTurnEnd += OnTurnEnd;
+                    }
                 }
             }
         }
@@ -132,7 +155,7 @@ public class TurnBasedSystem:MonoBehaviour
     /// Turn end event only for human controlled team
     /// </summary>
     /// <param name="id"></param>
-    public void OnTurnEnd(int id)
+    public void OnTurnEnd(string id)
     {
         bool teamTurnActive = false;
         foreach (PlayerController pc in activeTeam.players)
@@ -146,7 +169,7 @@ public class TurnBasedSystem:MonoBehaviour
         activeTeam.isTurnActive = teamTurnActive;
     }
 
-    private void RemoveFromTeam(int ID)
+    private void RemoveFromTeam(string ID)
     {
         Team team = null;
         PlayerController pc = null;
@@ -159,7 +182,6 @@ public class TurnBasedSystem:MonoBehaviour
                 break;
             } catch(System.Exception exc)
             {
-                //Debug.Log(exc.StackTrace);
             }
         }
         if(pc != null)
@@ -167,14 +189,24 @@ public class TurnBasedSystem:MonoBehaviour
             team.Remove(pc);
             if(team.isWiped())
             {
-                //End the game here
-                GameManager.I.levelComplete = true;
+                teams.Remove(team);
+                teamTurnQueue.Remove(team);
                 if(team.aiAgent)
                 {
-                    UIManager.ActivateStageClearMessage();
+                    if(waves != null && waves.Count > 0)
+                    {
+                        InitalizeNewWave();
+                    }
+                    else
+                    {
+                        //End the game here
+                        HandleGameOver(team);
+                    }
+
                 } else
                 {
-                    UIManager.ActivategameOverMessage();
+                    //End the game here
+                    HandleGameOver(team);
                 }
             }
             if (!pc.isAgent) //dead character is player controlled
@@ -188,6 +220,82 @@ public class TurnBasedSystem:MonoBehaviour
         }
     }
 
+    private void InitalizeNewWave()
+    {
+        Team t = new Team();
+        StartCoroutine(SpawnNextWave(t));
+        teams.Add(t); //Add team to team list.
+        teamTurnQueue.Add(t); //Add team to command queue.
+        /*        foreach (PlayerController pc in t.players)
+                {
+                    pc.OnDeath += CharacterDied;
+                }*/
+    }
 
+    private static void HandleGameOver(Team team)
+    {
+        GameManager.I.levelComplete = true;
+        if (team.aiAgent)
+        {
+            UIManager.ActivateStageClearMessage();
+        }
+        else
+        {
+            UIManager.ActivategameOverMessage();
+        }
+    }
 
+    #region Enemy wave spawn
+    public List<EnemyWave> waves;
+    int waveCounter = 0;
+
+    public LineRenderer pathVisualizer;
+    public LineRenderer rangeVisualizer;
+    public IEnumerator SpawnNextWave(Team t)
+    {
+        if (waves != null && waves.Count > 0)
+        {
+            readyForNextTurn = false; //Stop the turns from running till wave is initialized
+            ++waveCounter;
+            t.aiAgent = true;
+            t.name = "AIWave";
+            t.teamID = string.Format("{0}", waveCounter);
+            t.players = new List<PlayerController>();
+            EnemyWave wave = waves[0];
+            waves.Remove(wave);
+            Vector2 pt;
+            for (int i = 0; i < wave.enemyPrefabs.Length; i++)
+            {
+                pt = UnityEngine.Random.insideUnitCircle * 5f;
+                Vector3 spawnLocation = wave.spawnZoneCenter + new Vector3(pt.x, wave.spawnZoneCenter.y, pt.y);
+                while (!GeneralUtils.InsideNavMesh(spawnLocation, GameManager.UNIVERSAL_AGENT)
+                        || GeneralUtils.AreInSameSpot(GameManager.occupancyMap, spawnLocation, 3f))
+                {
+                    pt = UnityEngine.Random.insideUnitCircle * 5f;
+                    spawnLocation = wave.spawnZoneCenter + new Vector3(pt.x, wave.spawnZoneCenter.y, pt.y);
+                }
+
+                PlayerController enemy = Instantiate(wave.enemyPrefabs[i],
+                                         spawnLocation,
+                                         Quaternion.LookRotation(wave.unitLookAt - spawnLocation));
+
+                enemy.pathVisualizer = pathVisualizer;
+                enemy.rangeVisualizer = rangeVisualizer;
+                enemy.ID = string.Format("EW{0}{1}", waveCounter, i);
+                enemy.OnDeath += CharacterDied;
+                AudioManager.I.PlayEnemySpawn(enemy.audioSource);
+                GameManager.occupancyMap[enemy.ID] = new Vector2(Mathf.Floor(spawnLocation.x), Mathf.Floor(spawnLocation.z));
+                t.AddPlayer(enemy);
+                yield return new WaitForSeconds(.5f);
+            }
+            /* Register them with AI Manager.
+             * At this point system only works for one non-human enemy team.
+             * First implementation is with AI. Network agent will be added later.
+            */
+            AIManager.Init(t);
+            t.init();
+            readyForNextTurn = true; //Turns can proceed.
+        }
+    }
+    #endregion
 }

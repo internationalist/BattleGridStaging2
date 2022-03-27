@@ -56,11 +56,11 @@ public class UICamera : MonoBehaviour
             previewSubject = defaultPreview;
         }
     }
-    GameObject getObjectByID(int objectID)
+    GameObject getObjectByID(string objectID)
     {
         foreach(IDModelMap modelMap in modelMapList)
         {
-            if(modelMap.objectID == objectID)
+            if(modelMap.objectID.Equals(objectID))
             {
                 return modelMap.model;
             }

@@ -9,7 +9,7 @@ public class Team
     public bool aiAgent;
     public string name;
     public string teamID;
-    public Dictionary<int, PlayerController> memberMap = new Dictionary<int, PlayerController>();
+    public Dictionary<string, PlayerController> memberMap = new Dictionary<string, PlayerController>();
 
     public void init()
     {
@@ -31,5 +31,10 @@ public class Team
     public bool isWiped()
     {
         return players.Count == 0;
+    }
+
+    public void AddPlayer(PlayerController pc)
+    {
+        players.Add(pc);
     }
 }

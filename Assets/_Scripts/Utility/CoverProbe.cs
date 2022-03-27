@@ -6,7 +6,7 @@ public class CoverProbe : MonoBehaviour
 {
     PlayerController hostPlayer;
 
-    private void Start()
+    private void Awake()
     {
         hostPlayer = GetComponentInParent<PlayerController>();
     }

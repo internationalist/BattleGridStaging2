@@ -395,17 +395,15 @@ public static class GeneralUtils {
     #region Resolving unique location and checking if spot occupied
     public static Vector3 GetUniqueLocation(PlayerController controller, Vector3 location)
     {
-      Dictionary<int, Vector2> occupancyMap = GameManager.occupancyMap;
+      Dictionary<string, Vector2> occupancyMap = GameManager.occupancyMap;
       float originalDistance = Vector3.Distance(controller.transform.position, location);
       Vector2 newLocation = new Vector2(Mathf.Floor(location.x), Mathf.Floor(location.z));
-      //Debug.LogFormat("GetUniqueLocation::{0} getting unique location with {1}", controller.name, newLocation);
       //PrintDictionary(occupancyMap);
       int infiniteLoopCounter = 0;
       int maxLoops = 1000;
       float newDistance = originalDistance;
         bool logtest = newDistance < originalDistance;
-        //Debug.LogFormat("Location is inside occupancy map {0}, it is inside nav mesh {1}, new distance is less than original distance {2}",
-        //                 occupancyMap.ContainsValue(newLocation), InsideNavMesh(location, controller.nav), logtest);
+
       while (occupancyMap.ContainsValue(newLocation) || !InsideNavMesh(location, controller.nav)
             || newDistance < originalDistance)
       {
@@ -427,18 +425,17 @@ public static class GeneralUtils {
 
     public static bool IsSpotOccupied(Vector3 position)
     {
-        //Vector2 location = new Vector2(Mathf.Floor(position.x), Mathf.Floor(position.z));
-
-        //return GameManager.occupancyMap.ContainsValue(location);
-        return AreInSameSpot(GameManager.occupancyMap, position);
+        return AreInSameSpot(GameManager.occupancyMap, position, 1f);
     }
 
-    private static bool AreInSameSpot(Dictionary<int, Vector2> occupancyMap, Vector3 position)
+    public static bool AreInSameSpot(Dictionary<string, Vector2> occupancyMap,
+                                     Vector3 position,
+                                     float displacement)
     {
         Vector2 position2d = new Vector2(position.x, position.z);
-        foreach(KeyValuePair<int, Vector2> entry in occupancyMap)
+        foreach(KeyValuePair<string, Vector2> entry in occupancyMap)
         {
-            if(Vector2.Distance(entry.Value, position2d) < 1f)
+            if(Vector2.Distance(entry.Value, position2d) < displacement)
             {
                 return true;
             }
@@ -446,19 +443,15 @@ public static class GeneralUtils {
         return false;
     }
 
-    public static bool IsSpotOccupied(Vector3 position, int ID, out bool selfOccupied)
+    public static bool IsSpotOccupied(Vector3 position, string ID, out bool selfOccupied)
     {
         selfOccupied = false;
-        //PrintDictionary(GameManager.occupancyMap);
         Vector2 location = new Vector2(Mathf.Floor(position.x), Mathf.Floor(position.z));
 
-        //bool isOccupied = GameManager.occupancyMap.ContainsValue(location);
-        bool isOccupied = AreInSameSpot(GameManager.occupancyMap, position);
-        //Debug.LogFormat("Character ID is {0}, location is {1} isOccupied is {2}", ID, location, isOccupied);
+        bool isOccupied = AreInSameSpot(GameManager.occupancyMap, position, 1f);
 
         if (isOccupied)
         {
-            //Debug.LogFormat("Checking for occupancy using {0}", ID);
             Vector2 locationForId = Vector2.zero;
             GameManager.occupancyMap.TryGetValue(ID, out locationForId);
 
@@ -574,34 +567,39 @@ public static class GeneralUtils {
 
         foreach (PlayerController agent in team.players)
         {
-            bool isApplicable = false;
-            //first check if there is no cover in between
-            CoverFramework[] covers = CheckCoversBetweenPoints(origin, agent.transform.position);
-            isApplicable = (covers == null || covers.Length == 0);
-            if(!isApplicable)
+            if(agent != null)
             {
-                for (int i =0; i < covers.Length; i++)
+                bool isApplicable = false;
+                //first check if there is no cover in between
+                CoverFramework[] covers = CheckCoversBetweenPoints(origin, agent.transform.position);
+                isApplicable = (covers == null || covers.Length == 0);
+                if (!isApplicable)
                 {
-                    if(covers[i] != null && (player.cover != null
-                        && covers[i].name.Equals(player.cover.name)))
+                    for (int i = 0; i < covers.Length; i++)
                     {
-                        isApplicable = false;
-                        break;
-                    } else if(covers[i] != null && covers[i].coverType.Equals(CoverFramework.TYPE.full)) {
-                        isApplicable = false;
-                        break;
+                        if (covers[i] != null && (player.cover != null
+                            && covers[i].name.Equals(player.cover.name)))
+                        {
+                            isApplicable = false;
+                            break;
+                        }
+                        else if (covers[i] != null && covers[i].coverType.Equals(CoverFramework.TYPE.full))
+                        {
+                            isApplicable = false;
+                            break;
+                        }
+                        isApplicable = true;
                     }
-                    isApplicable = true;
                 }
-            }
 
-            if(isApplicable) //Only consider this enemy if there is no cover in between
-            {
-                distance = Vector3.Distance(origin, agent.transform.position);
-                if (distance < minDistance)
+                if (isApplicable) //Only consider this enemy if there is no cover in between
                 {
-                    minDistance = distance;
-                    pc = agent;
+                    distance = Vector3.Distance(origin, agent.transform.position);
+                    if (distance < minDistance)
+                    {
+                        minDistance = distance;
+                        pc = agent;
+                    }
                 }
             }
         }

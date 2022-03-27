@@ -113,7 +113,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &2582674874360933913
 Transform:
@@ -140,6 +140,10 @@ PrefabInstance:
     - target: {fileID: 100000, guid: be105541990f4024e9c2894259635e36, type: 3}
       propertyPath: m_Name
       value: Greeble01_07 (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: be105541990f4024e9c2894259635e36, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: be105541990f4024e9c2894259635e36, type: 3}
       propertyPath: m_RootOrder
@@ -251,6 +255,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Scifi_Walls_05
       objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 668dbb44b9cfd44948f7944f5e938edd, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 668dbb44b9cfd44948f7944f5e938edd, type: 3}
 --- !u!4 &2191628836176073746 stripped
@@ -268,6 +276,10 @@ PrefabInstance:
     - target: {fileID: 100000, guid: be105541990f4024e9c2894259635e36, type: 3}
       propertyPath: m_Name
       value: Greeble01_07
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: be105541990f4024e9c2894259635e36, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: be105541990f4024e9c2894259635e36, type: 3}
       propertyPath: m_RootOrder
@@ -334,6 +346,10 @@ PrefabInstance:
     - target: {fileID: 100000, guid: ca43ae01e83964c4ea44876901878ecf, type: 3}
       propertyPath: m_Name
       value: Greeble03_02
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: ca43ae01e83964c4ea44876901878ecf, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: ca43ae01e83964c4ea44876901878ecf, type: 3}
       propertyPath: m_RootOrder

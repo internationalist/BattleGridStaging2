@@ -33,7 +33,7 @@ public class AudioManager : MonoBehaviour
     public AudioClip _showUI;
     public AudioClip _playerTurn;
     public AudioClip _enemyTurn;
-
+    public AudioClip _enemySpawn;
 
     public List<AudioClip> footsteps;
     public int footStepsNoRepeatRange;
@@ -53,6 +53,11 @@ public class AudioManager : MonoBehaviour
     {
         I._mainAudio.clip = I._click;
         I._mainAudio.Play();
+    }
+
+    public void PlayEnemySpawn(AudioSource auSrc)
+    {
+        auSrc.PlayOneShot(_enemySpawn);
     }
 
     public static void NoMoreAP()

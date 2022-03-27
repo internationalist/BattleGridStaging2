@@ -7,7 +7,7 @@ public class DockPoint
 {
     public Vector3 position;
     public bool isOccupied;
-    public int controllerID;
+    public string controllerID;
 
     private DockPoint(Vector3 location)
     {

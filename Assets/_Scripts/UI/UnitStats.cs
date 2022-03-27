@@ -7,7 +7,7 @@ public class UnitStats : MonoBehaviour
 {
     public RectTransform statsPanel;
     public Transform hostUnit;
-    public Camera cam;
+    Camera cam;
     // Start is called before the first frame update
     void Start()
     {
@@ -16,6 +16,7 @@ public class UnitStats : MonoBehaviour
         {
             UIManager.I.OnActionCamChange += ActionCamChange;
         }
+        cam = Camera.main;
     }
 
     // Update is called once per frame

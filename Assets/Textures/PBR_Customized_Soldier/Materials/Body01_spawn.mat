@@ -7,20 +7,21 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Body01
-  m_Shader: {fileID: 4800000, guid: 371dee73dabc89140878360402049bfc, type: 3}
-  m_ShaderKeywords: _EMISSION _FRESNELHIGHLIGHTS_ON _METALLICGLOSSMAP _METALLICSPECGLOSSMAP
-    _MK_ALBEDO_MAP _MK_ARTISTIC_PROJECTION_SCREEN_SPACE _MK_DETAIL_BLEND_MIX _MK_EMISSION
-    _MK_ENVIRONMENT_REFLECTIONS_AMBIENT _MK_FRESNEL_HIGHLIGHTS _MK_LIGHT_CEL _MK_NORMAL_MAP
-    _MK_OCCLUSION_MAP _MK_OUTLINE_HULL_CLIP _MK_PBS_MAP_0 _MK_RECEIVE_SHADOWS _MK_SPECULAR_ISOTROPIC
-    _MK_WRAPPED_DIFFUSE _NORMALMAP _OCCLUSIONMAP _RECEIVESHADOWS_ON _WRAPPEDLIGHTING_ON
+  m_Name: Body01_spawn
+  m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
+  m_ShaderKeywords: _ALPHAPREMULTIPLY_ON _EMISSION _FRESNELHIGHLIGHTS_ON _METALLICGLOSSMAP
+    _METALLICSPECGLOSSMAP _MK_ALBEDO_MAP _MK_ARTISTIC_PROJECTION_SCREEN_SPACE _MK_DETAIL_BLEND_MIX
+    _MK_EMISSION _MK_ENVIRONMENT_REFLECTIONS_AMBIENT _MK_FRESNEL_HIGHLIGHTS _MK_LIGHT_CEL
+    _MK_NORMAL_MAP _MK_OCCLUSION_MAP _MK_OUTLINE_HULL_CLIP _MK_PBS_MAP_0 _MK_RECEIVE_SHADOWS
+    _MK_SPECULAR_ISOTROPIC _MK_WRAPPED_DIFFUSE _NORMALMAP _OCCLUSIONMAP _RECEIVESHADOWS_ON
+    _WRAPPEDLIGHTING_ON
   m_LightmapFlags: 2
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 2000
+  m_CustomRenderQueue: 3000
   stringTagMap:
     IGNOREPROJECTOR: False
-    RenderType: Opaque
+    RenderType: Transparent
   disabledShaderPasses: []
   m_SavedProperties:
     serializedVersion: 3
@@ -216,7 +217,7 @@ Material:
     - _DrawnClampMax: 1
     - _DrawnClampMin: 0
     - _DrawnMapScale: 1
-    - _DstBlend: 0
+    - _DstBlend: 10
     - _EnvironmentReflections: 1
     - _FresnelHighlights: 1
     - _GlossMapScale: 1
@@ -240,7 +241,7 @@ Material:
     - _LightTransmissionSmoothness: 0.5
     - _LightTransmissionThresholdOffset: 0.25
     - _Metallic: 0
-    - _Mode: 0
+    - _Mode: 3
     - _NormalMapIntensity: 1
     - _OcclusionMapIntensity: 1
     - _OcclusionStrength: 1
@@ -291,7 +292,7 @@ Material:
     - _WorkflowMode: 1
     - _WrappedLighting: 1
     - _ZTest: 4
-    - _ZWrite: 1
+    - _ZWrite: 0
     m_Colors:
     - _AlbedoColor: {r: 1, g: 1, b: 1, a: 1}
     - _BaseColor: {r: 0.6415094, g: 0.6415094, b: 0.6415094, a: 1}

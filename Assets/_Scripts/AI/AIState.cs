@@ -69,7 +69,7 @@ public class AIState
         if (occupiedDockPoint != null)
         {
             occupiedDockPoint.isOccupied = false;
-            occupiedDockPoint.controllerID = -1;
+            occupiedDockPoint.controllerID = "-1";
         }
     }
 

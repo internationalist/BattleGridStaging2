@@ -22,7 +22,7 @@ public class GameManager : MonoBehaviour
             return;
         }
         _instance = this;
-        universalAgent = GetComponent<NavMeshAgent>();
+        UNIVERSAL_AGENT = GetComponent<NavMeshAgent>();
         Cursor.SetCursor(cursorGroup.select, Vector3.zero, CursorMode.Auto);
         regularCoverMaterial = new Dictionary<MeshRenderer, Material>();
     }
@@ -35,7 +35,7 @@ public class GameManager : MonoBehaviour
     public delegate void PlayerSelectAction(PlayerController playerController);
     public static event PlayerSelectAction OnSelected;
 
-    public static NavMeshAgent universalAgent;
+    public static NavMeshAgent UNIVERSAL_AGENT;
 
     public GameObject grenadeMarker;
 
@@ -43,7 +43,7 @@ public class GameManager : MonoBehaviour
 
     public float gravity;
 
-    public static Dictionary<int, Vector2> occupancyMap = new Dictionary<int, Vector2>();
+    public static Dictionary<string, Vector2> occupancyMap = new Dictionary<string, Vector2>();
 
     private static GameObject transparentCover;
     public Material transparentCoverMaterial;
@@ -115,6 +115,7 @@ public class GameManager : MonoBehaviour
         FadeCover();
     }
 
+    #region cover fading
     private void FadeCover()
     {
         RaycastHit hit;
@@ -176,46 +177,6 @@ public class GameManager : MonoBehaviour
         transparentCover = coverObject;
     }
 
-    /* private void FadeCover()
-     {
-         RaycastHit hit;
-         if (GeneralUtils.MousePointerOverCover(out hit))
-         {
-             //Debug.LogFormat("Mouse hove over cover {0}", hit.collider.gameObject.name);
-             GameObject coverObject = hit.collider.gameObject;
-             if (transparentCover != null)
-             {
-                 if (!transparentCover.name.Equals(coverObject.name))
-                 {
-                     GetRenderer(transparentCover).material = regularCoverMaterial;
-                     MeshRenderer mr = GetRenderer(coverObject);
-                     regularCoverMaterial = mr.material;
-                     mr.material = transparentCoverMaterial;
-                     StartCoroutine(GeneralUtils.Fade(transparentCoverMaterial));
-                     transparentCover = coverObject;
-                 }
-             }
-             else
-             {
-                 MeshRenderer mr = GetRenderer(coverObject);
-                 regularCoverMaterial = mr.material;
-                 mr.material = transparentCoverMaterial;
-                 StartCoroutine(GeneralUtils.Fade(transparentCoverMaterial));
-                 transparentCover = coverObject;
-             }
-         }
-         else
-         {
-             if (transparentCover != null)
-             {
-                 GetRenderer(transparentCover).material = regularCoverMaterial;
-                 Color c = transparentCoverMaterial.color;
-                 c.a = 1;
-                 transparentCoverMaterial.color = c;
-                 transparentCover = null;
-             }
-         }
-     }*/
 
     private static MeshRenderer[] GetRenderer(GameObject coverObject)
     {
@@ -227,8 +188,8 @@ public class GameManager : MonoBehaviour
 
         return mr;
     }
+    #endregion
 
-    //UI event handlers.
     #region UI Handlers
     public static void AssignCommandFromUI(int slot)
     {
@@ -243,6 +204,9 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Called by UI
+    /// </summary>
     public static void EndPlayerTurn()
     {
         AudioManager.ClickButton();
