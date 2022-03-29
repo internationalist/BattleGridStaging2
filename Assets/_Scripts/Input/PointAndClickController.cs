@@ -48,13 +48,19 @@ public class PointAndClickController : MonoBehaviour
     {
         RaycastHit hit = new RaycastHit();
 
+        Debug.LogFormat("Current Player:{0}", GameManager._currentPlayer);
+        if(GameManager._currentPlayer != null)
+        {
+            Debug.LogFormat("Current Command:{0}", GameManager._currentPlayer.getCurrentCommand());
+        }
         if (GeneralUtils.MousePointerOnGroundAndCharacters(out hit))
         {
             if ("Friendly".Equals(hit.transform.gameObject.tag))
             {
                 if(GameManager.playerSelected 
                     && Command.type.buff
-                        .Equals(GameManager._currentPlayer.getCurrentCommand().commandType))
+                        .Equals(GameManager._currentPlayer.getCurrentCommand().commandType)
+                        && !GameManager._currentPlayer.getCurrentCommand().isActivated)
                 {
                     GameManager.ActivateCommand(hit.transform, hit.point);
                 } else
@@ -63,12 +69,14 @@ public class PointAndClickController : MonoBehaviour
                 }
             }
             else if (GameManager.playerSelected && "Ground".Equals(hit.transform.gameObject.tag) &&
-                    !GameManager._currentPlayer.isAgent)
+                    !GameManager._currentPlayer.isAgent
+                    && !GameManager._currentPlayer.getCurrentCommand().isActivated)
             {
                 //Move command.
                 GameManager.ActivateCommand(null, GameManager._currentPlayer.playerMetaData.moveLocation);
             }
-            else if (GameManager.playerSelected && "Enemy".Equals(hit.transform.gameObject.tag))
+            else if (GameManager.playerSelected && "Enemy".Equals(hit.transform.gameObject.tag)
+                && !GameManager._currentPlayer.getCurrentCommand().isActivated)
             {
                 GameManager.ActivateCommand(hit.transform, hit.point);
             } else
