@@ -27,7 +27,10 @@ public class HealGunFSM : Command
         RaycastHit hit = new RaycastHit();
         MovementData movementData = (MovementData)actionData;
 
-        if (!playerController.isAgent && !EventSystem.current.IsPointerOverGameObject() && GeneralUtils.MousePointerOnGroundAndCharacters(out hit))
+        if (!playerController.isAgent
+            && !EventSystem.current.IsPointerOverGameObject()
+            && GeneralUtils.MousePointerOnGroundAndCharacters(out hit)
+            && !this.complete)
         {
             if (TAG.Equals(hit.transform.gameObject.tag))
             {
