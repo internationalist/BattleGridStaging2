@@ -285,7 +285,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   statsPanel: {fileID: 0}
   hostUnit: {fileID: 4363349666906251910}
-  cam: {fileID: 0}
 --- !u!225 &34870670126447401
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -2110,7 +2109,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4869245992455386751}
-  m_Layer: 16
+  - component: {fileID: 5006588506102969327}
+  - component: {fileID: 134287458015551117}
+  m_Layer: 17
   m_Name: ball_r
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2132,6 +2133,32 @@ Transform:
   m_Father: {fileID: 8564299678694417262}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!135 &5006588506102969327
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1100991415079809904}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.1
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &134287458015551117
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1100991415079809904}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8cfbd225a6734a8459f90b6156b373ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pc: {fileID: 4363349666906251906}
 --- !u!1 &1180051350623409142
 GameObject:
   m_ObjectHideFlags: 0
@@ -11703,6 +11730,7 @@ MonoBehaviour:
     dmgMultiplierBg: {fileID: 3626369696121413002}
     dialogPanel: {fileID: 8773188554244435433}
     dialog: {fileID: 1676324472581306651}
+  spawnSound: {fileID: 0}
   currentState: 
   nav: {fileID: 0}
   healthBar: {fileID: 1111666861577635180}
@@ -41523,7 +41551,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3474000912017776770}
-  m_Layer: 16
+  - component: {fileID: 6049202914245648088}
+  - component: {fileID: 1240053537812085391}
+  m_Layer: 17
   m_Name: ball_l
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -41545,6 +41575,32 @@ Transform:
   m_Father: {fileID: 1130434643815406664}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6049202914245648088
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8918870760504013188}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8cfbd225a6734a8459f90b6156b373ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pc: {fileID: 4363349666906251906}
+--- !u!135 &1240053537812085391
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8918870760504013188}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &8931677756060313533
 GameObject:
   m_ObjectHideFlags: 0
