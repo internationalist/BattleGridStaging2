@@ -11,7 +11,6 @@ public class PointAndClickController : MonoBehaviour
     {
         if (PCInputManager.Instance.MouseClick() && !EventSystem.current.IsPointerOverGameObject())
         {
-            //if(!TurnBasedSystem.I.activeTeam.aiAgent && !GameManager.I.readOnly)
             if (!TurnBasedSystem.I.ActiveTeam.aiAgent)
             {
                 Clicked();
@@ -48,11 +47,6 @@ public class PointAndClickController : MonoBehaviour
     {
         RaycastHit hit = new RaycastHit();
 
-        Debug.LogFormat("Current Player:{0}", GameManager._currentPlayer);
-        if(GameManager._currentPlayer != null)
-        {
-            Debug.LogFormat("Current Command:{0}", GameManager._currentPlayer.getCurrentCommand());
-        }
         if (GeneralUtils.MousePointerOnGroundAndCharacters(out hit))
         {
             if ("Friendly".Equals(hit.transform.gameObject.tag))
@@ -62,9 +56,11 @@ public class PointAndClickController : MonoBehaviour
                         .Equals(GameManager._currentPlayer.getCurrentCommand().commandType)
                         && !GameManager._currentPlayer.getCurrentCommand().isActivated)
                 {
+                    //Buff/Heal friendly player
                     GameManager.ActivateCommand(hit.transform, hit.point);
                 } else
                 {
+                    //Select player
                     GameManager.SelectPlayer(hit.transform.gameObject.GetComponent<PlayerController>());
                 }
             }
@@ -78,15 +74,17 @@ public class PointAndClickController : MonoBehaviour
             else if (GameManager.playerSelected && "Enemy".Equals(hit.transform.gameObject.tag)
                 && !GameManager._currentPlayer.getCurrentCommand().isActivated)
             {
+                //Attack command.
                 GameManager.ActivateCommand(hit.transform, hit.point);
             } else
             {
+                //Select player
                 GameManager.SelectPlayer(null);
             }
-        } else
+        }/* else
         {
             GameManager.SelectPlayer(null);
-        }
+        }*/
     }
 
     void RightClicked()

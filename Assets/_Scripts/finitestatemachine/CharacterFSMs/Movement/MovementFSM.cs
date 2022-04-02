@@ -158,7 +158,6 @@ public class MovementFSM : Command
         if (playerController.playerMetaData.WithinRange())
         {
             return this.commandDataInstance.CanRun();
-            //return playerController.playerMetaData.CanMove();
         }
         else
         {
