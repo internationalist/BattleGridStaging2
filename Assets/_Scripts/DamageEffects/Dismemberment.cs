@@ -37,7 +37,9 @@ public class Dismemberment : MonoBehaviour
             decimate = false;
             //Determine number of parts to decimate. This can be between configurable boundaries.
             int tornParts = Random.Range(minParts, maxParts);
-            Destroy(rigParts[4].GetComponent<CharacterJoint>());
+            Destroy(rigParts[1].GetComponent<CharacterJoint>());
+            Destroy(rigParts[3].GetComponent<CharacterJoint>());
+            Destroy(rigParts[0].GetComponent<CharacterJoint>());
             int totalParts = rigParts.Count;
             anim.enabled = false;
             torsoBloodSplatter.SetActive(true);
