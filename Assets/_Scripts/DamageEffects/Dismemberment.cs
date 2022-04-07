@@ -47,6 +47,8 @@ public class Dismemberment : MonoBehaviour
                 ParticleSystem blood = rigParts[tornPartIdx].GetComponentInChildren<ParticleSystem>();
                 if(blood != null)
                 {
+                    var main = blood.main;
+                    main.loop = true;
                     blood.Play();
                 }
                 Destroy(rigParts[tornPartIdx].GetComponent<CharacterJoint>());
