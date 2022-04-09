@@ -10,7 +10,10 @@ public class TurnForMoveState : BaseState
     private Command.InternalState nextState;
     float startTime;
     float rotationDuration = 2f;
-    Quaternion rotation;
+    float turnSpeed = 2f;
+    Quaternion toRotation;
+    Quaternion fromRotation;
+    float timeCount;
 
     public TurnForMoveState(Dir turnDir)
     {
@@ -28,7 +31,9 @@ public class TurnForMoveState : BaseState
         Debug.Log("Entering turn state");
         startTime = Time.time;
         Command command = (Command)player;
-        rotation = Quaternion.LookRotation(command.targetDirection);
+        toRotation = Quaternion.LookRotation(command.targetDirection);
+        fromRotation = command.playerTransform.rotation;
+        timeCount = 0;
         pc = command.playerController;
         switch (turnDir)
         {
@@ -51,26 +56,29 @@ public class TurnForMoveState : BaseState
         float currentTime = Time.time;
         Command command = (Command)player;
 
-        float duration = (currentTime - startTime)/rotationDuration;
+        //float duration = (currentTime - startTime)/rotationDuration;
+        timeCount += Time.deltaTime * turnSpeed;
+        Debug.LogFormat("timecount is {0}", timeCount);
 
-        if(command.playerTransform.rotation == rotation)
+        if (timeCount >= 1)
         {
+            command.playerTransform.rotation = toRotation;
             command.anim.ResetTrigger("Turn_Left");
             command.anim.ResetTrigger("Turn_Right");
             player.TransitionToState(player.StateMap[nextState.ToString()]);
         } else
         {
-            command.playerTransform.rotation = Quaternion.Lerp(command.playerTransform.rotation, rotation, duration);
+            command.playerTransform.rotation = Quaternion.Slerp(fromRotation, toRotation, timeCount);
         }
         
         //Debug.LogFormat("Angle left is {0}", angleLeft);
 
-        if (duration >= 1)
+        /* (timeCount >= 1)
         {
             command.anim.ResetTrigger("Turn_Left");
             command.anim.ResetTrigger("Turn_Right");
             player.TransitionToState(player.StateMap[nextState.ToString()]);
-        }
+        }*/
     }
 
     private void Rotate(BaseFSMController player)
