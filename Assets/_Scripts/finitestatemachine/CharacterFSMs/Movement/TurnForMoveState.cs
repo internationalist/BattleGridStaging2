@@ -9,7 +9,6 @@ public class TurnForMoveState : BaseState
     public Dir turnDir;
     private Command.InternalState nextState;
     float startTime;
-    float rotationDuration = 2f;
     float turnSpeed = 2f;
     Quaternion toRotation;
     Quaternion fromRotation;
@@ -60,7 +59,7 @@ public class TurnForMoveState : BaseState
         timeCount += Time.deltaTime * turnSpeed;
         Debug.LogFormat("timecount is {0}", timeCount);
 
-        if (timeCount >= 1)
+        if (timeCount >= .8f)
         {
             command.playerTransform.rotation = toRotation;
             command.anim.ResetTrigger("Turn_Left");
@@ -68,7 +67,7 @@ public class TurnForMoveState : BaseState
             player.TransitionToState(player.StateMap[nextState.ToString()]);
         } else
         {
-            command.playerTransform.rotation = Quaternion.Slerp(fromRotation, toRotation, timeCount);
+            command.playerTransform.rotation = Quaternion.Slerp(command.playerTransform.rotation, toRotation, timeCount);
         }
         
         //Debug.LogFormat("Angle left is {0}", angleLeft);

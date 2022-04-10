@@ -11319,6 +11319,18 @@ PrefabInstance:
       propertyPath: m_ConnectedAnchor.z
       value: -0.00000009685756
       objectReference: {fileID: 0}
+    - target: {fileID: 3928834599248783047, guid: 7e5e37aadd8b0f54e95a4e35ef81b84f, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.9893995
+      objectReference: {fileID: 0}
+    - target: {fileID: 3928834599248783047, guid: 7e5e37aadd8b0f54e95a4e35ef81b84f, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.14521961
+      objectReference: {fileID: 0}
+    - target: {fileID: 3928834599248783047, guid: 7e5e37aadd8b0f54e95a4e35ef81b84f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -16.7
+      objectReference: {fileID: 0}
     - target: {fileID: 4363349666906251906, guid: 7e5e37aadd8b0f54e95a4e35ef81b84f, type: 3}
       propertyPath: ID
       value: P13
