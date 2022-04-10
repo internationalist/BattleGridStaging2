@@ -27,9 +27,12 @@ public class TurnForMoveState : BaseState
     }
     public override void EnterState(BaseFSMController player)
     {
-        Debug.Log("Entering turn state");
         startTime = Time.time;
         Command command = (Command)player;
+        if(command.targetDirection.Equals(Vector3.zero))
+        {
+            command.targetDirection = command.playerTransform.forward;
+        }
         toRotation = Quaternion.LookRotation(command.targetDirection);
         fromRotation = command.playerTransform.rotation;
         timeCount = 0;
@@ -57,7 +60,6 @@ public class TurnForMoveState : BaseState
 
         //float duration = (currentTime - startTime)/rotationDuration;
         timeCount += Time.deltaTime * turnSpeed;
-        Debug.LogFormat("timecount is {0}", timeCount);
 
         if (timeCount >= .8f)
         {
@@ -69,15 +71,6 @@ public class TurnForMoveState : BaseState
         {
             command.playerTransform.rotation = Quaternion.Slerp(command.playerTransform.rotation, toRotation, timeCount);
         }
-        
-        //Debug.LogFormat("Angle left is {0}", angleLeft);
-
-        /* (timeCount >= 1)
-        {
-            command.anim.ResetTrigger("Turn_Left");
-            command.anim.ResetTrigger("Turn_Right");
-            player.TransitionToState(player.StateMap[nextState.ToString()]);
-        }*/
     }
 
     private void Rotate(BaseFSMController player)
