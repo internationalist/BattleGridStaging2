@@ -8,6 +8,11 @@ public class TurnForMoveState : BaseState
     public enum Dir { left, right }
     public Dir turnDir;
     private Command.InternalState nextState;
+    float startTime;
+    float turnSpeed = 2f;
+    Quaternion toRotation;
+    Quaternion fromRotation;
+    float timeCount;
 
     public TurnForMoveState(Dir turnDir)
     {
@@ -22,22 +27,53 @@ public class TurnForMoveState : BaseState
     }
     public override void EnterState(BaseFSMController player)
     {
+        startTime = Time.time;
         Command command = (Command)player;
+        if(command.targetDirection.Equals(Vector3.zero))
+        {
+            command.targetDirection = command.playerTransform.forward;
+        }
+        toRotation = Quaternion.LookRotation(command.targetDirection);
+        fromRotation = command.playerTransform.rotation;
+        timeCount = 0;
         pc = command.playerController;
         switch (turnDir)
         {
             case Dir.left:
                 GeneralUtils.SetAnimationTrigger(command.anim, ("Turn_Left"));
-                //command.anim.SetTrigger("Turn_Left");
                 break;
             case Dir.right:
                 GeneralUtils.SetAnimationTrigger(command.anim, ("Turn_Right"));
-                //command.anim.SetTrigger("Turn_Right");
                 break;
         }
     }
 
     public override void Update(BaseFSMController player)
+    {
+        RotateV2(player);
+    }
+
+    private void RotateV2(BaseFSMController player)
+    {
+        float currentTime = Time.time;
+        Command command = (Command)player;
+
+        //float duration = (currentTime - startTime)/rotationDuration;
+        timeCount += Time.deltaTime * turnSpeed;
+
+        if (timeCount >= .8f)
+        {
+            command.playerTransform.rotation = toRotation;
+            command.anim.ResetTrigger("Turn_Left");
+            command.anim.ResetTrigger("Turn_Right");
+            player.TransitionToState(player.StateMap[nextState.ToString()]);
+        } else
+        {
+            command.playerTransform.rotation = Quaternion.Slerp(command.playerTransform.rotation, toRotation, timeCount);
+        }
+    }
+
+    private void Rotate(BaseFSMController player)
     {
         Command command = (Command)player;
         float distance = Vector3.Distance(command.playerTransform.position, command.Destination.Value);
@@ -48,7 +84,6 @@ public class TurnForMoveState : BaseState
         float singleStep = stepWeight * Time.deltaTime;
         // Rotate the forward vector towards the target direction by one step
         Vector3 newDirection = Vector3.RotateTowards(command.playerTransform.forward, command.targetDirection, singleStep, 0.0f);
-        Debug.DrawRay(command.playerTransform.position, newDirection, Color.red);
 
         command.playerTransform.rotation = Quaternion.LookRotation(newDirection);
 
