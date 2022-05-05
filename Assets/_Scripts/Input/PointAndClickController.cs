@@ -76,11 +76,11 @@ public class PointAndClickController : MonoBehaviour
             {
                 //Attack command.
                 GameManager.ActivateCommand(hit.transform, hit.point);
-            } else
+            } /*else
             {
                 //Select player
                 GameManager.SelectPlayer(null);
-            }
+            }*/
         }/* else
         {
             GameManager.SelectPlayer(null);

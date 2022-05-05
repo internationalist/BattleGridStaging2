@@ -9,7 +9,7 @@ public class TurnForMoveState : BaseState
     public Dir turnDir;
     private Command.InternalState nextState;
     float startTime;
-    float turnSpeed = 2f;
+    float turnSpeed = 4f;
     Quaternion toRotation;
     Quaternion fromRotation;
     float timeCount;

@@ -97,13 +97,11 @@ public class MovementFSM : Command
             if (playerController.playerMetaData.voice.responseOnMove != null && playerController.playerMetaData.voice.responseOnMove.Count > 0)
             {
                 AudioManager.PlayVoice(playerController.playerMetaData.voice.responseOnMove, playerController.audioSource);
-                //int audioIndex = Random.Range(0, playerController.playerMetaData.responseOnMove.Count);
-                //playerController.audioSource.PlayOneShot(playerController.playerMetaData.responseOnMove[audioIndex]);
 
             }
             Destination = destination.Value;
             Destination = GeneralUtils.GetUniqueLocation(playerController, destination.Value);
-            //Debug.LogFormat("{0} Final destination value is {1}", playerController.name, Destination.Value);
+            Debug.LogFormat("{0} Final destination value is {1}", playerController.name, Destination.Value);
             GameManager.occupancyMap[playerController.ID] = new Vector2(Mathf.Floor(Destination.Value.x), Mathf.Floor(Destination.Value.z));
             isActivated = true;
         }
