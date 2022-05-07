@@ -96,6 +96,32 @@ public class NewCameraController : MonoBehaviour
         //GameManager.OnSelected += OnSelect;
     }
 
+    Vector3 GetInputIsometricTranslationDirection()
+    {
+        Vector3 direction = Vector3.zero;
+        //if (Input.GetKey(KeyCode.W) || cameraInputManager.CanCameraPanForward())
+        if (Input.GetKey(KeyCode.W))
+        {
+            direction += Vector3.forward + Vector3.left;
+        }
+        //if (Input.GetKey(KeyCode.S) || cameraInputManager.CanCameraPanBackward())
+        if (Input.GetKey(KeyCode.S))
+        {
+            direction -= Vector3.forward + Vector3.left;
+        }
+        //if (Input.GetKey(KeyCode.A) || cameraInputManager.CanCameraPanLeft())
+        if (Input.GetKey(KeyCode.A))
+        {
+            direction -= Vector3.forward + Vector3.right;
+        }
+        //if (Input.GetKey(KeyCode.D) || cameraInputManager.CanCameraPanRight())
+        if (Input.GetKey(KeyCode.D))
+        {
+            direction += Vector3.forward + Vector3.right;
+        }
+        return direction;
+    }
+
     Vector3 GetInputTranslationDirection()
     {
         Vector3 direction = Vector3.zero;
@@ -203,7 +229,7 @@ public class NewCameraController : MonoBehaviour
 
     private Vector3 GetTranslationFromInput()
     {
-        var translation = GetInputTranslationDirection() * Time.deltaTime;
+        var translation = GetInputIsometricTranslationDirection() * Time.deltaTime;
 
         // Speed up movement when shift key held
         if (IsBoostPressed())
