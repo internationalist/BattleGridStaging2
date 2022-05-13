@@ -183,9 +183,9 @@ public class GameManager : MonoBehaviour
         //MeshRenderer mr = coverObject.GetComponentInChildren<MeshRenderer>();
         //if (mr == null)
         //{
-            MeshRenderer[] mr = coverObject.GetComponent<CoverFramework>().coverRenderer;
+        Debug.LogFormat("Cover object getting renderer {0}", coverObject.transform.parent.name);
+        MeshRenderer[] mr = coverObject.GetComponent<CoverFramework>().coverRenderer;
         //}
-
         return mr;
     }
     #endregion
