@@ -11,7 +11,8 @@ public class BeginState : AIActionState
 
     public override void Update()
     {
-        if(aim._controller.turnActive)
+        //if(aim._controller.turnActive)
+        if (true)
         {
             if(aim._aiState.targets.Count == 0) //All targets have been exhausted. End turn
             {

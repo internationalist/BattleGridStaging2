@@ -36,6 +36,8 @@ public class PlayerMetaData
 
     public Grunts grunts;
 
+    [Header("This switch will turn on or off command limits")]
+    public bool commandLimit;
 
     //public float ApNeeded { get => apNeeded; set => apNeeded = value; }
     //public float Ap { get => ap; set => ap = value; }
@@ -84,17 +86,35 @@ public class PlayerMetaData
 
     public bool CanAttack()
     {
-        return maxAttackCount - AttackCount > 0;
+        if (commandLimit)
+        {
+            return maxAttackCount - AttackCount > 0;
+        } else
+        {
+            return true;
+        }
     }
 
     public bool CanReload()
     {
-        return maxReloadCommands - reloadCommandsGiven > 0;
+        if (commandLimit)
+        {
+            return maxReloadCommands - reloadCommandsGiven > 0;
+        } else
+        {
+            return true;
+        }
     }
 
     public bool CanMove()
     {
-        return maxMoveCount - MoveCount > 0;
+        if (commandLimit)
+        {
+            return maxMoveCount - MoveCount > 0;
+        } else
+        {
+            return true;
+        }
     }
 
     public bool CanRunCommand()

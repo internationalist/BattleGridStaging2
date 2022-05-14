@@ -51,9 +51,11 @@ public class GameManager : MonoBehaviour
     public CursorGroup cursorGroup;
     [Range(0,1)]
     public float actionCamChance;
-    //public bool readOnly;
 
     public bool levelComplete;
+
+    [Header("This is a very important control and is used to turn on or off realtime combat!")]
+    public bool realTimeCombat;
 
     #endregion
 
