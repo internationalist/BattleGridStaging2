@@ -193,7 +193,7 @@ public class GameManager : MonoBehaviour
         //MeshRenderer mr = coverObject.GetComponentInChildren<MeshRenderer>();
         //if (mr == null)
         //{
-        Debug.LogFormat("Cover object getting renderer {0}", coverObject.transform.parent.name);
+        //Debug.LogFormat("Cover object getting renderer {0}", coverObject.transform.parent.name);
         MeshRenderer[] mr = coverObject.GetComponent<CoverFramework>().coverRenderer;
         //}
         return mr;
@@ -225,32 +225,38 @@ public class GameManager : MonoBehaviour
 
     public static Command AssignCommand(int slot)
     {
-        if (_currentPlayer != null)
+        return AssignCommand(_currentPlayer, slot);
+    }
+
+    public static Command AssignCommand(PlayerController player, int slot)
+    {
+        if (player != null)
         {
-            if (_currentPlayer.getCurrentCommand() != null)
+            if (player.getCurrentCommand() != null)
             {
-                return SwapCommand(slot);
+                return SwapCommand(player, slot);
             }
             else
             {
-                _currentPlayer.setCurrentCommand(_currentPlayer.commands[slot]);
-                return _currentPlayer.commands[slot];
+                player.setCurrentCommand(player.commands[slot]);
+                return player.commands[slot];
             }
         }
         return null;
     }
 
-    private static Command SwapCommand(int slot)
+    private static Command SwapCommand(PlayerController player, int slot)
     {
-        if(_currentPlayer != null)
+        if(player != null)
         {
-            Command oldCommand = _currentPlayer.getCurrentCommand();
+            Command oldCommand = player.getCurrentCommand();
             oldCommand.Cancel();
-            _currentPlayer.setCurrentCommand(_currentPlayer.commands[slot]);
-            return _currentPlayer.commands[slot];
+            player.setCurrentCommand(player.commands[slot]);
+            return player.commands[slot];
         }
         return null;
     }
+
     #endregion
 
     #region weapon and movement visualizations
