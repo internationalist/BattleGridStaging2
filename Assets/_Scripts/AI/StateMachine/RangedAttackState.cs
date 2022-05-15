@@ -59,8 +59,8 @@ public class RangedAttackState : AIActionState
             commandStartTimeInSec = -1f;
         }
 
-        if (aim._controller.turnActive && !isRunning)
-        {
+        //if (aim._controller.turnActive && !isRunning)
+        //{
             if(aim._controller.playerMetaData.CanRunCommand())
             {
                 if (Command.type.primaryaction.Equals(aim._aiState.attackType))
@@ -76,7 +76,7 @@ public class RangedAttackState : AIActionState
                 aim.TransitionToState(aim.states["end"]); // End turn
             }
 
-        }
+        //}
     }
 
     protected virtual void NewAILogic()
@@ -323,7 +323,7 @@ public class RangedAttackState : AIActionState
                 GameManager.AssignCommand(GeneralUtils.MOVESLOT);
                 //Debug.LogFormat("{0} AIAttackState:TriggerCommand->Running move command", aim._controller.name);
                 //Debug.Log("TriggerCommand::Running move command");
-                Command cmd = GameManager.ActivateCommand(null, state.moveLocation, () =>
+                Command cmd = GameManager.ActivateCommand(aim._controller, null, state.moveLocation, () =>
                 {
                     //Debug.LogFormat("{0} AIAttackState:TriggerCommand->Command done", aim._controller.name);
                     AIUtils.DirectionAndDistanceToLocation(state, agent);

@@ -102,6 +102,14 @@ public class GameManager : MonoBehaviour
         return InvokeCmd(enemyTransform, destination, cmd);
     }
 
+    public static Command ActivateCommand(PlayerController player, Transform enemyTransform, Vector3? destination, Command.OnCompleteCallback onComplete)
+    {
+        //Evaluate which command is selected and invoke command trigger.
+        Command cmd = player.getCurrentCommand();
+        cmd.onCompleteCallback = onComplete;
+        return InvokeCmd(enemyTransform, destination, cmd);
+    }
+
     private static Command InvokeCmd(Transform enemyTransform, Vector3? destination, Command cmd)
     {
         if (cmd != null)

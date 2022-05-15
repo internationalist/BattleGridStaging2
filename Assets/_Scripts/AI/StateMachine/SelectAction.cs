@@ -11,11 +11,11 @@ public class SelectAction : AIActionState
 
     public override void Update()
     {
-        if (aim._controller.turnActive)
-        {
+        //if (aim._controller.turnActive)
+        //{
             SelectAttack(aim);
             aim.TransitionToState(next);
-        }
+        //}
     }
 
     public static void SelectAttack(AIStateMachine aim)
