@@ -99,6 +99,11 @@ public class RifleAttackState : BaseState
                 command.TransitionToState(command.StateMap[Command.InternalState.idle.ToString()]);
                 command.isActivated = false;
                 command.playerController.OnAnimationComplete -= OnComplete;
+                if (command.onCompleteCallback != null)
+                {
+                    command.onCompleteCallback();
+                    command.onCompleteCallback = null;
+                }
                 command.playerController.StartCoroutine(HideActionCam());
             }
         }

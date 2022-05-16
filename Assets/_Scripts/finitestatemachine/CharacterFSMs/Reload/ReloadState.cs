@@ -55,14 +55,6 @@ public class ReloadState : BaseState
 
     public override void Update(BaseFSMController controller)
     {
-        //Debug.Log("{0}AttackState.Update::Running");
-        if (reloadComplete) {
-            command.anim.ResetTrigger("Reload");
-            command.anim.ResetTrigger("Crouch_Reload");
-            command.isActivated = false;
-            command.playerController.OnAnimationComplete -= OnComplete;
-            command.complete = true;
-        }
     }
 
     public void OnComplete(string name)
@@ -70,7 +62,16 @@ public class ReloadState : BaseState
         if ("reload".Equals(name)) 
         {
             command.playerController.TopUpAmmo();
-            reloadComplete = true;
+            command.anim.ResetTrigger("Reload");
+            command.anim.ResetTrigger("Crouch_Reload");
+            command.isActivated = false;
+            command.playerController.OnAnimationComplete -= OnComplete;
+            if (command.onCompleteCallback != null)
+            {
+                command.onCompleteCallback();
+                command.onCompleteCallback = null;
+            }
+            command.complete = true;
         }
     }
 }
