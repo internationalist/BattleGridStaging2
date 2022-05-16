@@ -101,7 +101,6 @@ public class MovementFSM : Command
             }
             Destination = destination.Value;
             Destination = GeneralUtils.GetUniqueLocation(playerController, destination.Value);
-            Debug.LogFormat("{0} Final destination value is {1}", playerController.name, Destination.Value);
             GameManager.occupancyMap[playerController.ID] = new Vector2(Mathf.Floor(Destination.Value.x), Mathf.Floor(Destination.Value.z));
             isActivated = true;
         }

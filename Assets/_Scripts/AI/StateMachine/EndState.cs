@@ -12,12 +12,12 @@ public class EndState : AIActionState
 
     public override void Update()
     {
-        if(aim._controller.turnActive)
-        {
+        //if(aim._controller.turnActive)
+        //{
             aim._controller.EndTurn();
             aim._aiState.InitForNewTurn();
             aim.TransitionToState(aim.defaultState);
-        } 
+        //} 
     }
 
  

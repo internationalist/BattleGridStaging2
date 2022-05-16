@@ -38,7 +38,7 @@ public class AIManager : MonoBehaviour
 
     private void Update()
     {
-        if (IsTeamTurnActive())
+        if (IsTeamTurnActive()) //Agent turns ending leads to team turn end.
         {
             if (!aiPause && (activeAgent == null || !activeAgent.turnActive))
             {

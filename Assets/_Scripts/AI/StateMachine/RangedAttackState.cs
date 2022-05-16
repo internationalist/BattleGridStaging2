@@ -59,10 +59,11 @@ public class RangedAttackState : AIActionState
             commandStartTimeInSec = -1f;
         }
 
-        if (aim._controller.turnActive && !isRunning)
+        //if (aim._controller.turnActive && !isRunning)
+        if (!isRunning)
         {
-            if(aim._controller.playerMetaData.CanRunCommand())
-            {
+            //if(aim._controller.playerMetaData.CanRunCommand())
+            //{
                 if (Command.type.primaryaction.Equals(aim._aiState.attackType))
                 {
                     NewAILogic();
@@ -71,10 +72,10 @@ public class RangedAttackState : AIActionState
                 {
                     ThrowItem();
                 }
-            } else
-            {
-                aim.TransitionToState(aim.states["end"]); // End turn
-            }
+            //} else
+            //{
+            //    aim.TransitionToState(aim.states["end"]); // End turn
+            //}
 
         }
     }
@@ -320,10 +321,10 @@ public class RangedAttackState : AIActionState
         switch (state.cmdType)
         {
             case Command.type.move:
-                GameManager.AssignCommand(GeneralUtils.MOVESLOT);
+                GameManager.AssignCommand(aim._controller, GeneralUtils.MOVESLOT);
                 //Debug.LogFormat("{0} AIAttackState:TriggerCommand->Running move command", aim._controller.name);
                 //Debug.Log("TriggerCommand::Running move command");
-                Command cmd = GameManager.ActivateCommand(null, state.moveLocation, () =>
+                Command cmd = GameManager.ActivateCommand(aim._controller, null, state.moveLocation, () =>
                 {
                     //Debug.LogFormat("{0} AIAttackState:TriggerCommand->Command done", aim._controller.name);
                     AIUtils.DirectionAndDistanceToLocation(state, agent);
@@ -331,26 +332,26 @@ public class RangedAttackState : AIActionState
                 });
                 break;
             case Command.type.primaryaction:
-                GameManager.AssignCommand(GeneralUtils.ATTACKSLOT);
+                GameManager.AssignCommand(aim._controller, GeneralUtils.ATTACKSLOT);
                 //Debug.Log("TriggerCommand::Running attack command and  setting attack achieved flag to true");
                 state.achievedAttack = true;
-                GameManager.ActivateCommand(state.target.transform, state.target.transform.position, () =>
+                GameManager.ActivateCommand(aim._controller, state.target.transform, state.target.transform.position, () =>
                 {
                     GameManager.I.StartCoroutine(DelayedCommandComplete());
                 });
                 break;
             case Command.type.specialaction:
-                GameManager.AssignCommand(GeneralUtils.ITEMSLOT);
+                GameManager.AssignCommand(aim._controller, GeneralUtils.ITEMSLOT);
                 //Debug.Log("TriggerCommand::Running special attack command and  setting attack achieved flag to true");
                 state.achievedAttack = true;
-                GameManager.ActivateCommand(state.target.transform, state.target.transform.position, () =>
+                GameManager.ActivateCommand(aim._controller, state.target.transform, state.target.transform.position, () =>
                 {
                     GameManager.I.StartCoroutine(DelayedCommandComplete());
                 });
                 break;
             case Command.type.reload:
-                GameManager.AssignCommand(GeneralUtils.RELOADSLOT);
-                GameManager.ActivateCommand(null, null, () =>
+                GameManager.AssignCommand(aim._controller, GeneralUtils.RELOADSLOT);
+                GameManager.ActivateCommand(aim._controller, null, null, () =>
                 {
                     //Debug.LogFormat("{0} AIAttackState:TriggerCommand->Command done", aim._controller.name);
                     isRunning = false;

@@ -674,6 +674,7 @@ MonoBehaviour:
     maxReloadCommands: 1
     voice: {fileID: 11400000, guid: cb575e372dd52e14e8faec6043d96511, type: 2}
     grunts: {fileID: 11400000, guid: 707820041a3b6484184b5bc14bb124ed, type: 2}
+    commandLimit: 0
   _agent: {fileID: 0}
   isAgent: 0
   cover: {fileID: 0}
@@ -700,6 +701,7 @@ MonoBehaviour:
     dmgMultiplierBg: {fileID: 243136361678112895}
     dialogPanel: {fileID: 5245602558680234012}
     dialog: {fileID: 2760494383026433262}
+  spawnSound: {fileID: 0}
   currentState: 
   nav: {fileID: 0}
   healthBar: {fileID: 4495102751913037977}
@@ -737,8 +739,6 @@ MonoBehaviour:
   - {fileID: 1506795742701935615}
   - {fileID: 8630735219185729662}
   decimate: 0
-  minParts: 1
-  maxParts: 3
   torsoBloodSplatter: {fileID: 8644164444149060109}
 --- !u!95 &973063781272057714
 Animator:

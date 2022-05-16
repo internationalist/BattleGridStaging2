@@ -358,7 +358,9 @@ public class PlayerController : MonoBehaviour
         setCurrentCommand(defaultCommand);
         currentCommand.TransitionToState(currentCommand.currentState);
     }
+    #endregion
 
+    #region Turn related
     public void EndTurn()
     {
         turnActive = false;
@@ -377,8 +379,8 @@ public class PlayerController : MonoBehaviour
         }
         turnActive = true;
     }
-
     #endregion
+
 
     #region UI Related
     public void ResetCommand()

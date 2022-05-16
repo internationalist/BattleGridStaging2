@@ -18,8 +18,6 @@ public class RifleAttackState : BaseState
         {
             command.anim.SetTrigger("Single_Shot");
         }
-        
-        attackComplete = false;
         fireCounter = 0;
         command.playerController.OnAnimationComplete += OnComplete;
     }
@@ -45,20 +43,18 @@ public class RifleAttackState : BaseState
         }
     }
 
-    protected bool attackComplete;
     protected RifleAttackFSM command;
     protected int fireCounter;
 
     public override void Update(BaseFSMController controller)
     {
-        if (attackComplete) {
+        /*if (command.complete) {
             command.anim.ResetTrigger("Single_Shot");
             command.TransitionToState(command.StateMap[Command.InternalState.idle.ToString()]);
             command.isActivated = false;
             command.playerController.OnAnimationComplete -= OnComplete;
-            command.complete = true;
             command.playerController.StartCoroutine(HideActionCam());
-        }
+        }*/
     }
 
     public override void ExitState(BaseFSMController controller)
@@ -93,9 +89,22 @@ public class RifleAttackState : BaseState
         {
             ++fireCounter;
             CommandTemplate wt = command.commandTemplate;
+            //Debug.LogFormat("Fire counter is  {0} Max burst fire is {1}", fireCounter, wt.maxBurstFire);
             if (wt.maxBurstFire == fireCounter)
             {
-                attackComplete = true;
+                //Debug.Log("Completing command since fire limit reached");
+                command.complete = true;
+                fireCounter = 0;
+                command.anim.ResetTrigger("Single_Shot");
+                command.TransitionToState(command.StateMap[Command.InternalState.idle.ToString()]);
+                command.isActivated = false;
+                command.playerController.OnAnimationComplete -= OnComplete;
+                if (command.onCompleteCallback != null)
+                {
+                    command.onCompleteCallback();
+                    command.onCompleteCallback = null;
+                }
+                command.playerController.StartCoroutine(HideActionCam());
             }
         }
     }

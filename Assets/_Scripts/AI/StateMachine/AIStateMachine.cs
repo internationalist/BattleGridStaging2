@@ -6,6 +6,34 @@ using UnityEngine;
 public class AIStateMachine : MonoBehaviour
 {
 
+    #region State
+    public Dictionary<string, AIActionState> states;
+
+    public AIActionState attackState;
+
+    public PlayerController _controller;
+
+    protected AIActionState currentState;
+
+    public AIActionState defaultState;
+
+    public AIState _aiState;
+
+    public bool isCommandRunning;
+
+    public RangedAttackState.Agression agressionLevel;
+
+    public List<Factor> decisionMatrix;
+
+    public float postCommandPauseInSecs;
+
+    [Range(0, 1)]
+    public float specialAttackChance;
+    #endregion
+
+
+    #region Unity messages
+
     private void Start()
     {
         states = new Dictionary<string, AIActionState>();
@@ -29,62 +57,36 @@ public class AIStateMachine : MonoBehaviour
         decisionMatrix.Add(new HealthFactor("Health", 1));
     }
 
+    public virtual void Update()
+    {
+        currentState.Update();
+    }
+
+    #endregion
+
+    #region AI State Machine methods
     public void InitState()
     {
         _aiState = new AIState(_controller);
     }
 
 
-    public Dictionary<string, AIActionState> states;
-
-    public AIActionState attackState;
-
-    public PlayerController _controller;
-
-    protected AIActionState currentState;
-
-    public AIActionState defaultState;
-
-    public AIState _aiState;
-
-    public bool isCommandRunning;
-
-    public RangedAttackState.Agression agressionLevel;
-
-    public List<Factor> decisionMatrix;
-
-    public float postCommandPauseInSecs;
-
-    [Range(0,1)]
-    public float specialAttackChance;
-
-    public AIActionState CurrentState
-    {
-        get => currentState;
-        set => currentState = value;
-    }
-
-    public virtual void Update()
-    {
-        currentState.Update();
-    }
-
     public void TransitionToState(AIActionState state)
     {
         currentState = state;
         currentState.EnterState(this);
     }
-    [System.Serializable]
-    public class StateContainer
-    {
-        public StateContainer(string name, AIActionState action)
-        {
-            this.name = name;
-            this.aiActionState = action;
-        }
-        public string name;
-        public AIActionState aiActionState;
-    }
+    /*  [System.Serializable]
+      public class StateContainer
+      {
+          public StateContainer(string name, AIActionState action)
+          {
+              this.name = name;
+              this.aiActionState = action;
+          }
+          public string name;
+          public AIActionState aiActionState;
+      }*/
 
     public void DiscardTargetAndBeginAILoop()
     {
@@ -93,4 +95,5 @@ public class AIStateMachine : MonoBehaviour
         _aiState.weaponTemplate = null;
         TransitionToState(defaultState);
     }
+    #endregion
 }

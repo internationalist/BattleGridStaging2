@@ -13,10 +13,10 @@ public class FindTarget : AIActionState
 
     public override void Update()
     {
-        if (aim._controller.turnActive)
-        {
+        //if (aim._controller.turnActive)
+        //{
             AIUtils.ChooseEnemyV2(aim._aiState, aim._controller, aim.decisionMatrix);
             aim.TransitionToState(next);
-        }
+        //}
     }
 }

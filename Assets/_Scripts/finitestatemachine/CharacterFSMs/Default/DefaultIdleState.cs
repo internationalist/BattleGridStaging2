@@ -89,7 +89,7 @@ public class DefaultIdleState : BaseState
         }
         else
         {
-            if (pc.InCover)
+           /* if (pc.InCover)
             {
                 if (CoverFramework.TYPE.full.Equals(pc.cover.coverType))
                 {
@@ -103,7 +103,7 @@ public class DefaultIdleState : BaseState
             else
             {
                 GeneralUtils.SetAnimationTrigger(command.anim, "Alert_Idle");
-            }
+            }*/
         }
     }
 
