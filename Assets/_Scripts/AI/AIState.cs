@@ -37,7 +37,8 @@ public class AIState
             {
                 foreach (PlayerController pc in t.players)
                 {
-                    if (pc.isAgent)
+                    //if (pc.isAgent)
+                    if(agent.playerMetaData.teamName.Equals(pc.playerMetaData.teamName))
                     {
                         this.friends.Add(pc);
                     }

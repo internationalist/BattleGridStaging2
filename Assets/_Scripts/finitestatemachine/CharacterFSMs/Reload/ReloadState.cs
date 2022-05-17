@@ -38,12 +38,12 @@ public class ReloadState : BaseState
         {
             command.anim.SetTrigger("Reload");
         }
-        float yDisplacement = 2.5f;
+        /*float yDisplacement = 2.5f;
         if(command.playerController.InCover
             && CoverFramework.TYPE.half.Equals(command.playerController.cover.coverType))
         {
             yDisplacement -= .7F;
-        }
+        }*/
         command.playerController.infoPanel.SetDialog("!!Reloading!!");
         command.playerController.StartCoroutine(command.playerController.infoPanel.ShowDialog());
         reloadComplete = false;

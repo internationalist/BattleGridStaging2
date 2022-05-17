@@ -38,6 +38,8 @@ public class PlayerMetaData
 
     [Header("This switch will turn on or off command limits")]
     public bool commandLimit;
+    [Header("Team name")]
+    public string teamName;
 
     //public float ApNeeded { get => apNeeded; set => apNeeded = value; }
     //public float Ap { get => ap; set => ap = value; }

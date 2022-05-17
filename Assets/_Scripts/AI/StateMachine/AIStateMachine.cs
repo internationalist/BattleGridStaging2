@@ -47,7 +47,8 @@ public class AIStateMachine : MonoBehaviour
         states["selectaction"].next = states["start"];
 
         _controller = GetComponent<PlayerController>();
-        InitState();
+        //InitState();
+        TurnBasedSystem.enemySpawnComplete += EnemySpawnCompleteListener;
         defaultState = states["start"];
         currentState = defaultState;
         currentState.EnterState(this);
@@ -70,23 +71,17 @@ public class AIStateMachine : MonoBehaviour
         _aiState = new AIState(_controller);
     }
 
+    public void EnemySpawnCompleteListener(string teamName)
+    {
+        InitState();
+    }
+
 
     public void TransitionToState(AIActionState state)
     {
         currentState = state;
         currentState.EnterState(this);
     }
-    /*  [System.Serializable]
-      public class StateContainer
-      {
-          public StateContainer(string name, AIActionState action)
-          {
-              this.name = name;
-              this.aiActionState = action;
-          }
-          public string name;
-          public AIActionState aiActionState;
-      }*/
 
     public void DiscardTargetAndBeginAILoop()
     {

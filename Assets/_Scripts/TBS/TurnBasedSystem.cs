@@ -43,12 +43,14 @@ public class TurnBasedSystem:MonoBehaviour
     #endregion
 
     #region events and delegates
-    public delegate bool ReadyForNextTurn();
 
     bool ReadyForNextTurnImpl()
     {
         return readyForNextTurn;
     }
+
+    public delegate void EnemySpawnComplete(string teamName);
+    public static event EnemySpawnComplete enemySpawnComplete;
     #endregion
 
 
@@ -279,6 +281,7 @@ public class TurnBasedSystem:MonoBehaviour
                                          spawnLocation,
                                          Quaternion.LookRotation(wave.unitLookAt - spawnLocation));
 
+                enemy.playerMetaData.teamName = t.name;
                 enemy.pathVisualizer = pathVisualizer;
                 enemy.rangeVisualizer = rangeVisualizer;
                 enemy.ID = string.Format("EW{0}{1}", waveCounter, i);
@@ -295,6 +298,10 @@ public class TurnBasedSystem:MonoBehaviour
             AIManager.Init(t);
             t.init();
             readyForNextTurn = true; //Turns can proceed.
+            if(enemySpawnComplete != null)
+            {
+                enemySpawnComplete(t.name);
+            }
         }
     }
     #endregion

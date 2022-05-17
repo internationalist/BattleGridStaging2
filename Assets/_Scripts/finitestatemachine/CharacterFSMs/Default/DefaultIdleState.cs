@@ -29,7 +29,7 @@ public class DefaultIdleState : BaseState
         }
         else if (takeDamage)
         {
-            ResetIdleAnims(cmd);
+            //ResetIdleAnims(cmd);
             if (damageAmt < 40)
             {
                 cmd.TransitionToState(cmd.StateMap[Command.InternalState.lightdamage.ToString()]);
