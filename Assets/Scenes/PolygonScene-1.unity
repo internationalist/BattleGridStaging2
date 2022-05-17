@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0.99999905, b: 0.99999905, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -3461,16 +3461,20 @@ PrefabInstance:
       objectReference: {fileID: 1793320060}
     - target: {fileID: 7488266450533309439, guid: c42b0729f71d76741958c27d3bf91ae6, type: 3}
       propertyPath: playerMetaData.maxHP
-      value: 1000
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 7488266450533309439, guid: c42b0729f71d76741958c27d3bf91ae6, type: 3}
       propertyPath: playerMetaData.teamName
       value: PlayerAI
       objectReference: {fileID: 0}
     - target: {fileID: 7488266450533309439, guid: c42b0729f71d76741958c27d3bf91ae6, type: 3}
+      propertyPath: commandList.Array.data[2].weaponTemplate
+      value: 
+      objectReference: {fileID: 11400000, guid: c5af1bc7b050e6548a37504b1f487e7b, type: 2}
+    - target: {fileID: 7488266450533309439, guid: c42b0729f71d76741958c27d3bf91ae6, type: 3}
       propertyPath: commandList.Array.data[4].weaponTemplate
       value: 
-      objectReference: {fileID: 11400000, guid: 017d7f0c09a24c44aa4faf6314224b4c, type: 2}
+      objectReference: {fileID: 11400000, guid: 523e8e917263dfd45ab6c8afa3d66e54, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c42b0729f71d76741958c27d3bf91ae6, type: 3}
 --- !u!1001 &1379732570
