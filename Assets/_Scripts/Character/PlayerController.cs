@@ -169,6 +169,8 @@ public class PlayerController : MonoBehaviour
 
         if (playerMetaData.Hp <= 0)
         {
+            setCurrentCommand(defaultCommand);
+            currentCommand.TransitionToState(currentCommand.defaultState);
             AudioManager.PlayVoice(playerMetaData.grunts.screams, audioSource);
             StartCoroutine(deathBloodGush());
             isDead = true;
@@ -283,6 +285,13 @@ public class PlayerController : MonoBehaviour
         
         playerMetaData.Initialize();
     }
+
+    private void Start()
+    {
+        OnDeath += TurnBasedSystem.I.CharacterDied;
+    }
+
+
 
     private void OnEnable()
     {

@@ -6,6 +6,7 @@ public abstract class BaseFSMController
 {
 
     public BaseState currentState;
+    public BaseState defaultState;
 
 
     public Dictionary<string, BaseState> StateMap { get => stateMap; set => stateMap = value; }

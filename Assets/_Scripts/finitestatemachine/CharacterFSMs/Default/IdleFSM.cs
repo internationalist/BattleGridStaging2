@@ -8,7 +8,8 @@ public class IdleFSM : Command
     public bool turnToEnemy = false;
     public IdleFSM(Animator anim, NavMeshAgent nav, PlayerController controller, CommandTemplate weaponData) : base(anim, nav, controller, weaponData)
     {
-        currentState = new DefaultIdleState();
+        defaultState = new DefaultIdleState();
+        currentState = defaultState;
         currentState.EnterState(this);
         StateMap.Add(InternalState.idle.ToString(), this.currentState);
         StateMap.Add(InternalState.lightdamage.ToString(), new LightDamageState());

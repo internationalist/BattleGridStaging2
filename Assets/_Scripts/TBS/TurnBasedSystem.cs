@@ -125,18 +125,17 @@ public class TurnBasedSystem:MonoBehaviour
         for (int i = 0; i < teams.Count; i++)
         {
             teamTurnQueue.Add(teams[i]);
-            if (!teams[i].aiAgent) { //Only for human player
+            //if (!teams[i].aiAgent) { //Only for human player
                 teams[i].init();
                 //Subscribe to the death event of each player.
-                foreach (PlayerController pc in teams[i].players)
+              /*  foreach (PlayerController pc in teams[i].players)
                 {
                     if (!teams[i].aiAgent) //Listen for turn end event only for human player
                     {
-                        pc.OnDeath += CharacterDied;
                         pc.OnTurnEnd += OnTurnEnd;
                     }
-                }
-            }
+                }*/
+            //}
         }
         //Start first turn
         StartCoroutine(NextTurn());
@@ -285,7 +284,7 @@ public class TurnBasedSystem:MonoBehaviour
                 enemy.pathVisualizer = pathVisualizer;
                 enemy.rangeVisualizer = rangeVisualizer;
                 enemy.ID = string.Format("EW{0}{1}", waveCounter, i);
-                enemy.OnDeath += CharacterDied;
+                //enemy.OnDeath += CharacterDied;
                 AudioManager.I.PlayEnemySpawn(enemy.audioSource);
                 GameManager.occupancyMap[enemy.ID] = new Vector2(Mathf.Floor(spawnLocation.x), Mathf.Floor(spawnLocation.z));
                 t.AddPlayer(enemy);
