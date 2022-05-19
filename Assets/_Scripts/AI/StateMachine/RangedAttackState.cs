@@ -84,7 +84,7 @@ public class RangedAttackState : AIActionState
     {
         AIUtils.DirectionAndDistanceToTarget(aim._aiState, aim._aiState.agent);
         //Debug.LogFormat("{0} AIAttackState:Update->turn active", aim._controller.name);
-        if (aim._aiState.target == null) //Enemy has already died, start over turn
+        if (aim._aiState.target.isDead || aim._aiState.target == null) //Enemy has already died, start over turn
         {
             aim.TransitionToState(aim.states["start"]);
         } else if(aim._controller.playerMetaData.CanAttack() && !aim._aiState.weaponInstance.isAmmoLeft())

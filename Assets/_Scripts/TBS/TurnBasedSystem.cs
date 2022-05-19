@@ -125,8 +125,13 @@ public class TurnBasedSystem:MonoBehaviour
         for (int i = 0; i < teams.Count; i++)
         {
             teamTurnQueue.Add(teams[i]);
+            if(teams[i].memberMap.Count == 0)
+            {
+                //TODO: temporary testing code will be remove later.
+                teams[i].init(); 
+            }
             //if (!teams[i].aiAgent) { //Only for human player
-                teams[i].init();
+                //teams[i].init();
                 //Subscribe to the death event of each player.
               /*  foreach (PlayerController pc in teams[i].players)
                 {
@@ -295,7 +300,7 @@ public class TurnBasedSystem:MonoBehaviour
              * First implementation is with AI. Network agent will be added later.
             */
             AIManager.Init(t);
-            t.init();
+            //t.init();
             readyForNextTurn = true; //Turns can proceed.
             if(enemySpawnComplete != null)
             {

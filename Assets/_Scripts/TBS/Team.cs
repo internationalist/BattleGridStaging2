@@ -36,5 +36,6 @@ public class Team
     public void AddPlayer(PlayerController pc)
     {
         players.Add(pc);
+        memberMap.Add(pc.ID, pc);
     }
 }

@@ -61,7 +61,6 @@ public class PlayerMetaData
 
     public void IncrementAttackCount()
     {
-        //TODO: We should not maintain two different variables here.
         ++AttackCount;
     }
 

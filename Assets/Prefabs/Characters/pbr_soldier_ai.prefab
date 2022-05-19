@@ -32550,6 +32550,7 @@ MonoBehaviour:
     voice: {fileID: 11400000, guid: ee0a76d5c877771419ac767b27ac6385, type: 2}
     grunts: {fileID: 11400000, guid: 707820041a3b6484184b5bc14bb124ed, type: 2}
     commandLimit: 0
+    teamName: 
   _agent: {fileID: 0}
   isAgent: 0
   cover: {fileID: 0}
@@ -32638,7 +32639,7 @@ MonoBehaviour:
   isCommandRunning: 0
   agressionLevel: 0
   decisionMatrix: []
-  postCommandPauseInSecs: 1
+  postCommandPauseInSecs: 2
   specialAttackChance: 0
 --- !u!114 &7488266450533309437
 MonoBehaviour:
