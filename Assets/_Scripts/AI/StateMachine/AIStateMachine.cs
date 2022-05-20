@@ -49,6 +49,7 @@ public class AIStateMachine : MonoBehaviour
         _controller = GetComponent<PlayerController>();
         //InitState();
         TurnBasedSystem.enemySpawnComplete += EnemySpawnCompleteListener;
+        TurnBasedSystem.broadcastTeamChange += InitState;
         defaultState = states["start"];
         currentState = defaultState;
         currentState.EnterState(this);
