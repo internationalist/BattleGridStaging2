@@ -2,38 +2,33 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AIMachineV2 : MonoBehaviour
+public class AIReload : MonoBehaviour
 {
     public PlayerController enemy;
     PlayerController controller;
     CommandTemplate commandTmpl;
-    bool isRunning;
+    CommandDataInstance commandData;
     Vector3 movementLocation;
     float postCommandPauseInSecs = 1;
-    private float startTime;
-    public float delay;
+    AIBrain aiBrain;
+
     // Start is called before the first frame update
     void Start()
     {
         controller = GetComponent<PlayerController>();
         commandTmpl = controller.GetWeaponTemplateForCommand(GeneralUtils.ATTACKSLOT);
-        startTime = Time.time;
+        commandData = controller.commands[GeneralUtils.ATTACKSLOT].commandDataInstance;
+        aiBrain = GetComponent<AIBrain>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        //if(!isRunning)
-        if(Time.time - startTime > delay)
+        if (!aiBrain.isRunning && enemy != null && !enemy.isDead)
         {
-            startTime = Time.time;
-            var distanceToEnemy = Vector3.Distance(transform.position, enemy.transform.position);
-            if(distanceToEnemy > commandTmpl.damageParameters.optimalRange)
+            if (commandData.ammoCount < commandData.maxBurstFire)
             {
-                var movementDistance = distanceToEnemy - commandTmpl.damageParameters.optimalRange;
-                Vector3 dirOfMovement = (enemy.transform.position - transform.position).normalized;
-                movementLocation = transform.position + dirOfMovement* movementDistance;
-                TriggerCommand(Command.type.move);
+                TriggerCommand(Command.type.reload);
             }
         }
     }
@@ -41,8 +36,7 @@ public class AIMachineV2 : MonoBehaviour
     protected void TriggerCommand(Command.type cmdType)
     {
         //commandStartTimeInSec = Time.realtimeSinceStartup; // We will enforce a timeout on the command due to a vague problem of commands not finishing.
-
-        isRunning = true;
+        aiBrain.isRunning = true;
         switch (cmdType)
         {
             case Command.type.move:
@@ -52,7 +46,7 @@ public class AIMachineV2 : MonoBehaviour
                 Command cmd = GameManager.ActivateCommand(controller, null, movementLocation, () =>
                 {
                     //Debug.LogFormat("{0} AIAttackState:TriggerCommand->Command done", aim._controller.name);
-                    isRunning = false;
+                    aiBrain.isRunning = false;
                 });
                 break;
             case Command.type.primaryaction:
@@ -76,7 +70,7 @@ public class AIMachineV2 : MonoBehaviour
                 GameManager.ActivateCommand(controller, null, null, () =>
                 {
                     //Debug.LogFormat("{0} AIAttackState:TriggerCommand->Command done", aim._controller.name);
-                    isRunning = false;
+                    aiBrain.isRunning = false;
                 });
                 break;
         }
@@ -85,6 +79,6 @@ public class AIMachineV2 : MonoBehaviour
     private IEnumerator DelayedCommandComplete()
     {
         yield return new WaitForSeconds(postCommandPauseInSecs);
-        isRunning = false;
+        aiBrain.isRunning = false;
     }
 }
