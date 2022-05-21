@@ -444,7 +444,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5379860647554218292, guid: 9dd6f0db6066d36459cb50dad03b72fc, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 7
+      value: 17
       objectReference: {fileID: 0}
     - target: {fileID: 5379860647554218292, guid: 9dd6f0db6066d36459cb50dad03b72fc, type: 3}
       propertyPath: m_LocalRotation.w
@@ -3455,6 +3455,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: pbr_soldier_ai
       objectReference: {fileID: 0}
+    - target: {fileID: 7488266450533309383, guid: c42b0729f71d76741958c27d3bf91ae6, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7488266450533309439, guid: c42b0729f71d76741958c27d3bf91ae6, type: 3}
       propertyPath: pathVisualizer
       value: 
@@ -4016,7 +4020,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8701500568258011919, guid: 8f8f1b4fe531feb4599ad909ac23cf0a, type: 3}
       propertyPath: waves.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8701500568258011919, guid: 8f8f1b4fe531feb4599ad909ac23cf0a, type: 3}
       propertyPath: teams.Array.data[0].aiAgent
@@ -4036,7 +4040,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8701500568258011919, guid: 8f8f1b4fe531feb4599ad909ac23cf0a, type: 3}
       propertyPath: waves.Array.data[1].unitLookAt.z
-      value: 15
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8701500568258011919, guid: 8f8f1b4fe531feb4599ad909ac23cf0a, type: 3}
       propertyPath: waves.Array.data[0].spawnZoneCenter.x
@@ -4048,10 +4052,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8701500568258011919, guid: 8f8f1b4fe531feb4599ad909ac23cf0a, type: 3}
       propertyPath: waves.Array.data[1].spawnZoneCenter.x
-      value: 18
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 8701500568258011919, guid: 8f8f1b4fe531feb4599ad909ac23cf0a, type: 3}
       propertyPath: waves.Array.data[1].spawnZoneCenter.z
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 8701500568258011919, guid: 8f8f1b4fe531feb4599ad909ac23cf0a, type: 3}
+      propertyPath: teams.Array.data[0].players.Array.size
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8701500568258011919, guid: 8f8f1b4fe531feb4599ad909ac23cf0a, type: 3}
@@ -4064,7 +4072,7 @@ PrefabInstance:
       objectReference: {fileID: 8303986}
     - target: {fileID: 8701500568258011919, guid: 8f8f1b4fe531feb4599ad909ac23cf0a, type: 3}
       propertyPath: waves.Array.data[0].enemyPrefabs.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8701500568258011919, guid: 8f8f1b4fe531feb4599ad909ac23cf0a, type: 3}
       propertyPath: waves.Array.data[1].enemyPrefabs.Array.size

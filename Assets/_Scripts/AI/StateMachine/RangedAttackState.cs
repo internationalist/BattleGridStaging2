@@ -71,6 +71,9 @@ public class RangedAttackState : AIActionState
                 else if (Command.type.specialaction.Equals(aim._aiState.attackType))
                 {
                     ThrowItem();
+                } else
+                {
+                    aim.TransitionToState(aim.states["start"]);
                 }
             //} else
             //{

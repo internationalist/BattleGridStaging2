@@ -29,6 +29,7 @@ public class AIStateMachine : MonoBehaviour
 
     [Range(0, 1)]
     public float specialAttackChance;
+
     #endregion
 
 
@@ -61,7 +62,10 @@ public class AIStateMachine : MonoBehaviour
 
     public virtual void Update()
     {
-        currentState.Update();
+        if(!GameManager.I.levelComplete)
+        {
+            currentState.Update();
+        }
     }
 
     #endregion

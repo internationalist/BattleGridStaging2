@@ -271,7 +271,7 @@ public class TurnBasedSystem:MonoBehaviour
             readyForNextTurn = false; //Stop the turns from running till wave is initialized
             ++waveCounter;
             t.aiAgent = true;
-            t.name = "AIWave";
+            t.name = string.Format("AIWave{0}", waveCounter);
             t.teamID = string.Format("{0}", waveCounter);
             t.players = new List<PlayerController>();
             EnemyWave wave = waves[0];

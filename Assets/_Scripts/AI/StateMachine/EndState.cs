@@ -14,9 +14,9 @@ public class EndState : AIActionState
     {
         //if(aim._controller.turnActive)
         //{
-            aim._controller.EndTurn();
-            aim._aiState.InitForNewTurn();
-            aim.TransitionToState(aim.defaultState);
+            //aim._controller.EndTurn();
+        aim._aiState.InitForNewTurn();
+        aim.TransitionToState(aim.defaultState);
         //} 
     }
 
