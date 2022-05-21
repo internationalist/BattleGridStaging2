@@ -51,9 +51,6 @@ public class TurnBasedSystem:MonoBehaviour
 
     public delegate void EnemySpawnComplete(string teamName);
     public static event EnemySpawnComplete enemySpawnComplete;
-
-    public delegate void BroadcastTeamChange();
-    public static event BroadcastTeamChange broadcastTeamChange;
     #endregion
 
 
@@ -218,17 +215,13 @@ public class TurnBasedSystem:MonoBehaviour
                     HandleGameOver(team);
                 }
             }
-            /*if (!pc.isAgent) //dead character is player controlled
+            if (!pc.isAgent) //dead character is player controlled
             {
                 foreach (PlayerController aiChar in AIManager.I.currentTeam.players)
                 {
                     aiChar._agent.InitState();
                     aiChar._agent.TransitionToState(aiChar._agent.defaultState);
                 }
-            }*/
-            if(broadcastTeamChange != null)
-            {
-                broadcastTeamChange();
             }
         }
     }

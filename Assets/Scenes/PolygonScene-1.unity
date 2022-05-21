@@ -3403,10 +3403,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 7488266450533309379, guid: c42b0729f71d76741958c27d3bf91ae6, type: 3}
-      propertyPath: specialAttackChance
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7488266450533309382, guid: c42b0729f71d76741958c27d3bf91ae6, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -3469,7 +3465,7 @@ PrefabInstance:
       objectReference: {fileID: 1793320060}
     - target: {fileID: 7488266450533309439, guid: c42b0729f71d76741958c27d3bf91ae6, type: 3}
       propertyPath: playerMetaData.maxHP
-      value: 500
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 7488266450533309439, guid: c42b0729f71d76741958c27d3bf91ae6, type: 3}
       propertyPath: playerMetaData.teamName
