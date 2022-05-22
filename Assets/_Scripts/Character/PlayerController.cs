@@ -174,10 +174,10 @@ public class PlayerController : MonoBehaviour
             AudioManager.PlayVoice(playerMetaData.grunts.screams, audioSource);
             StartCoroutine(deathBloodGush());
             isDead = true;
-            if (OnDeath != null)
+            /*if (OnDeath != null)
             {
                 OnDeath(ID);
-            }
+            }*/
         }
         else
         {
@@ -252,7 +252,7 @@ public class PlayerController : MonoBehaviour
 
     public void Die()
     {
-        isDead = true;
+        //isDead = true;
         Destroy(gameObject);
     }
     #endregion

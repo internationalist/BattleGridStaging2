@@ -26,8 +26,8 @@ public class DeathState : BaseState
         
         if (complete)
         {
-            characterPlayer.playerController.Die();
             characterPlayer.playerController.OnAnimationComplete -= OnComplete;
+            characterPlayer.playerController.Die();
         }
     }
 

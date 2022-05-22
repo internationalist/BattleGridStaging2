@@ -49,8 +49,6 @@ public class GameManager : MonoBehaviour
     public Material transparentCoverMaterial;
     private Dictionary<MeshRenderer, Material> regularCoverMaterial;
     public CursorGroup cursorGroup;
-    [Range(0,1)]
-    public float actionCamChance;
 
     public bool levelComplete;
 

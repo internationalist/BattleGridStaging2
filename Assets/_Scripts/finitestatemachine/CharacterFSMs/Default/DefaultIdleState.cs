@@ -23,7 +23,7 @@ public class DefaultIdleState : BaseState
         IdleFSM cmd = (IdleFSM)controller;
         if (pc.isDead)
         {
-            //Debug.Log("Character is dead moving to death state");
+            Debug.Log("Character is dead moving to death state");
             ResetIdleAnims(cmd);
             cmd.TransitionToState(cmd.StateMap[Command.InternalState.death.ToString()]);
         }

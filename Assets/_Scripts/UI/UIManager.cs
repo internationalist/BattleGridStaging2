@@ -57,7 +57,7 @@ public class UIManager : MonoBehaviour
 
     public WorldScreenUI attackData;
 
-    public Camera actionCam;
+    //public Camera actionCam;
     public CinemachineVirtualCamera cmActionCam;
     public CinemachineVirtualCamera cmGameCam;
 
@@ -232,42 +232,11 @@ public class UIManager : MonoBehaviour
 
     public event ActionCamChange OnActionCamChange;
 
-
-    public static void ShowActionCam()
-    {
-        Time.timeScale = .7f;
-        I.cmActionCam.Priority = CM_MAX_PRIORITY;
-        I.actionCam.gameObject.SetActive(true);
-        if(I.OnActionCamChange != null)
-        {
-            I.OnActionCamChange(false);
-        }
-    }
-
     public static bool ActionCamObstructed(Transform origin)
     {
         bool somethingInTheWay = GeneralUtils.IsActionCamBlocked(origin.position, I.cmActionCam.transform.position);
 
         return somethingInTheWay;
-    }
-
-
-    public static void MoveActioncam(Transform actionCamHook)
-    {
-        I.cmActionCam.transform.position = actionCamHook.position;
-        I.cmActionCam.transform.rotation = actionCamHook.rotation;
-    }
-
-    public static void HideActionCam()
-    {
-        Time.timeScale = 1;
-        I.cmActionCam.Priority = CM_MIN_PRIORITY;
-        I.actionCam.gameObject.SetActive(false);
-        I.fadePanel.gameObject.SetActive(false);
-        if (I.OnActionCamChange != null)
-        {
-            I.OnActionCamChange(true);
-        }
     }
 
     public delegate void OnBlack<T>(T payload);

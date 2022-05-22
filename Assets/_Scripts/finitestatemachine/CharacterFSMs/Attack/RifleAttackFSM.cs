@@ -8,7 +8,6 @@ public class RifleAttackFSM : Command
 {
 
     public Queue<ApplicableDamage> attackAmounts;
-    public bool actionCam;
     PlayerController enemyPC;
     protected string TAG = "Enemy";
 
@@ -157,14 +156,6 @@ public class RifleAttackFSM : Command
                 totalDamage += damageAmt;
             }
             float actionCamRandom = Random.Range(0f, 1f);
-            
-            if (totalDamage >= enemyHp && GameManager.I.actionCamChance > actionCamRandom)
-            {
-                actionCam = true;
-            } else
-            {
-                actionCam = false;
-            }
         }
         else
         {

@@ -8,39 +8,9 @@ public class RifleAttackState : BaseState
     public override void EnterState(BaseFSMController controller)
     {
         command = (RifleAttackFSM)controller;
-        if(command.actionCam)
-        {
-            Transform actionCamHook = command.playerController.actionCamHook;
-            UIManager.MoveActioncam(actionCamHook);
-            TriggerActionCam();
-        }
-        else
-        {
-            command.anim.SetTrigger("Single_Shot");
-        }
+        command.anim.SetTrigger("Single_Shot");
         fireCounter = 0;
         command.playerController.OnAnimationComplete += OnComplete;
-    }
-
-    private void TriggerActionCam()
-    {
-        if (!UIManager.ActionCamObstructed(command.playerController.transform))
-        {
-            command.anim.SetTrigger("Idle");
-            UIManager.FadeToBlack(command.playerController.actionCamHook,
-                (Transform t) =>
-                {//OnBlack
-                    UIManager.ShowActionCam();
-                },
-                (Transform t) =>
-                {//OnComplete
-                    command.anim.SetTrigger("Single_Shot");
-                });
-        }
-        else
-        {
-            command.anim.SetTrigger("Single_Shot");
-        }
     }
 
     protected RifleAttackFSM command;
@@ -62,12 +32,6 @@ public class RifleAttackState : BaseState
         base.ExitState(controller);
     }
 
-    private IEnumerator HideActionCam()
-    {
-        yield return new WaitForSeconds(3f);
-        UIManager.HideActionCam();
-        Time.timeScale = 1;
-    }
 
     /// <summary>
     /// The rifle attack animation is a looping one that auto repeats. In animation loop the OnAnimationComplete event is called.
@@ -104,7 +68,6 @@ public class RifleAttackState : BaseState
                     command.onCompleteCallback();
                     command.onCompleteCallback = null;
                 }
-                command.playerController.StartCoroutine(HideActionCam());
             }
         }
     }
