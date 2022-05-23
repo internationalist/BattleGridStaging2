@@ -23,7 +23,7 @@ public class GameManager : MonoBehaviour
         }
         _instance = this;
         UNIVERSAL_AGENT = GetComponent<NavMeshAgent>();
-        Cursor.SetCursor(cursorGroup.select, Vector3.zero, CursorMode.Auto);
+        //Cursor.SetCursor(cursorGroup.select, Vector3.zero, CursorMode.Auto);
         regularCoverMaterial = new Dictionary<MeshRenderer, Material>();
     }
     #endregion

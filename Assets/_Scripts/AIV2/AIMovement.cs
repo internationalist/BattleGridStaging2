@@ -24,7 +24,11 @@ public class AIMovement : MonoBehaviour
     void Update()
     {
         //if(!isRunning)
-        if(Time.time - startTime > delay && enemy != null && !enemy.isDead)
+        if (Time.time - startTime > delay
+        && controller != null
+        && !controller.isDead
+        && enemy != null
+        && !enemy.isDead)
         {
             startTime = Time.time;
             var distanceToEnemy = Vector3.Distance(transform.position, enemy.transform.position);

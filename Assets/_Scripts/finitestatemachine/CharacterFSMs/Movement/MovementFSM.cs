@@ -52,7 +52,7 @@ public class MovementFSM : Command
                 moveTargePoint.y = playerTransform.position.y;
                 float distanceToMove = Mathf.Round(Vector3.Distance(playerTransform.position, moveTargePoint));
                 playerController.playerMetaData.distanceToMove = distanceToMove;
-                Cursor.SetCursor(GameManager.I.cursorGroup.move, Vector3.zero, CursorMode.Auto);
+                //Cursor.SetCursor(GameManager.I.cursorGroup.move, Vector3.zero, CursorMode.Auto);
             }
         }
     }
@@ -79,7 +79,7 @@ public class MovementFSM : Command
         {
             destinationMarker.SetActive(false);
         }
-        Cursor.SetCursor(GameManager.I.cursorGroup.select, Vector3.zero, CursorMode.Auto);
+        //Cursor.SetCursor(GameManager.I.cursorGroup.select, Vector3.zero, CursorMode.Auto);
     }
 
     protected override void Activated()
@@ -108,7 +108,7 @@ public class MovementFSM : Command
         {
             isActivated = false;
         }
-        Cursor.SetCursor(GameManager.I.cursorGroup.select, Vector3.zero, CursorMode.Auto);
+        //Cursor.SetCursor(GameManager.I.cursorGroup.select, Vector3.zero, CursorMode.Auto);
     }
 
     void OnCollide(bool didCollide, string collidingObjectName)

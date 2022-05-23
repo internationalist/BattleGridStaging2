@@ -39,9 +39,9 @@ public class DeathState : BaseState
 
     public void OnComplete(string name)
     {
-        Debug.Log("DeathState::OnComplete::Character just died");
         if ("death".Equals(name))
         {
+            Debug.Log("DeathState::OnComplete::Character just died");
             complete = true;
         }
     }

@@ -64,7 +64,7 @@ public class RifleAttackFSM : Command
                     destinationMarker.transform.position += destinationMarker.transform.up * .2f;
                     destinationMarker.SetActive(true);
                 }
-                Cursor.SetCursor(GameManager.I.cursorGroup.target, Vector3.zero, CursorMode.Auto);
+                //Cursor.SetCursor(GameManager.I.cursorGroup.target, Vector3.zero, CursorMode.Auto);
                 this.EnemyTransform = hit.transform;
 
                 Vector3 dir = hit.transform.position - playerController.transform.position;
@@ -179,7 +179,7 @@ public class RifleAttackFSM : Command
         {
             destinationMarker.SetActive(false);
         }
-        Cursor.SetCursor(GameManager.I.cursorGroup.select, Vector3.zero, CursorMode.Auto);
+        //Cursor.SetCursor(GameManager.I.cursorGroup.select, Vector3.zero, CursorMode.Auto);
     }
 
     protected override bool Validate(Transform enemyTransform, Vector3? destination)

@@ -20,7 +20,11 @@ public class AIReload : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!aiBrain.isRunning && enemy != null && !enemy.isDead)
+        if (!aiBrain.isRunning
+                && controller != null
+                && !controller.isDead
+                && enemy != null
+                && !enemy.isDead)
         {
             if (commandData.ammoCount < commandData.maxBurstFire)
             {
