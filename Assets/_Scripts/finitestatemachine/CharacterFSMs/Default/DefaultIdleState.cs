@@ -21,7 +21,7 @@ public class DefaultIdleState : BaseState
     public override void Update(BaseFSMController controller)
     {   
         IdleFSM cmd = (IdleFSM)controller;
-        if (pc.isDead)
+        if (pc.IsDead)
         {
             Debug.Log("Character is dead moving to death state");
             ResetIdleAnims(cmd);

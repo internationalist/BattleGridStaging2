@@ -42,7 +42,7 @@ public class PlayerController : MonoBehaviour
     public GameObject destinationMarker;
 
     [SerializeField]
-    public bool isDead = false;
+    private bool isDead = false;
     [SerializeField]
     private bool isSelected = false;
 
@@ -124,6 +124,11 @@ public class PlayerController : MonoBehaviour
 
     public bool InCover { get => inCover; }
 
+    /// <summary>
+    /// Synchronizing on this property so that commands are not run on the object after it is set to be destroyed.
+    /// </summary>
+    public bool IsDead { get { lock (this) { return isDead; } } set { lock (this) { isDead = value; } } }
+
     public void EnableCover(bool inCover, CoverFramework cf = null)
     {
         this.cover = cf;
@@ -173,7 +178,7 @@ public class PlayerController : MonoBehaviour
             currentCommand.TransitionToState(currentCommand.defaultState);
             AudioManager.PlayVoice(playerMetaData.grunts.screams, audioSource);
             StartCoroutine(deathBloodGush());
-            isDead = true;
+            IsDead = true;
             /*if (OnDeath != null)
             {
                 OnDeath(ID);

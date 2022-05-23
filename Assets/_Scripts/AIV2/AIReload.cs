@@ -22,9 +22,9 @@ public class AIReload : MonoBehaviour
     {
         if (!aiBrain.isRunning
                 && controller != null
-                && !controller.isDead
+                && !controller.IsDead
                 && enemy != null
-                && !enemy.isDead)
+                && !enemy.IsDead)
         {
             if (commandData.ammoCount < commandData.maxBurstFire)
             {

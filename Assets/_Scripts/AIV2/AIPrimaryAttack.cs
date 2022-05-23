@@ -24,9 +24,9 @@ public class AIPrimaryAttack : MonoBehaviour
     {
         if(!aiBrain.isRunning
                 && controller != null
-                && !controller.isDead
+                && !controller.IsDead
                 && enemy != null
-                && !enemy.isDead)
+                && !enemy.IsDead)
         {
             var distanceToEnemy = Vector3.Distance(transform.position, enemy.transform.position);
             if(distanceToEnemy <= commandTmpl.damageParameters.optimalRange
