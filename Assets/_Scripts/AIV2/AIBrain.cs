@@ -6,6 +6,7 @@ public class AIBrain : MonoBehaviour
 {
     public bool isRunning;
     float postCommandPauseInSecs = 1;
+    public PlayerController enemy;
 
 
     public void TriggerMoveCommand(PlayerController controller, Vector3 movemenLocation)
@@ -13,9 +14,14 @@ public class AIBrain : MonoBehaviour
         TriggerCommand(Command.type.move, controller, null, movemenLocation);
     }
 
-    public void TriggerPrimaryAttack(PlayerController controller, PlayerController enemy)
+    public void TriggerPrimaryAction(PlayerController controller, PlayerController enemy)
     {
         TriggerCommand(Command.type.primaryaction, controller, enemy, Vector3.zero);
+    }
+
+    public void TriggerSpecialAction(PlayerController controller, PlayerController enemy)
+    {
+        TriggerCommand(Command.type.specialaction, controller, enemy, Vector3.zero);
     }
 
     public void TriggerReload(PlayerController controller)

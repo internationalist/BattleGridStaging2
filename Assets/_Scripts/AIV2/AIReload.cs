@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class AIReload : MonoBehaviour
 {
-    public PlayerController enemy;
     PlayerController controller;
     CommandDataInstance commandData;
     AIBrain aiBrain;
@@ -23,8 +22,8 @@ public class AIReload : MonoBehaviour
         if (!aiBrain.isRunning
                 && controller != null
                 && !controller.IsDead
-                && enemy != null
-                && !enemy.IsDead)
+                && aiBrain.enemy != null
+                && !aiBrain.enemy.IsDead)
         {
             if (commandData.ammoCount < commandData.maxBurstFire)
             {

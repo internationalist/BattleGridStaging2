@@ -53,6 +53,7 @@ public class PlayerController : MonoBehaviour
     public bool isAgent;
 
     [Tooltip("A boolean indicating if this character is in a cover position or not")]
+    [SerializeField]
     private bool inCover;
 
     public CoverFramework cover;

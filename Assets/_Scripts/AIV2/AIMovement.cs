@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class AIMovement : MonoBehaviour
 {
-    public PlayerController enemy;
     PlayerController controller;
     CommandTemplate commandTmpl;
     Vector3 movementLocation;
@@ -23,19 +22,18 @@ public class AIMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //if(!isRunning)
         if (Time.time - startTime > delay
         && controller != null
         && !controller.IsDead
-        && enemy != null
-        && !enemy.IsDead)
+        && aiBrain.enemy != null
+        && !aiBrain.enemy.IsDead)
         {
             startTime = Time.time;
-            var distanceToEnemy = Vector3.Distance(transform.position, enemy.transform.position);
+            var distanceToEnemy = Vector3.Distance(transform.position, aiBrain.enemy.transform.position);
             if(distanceToEnemy > commandTmpl.damageParameters.optimalRange)
             {
                 var movementDistance = distanceToEnemy - commandTmpl.damageParameters.optimalRange;
-                Vector3 dirOfMovement = (enemy.transform.position - transform.position).normalized;
+                Vector3 dirOfMovement = (aiBrain.enemy.transform.position - transform.position).normalized;
                 movementLocation = transform.position + dirOfMovement* movementDistance;
                 aiBrain.TriggerMoveCommand(controller, movementLocation);
             }
