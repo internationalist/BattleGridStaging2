@@ -123,7 +123,10 @@ public class ThrowItemFSM : Command
                 AudioManager.NoMoreAP();
             }
             cancel = true;
+            return false;
         }
+        return true;
+        /*
         else if (playerController.playerMetaData.CanUseItem())
         {
             return true;
@@ -137,6 +140,7 @@ public class ThrowItemFSM : Command
                 AudioManager.NoMoreAP();
             }
         }
-        return false;
+        return false;*/
+
     }
 }
