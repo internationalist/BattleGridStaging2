@@ -315,7 +315,7 @@ public class RangedAttackState : AIActionState
     /// <param name="agent"></param>
     protected void TriggerCommand(AIState state, PlayerController agent)
     {   
-        commandStartTimeInSec = Time.realtimeSinceStartup; // We will enforce a timeout on the command due to a vague problem of commands not finishing.
+/*        commandStartTimeInSec = Time.realtimeSinceStartup; // We will enforce a timeout on the command due to a vague problem of commands not finishing.
 
         isRunning = true;
         switch (state.cmdType)
@@ -357,7 +357,7 @@ public class RangedAttackState : AIActionState
                     isRunning = false;
                 });
                 break;
-        }
+        }*/
     }
 
     private IEnumerator DelayedCommandComplete()

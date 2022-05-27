@@ -38,34 +38,29 @@ public class AIBrain : MonoBehaviour
             switch (cmdType)
             {
                 case Command.type.move:
-                    GameManager.AssignCommand(controller, GeneralUtils.MOVESLOT);
                     //Debug.LogFormat("{0} AIAttackState:TriggerCommand->Running move command", aim._controller.name);
                     //Debug.Log("TriggerCommand::Running move command");
-                    Command cmd = GameManager.ActivateCommand(controller, null, movementLocation, () =>
+                    Command cmd = GameManager.ActivateCommand(controller, GeneralUtils.MOVESLOT, null, movementLocation, () =>
                     {
-                        //Debug.LogFormat("{0} AIAttackState:TriggerCommand->Command done", aim._controller.name);
                         isRunning = false;
                     });
                     break;
                 case Command.type.primaryaction:
-                    GameManager.AssignCommand(controller, GeneralUtils.ATTACKSLOT);
                     //Debug.Log("TriggerCommand::Running attack command and  setting attack achieved flag to true");
-                    GameManager.ActivateCommand(controller, enemy.transform, enemy.transform.position, () =>
+                    GameManager.ActivateCommand(controller, GeneralUtils.ATTACKSLOT, enemy.transform, enemy.transform.position, () =>
                     {
                         GameManager.I.StartCoroutine(DelayedCommandComplete());
                     });
                     break;
                 case Command.type.specialaction:
-                    GameManager.AssignCommand(controller, GeneralUtils.ITEMSLOT);
                     //Debug.Log("TriggerCommand::Running special attack command and  setting attack achieved flag to true");
-                    GameManager.ActivateCommand(controller, enemy.transform, enemy.transform.position, () =>
+                    GameManager.ActivateCommand(controller, GeneralUtils.ITEMSLOT, enemy.transform, enemy.transform.position, () =>
                     {
                         GameManager.I.StartCoroutine(DelayedCommandComplete());
                     });
                     break;
                 case Command.type.reload:
-                    GameManager.AssignCommand(controller, GeneralUtils.RELOADSLOT);
-                    GameManager.ActivateCommand(controller, null, null, () =>
+                    GameManager.ActivateCommand(controller, GeneralUtils.RELOADSLOT, null, null, () =>
                     {
                         isRunning = false;
                     });
