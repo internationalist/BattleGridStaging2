@@ -56,9 +56,11 @@ public class PointAndClickController : MonoBehaviour
                         .Equals(GameManager._currentPlayer.getCurrentCommand().commandType)
                         && !GameManager._currentPlayer.getCurrentCommand().isActivated)
                 {
+                    //TODO implement player controls to heal over here
                     //Buff/Heal friendly player
-                    GameManager.ActivateCommand(hit.transform, hit.point);
-                } else
+                    //GameManager.ActivateCommand(hit.transform, hit.point);
+                }
+                else
                 {
                     //Select player
                     GameManager.SelectPlayer(hit.transform.gameObject.GetComponent<PlayerController>());
@@ -68,14 +70,16 @@ public class PointAndClickController : MonoBehaviour
                     !GameManager._currentPlayer.isAgent
                     && !GameManager._currentPlayer.getCurrentCommand().isActivated)
             {
+                //TODO implement player controls to move over here
                 //Move command.
-                GameManager.ActivateCommand(null, GameManager._currentPlayer.playerMetaData.moveLocation);
+                //GameManager.ActivateCommand(null, GameManager._currentPlayer.playerMetaData.moveLocation);
             }
             else if (GameManager.playerSelected && "Enemy".Equals(hit.transform.gameObject.tag)
                 && !GameManager._currentPlayer.getCurrentCommand().isActivated)
             {
+                //TODO implement player controls to attack over here
                 //Attack command.
-                GameManager.ActivateCommand(hit.transform, hit.point);
+                //GameManager.ActivateCommand(hit.transform, hit.point);
             } /*else
             {
                 //Select player

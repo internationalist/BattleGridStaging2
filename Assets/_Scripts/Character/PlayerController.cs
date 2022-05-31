@@ -70,7 +70,7 @@ public class PlayerController : MonoBehaviour
 
     public AudioClip spawnSound;
 
-    private Queue<Command> commandQueue = new Queue<Command>();
+    private CommandQueue commandQueue = new CommandQueue();
 
     private Command currentCommand;
 
@@ -319,8 +319,18 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        currentState = currentCommand.currentState.GetType().Name;
-        if (currentCommand != null && (isSelected || currentCommand.isActivated))
+        if(currentCommand.Equals(defaultCommand))
+        {//check command queue for content.
+            CommandQueue.CommandQueueElement? queueElementOptional = commandQueue.Dequeue();
+            if(queueElementOptional.HasValue)
+            {
+                CommandQueue.CommandQueueElement element = queueElementOptional.Value;
+                ActivateCommand(element.slot, element.enemyTransform, element.destination, element.onComplete);
+            } else
+            {
+                defaultCommand.Update();
+            }
+        } else if (currentCommand != null && (currentCommand.isActivated))
         {
             currentCommand.Update();
         }
@@ -389,21 +399,37 @@ public class PlayerController : MonoBehaviour
         currentCommand.TransitionToState(defaultCommand.defaultState);
     }
 
-    public void AddToCommandQueue(int slot)
+    [MethodImpl(MethodImplOptions.Synchronized)]
+    public void AddToCommandQueue(int slot,
+                                    Transform enemyTransform,
+                                    Vector3? destination,
+                                    Command.OnCompleteCallback onComplete)
     {
-        if(currentCommand.commandType == Command.type.move)
+        if((currentCommand.commandType == Command.type.move
+            || currentCommand.commandType == Command.type.idle)
+            && slot == GeneralUtils.MOVESLOT)//if current and requested commanmd is of move type. Immediately execute new move command.
         {
+            ActivateCommand(slot, enemyTransform, destination, onComplete);
+        } else if(slot == GeneralUtils.MOVESLOT)
+        {
+            CommandQueue.CommandQueueElement commandQueueElement  = new CommandQueue.CommandQueueElement(slot,
+                                        enemyTransform,
+                                        destination,
+                                        onComplete);
 
-        }
-        Command cmd = commands[slot];
-        if(cmd == commands[GeneralUtils.MOVESLOT] && !commandQueue.Contains(cmd))
-        {
-            commandQueue.Enqueue(cmd);
+            commandQueue.Replace(commandQueueElement);
         } else
         {
-            Debug.LogFormat("Command already added {0}", cmd.commandType);
+            CommandQueue.CommandQueueElement commandQueueElement = new CommandQueue.CommandQueueElement(slot,
+                                        enemyTransform,
+                                        destination,
+                                        onComplete);
+
+            if (!currentCommand.Equals(commands[slot]) && !commandQueue.Contains(commandQueueElement))
+            {
+                commandQueue.Enqueue(commandQueueElement);
+            }
         }
-        
     }
 
     public Command ActivateCommand(
@@ -413,8 +439,7 @@ public class PlayerController : MonoBehaviour
                                     Command.OnCompleteCallback onComplete)
     {
         //Evaluate which command is selected and invoke command trigger.
-        AssignCommand(slot);
-        Command cmd = getCurrentCommand();
+        Command cmd = AssignCommand(slot);
         cmd.onCompleteCallback = onComplete;
         return InvokeCmd(enemyTransform, destination, cmd);
     }
@@ -428,7 +453,7 @@ public class PlayerController : MonoBehaviour
         return cmd;
     }
 
-    public Command AssignCommand(int slot)
+    private Command AssignCommand(int slot)
     {
 
         if (getCurrentCommand() != null)
@@ -438,7 +463,7 @@ public class PlayerController : MonoBehaviour
         else
         {
             setCurrentCommand(commands[slot]);
-            return commands[slot];
+            return getCurrentCommand();
         }
     }
 

@@ -84,7 +84,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public static Command ActivateCommand(Transform enemyTransform, Vector3? destination)
+   /* public static Command ActivateCommand(Transform enemyTransform, Vector3? destination)
     {
         //Debug.LogFormat("GameManager::{0}->Command is {1} and target point is {2}", _currentPlayer.name, _currentPlayer.CurrentCommand, destination);
         //Evaluate which command is selected and invoke command trigger.
@@ -112,7 +112,7 @@ public class GameManager : MonoBehaviour
             cmd.StartCommand(enemyTransform, destination);
         }
         return cmd;
-    }
+    }*/
     #endregion
 
     private void Update()
@@ -196,7 +196,7 @@ public class GameManager : MonoBehaviour
     #endregion
 
     #region UI Handlers
-    public static void AssignCommandFromUI(int slot)
+   /* public static void AssignCommandFromUI(int slot)
     {
         if(_currentPlayer.turnActive)
         {
@@ -207,7 +207,7 @@ public class GameManager : MonoBehaviour
                 ActivateCommand(null, Vector3.zero);
             }
         }
-    }
+    }*/
 
     /// <summary>
     /// Called by UI
@@ -218,7 +218,7 @@ public class GameManager : MonoBehaviour
         _currentPlayer.EndTurn();
     }
 
-    public static Command AssignCommand(int slot)
+/*    public static Command AssignCommand(int slot)
     {
         return AssignCommand(_currentPlayer, slot);
     }
@@ -250,7 +250,7 @@ public class GameManager : MonoBehaviour
             return player.getCurrentCommand();
         }
         return null;
-    }
+    }*/
 
     #endregion
 
