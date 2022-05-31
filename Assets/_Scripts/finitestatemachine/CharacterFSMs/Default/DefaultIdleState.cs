@@ -25,7 +25,10 @@ public class DefaultIdleState : BaseState
         {
             Debug.Log("Character is dead moving to death state");
             ResetIdleAnims(cmd);
-            cmd.TransitionToState(cmd.StateMap[Command.InternalState.death.ToString()]);
+            if(!(cmd.currentState is DeathState))
+            {
+                cmd.TransitionToState(cmd.StateMap[Command.InternalState.death.ToString()]);
+            }
         }
         else if (takeDamage)
         {

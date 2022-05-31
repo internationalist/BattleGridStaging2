@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
 using Cinemachine;
+using System.Runtime.CompilerServices;
 
 [RequireComponent(typeof(NavMeshAgent))]
 [RequireComponent(typeof(Animator))]
@@ -69,6 +70,8 @@ public class PlayerController : MonoBehaviour
 
     public AudioClip spawnSound;
 
+    private Queue<Command> commandQueue = new Queue<Command>();
+
     private Command currentCommand;
 
     public Command getCurrentCommand() { return currentCommand;}
@@ -130,6 +133,7 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     public bool IsDead { get { lock (this) { return isDead; } } set { lock (this) { isDead = value; } } }
 
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public void EnableCover(bool inCover, CoverFramework cf = null)
     {
         this.cover = cf;
@@ -150,6 +154,7 @@ public class PlayerController : MonoBehaviour
     /// Event that is invoked for weapon effects launch from a certain point in the
     /// weapon activation animation. This event only happens during an attack move.
     /// </summary>
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public void WeaponsLaunch()
     {
         try
@@ -167,43 +172,44 @@ public class PlayerController : MonoBehaviour
     /// This public method is invoked by other objects to simulate this player taking damage.
     /// </summary>
     /// <param name="dmgAmt"></param>
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public void TakeDamage(int dmgAmt, bool critical = false)
     {
-        
-        playerMetaData.TakeDamage(dmgAmt);
-        healthBar.fillAmount = playerMetaData.NormalizedHealthRemaining();
+        if (!isDead)
+        {
+            playerMetaData.TakeDamage(dmgAmt);
+            healthBar.fillAmount = playerMetaData.NormalizedHealthRemaining();
 
-        if (playerMetaData.Hp <= 0)
-        {
-            setCurrentCommand(defaultCommand);
-            currentCommand.TransitionToState(currentCommand.defaultState);
-            AudioManager.PlayVoice(playerMetaData.grunts.screams, audioSource);
-            StartCoroutine(deathBloodGush());
-            IsDead = true;
-            /*if (OnDeath != null)
+            if (playerMetaData.Hp <= 0)
             {
-                OnDeath(ID);
-            }*/
-        }
-        else
-        {
-            float dmgPercent = playerMetaData.DamagePercent(dmgAmt);
-            //Debug.Log("Damage percent " + dmgPercent);
-            if(dmgPercent > .3)
-            {
-                AudioManager.PlayVoice(playerMetaData.grunts.heavyHurt, audioSource);
-            } else
-            {
-                AudioManager.PlayVoice(playerMetaData.grunts.lightHurt, audioSource);
+                setCurrentCommand(defaultCommand);
+                currentCommand.TransitionToState(currentCommand.defaultState);
+                AudioManager.PlayVoice(playerMetaData.grunts.screams, audioSource);
+                StartCoroutine(deathBloodGush());
+                IsDead = true;
             }
-            
-            if (OnDamage != null)
+            else
             {
-                OnDamage(dmgAmt);
+                float dmgPercent = playerMetaData.DamagePercent(dmgAmt);
+                //Debug.Log("Damage percent " + dmgPercent);
+                if (dmgPercent > .3)
+                {
+                    AudioManager.PlayVoice(playerMetaData.grunts.heavyHurt, audioSource);
+                }
+                else
+                {
+                    AudioManager.PlayVoice(playerMetaData.grunts.lightHurt, audioSource);
+                }
+
+                if (OnDamage != null)
+                {
+                    OnDamage(dmgAmt);
+                }
             }
         }
     }
-
+    
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public IEnumerator Heal(int healAmt, int duration, bool critical = false)
     {
         int deltaHealAmount = healAmt / duration;
@@ -236,6 +242,7 @@ public class PlayerController : MonoBehaviour
         deathBlood.Stop();
     }
 
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public void TopUpAmmo()
     {
         CommandDataInstance wi = commands[GeneralUtils.ATTACKSLOT].commandDataInstance;
@@ -248,6 +255,7 @@ public class PlayerController : MonoBehaviour
     /// that need this event will subscribe to this.
     /// </summary>
     /// <param name="id"></param>
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public void AnimationComplete(string id)
     {
         if (OnAnimationComplete != null)
@@ -255,7 +263,7 @@ public class PlayerController : MonoBehaviour
             OnAnimationComplete(id);
         }
     }
-
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public void Die()
     {
         //isDead = true;
@@ -371,7 +379,75 @@ public class PlayerController : MonoBehaviour
     {
         currentCommand.Cancel();
         setCurrentCommand(defaultCommand);
-        currentCommand.TransitionToState(currentCommand.currentState);
+        currentCommand.TransitionToState(currentCommand.defaultState);
+    }
+
+    public void ResetCommand()
+    {
+        currentCommand.Complete();
+        setCurrentCommand(defaultCommand);
+        currentCommand.TransitionToState(defaultCommand.defaultState);
+    }
+
+    public void AddToCommandQueue(int slot)
+    {
+        if(currentCommand.commandType == Command.type.move)
+        {
+
+        }
+        Command cmd = commands[slot];
+        if(cmd == commands[GeneralUtils.MOVESLOT] && !commandQueue.Contains(cmd))
+        {
+            commandQueue.Enqueue(cmd);
+        } else
+        {
+            Debug.LogFormat("Command already added {0}", cmd.commandType);
+        }
+        
+    }
+
+    public Command ActivateCommand(
+                                    int slot,
+                                    Transform enemyTransform,
+                                    Vector3? destination,
+                                    Command.OnCompleteCallback onComplete)
+    {
+        //Evaluate which command is selected and invoke command trigger.
+        AssignCommand(slot);
+        Command cmd = getCurrentCommand();
+        cmd.onCompleteCallback = onComplete;
+        return InvokeCmd(enemyTransform, destination, cmd);
+    }
+
+    private static Command InvokeCmd(Transform enemyTransform, Vector3? destination, Command cmd)
+    {
+        if (cmd != null)
+        {
+            cmd.StartCommand(enemyTransform, destination);
+        }
+        return cmd;
+    }
+
+    public Command AssignCommand(int slot)
+    {
+
+        if (getCurrentCommand() != null)
+        {
+            return SwapCommand(slot);
+        }
+        else
+        {
+            setCurrentCommand(commands[slot]);
+            return commands[slot];
+        }
+    }
+
+    private Command SwapCommand(int slot)
+    {
+        Command oldCommand = getCurrentCommand();
+        oldCommand.Cancel();
+        setCurrentCommand(commands[slot]);
+        return getCurrentCommand();
     }
     #endregion
 
@@ -398,12 +474,7 @@ public class PlayerController : MonoBehaviour
 
 
     #region UI Related
-    public void ResetCommand()
-    {
-        currentCommand.Complete();
-        setCurrentCommand(defaultCommand);
-        currentCommand.TransitionToState(currentCommand.currentState);
-    }
+
 
     public void CreatePath()
     {
