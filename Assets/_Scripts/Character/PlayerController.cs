@@ -330,7 +330,7 @@ public class PlayerController : MonoBehaviour
             {
                 defaultCommand.Update();
             }
-        } else if (currentCommand != null && (currentCommand.isActivated))
+        } else if (currentCommand != null)
         {
             currentCommand.Update();
         }

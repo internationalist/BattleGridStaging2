@@ -57,7 +57,7 @@ public class RifleAttackState : BaseState
             if (wt.maxBurstFire == fireCounter)
             {
                 Debug.LogFormat("{0} Completing command since fire limit reached", command.playerController.name);
-                command.complete = true;
+
                 fireCounter = 0;
                 command.anim.ResetTrigger("Single_Shot");
                 command.TransitionToState(command.StateMap[Command.InternalState.idle.ToString()]);
@@ -68,6 +68,7 @@ public class RifleAttackState : BaseState
                     command.onCompleteCallback();
                     command.onCompleteCallback = null;
                 }
+                command.complete = true;
             }
         }
     }
