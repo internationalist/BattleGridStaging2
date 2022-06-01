@@ -56,7 +56,7 @@ public class RifleAttackState : BaseState
             //Debug.LogFormat("Fire counter is  {0} Max burst fire is {1}", fireCounter, wt.maxBurstFire);
             if (wt.maxBurstFire == fireCounter)
             {
-                //Debug.Log("Completing command since fire limit reached");
+                Debug.LogFormat("{0} Completing command since fire limit reached", command.playerController.name);
                 command.complete = true;
                 fireCounter = 0;
                 command.anim.ResetTrigger("Single_Shot");
