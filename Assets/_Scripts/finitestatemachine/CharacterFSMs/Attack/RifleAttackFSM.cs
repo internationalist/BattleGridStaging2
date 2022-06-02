@@ -185,6 +185,7 @@ public class RifleAttackFSM : Command
     protected override bool Validate(Transform enemyTransform, Vector3? destination)
     {
         //Debug.LogFormat("{0} Can attack: {1}", playerController.name, playerController.playerMetaData.CanAttack());
+
         if (playerController.playerMetaData.CanAttack() && commandDataInstance.isAmmoLeft())
         {
             return true;
@@ -203,7 +204,6 @@ public class RifleAttackFSM : Command
                 
                 AudioManager.NoMoreAP();
             }
-            Debug.Log("Cannot run command. Not enough AP");
             //Validation failed. Cancel this command/move.
             cancel = true;
         }

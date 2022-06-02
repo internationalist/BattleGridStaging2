@@ -10,9 +10,9 @@ public class AIBrain : MonoBehaviour
     public PlayerController enemy;
 
 
-    public void TriggerMoveCommand(PlayerController controller, Vector3 movemenLocation)
+    public void TriggerMoveCommand(PlayerController controller, PlayerController enemy, Vector3 movemenLocation)
     {
-        TriggerCommand(Command.type.move, controller, null, movemenLocation);
+        TriggerCommand(Command.type.move, controller, enemy, movemenLocation);
     }
 
     public void TriggerPrimaryAction(PlayerController controller, PlayerController enemy)
@@ -25,9 +25,9 @@ public class AIBrain : MonoBehaviour
         TriggerCommand(Command.type.specialaction, controller, enemy, Vector3.zero);
     }
 
-    public void TriggerReload(PlayerController controller)
+    public void TriggerReload(PlayerController controller, PlayerController enemy)
     {
-        TriggerCommand(Command.type.reload, controller, null, Vector3.zero);
+        TriggerCommand(Command.type.reload, controller, enemy, Vector3.zero);
     }
 
     [MethodImpl(MethodImplOptions.Synchronized)]
@@ -41,7 +41,7 @@ public class AIBrain : MonoBehaviour
             case Command.type.move:
                 //Debug.LogFormat("{0} AIAttackState:TriggerCommand->Running move command", aim._controller.name);
                 //Debug.Log("TriggerCommand::Running move command");
-                controller.AddToCommandQueue(GeneralUtils.MOVESLOT, null, movementLocation, () =>
+                controller.AddToCommandQueue(GeneralUtils.MOVESLOT, enemy.transform, movementLocation, () =>
                 {
                     //isRunning = false;
                 });
@@ -75,7 +75,7 @@ public class AIBrain : MonoBehaviour
                 });*/
                 break;
             case Command.type.reload:
-                controller.AddToCommandQueue(GeneralUtils.RELOADSLOT, null, null, () =>
+                controller.AddToCommandQueue(GeneralUtils.RELOADSLOT, enemy.transform, null, () =>
                 {
                     isRunning = false;
                 });

@@ -323,7 +323,7 @@ public class PlayerController : MonoBehaviour
     {
         if(currentCommand.Equals(defaultCommand) && !commandInQueue)
         {//check command queue for content.
-            CommandQueue.CommandQueueElement? queueElementOptional = commandQueue.Dequeue();
+            CommandQueue.CommandQueueElement? queueElementOptional = commandQueue.Peek();
             if(queueElementOptional.HasValue)
             {
                 CommandQueue.CommandQueueElement element = queueElementOptional.Value;
@@ -353,11 +353,21 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    [MethodImpl(MethodImplOptions.Synchronized)]
     private IEnumerator DelayedCommandActivate(CommandQueue.CommandQueueElement element)
     {
         commandInQueue = true;
         yield return new WaitForSeconds(.5f);
-        ActivateCommand(element.slot, element.enemyTransform, element.destination, element.onComplete);
+        if(element.enemyTransform != null)
+        {
+            PlayerController enemy = element.enemyTransform.GetComponent<PlayerController>();
+            if(enemy != null && !enemy.isDead && !isDead)
+            {
+                ActivateCommand(element.slot, element.enemyTransform, element.destination, element.onComplete);
+                commandQueue.Dequeue();
+            }
+        }
+
         commandInQueue = false;
     }
     #endregion
@@ -441,6 +451,20 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
+
+    private bool IsEnemyAlive(Transform enemyTransform)
+    {
+        if (enemyTransform != null)
+        {
+            PlayerController enemy = enemyTransform.GetComponent<PlayerController>();
+            if (enemy != null && !enemy.isDead)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
 
     public Command ActivateCommand(
                                     int slot,

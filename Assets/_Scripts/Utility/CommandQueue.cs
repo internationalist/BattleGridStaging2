@@ -59,6 +59,16 @@ public class CommandQueue
     }
 
     [MethodImpl(MethodImplOptions.Synchronized)]
+    public CommandQueueElement? Peek()
+    {
+        if (data.Count > 0)
+        {
+            return data[0];
+        }
+        return null;
+    }
+
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public bool Replace(CommandQueueElement element)
     {
         int idx = data.FindIndex(e=> e.slot == element.slot);

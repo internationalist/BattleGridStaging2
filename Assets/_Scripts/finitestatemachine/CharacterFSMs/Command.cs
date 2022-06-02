@@ -184,7 +184,6 @@ public abstract class Command : BaseFSMController
             }
         }
 
-
         if(!complete && !cancel)
         {
             base.Update();
