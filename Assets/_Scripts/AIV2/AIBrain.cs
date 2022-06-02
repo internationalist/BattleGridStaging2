@@ -43,7 +43,7 @@ public class AIBrain : MonoBehaviour
                 //Debug.Log("TriggerCommand::Running move command");
                 controller.AddToCommandQueue(GeneralUtils.MOVESLOT, null, movementLocation, () =>
                 {
-                    isRunning = false;
+                    //isRunning = false;
                 });
                 /*Command cmd = controller.ActivateCommand(GeneralUtils.MOVESLOT, null, movementLocation, () =>
                 {
@@ -92,6 +92,6 @@ public class AIBrain : MonoBehaviour
     private IEnumerator DelayedCommandComplete()
     {
         yield return new WaitForSeconds(postCommandPauseInSecs);
-        isRunning = false;
+        //isRunning = false;
     }
 }

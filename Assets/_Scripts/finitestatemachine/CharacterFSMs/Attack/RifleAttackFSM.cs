@@ -195,7 +195,7 @@ public class RifleAttackFSM : Command
             { //No need to show UI notification if AI
                 if(playerController.playerMetaData.CanAttack())
                 {
-                    UIManager.ShowMessage("Ammo depleted.");
+                   // UIManager.ShowMessage("Ammo depleted.");
                 } else
                 {
                     UIManager.ShowMessage("Attack completed.");

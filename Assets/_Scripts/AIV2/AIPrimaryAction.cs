@@ -21,8 +21,9 @@ public class AIPrimaryAction : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(!aiBrain.isRunning
-                && controller != null
+        if(//!aiBrain.isRunning
+                //&&
+                controller != null
                 && !controller.IsDead
                 && aiBrain.enemy != null
                 && !aiBrain.enemy.IsDead)

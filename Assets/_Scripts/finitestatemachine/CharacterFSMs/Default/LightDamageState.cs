@@ -30,8 +30,11 @@ public class LightDamageState : BaseState
         lock (this) // For damage events from multiple threads, we have to use synchronization
         {
             if ("damage".Equals(name))
-            {   
-                command.playerController.OnAnimationComplete -= OnComplete;
+            {
+                if(command != null && command.playerController != null)
+                {
+                    command.playerController.OnAnimationComplete -= OnComplete;
+                }
             }
         }
     }

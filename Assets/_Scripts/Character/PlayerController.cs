@@ -73,6 +73,8 @@ public class PlayerController : MonoBehaviour
     private CommandQueue commandQueue = new CommandQueue();
 
     private Command currentCommand;
+    
+    private bool commandInQueue;
 
     public Command getCurrentCommand() { return currentCommand;}
 
@@ -319,13 +321,13 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        if(currentCommand.Equals(defaultCommand))
+        if(currentCommand.Equals(defaultCommand) && !commandInQueue)
         {//check command queue for content.
             CommandQueue.CommandQueueElement? queueElementOptional = commandQueue.Dequeue();
             if(queueElementOptional.HasValue)
             {
                 CommandQueue.CommandQueueElement element = queueElementOptional.Value;
-                ActivateCommand(element.slot, element.enemyTransform, element.destination, element.onComplete);
+                StartCoroutine(DelayedCommandActivate(element));
             } else
             {
                 defaultCommand.Update();
@@ -349,6 +351,14 @@ public class PlayerController : MonoBehaviour
             && !isAgent) {//For AI the AI code will end turn
             EndTurn();
         }
+    }
+
+    private IEnumerator DelayedCommandActivate(CommandQueue.CommandQueueElement element)
+    {
+        commandInQueue = true;
+        yield return new WaitForSeconds(.5f);
+        ActivateCommand(element.slot, element.enemyTransform, element.destination, element.onComplete);
+        commandInQueue = false;
     }
     #endregion
 
