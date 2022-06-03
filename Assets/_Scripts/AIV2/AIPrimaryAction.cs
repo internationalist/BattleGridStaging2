@@ -21,12 +21,11 @@ public class AIPrimaryAction : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(//!aiBrain.isRunning
-                //&&
-                controller != null
-                && !controller.IsDead
-                && aiBrain.enemy != null
-                && !aiBrain.enemy.IsDead)
+        if(
+            controller != null
+            && !controller.IsDead
+            && aiBrain.enemy != null
+            && !aiBrain.enemy.IsDead)
         {
             var distanceToEnemy = Vector3.Distance(transform.position, aiBrain.enemy.transform.position);
             if(distanceToEnemy <= commandTmpl.damageParameters.optimalRange

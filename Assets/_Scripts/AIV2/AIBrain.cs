@@ -35,7 +35,10 @@ public class AIBrain : MonoBehaviour
         choosingEnemy = true;
         for (int i = 0; i < allPlayers.Length; i++)
         {
-            if (allPlayers[i].ID != player.ID && allPlayers[i].teamID != player.teamID)
+            if (allPlayers[i] != null
+                && !allPlayers[i].IsDead
+                && allPlayers[i].ID != player.ID
+                && allPlayers[i].teamID != player.teamID)
             {
                 enemy = allPlayers[i];
                 break;

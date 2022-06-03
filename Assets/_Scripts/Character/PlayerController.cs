@@ -365,6 +365,9 @@ public class PlayerController : MonoBehaviour
             {
                 ActivateCommand(element.slot, element.enemyTransform, element.destination, element.onComplete);
                 commandQueue.Dequeue();
+            } else if(enemy == null || enemy.isDead) //Get rid of any commands that point to dead enemy
+            {
+                commandQueue.Dequeue();
             }
         }
 
