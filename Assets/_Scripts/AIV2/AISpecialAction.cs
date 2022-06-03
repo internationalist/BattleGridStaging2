@@ -9,7 +9,13 @@ public class AISpecialAction : MonoBehaviour
     CommandDataInstance commandData;
     AIBrain aiBrain;
     [Range(0, 1)]
+    [Header("AI probability of activating special attack")]
     public float fireChance;
+    [Header("Cool down delay")]
+    public float coolDownDelay;
+    private float activationTime;
+
+
 
     // Start is called before the first frame update
     void Start()
@@ -23,17 +29,17 @@ public class AISpecialAction : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (//!aiBrain.isRunning
-              //  &&
-                controller != null
-                && !controller.IsDead
-                && aiBrain.enemy != null
-                && !aiBrain.enemy.IsDead)
+        if (controller != null
+            && !controller.IsDead
+            && aiBrain.enemy != null
+            && !aiBrain.enemy.IsDead)
         {
             var distanceToEnemy = Vector3.Distance(transform.position, aiBrain.enemy.transform.position);
             if (distanceToEnemy <= commandTmpl.damageParameters.optimalRange
-                && CalculateChance())
+                && CalculateChance()
+                && (Time.time - activationTime) >= coolDownDelay)
             {
+                activationTime = Time.time;
                 aiBrain.TriggerSpecialAction(controller, aiBrain.enemy);
             }
         }

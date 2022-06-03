@@ -77,8 +77,6 @@ public class RifleAttackFSM : Command
                 {
                     dm = GeneralUtils.CalculateDamageChance(commandTemplate.damageParameters, distance, null);
                 }
-
-                //string attackMeta = string.Format("CRITICAL DAMAGE:{0}%\nHIT CHANCE: {1}%\n DMG MULTIPLIER:{2}", dm.criticalDmgChance.ToString("0.##"), dm.dmgChance.ToString("0.##"), dm.dmgMultiplier.ToString("0.##"));
                 enemyPC = hit.transform.GetComponent<PlayerController>();
                 enemyPC.infoPanel.SetAttackInfo(dm.criticalDmgChance.ToString("0.##"), dm.dmgChance.ToString("0.##"), dm.dmgMultiplier.ToString("0.##"));
                 enemyPC.infoPanel.ShowHitChance();

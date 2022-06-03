@@ -5,10 +5,45 @@ using UnityEngine;
 
 public class AIBrain : MonoBehaviour
 {
-    public bool isRunning;
-    float postCommandPauseInSecs = 1;
+    #region state
     public PlayerController enemy;
+    PlayerController player;
+    PlayerController[] allPlayers;
+    bool choosingEnemy;
+    #endregion
 
+    #region Unity events
+    private void Start()
+    {
+        player = GetComponent<PlayerController>();
+        allPlayers = FindObjectsOfType<PlayerController>();
+        ChooseEnemy();
+    }
+
+    private void Update()
+    {
+        if(enemy.IsDead && !choosingEnemy)
+        {
+            ChooseEnemy();
+        }
+    }
+
+
+
+    private void ChooseEnemy()
+    {
+        choosingEnemy = true;
+        for (int i = 0; i < allPlayers.Length; i++)
+        {
+            if (allPlayers[i].ID != player.ID && allPlayers[i].teamID != player.teamID)
+            {
+                enemy = allPlayers[i];
+                break;
+            }
+        }
+        choosingEnemy = false;
+    }
+    #endregion
 
     public void TriggerMoveCommand(PlayerController controller, PlayerController enemy, Vector3 movemenLocation)
     {
@@ -35,63 +70,25 @@ public class AIBrain : MonoBehaviour
     {
 
     //commandStartTimeInSec = Time.realtimeSinceStartup; // We will enforce a timeout on the command due to a vague problem of commands not finishing.
-        isRunning = true;
         switch (cmdType)
         {
             case Command.type.move:
-                //Debug.LogFormat("{0} AIAttackState:TriggerCommand->Running move command", aim._controller.name);
-                //Debug.Log("TriggerCommand::Running move command");
                 controller.AddToCommandQueue(GeneralUtils.MOVESLOT, enemy.transform, movementLocation, () =>
-                {
-                    //isRunning = false;
-                });
-                /*Command cmd = controller.ActivateCommand(GeneralUtils.MOVESLOT, null, movementLocation, () =>
-                {
-                    isRunning = false;
-                });*/
+                {});
                 break;
             case Command.type.primaryaction:
                 //Debug.Log("TriggerCommand::Running attack command and  setting attack achieved flag to true");
                 controller.AddToCommandQueue(GeneralUtils.ATTACKSLOT, enemy.transform, enemy.transform.position, () =>
-                {
-                    GameManager.I.StartCoroutine(DelayedCommandComplete());
-                });
-
-                /*controller.ActivateCommand(GeneralUtils.ATTACKSLOT, enemy.transform, enemy.transform.position, () =>
-                {
-                    GameManager.I.StartCoroutine(DelayedCommandComplete());
-                });*/
+                {});
                 break;
             case Command.type.specialaction:
                 controller.AddToCommandQueue(GeneralUtils.ITEMSLOT, enemy.transform, enemy.transform.position, () =>
-                {
-                    GameManager.I.StartCoroutine(DelayedCommandComplete());
-                });
-
-                //Debug.Log("TriggerCommand::Running special attack command and  setting attack achieved flag to true");
-                /*controller.ActivateCommand(GeneralUtils.ITEMSLOT, enemy.transform, enemy.transform.position, () =>
-                {
-                    GameManager.I.StartCoroutine(DelayedCommandComplete());
-                });*/
+                {});
                 break;
             case Command.type.reload:
                 controller.AddToCommandQueue(GeneralUtils.RELOADSLOT, enemy.transform, null, () =>
-                {
-                    isRunning = false;
-                });
-
-                /*controller.ActivateCommand(GeneralUtils.RELOADSLOT, null, null, () =>
-                {
-                    isRunning = false;
-                });*/
+                {});
                 break;
         }
-    }
-
-    [MethodImpl(MethodImplOptions.Synchronized)]
-    private IEnumerator DelayedCommandComplete()
-    {
-        yield return new WaitForSeconds(postCommandPauseInSecs);
-        //isRunning = false;
     }
 }
