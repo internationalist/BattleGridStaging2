@@ -18,8 +18,6 @@ public class ReloadFSM : Command
         if (playerController.playerMetaData.voice.responseOnReload != null && playerController.playerMetaData.voice.responseOnReload.Count > 0)
         {
             AudioManager.PlayVoice(playerController.playerMetaData.voice.responseOnReload, playerController.audioSource);
-            //int audioIndex = Random.Range(0, playerController.playerMetaData.responseOnReload.Count);
-            //playerController.audioSource.PlayOneShot(playerController.playerMetaData.responseOnReload[audioIndex]);
         }
         base.Activate(enemyTransform, destination);
     }

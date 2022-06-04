@@ -8,7 +8,20 @@ public class RifleAttackState : BaseState
     public override void EnterState(BaseFSMController controller)
     {
         command = (RifleAttackFSM)controller;
-        command.anim.SetTrigger("Single_Shot");
+        if (command.playerController.InCover)
+        {
+            if (command.playerController.cover.coverType.Equals(CoverFramework.TYPE.half))
+            {
+                command.anim.SetTrigger("Crouched_Shot");
+            } else
+            {
+                command.anim.SetTrigger("Single_Shot");
+            }
+        } else
+        {
+            command.anim.SetTrigger("Single_Shot");
+        }
+
         fireCounter = 0;
         command.playerController.OnAnimationComplete += OnComplete;
     }
@@ -18,13 +31,6 @@ public class RifleAttackState : BaseState
 
     public override void Update(BaseFSMController controller)
     {
-        /*if (command.complete) {
-            command.anim.ResetTrigger("Single_Shot");
-            command.TransitionToState(command.StateMap[Command.InternalState.idle.ToString()]);
-            command.isActivated = false;
-            command.playerController.OnAnimationComplete -= OnComplete;
-            command.playerController.StartCoroutine(HideActionCam());
-        }*/
     }
 
     public override void ExitState(BaseFSMController controller)
@@ -60,6 +66,7 @@ public class RifleAttackState : BaseState
 
                 fireCounter = 0;
                 command.anim.ResetTrigger("Single_Shot");
+                command.anim.ResetTrigger("Crouched_Shot");
                 command.TransitionToState(command.StateMap[Command.InternalState.idle.ToString()]);
                 command.isActivated = false;
                 command.playerController.OnAnimationComplete -= OnComplete;

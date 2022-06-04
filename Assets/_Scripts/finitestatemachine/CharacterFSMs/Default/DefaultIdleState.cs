@@ -15,7 +15,8 @@ public class DefaultIdleState : BaseState
         IdleFSM command = (IdleFSM)controller;
         pc = command.playerController;
         pc.OnDamage += TakeDamage;
-        command.anim.SetTrigger("Idle");
+        //command.anim.SetTrigger("Idle");
+        ActivateIdleAnimation(command);
     }
 
     public override void Update(BaseFSMController controller)
@@ -92,21 +93,26 @@ public class DefaultIdleState : BaseState
         }
         else
         {
-           /* if (pc.InCover)
+            ActivateIdleAnimation(command);
+        }
+    }
+
+    private void ActivateIdleAnimation(IdleFSM command)
+    {
+        if (pc.InCover)
+        {
+            if (CoverFramework.TYPE.full.Equals(pc.cover.coverType))
             {
-                if (CoverFramework.TYPE.full.Equals(pc.cover.coverType))
-                {
-                    GeneralUtils.SetAnimationTrigger(command.anim, "Alert_Idle");
-                }
-                else
-                {
-                    GeneralUtils.SetAnimationTrigger(command.anim, "Crouch_Idle");
-                }
+                GeneralUtils.SetAnimationTrigger(command.anim, "Alert_Idle");
             }
             else
             {
-                GeneralUtils.SetAnimationTrigger(command.anim, "Alert_Idle");
-            }*/
+                GeneralUtils.SetAnimationTrigger(command.anim, "Crouch_Idle");
+            }
+        }
+        else
+        {
+            GeneralUtils.SetAnimationTrigger(command.anim, "Alert_Idle");
         }
     }
 
