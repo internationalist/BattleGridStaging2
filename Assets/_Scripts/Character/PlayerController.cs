@@ -95,6 +95,7 @@ public class PlayerController : MonoBehaviour
     public NavMeshAgent nav;
     GameObject marker;
     public Image healthBar;
+    public Image healthBarBackGround;
     public Image coverStatus;
 
     public bool barrelGripIK = true;
@@ -189,6 +190,7 @@ public class PlayerController : MonoBehaviour
                 AudioManager.PlayVoice(playerMetaData.grunts.screams, audioSource);
                 StartCoroutine(deathBloodGush());
                 IsDead = true;
+                HideHealthBar();
             }
             else
             {
@@ -210,7 +212,13 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
-    
+
+    private void HideHealthBar()
+    {
+        this.healthBar.enabled = false;
+        this.healthBarBackGround.enabled = false;
+    }
+
     [MethodImpl(MethodImplOptions.Synchronized)]
     public IEnumerator Heal(int healAmt, int duration, bool critical = false)
     {
