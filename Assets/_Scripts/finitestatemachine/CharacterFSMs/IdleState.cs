@@ -5,12 +5,11 @@ using UnityEngine;
 public class IdleState : BaseState
 {
 
-    public override void EnterState(BaseFSMController player)
+    public override void EnterState(BaseFSMController baseCommand)
     {
         //Debug.LogFormat("IdleState.EnterState->Set trigger Idle");
-        Command characterPlayer = (Command)player;
-        //characterPlayer.anim.CrossFade("Idle", 0.2f);
-        characterPlayer.anim.SetTrigger("Idle");
+        Command command = (Command)baseCommand;
+        ActivateIdleAnimation(command);
     }
 
     public override void Update(BaseFSMController controller)
@@ -34,4 +33,23 @@ public class IdleState : BaseState
         }
     }
 
+    private void ActivateIdleAnimation(Command command)
+    {
+        PlayerController pc = command.playerController;
+        if (pc.InCover)
+        {
+            if (CoverFramework.TYPE.full.Equals(pc.cover.coverType))
+            {
+                GeneralUtils.SetAnimationTrigger(command.anim, "Alert_Idle");
+            }
+            else
+            {
+                GeneralUtils.SetAnimationTrigger(command.anim, "Crouch_Idle");
+            }
+        }
+        else
+        {
+            GeneralUtils.SetAnimationTrigger(command.anim, "Alert_Idle");
+        }
+    }
 }
