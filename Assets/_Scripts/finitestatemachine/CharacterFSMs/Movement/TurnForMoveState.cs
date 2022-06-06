@@ -40,10 +40,12 @@ public class TurnForMoveState : BaseState
         switch (turnDir)
         {
             case Dir.left:
-                GeneralUtils.SetAnimationTrigger(command.anim, ("Turn_Left"));
+                ActivateTurnAnimation(command, "Turn_Left", "Crouched_Turn_L");
+                //GeneralUtils.SetAnimationTrigger(command.anim, ("Turn_Left"));
                 break;
             case Dir.right:
-                GeneralUtils.SetAnimationTrigger(command.anim, ("Turn_Right"));
+                ActivateTurnAnimation(command, "Turn_Right", "Crouched_Turn_R");
+                //GeneralUtils.SetAnimationTrigger(command.anim, ("Turn_Right"));
                 break;
         }
     }
@@ -73,32 +75,27 @@ public class TurnForMoveState : BaseState
         }
     }
 
-    private void Rotate(BaseFSMController player)
+    private void ActivateTurnAnimation(Command command, string defaultAnim, string crouchedAnim)
     {
-        Command command = (Command)player;
-        float distance = Vector3.Distance(command.playerTransform.position, command.Destination.Value);
-        float angleLimit = 2;
-
-        angleLimit = Mathf.Clamp(10f / distance, 2, 20);
-        float stepWeight = 5.0f;
-        float singleStep = stepWeight * Time.deltaTime;
-        // Rotate the forward vector towards the target direction by one step
-        Vector3 newDirection = Vector3.RotateTowards(command.playerTransform.forward, command.targetDirection, singleStep, 0.0f);
-
-        command.playerTransform.rotation = Quaternion.LookRotation(newDirection);
-
-        float angleLeft = Vector3.Angle(command.playerTransform.forward, command.targetDirection);
-
-        //Debug.LogFormat("Angle left is {0}", angleLeft);
-
-        if (angleLeft <= angleLimit)
+        PlayerController pc = command.playerController;
+        if (pc.InCover)
         {
-            //Logger.Trace("TurnForMove.cs", "{0}-> Angle left is {1} Angle limit is {2}", command.playerController.name, angleLeft, angleLimit);
-            command.anim.ResetTrigger("Turn_Left");
-            command.anim.ResetTrigger("Turn_Right");
-            player.TransitionToState(player.StateMap[nextState.ToString()]);
+            if (CoverFramework.TYPE.full.Equals(pc.cover.coverType))
+            {
+                GeneralUtils.SetAnimationTrigger(command.anim, defaultAnim);
+            }
+            else
+            {
+                GeneralUtils.SetAnimationTrigger(command.anim, crouchedAnim);
+            }
+        }
+        else
+        {
+            GeneralUtils.SetAnimationTrigger(command.anim, defaultAnim);
         }
     }
+
+
 
     public override void ExitState(BaseFSMController controller)
     {

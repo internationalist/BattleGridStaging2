@@ -150,7 +150,7 @@ MonoBehaviour:
   ricochetEffects:
   - {fileID: 1342903106951141758, guid: e617e429c78cc1147a86d7f25764a7e5, type: 3}
   - {fileID: 3088086561818561513, guid: 86991083bf70246cab4905f681be4c36, type: 3}
-  damageReductionPct: 0.4
+  damageReductionPct: 0.6
   coverType: 2
   coverRenderer:
   - {fileID: 9205312802343663991}
