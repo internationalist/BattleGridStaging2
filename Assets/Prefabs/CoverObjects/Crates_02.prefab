@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6370047643765254788}
   - component: {fileID: 6370047643765254789}
   m_Layer: 13
-  m_Name: Cover
+  m_Name: Crates_02_Cover
   m_TagString: cover
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

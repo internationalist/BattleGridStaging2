@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5918334160993955504}
   - component: {fileID: 5918334160993955505}
   m_Layer: 13
-  m_Name: Cover
+  m_Name: Barrel_02_Cover
   m_TagString: cover
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -12,7 +12,7 @@ public class AIBrain : MonoBehaviour
     List<PlayerController> foes;
     List<PlayerController> friends;
     bool choosingEnemy;
-    List<CoverFramework> covers = new List<CoverFramework>();
+    public List<CoverFramework> covers = new List<CoverFramework>();
     #endregion
 
     #region Unity events

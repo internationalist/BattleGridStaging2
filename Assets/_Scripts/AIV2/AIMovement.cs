@@ -28,15 +28,33 @@ public class AIMovement : MonoBehaviour
         && aiBrain.enemy != null
         && !aiBrain.enemy.IsDead)
         {
+            DockPoint dock = null;
             startTime = Time.time;
-            var distanceToEnemy = Vector3.Distance(transform.position, aiBrain.enemy.transform.position);
-            if(distanceToEnemy > commandTmpl.damageParameters.optimalRange)
+            for(int i = 0; i < aiBrain.covers.Count; i++)
             {
-                var movementDistance = distanceToEnemy - commandTmpl.damageParameters.optimalRange;
-                Vector3 dirOfMovement = (aiBrain.enemy.transform.position - transform.position).normalized;
-                movementLocation = transform.position + dirOfMovement* movementDistance;
-                aiBrain.TriggerMoveCommand(controller, aiBrain.enemy, movementLocation);
+                dock = aiBrain.EvaluateCover(controller, aiBrain.enemy, aiBrain.covers[i]);
+                if(dock != null)
+                {
+                    aiBrain.TriggerMoveCommand(controller, aiBrain.enemy, dock.position);
+                    break;
+                }
             }
+            if(dock == null)
+            {
+                ApproachEnemy();
+            }
+        }
+    }
+
+    void ApproachEnemy()
+    {
+        var distanceToEnemy = Vector3.Distance(transform.position, aiBrain.enemy.transform.position);
+        if (distanceToEnemy > commandTmpl.damageParameters.optimalRange)
+        {
+            var movementDistance = distanceToEnemy - commandTmpl.damageParameters.optimalRange;
+            Vector3 dirOfMovement = (aiBrain.enemy.transform.position - transform.position).normalized;
+            movementLocation = transform.position + dirOfMovement * movementDistance;
+            aiBrain.TriggerMoveCommand(controller, aiBrain.enemy, movementLocation);
         }
     }
 }
