@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -283,7 +282,7 @@ public static class GeneralUtils {
                 retValues[i] = hits[i].transform.GetComponent<CoverFramework>();
             }
         }
-        Array.Sort(retValues, (CoverFramework other, CoverFramework thisOne) => { });
+        System.Array.Sort(retValues);
         return retValues;
     }
 
