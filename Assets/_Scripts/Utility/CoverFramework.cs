@@ -13,6 +13,7 @@ public class CoverFramework : MonoBehaviour
     public List<Vector3> cornerPoints;
     public List<DockPoint> flankPoints;
     public List<ParticleSystem> ricochetEffects;
+    public int ID;
 
     [Range(0, 1)]
     public float damageReductionPct;

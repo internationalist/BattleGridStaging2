@@ -12,18 +12,12 @@ public class AIBrain : MonoBehaviour
     List<PlayerController> foes;
     List<PlayerController> friends;
     bool choosingEnemy;
-    public List<CoverFramework> covers = new List<CoverFramework>();
+    
     #endregion
 
     #region Unity events
     private void Start()
     {
-        GameObject[] coverObjects = GameObject.FindGameObjectsWithTag("cover");
-        for (int i = 0; i < coverObjects.Length; i++)
-        {
-            covers.Add(coverObjects[i].GetComponent<CoverFramework>());
-        }
-
         player = GetComponent<PlayerController>();
         allPlayers = FindObjectsOfType<PlayerController>();
         ChooseEnemy();

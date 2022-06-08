@@ -30,9 +30,9 @@ public class AIMovement : MonoBehaviour
         {
             DockPoint dock = null;
             startTime = Time.time;
-            for(int i = 0; i < aiBrain.covers.Count; i++)
+            for(int i = 0; i < GameManager.I.covers.Count; i++)
             {
-                dock = aiBrain.EvaluateCover(controller, aiBrain.enemy, aiBrain.covers[i]);
+                dock = aiBrain.EvaluateCover(controller, aiBrain.enemy, GameManager.I.covers[i]);
                 if(dock != null)
                 {
                     aiBrain.TriggerMoveCommand(controller, aiBrain.enemy, dock.position);

@@ -25,6 +25,13 @@ public class GameManager : MonoBehaviour
         UNIVERSAL_AGENT = GetComponent<NavMeshAgent>();
         //Cursor.SetCursor(cursorGroup.select, Vector3.zero, CursorMode.Auto);
         regularCoverMaterial = new Dictionary<MeshRenderer, Material>();
+        GameObject[] coverObjects = GameObject.FindGameObjectsWithTag("cover");
+        for (int i = 0; i < coverObjects.Length; i++)
+        {
+            CoverFramework cf = coverObjects[i].GetComponent<CoverFramework>();
+            cf.ID = i;
+            covers.Add(cf);
+        }
     }
     #endregion
 
@@ -55,6 +62,8 @@ public class GameManager : MonoBehaviour
     [Header("This is a very important control and is used to turn on or off realtime combat!")]
     public bool realTimeCombat;
 
+    public List<CoverFramework> covers = new List<CoverFramework>();
+
     #endregion
 
     #region select and activate command
@@ -84,35 +93,6 @@ public class GameManager : MonoBehaviour
         }
     }
 
-   /* public static Command ActivateCommand(Transform enemyTransform, Vector3? destination)
-    {
-        //Debug.LogFormat("GameManager::{0}->Command is {1} and target point is {2}", _currentPlayer.name, _currentPlayer.CurrentCommand, destination);
-        //Evaluate which command is selected and invoke command trigger.
-        Command cmd = GameManager._currentPlayer.getCurrentCommand();
-        return InvokeCmd(enemyTransform, destination, cmd);
-    }
-
-    public static Command ActivateCommand(PlayerController player,
-                                          int slot,
-                                          Transform enemyTransform,
-                                          Vector3? destination,
-                                          Command.OnCompleteCallback onComplete)
-    {
-        //Evaluate which command is selected and invoke command trigger.
-        AssignCommand(player, slot);
-        Command cmd = player.getCurrentCommand();
-        cmd.onCompleteCallback = onComplete;
-        return InvokeCmd(enemyTransform, destination, cmd);
-    }
-
-    private static Command InvokeCmd(Transform enemyTransform, Vector3? destination, Command cmd)
-    {
-        if (cmd != null)
-        {
-            cmd.StartCommand(enemyTransform, destination);
-        }
-        return cmd;
-    }*/
     #endregion
 
     private void Update()
