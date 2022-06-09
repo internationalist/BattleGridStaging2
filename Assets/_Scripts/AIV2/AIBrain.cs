@@ -58,49 +58,53 @@ public class AIBrain : MonoBehaviour
     }
     #endregion
 
-    public void TriggerMoveCommand(PlayerController controller, PlayerController enemy, Vector3 movemenLocation)
+    public void TriggerMoveCommand(PlayerController controller, PlayerController enemy, Vector3 movemenLocation,
+        Command.OnCompleteCallback onComplete)
     {
-        TriggerCommand(Command.type.move, controller, enemy, movemenLocation);
+        TriggerCommand(Command.type.move, controller, enemy, movemenLocation, onComplete);
     }
 
     public void TriggerPrimaryAction(PlayerController controller, PlayerController enemy)
     {
-        TriggerCommand(Command.type.primaryaction, controller, enemy, Vector3.zero);
+        TriggerCommand(Command.type.primaryaction, controller, enemy, Vector3.zero,
+            ()=> { });
     }
 
     public void TriggerSpecialAction(PlayerController controller, PlayerController enemy)
     {
-        TriggerCommand(Command.type.specialaction, controller, enemy, Vector3.zero);
+        TriggerCommand(Command.type.specialaction, controller, enemy, Vector3.zero,
+            () => { });
     }
 
     public void TriggerReload(PlayerController controller, PlayerController enemy)
     {
-        TriggerCommand(Command.type.reload, controller, enemy, Vector3.zero);
+        TriggerCommand(Command.type.reload, controller, enemy, Vector3.zero,
+            () => { });
     }
 
     [MethodImpl(MethodImplOptions.Synchronized)]
-    protected void TriggerCommand(Command.type cmdType, PlayerController controller, PlayerController enemy, Vector3 movementLocation)
+    protected void TriggerCommand(Command.type cmdType,
+                                  PlayerController controller,
+                                  PlayerController enemy,
+                                  Vector3 movementLocation,
+                                  Command.OnCompleteCallback onComplete)
     {
 
     //commandStartTimeInSec = Time.realtimeSinceStartup; // We will enforce a timeout on the command due to a vague problem of commands not finishing.
         switch (cmdType)
         {
             case Command.type.move:
-                controller.AddToCommandQueue(GeneralUtils.MOVESLOT, enemy.transform, movementLocation, () =>
-                {});
+                controller.AddToCommandQueue(GeneralUtils.MOVESLOT, enemy.transform, movementLocation, onComplete);
                 break;
             case Command.type.primaryaction:
                 //Debug.Log("TriggerCommand::Running attack command and  setting attack achieved flag to true");
-                controller.AddToCommandQueue(GeneralUtils.ATTACKSLOT, enemy.transform, enemy.transform.position, () =>
-                {});
+                controller.AddToCommandQueue(GeneralUtils.ATTACKSLOT, enemy.transform, enemy.transform.position, onComplete);
                 break;
             case Command.type.specialaction:
-                controller.AddToCommandQueue(GeneralUtils.ITEMSLOT, enemy.transform, enemy.transform.position, () =>
-                {});
+                controller.AddToCommandQueue(GeneralUtils.ITEMSLOT, enemy.transform, enemy.transform.position, onComplete);
                 break;
             case Command.type.reload:
-                controller.AddToCommandQueue(GeneralUtils.RELOADSLOT, enemy.transform, null, () =>
-                {});
+                controller.AddToCommandQueue(GeneralUtils.RELOADSLOT, enemy.transform, null, onComplete);
                 break;
         }
     }
@@ -132,7 +136,7 @@ public class AIBrain : MonoBehaviour
                         ableToDock = false;
                         break;
                     }
-                    if (chosenDockPoint == null && thisCover.name.Equals(covers[0]))
+                    if (chosenDockPoint == null && thisCover.ID.Equals(covers[0].ID))
                     {
                         if (IsExposedToEnemy(dockPos))
                         {

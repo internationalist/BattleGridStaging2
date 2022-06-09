@@ -282,7 +282,23 @@ public static class GeneralUtils {
                 retValues[i] = hits[i].transform.GetComponent<CoverFramework>();
             }
         }
-        System.Array.Sort(retValues);
+        //Sort the covers ascending according to distance from the origin point
+        System.Array.Sort(retValues,
+            (CoverFramework thisOne,
+            CoverFramework other)=> {
+                var distanceFromThisOne = Vector3.Distance(origin, thisOne.transform.position);
+                var distanceFromOther = Vector3.Distance(origin, other.transform.position);
+                if(distanceFromThisOne==distanceFromOther)
+                {
+                    return 0;
+                } else if(distanceFromThisOne > distanceFromOther)
+                {
+                    return -1;
+                } else
+                {
+                    return 1;
+                }
+            });
         return retValues;
     }
 

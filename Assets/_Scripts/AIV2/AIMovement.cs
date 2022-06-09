@@ -10,6 +10,7 @@ public class AIMovement : MonoBehaviour
     private float startTime;
     public float delay;
     AIBrain aiBrain;
+    bool acquiringCover;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,12 +23,18 @@ public class AIMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Time.time - startTime > delay
+        if (!acquiringCover
+        && Time.time - startTime > delay
         && controller != null
         && !controller.IsDead
         && aiBrain.enemy != null
         && !aiBrain.enemy.IsDead)
         {
+            /*var distanceToEnemy = Vector3.Distance(transform.position, aiBrain.enemy.transform.position);
+            if (distanceToEnemy > commandTmpl.damageParameters.optimalRange)
+            {
+
+            }*/
             DockPoint dock = null;
             startTime = Time.time;
             for(int i = 0; i < GameManager.I.covers.Count; i++)
@@ -35,7 +42,11 @@ public class AIMovement : MonoBehaviour
                 dock = aiBrain.EvaluateCover(controller, aiBrain.enemy, GameManager.I.covers[i]);
                 if(dock != null)
                 {
-                    aiBrain.TriggerMoveCommand(controller, aiBrain.enemy, dock.position);
+                    acquiringCover = true;
+                    aiBrain.TriggerMoveCommand(controller,
+                                               aiBrain.enemy,
+                                               dock.position,
+                                               ()=>{ acquiringCover = false; });
                     break;
                 }
             }
@@ -54,7 +65,7 @@ public class AIMovement : MonoBehaviour
             var movementDistance = distanceToEnemy - commandTmpl.damageParameters.optimalRange;
             Vector3 dirOfMovement = (aiBrain.enemy.transform.position - transform.position).normalized;
             movementLocation = transform.position + dirOfMovement * movementDistance;
-            aiBrain.TriggerMoveCommand(controller, aiBrain.enemy, movementLocation);
+            aiBrain.TriggerMoveCommand(controller, aiBrain.enemy, movementLocation, ()=> { });
         }
     }
 }

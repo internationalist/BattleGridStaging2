@@ -56872,7 +56872,7 @@ MonoBehaviour:
     commandLimit: 0
     teamName: PlayerAI
   _agent: {fileID: 0}
-  isAgent: 0
+  isAgent: 1
   inCover: 0
   cover: {fileID: 0}
   bloodEffects:
@@ -56933,7 +56933,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c54f74bf16cc8048a17678baed8e14c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  delay: 0.25
+  delay: 1
 --- !u!114 &6515731884704742388
 MonoBehaviour:
   m_ObjectHideFlags: 0
