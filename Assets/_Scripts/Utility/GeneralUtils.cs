@@ -293,10 +293,10 @@ public static class GeneralUtils {
                     return 0;
                 } else if(distanceFromThisOne > distanceFromOther)
                 {
-                    return -1;
+                    return 1;
                 } else
                 {
-                    return 1;
+                    return -1;
                 }
             });
         return retValues;

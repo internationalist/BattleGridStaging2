@@ -37,9 +37,27 @@ public class AIMovement : MonoBehaviour
             }*/
             DockPoint dock = null;
             startTime = Time.time;
-            for(int i = 0; i < GameManager.I.covers.Count; i++)
+            List<CoverFramework> coversBYClosest = new List<CoverFramework>(GameManager.I.covers);
+            coversBYClosest.Sort((CoverFramework thisOne, CoverFramework other) =>
+                {
+                    var distanceFromThisOne = Vector3.Distance(transform.position, thisOne.transform.position);
+                    var distanceFromOther = Vector3.Distance(transform.position, other.transform.position);
+                    if (distanceFromOther == distanceFromThisOne)
+                    {
+                        return 0;
+                    }
+                    else if (distanceFromThisOne > distanceFromOther)
+                    {
+                        return 1;
+                    }
+                    else
+                    {
+                        return -1;
+                    }
+                });
+            for(int i = 0; i < coversBYClosest.Count; i++)
             {
-                dock = aiBrain.EvaluateCover(controller, aiBrain.enemy, GameManager.I.covers[i]);
+                dock = aiBrain.EvaluateCover(controller, aiBrain.enemy, coversBYClosest[i]);
                 if(dock != null)
                 {
                     acquiringCover = true;

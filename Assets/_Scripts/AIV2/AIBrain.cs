@@ -145,6 +145,14 @@ public class AIBrain : MonoBehaviour
                         else
                         {
                             chosenDockPoint = dockPointClone[i];
+                            //Check if within firing range or not.
+                            var distanceToEnemy = Vector3.Distance(pc.transform.position, enemy.transform.position);
+                            CommandTemplate commandTmpl = pc.GetWeaponTemplateForCommand(GeneralUtils.ATTACKSLOT);
+
+                            if (distanceToEnemy > commandTmpl.damageParameters.optimalRange)
+                            {
+                                continue;
+                            }
                             ableToDock = true;
                         }
                     }
