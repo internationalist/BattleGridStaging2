@@ -195,11 +195,12 @@ public class DefaultIdleState : BaseState
             }
         }
 
-        if(closest == null)
+        if(closest == null || closest.getCurrentCommand() == null)
         {
             return false;
         }
         //Debug.LogFormat("{0} Closest enemy is {1} running command {2}", pc.name, closest.name, closest.CurrentCommand.ToString());
+
         Command.type enemyCommand = closest.getCurrentCommand().commandType;
         enemyPos = closest.transform.position;
 

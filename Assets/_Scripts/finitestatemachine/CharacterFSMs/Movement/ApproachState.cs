@@ -10,6 +10,7 @@ public class ApproachState : BaseState
     public override void EnterState(BaseFSMController controller)
     {
         command = (MovementFSM)controller;
+        //Debug.LogFormat("{0}: Approaching destination {1}", command.playerController.name, command.Destination.Value);
         command.anim.CrossFade("Idle", 0.2f);
         command.nav.SetDestination(command.Destination.Value);
         float distance = Vector3.Distance(command.playerController.transform.position,

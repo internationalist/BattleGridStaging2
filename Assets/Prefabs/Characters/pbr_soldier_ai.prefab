@@ -56767,6 +56767,7 @@ GameObject:
   - component: {fileID: 6515731884704741385}
   - component: {fileID: 6515731884704741424}
   - component: {fileID: 6515731884704742389}
+  - component: {fileID: 3064799275050755884}
   - component: {fileID: 6515731884704742390}
   - component: {fileID: 6515731884704742388}
   - component: {fileID: 6515731884704742386}
@@ -56841,8 +56842,8 @@ MonoBehaviour:
     weaponTemplate: {fileID: 11400000, guid: 523e8e917263dfd45ab6c8afa3d66e54, type: 2}
     button: {fileID: 0}
   turnActive: 0
-  ID: 1
-  teamID: A
+  ID: 2
+  teamID: B
   rangeMarker: {fileID: 609973486436867824}
   pathVisualizer: {fileID: 0}
   rangeVisualizer: {fileID: 0}
@@ -56851,7 +56852,7 @@ MonoBehaviour:
   isSelected: 0
   playerMetaData:
     hp: 0
-    maxHP: 100
+    maxHP: 200
     maxActionPoints: 10
     distanceToMove: 0
     movementRange: 10
@@ -56921,6 +56922,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemy: {fileID: 0}
+--- !u!114 &3064799275050755884
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6515731884704741384}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94763db6f66422441964101d196e5470, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  delay: 0
 --- !u!114 &6515731884704742390
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -56959,7 +56973,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fireChance: 0
-  coolDownDelay: 0
+  coolDownDelay: 5
 --- !u!114 &6515731884704742391
 MonoBehaviour:
   m_ObjectHideFlags: 0

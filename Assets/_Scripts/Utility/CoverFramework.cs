@@ -1,4 +1,4 @@
-
+#define MARKER
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -82,7 +82,7 @@ public class CoverFramework : MonoBehaviour
             if (GeneralUtils.InsideNavMesh(flankPos, GameManager.UNIVERSAL_AGENT))
             {
                 #if MARKER
-                Instantiate(cornerMarkerPrefab, flankPos + Vector3.up * .1f, Quaternion.identity);
+                //Instantiate(cornerMarkerPrefab, flankPos + Vector3.up * .1f, Quaternion.identity);
                 #endif
                 flankPoints.Add(DockPoint.Instance(flankPos));
             }
@@ -100,7 +100,7 @@ public class CoverFramework : MonoBehaviour
             if (GeneralUtils.InsideNavMesh(flankPos, GameManager.UNIVERSAL_AGENT))
             {
                 #if MARKER
-                Instantiate(cornerMarkerPrefab, flankPos + Vector3.up * .1f, Quaternion.identity);
+                //Instantiate(cornerMarkerPrefab, flankPos + Vector3.up * .1f, Quaternion.identity);
                 #endif
                 flankPoints.Add(DockPoint.Instance(flankPos));
             }
@@ -122,7 +122,7 @@ public class CoverFramework : MonoBehaviour
             if (GeneralUtils.InsideNavMesh(flankPos, GameManager.UNIVERSAL_AGENT))
             {
                 #if MARKER
-                Instantiate(cornerMarkerPrefab, flankPos + Vector3.up * .1f, Quaternion.identity);
+                //Instantiate(cornerMarkerPrefab, flankPos + Vector3.up * .1f, Quaternion.identity);
                 #endif
                 flankPoints.Add(DockPoint.Instance(flankPos));
             }
@@ -141,7 +141,7 @@ public class CoverFramework : MonoBehaviour
             if (GeneralUtils.InsideNavMesh(flankPos, GameManager.UNIVERSAL_AGENT))
             {
                 #if MARKER
-                Instantiate(cornerMarkerPrefab, flankPos + Vector3.up * .1f, Quaternion.identity);
+                //Instantiate(cornerMarkerPrefab, flankPos + Vector3.up * .1f, Quaternion.identity);
                 #endif
                 flankPoints.Add(DockPoint.Instance(flankPos));
             }
@@ -206,7 +206,7 @@ public class CoverFramework : MonoBehaviour
     {
         Vector3 corner1 = new Vector3(transform.position.x + xPos * xInvert, transform.position.y, transform.position.z + zPos * zInvert);
         #if MARKER
-        Instantiate(cornerMarkerPrefab, corner1 + Vector3.up * .1f, Quaternion.identity);
+        //Instantiate(cornerMarkerPrefab, corner1 + Vector3.up * .1f, Quaternion.identity);
         #endif
         cornerPoints.Add(corner1);
         flankPoints.Add(DockPoint.Instance(corner1));
