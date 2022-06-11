@@ -152,7 +152,7 @@ public class MovementFSM : Command
     protected override bool Validate(Transform enemyTransform, Vector3? destination)
     {
         //Debug.LogFormat("{0}::In Validate points remaining {1}", playerController.name, pointsRemaining);
-        if (playerController.playerMetaData.WithinRange())
+/*        if (playerController.playerMetaData.WithinRange())
         {
             return this.commandDataInstance.CanRun();
         }
@@ -166,8 +166,8 @@ public class MovementFSM : Command
             Debug.Log("Cannot run command. Not within range");
             //Validation failed. Cancel this command/move.
             cancel = true;
-        }
-        return false;
+        }*/
+        return true;
     }
 
 }

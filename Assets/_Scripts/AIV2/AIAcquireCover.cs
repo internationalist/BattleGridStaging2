@@ -23,6 +23,8 @@ public class AIAcquireCover : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+
         if (!acquiringCover
         && Time.time - startTime > delay
         && controller != null
@@ -30,41 +32,45 @@ public class AIAcquireCover : MonoBehaviour
         && aiBrain.enemy != null
         && !aiBrain.enemy.IsDead)
         {
-            DockPoint dock = null;
-            startTime = Time.time;
-            List<CoverFramework> coversBYClosest = new List<CoverFramework>(GameManager.I.covers);
-            coversBYClosest.Sort((CoverFramework thisOne, CoverFramework other) =>
+            var distanceToEnemy = Vector3.Distance(transform.position, aiBrain.enemy.transform.position);
+            if(distanceToEnemy > commandTmpl.damageParameters.optimalRange || !controller.InCover)
             {
-                var distanceFromThisOne = Vector3.Distance(transform.position, thisOne.transform.position);
-                var distanceFromOther = Vector3.Distance(transform.position, other.transform.position);
-                if (distanceFromOther == distanceFromThisOne)
+                DockPoint dock = null;
+                startTime = Time.time;
+                List<CoverFramework> coversBYClosest = new List<CoverFramework>(GameManager.I.covers);
+                coversBYClosest.Sort((CoverFramework thisOne, CoverFramework other) =>
                 {
-                    return 0;
-                }
-                else if (distanceFromThisOne > distanceFromOther)
+                    var distanceFromThisOne = Vector3.Distance(transform.position, thisOne.transform.position);
+                    var distanceFromOther = Vector3.Distance(transform.position, other.transform.position);
+                    if (distanceFromOther == distanceFromThisOne)
+                    {
+                        return 0;
+                    }
+                    else if (distanceFromThisOne > distanceFromOther)
+                    {
+                        return 1;
+                    }
+                    else
+                    {
+                        return -1;
+                    }
+                });
+                for (int i = 0; i < coversBYClosest.Count; i++)
                 {
-                    return 1;
-                }
-                else
-                {
-                    return -1;
-                }
-            });
-            for (int i = 0; i < coversBYClosest.Count; i++)
-            {
-                dock = aiBrain.EvaluateCover(controller, aiBrain.enemy, coversBYClosest[i]);
-                if (dock != null)
-                {
-                    Debug.LogFormat("{0}: Moving to cover position {1}", name, dock.position);
-                    acquiringCover = true;
-                    aiBrain.TriggerMoveCommand(controller,
-                                               aiBrain.enemy,
-                                               dock.position,
-                                               () => {
-                                                   Debug.LogFormat("{0}: Reached cover at {1}", name, transform.position);
-                                                   acquiringCover = false;
-                                               });
-                    break;
+                    dock = aiBrain.EvaluateCover(controller, aiBrain.enemy, coversBYClosest[i]);
+                    if (dock != null)
+                    {
+                        Debug.LogFormat("{0}: Moving to cover position {1}", name, dock.position);
+                        acquiringCover = true;
+                        aiBrain.TriggerMoveCommand(controller,
+                                                   aiBrain.enemy,
+                                                   dock.position,
+                                                   () => {
+                                                       Debug.LogFormat("{0}: Reached cover at {1}", name, transform.position);
+                                                       acquiringCover = false;
+                                                   });
+                        break;
+                    }
                 }
             }
         }
