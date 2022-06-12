@@ -448,7 +448,14 @@ public class PlayerController : MonoBehaviour
                                         destination,
                                         onComplete);
 
-            commandQueue.Replace(commandQueueElement);
+            if(commandQueue.Contains(commandQueueElement))
+            {
+                commandQueue.Replace(commandQueueElement);
+            } else
+            {
+                commandQueue.Enqueue(commandQueueElement);
+            }
+
         } else
         {
             CommandQueue.CommandQueueElement commandQueueElement = new CommandQueue.CommandQueueElement(slot,

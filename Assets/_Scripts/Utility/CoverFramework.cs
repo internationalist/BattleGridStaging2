@@ -1,4 +1,4 @@
-#define MARKER
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -133,8 +133,8 @@ public class CoverFramework : MonoBehaviour
             {
                 #if MARKER
                 Instantiate(shelterMarkerPrefab, pos + Vector3.up * .1f, Quaternion.identity);
-                coverDockPoints.Add(DockPoint.Instance(pos));
                 #endif
+                coverDockPoints.Add(DockPoint.Instance(pos));
             }
 
             flankPos = new Vector3(transform.position.x + (minX - flankOffset) * xInvert, transform.position.y, transform.position.z + zIdx * zInvert);
