@@ -1,4 +1,3 @@
-
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,6 +13,8 @@ public class CoverFramework : MonoBehaviour
     public List<DockPoint> flankPoints;
     public List<ParticleSystem> ricochetEffects;
     public int ID;
+    [Tooltip("Making this zero increases the cover points")]
+    public int OFFSET = 1;
 
     [Range(0, 1)]
     public float damageReductionPct;
@@ -64,7 +65,7 @@ public class CoverFramework : MonoBehaviour
         bool foundXAxisPoints = false;
         bool foundZAxisPoints = false;
 
-        while (xIdx <= maxX - 1)
+        while (xIdx <= maxX - OFFSET)
         {
             foundXAxisPoints = true;
             Vector3 pos = new Vector3(transform.position.x + xIdx * xInvert, transform.position.y, transform.position.z + maxZ * zInvert);
@@ -107,7 +108,7 @@ public class CoverFramework : MonoBehaviour
             ++xIdx;
         }
 
-        while (zIdx <= maxZ - 1)
+        while (zIdx <= maxZ - OFFSET)
         {
             foundZAxisPoints = true;
             Vector3 pos = new Vector3(transform.position.x + maxX * xInvert, transform.position.y, transform.position.z + zIdx * zInvert);

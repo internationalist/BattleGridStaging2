@@ -151,6 +151,7 @@ MonoBehaviour:
   - {fileID: 1342903106951141758, guid: e617e429c78cc1147a86d7f25764a7e5, type: 3}
   - {fileID: 3088086561818561513, guid: 86991083bf70246cab4905f681be4c36, type: 3}
   ID: 0
+  OFFSET: 0
   damageReductionPct: 0.6
   coverType: 2
   coverRenderer:

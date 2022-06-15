@@ -273,7 +273,7 @@ public static class GeneralUtils {
         RaycastHit[] hits;
         // Does the ray intersect any cover
         hits = Physics.RaycastAll(origin, direction, distance, coverLayerMask);
-        //Debug.DrawRay(origin, direction, Color.red, 15f);
+        Debug.DrawRay(origin, direction, Color.red, 15f);
         if (hits != null)
         {
             retValues = new CoverFramework[hits.Length];
