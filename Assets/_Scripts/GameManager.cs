@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -51,6 +52,21 @@ public class GameManager : MonoBehaviour
     public float gravity;
 
     public static Dictionary<string, Vector2> occupancyMap = new Dictionary<string, Vector2>();
+
+    [MethodImpl(MethodImplOptions.Synchronized)]
+    public bool RecordOccupancyIfEmpty(string ID, Vector3 position)
+    {
+        if(GeneralUtils.IsSpotOccupied(position))
+        {
+            Debug.LogFormat("ID: {0} Position occupied {1}", ID, position);
+            return false;
+        } else
+        {
+            Debug.LogFormat("ID: {0} Adding position to occupancy map {1}", ID, position);
+            occupancyMap[ID] = new Vector2(position.x, position.z);
+            return true;
+        }
+    }
 
     private static GameObject transparentCover;
     public Material transparentCoverMaterial;

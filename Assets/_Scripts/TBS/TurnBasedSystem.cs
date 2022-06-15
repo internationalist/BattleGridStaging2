@@ -5,6 +5,7 @@ using UnityEngine;
 [System.Serializable]
 public class TurnBasedSystem:MonoBehaviour
 {
+    /*
     #region singleton
     private static TurnBasedSystem _instance;
     public static TurnBasedSystem I
@@ -141,7 +142,7 @@ public class TurnBasedSystem:MonoBehaviour
                     }
                 }*/
             //}
-        }
+/*        } 
         //Start first turn
         StartCoroutine(NextTurn());
     }
@@ -236,7 +237,7 @@ public class TurnBasedSystem:MonoBehaviour
                 {
                     pc.OnDeath += CharacterDied;
                 }*/
-    }
+  /*  }
 
     private static void HandleGameOver(Team team)
     {
@@ -299,7 +300,7 @@ public class TurnBasedSystem:MonoBehaviour
              * At this point system only works for one non-human enemy team.
              * First implementation is with AI. Network agent will be added later.
             */
-            AIManager.Init(t);
+/*            AIManager.Init(t);
             //t.init();
             readyForNextTurn = true; //Turns can proceed.
             if(enemySpawnComplete != null)
@@ -308,5 +309,5 @@ public class TurnBasedSystem:MonoBehaviour
             }
         }
     }
-    #endregion
+    #endregion */
 }

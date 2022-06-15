@@ -66,7 +66,6 @@ public class AIAcquireCover : MonoBehaviour
                                                    aiBrain.enemy,
                                                    dock.position,
                                                    () => {
-                                                       Debug.LogFormat("{0}: Reached cover at {1}", name, transform.position);
                                                        acquiringCover = false;
                                                    });
                         break;

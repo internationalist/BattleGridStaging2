@@ -11,10 +11,7 @@ public class PointAndClickController : MonoBehaviour
     {
         if (PCInputManager.Instance.MouseClick() && !EventSystem.current.IsPointerOverGameObject())
         {
-            if (!TurnBasedSystem.I.ActiveTeam.aiAgent)
-            {
-                Clicked();
-            }
+            Clicked();
         } else if (PCInputManager.Instance.RightClickOnDestination() && !EventSystem.current.IsPointerOverGameObject())
         {
             RightClicked();

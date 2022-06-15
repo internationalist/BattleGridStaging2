@@ -49,7 +49,6 @@ public class PlayerController : MonoBehaviour
 
     public PlayerMetaData playerMetaData;
 
-    public AIStateMachine _agent;
 
     public bool isAgent;
 
@@ -290,12 +289,7 @@ public class PlayerController : MonoBehaviour
         anim = GetComponent<Animator>();
         marker = transform.Find("Marker").gameObject;
         commands = new Dictionary<int, Command>();
-        _agent = GetComponent<AIStateMachine>();
 
-        if (_agent != null)
-        {
-            isAgent = true;
-        }
 
         for (int k = 0; k < commandList.Count; ++k)
         {
@@ -312,7 +306,6 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
-        OnDeath += TurnBasedSystem.I.CharacterDied;
     }
 
 

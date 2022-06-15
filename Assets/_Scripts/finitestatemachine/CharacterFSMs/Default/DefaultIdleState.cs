@@ -47,12 +47,12 @@ public class DefaultIdleState : BaseState
         } else
         {
             Vector3 enemyPosition;
-            if (DetectEnemyCloseby(cmd, out enemyPosition))
+            /*if (DetectEnemyCloseby(cmd, out enemyPosition))
             {
                 TurnToEnemy(cmd, enemyPosition);
             }
             else
-            {
+            {*/
                 AnimatorStateInfo currentAnimState = cmd.anim.GetCurrentAnimatorStateInfo(0);
                 if (currentAnimState.IsName("Idle") && cmd.playerController.InCover
                     && !transitioning)
@@ -63,7 +63,7 @@ public class DefaultIdleState : BaseState
                 {
                   transitioning = false;
                 }
-            }
+//            }
         }
     }
 
@@ -170,7 +170,7 @@ public class DefaultIdleState : BaseState
         }
     }
 
-    private bool DetectEnemyCloseby(Command command, out Vector3 enemyPos)
+/*    private bool DetectEnemyCloseby(Command command, out Vector3 enemyPos)
     {
         float distanceToClosestEnemy = float.MaxValue;
         PlayerController closest = null;
@@ -210,7 +210,7 @@ public class DefaultIdleState : BaseState
             return true;
         }
         return false;
-    }
+    }*/
 
     /// <summary>
     /// <para>When triggering the cover animation, the character can face either right or left depending upon which edge of cover is closer.

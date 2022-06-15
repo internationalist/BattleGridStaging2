@@ -61,6 +61,12 @@ public class AIBrain : MonoBehaviour
     public void TriggerMoveCommand(PlayerController controller, PlayerController enemy, Vector3 movemenLocation,
         Command.OnCompleteCallback onComplete)
     {
+        if(!GameManager.I.RecordOccupancyIfEmpty(controller.ID, movemenLocation))
+        {
+            Vector2 displacement = 2 * Random.insideUnitCircle;
+            Vector3 displacement3d = new Vector3(displacement.x, 0, displacement.y);
+            movemenLocation += displacement3d;
+        }
         TriggerCommand(Command.type.move, controller, enemy, movemenLocation, onComplete);
     }
 
