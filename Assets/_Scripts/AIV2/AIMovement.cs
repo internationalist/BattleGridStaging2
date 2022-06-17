@@ -41,7 +41,7 @@ public class AIMovement : MonoBehaviour
             var movementDistance = distanceToEnemy - commandTmpl.damageParameters.optimalRange;
             Vector3 dirOfMovement = (aiBrain.enemy.transform.position - transform.position).normalized;
             movementLocation = transform.position + dirOfMovement * movementDistance;
-            aiBrain.TriggerMoveCommand(controller, aiBrain.enemy, movementLocation, ()=> { });
+            AIManager.TriggerMoveCommand(controller, aiBrain.enemy, movementLocation, ()=> { });
         }
     }
 }

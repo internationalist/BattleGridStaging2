@@ -31,7 +31,7 @@ public class AIPrimaryAction : MonoBehaviour
             if(distanceToEnemy <= commandTmpl.damageParameters.optimalRange
                 && commandData.ammoCount >= commandData.maxBurstFire)
             {
-                aiBrain.TriggerPrimaryAction(controller, aiBrain.enemy);
+                AIManager.TriggerPrimaryAction(controller, aiBrain.enemy);
             }
         }
     }

@@ -28,7 +28,7 @@ public class AIReload : MonoBehaviour
         {
             if (commandData.ammoCount < commandData.maxBurstFire)
             {
-                aiBrain.TriggerReload(controller, aiBrain.enemy);
+                AIManager.TriggerReload(controller, aiBrain.enemy);
             }
         }
     }

@@ -40,7 +40,7 @@ public class AISpecialAction : MonoBehaviour
                 && (Time.time - activationTime) >= coolDownDelay)
             {
                 activationTime = Time.time;
-                aiBrain.TriggerSpecialAction(controller, aiBrain.enemy);
+                AIManager.TriggerSpecialAction(controller, aiBrain.enemy);
             }
         }
     }

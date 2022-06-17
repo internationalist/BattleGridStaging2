@@ -62,7 +62,7 @@ public class AIAcquireCover : MonoBehaviour
                     {
                         Debug.LogFormat("{0}: Moving to cover position {1}", name, dock.position);
                         acquiringCover = true;
-                        aiBrain.TriggerMoveCommand(controller,
+                        AIManager.TriggerMoveCommand(controller,
                                                    aiBrain.enemy,
                                                    dock.position,
                                                    () => {
