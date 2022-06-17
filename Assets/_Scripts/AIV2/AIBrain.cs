@@ -9,7 +9,7 @@ public class AIBrain : MonoBehaviour
     public PlayerController enemy;
     PlayerController player;
     PlayerController[] allPlayers;
-    List<PlayerController> foes;
+    public List<PlayerController> foes;
     List<PlayerController> friends;
     bool choosingEnemy;
     

@@ -2,26 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AIManager : MonoBehaviour
-{
-    #region singleton code
-    private static AIManager _instance;
-    public static AIManager I
-    {
-        get { return _instance; }
-    }
-
-    void Awake()
-    {
-        if (I != null)
-        {
-            Debug.LogError("Trying to initialize GameManager more than once");
-            return;
-        }
-        _instance = this;
-
-    }
-    #endregion
+public static class AIManager { 
 
     public static void TriggerMoveCommand(PlayerController controller, PlayerController enemy, Vector3 movemenLocation,
         Command.OnCompleteCallback onComplete)
@@ -53,7 +34,7 @@ public class AIManager : MonoBehaviour
             () => { });
     }
 
-    protected static void TriggerCommand(Command.type cmdType,
+    private static void TriggerCommand(Command.type cmdType,
                                   PlayerController controller,
                                   PlayerController enemy,
                                   Vector3 movementLocation,

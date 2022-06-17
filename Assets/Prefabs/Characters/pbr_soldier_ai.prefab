@@ -56872,7 +56872,6 @@ MonoBehaviour:
     grunts: {fileID: 11400000, guid: 707820041a3b6484184b5bc14bb124ed, type: 2}
     commandLimit: 0
     teamName: PlayerAI
-  _agent: {fileID: 0}
   isAgent: 1
   inCover: 0
   cover: {fileID: 0}
@@ -56973,7 +56972,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fireChance: 0
-  coolDownDelay: 5
+  coolDownDelay: 20
 --- !u!114 &6515731884704742391
 MonoBehaviour:
   m_ObjectHideFlags: 0
