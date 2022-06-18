@@ -58,6 +58,12 @@ public class AIBrain : MonoBehaviour
     }
     #endregion
 
+    #region AI Brain Stuff
+
+    #endregion
+
+    #region cover utility
+
     public DockPoint EvaluateCover(PlayerController pc,
         PlayerController enemy, CoverFramework thisCover)
     {
@@ -128,4 +134,5 @@ public class AIBrain : MonoBehaviour
         }
         return false;
     }
+    #endregion
 }

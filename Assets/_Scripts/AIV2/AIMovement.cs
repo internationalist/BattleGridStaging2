@@ -22,14 +22,19 @@ public class AIMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Time.time - startTime > delay
-        && controller != null
-        && !controller.IsDead
-        && aiBrain.enemy != null
-        && !aiBrain.enemy.IsDead)
+        if (IsActive())
         {
             ApproachEnemy();
         }
+    }
+
+    private bool IsActive()
+    {
+        return Time.time - startTime > delay //within the repeat delay
+                && controller != null //This player exists.
+                && !controller.IsDead //This player is not dead
+                && aiBrain.enemy != null //Enemy exists
+                && !aiBrain.enemy.IsDead; //Enemy is not dead
     }
 
     void ApproachEnemy()

@@ -29,20 +29,23 @@ public class AISpecialAction : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (controller != null
-            && !controller.IsDead
-            && aiBrain.enemy != null
-            && !aiBrain.enemy.IsDead)
+        if (IsActive())
         {
             var distanceToEnemy = Vector3.Distance(transform.position, aiBrain.enemy.transform.position);
-            if (distanceToEnemy <= commandTmpl.damageParameters.optimalRange
-                && CalculateChance()
-                && (Time.time - activationTime) >= coolDownDelay)
+            if (distanceToEnemy <= commandTmpl.damageParameters.optimalRange)
             {
                 activationTime = Time.time;
                 AIManager.TriggerSpecialAction(controller, aiBrain.enemy);
             }
         }
+    }
+
+    private bool IsActive()
+    {
+        return controller != null && !controller.IsDead //Player is alive
+                    && aiBrain.enemy != null && !aiBrain.enemy.IsDead //Enemy is alive
+                    && CalculateChance() //Probability of activation
+                    && (Time.time - activationTime) >= coolDownDelay; //Within the activation delay
     }
 
     private bool CalculateChance()
