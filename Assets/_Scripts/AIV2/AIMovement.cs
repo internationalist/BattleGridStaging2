@@ -6,7 +6,6 @@ public class AIMovement : MonoBehaviour
 {
     PlayerController controller;
     CommandTemplate commandTmpl;
-    Vector3 movementLocation;
     private float startTime;
     public float delay;
     AIBrain aiBrain;
@@ -24,7 +23,8 @@ public class AIMovement : MonoBehaviour
     {
         if (IsActive())
         {
-            ApproachEnemy();
+            startTime = AIUtils.ApproachEnemy(controller, aiBrain.enemy, commandTmpl);
+            //ApproachEnemy();
         }
     }
 
@@ -45,7 +45,7 @@ public class AIMovement : MonoBehaviour
         {
             var movementDistance = distanceToEnemy - commandTmpl.damageParameters.optimalRange;
             Vector3 dirOfMovement = (aiBrain.enemy.transform.position - transform.position).normalized;
-            movementLocation = transform.position + dirOfMovement * movementDistance;
+            Vector3 movementLocation = transform.position + dirOfMovement * movementDistance;
             AIManager.TriggerMoveCommand(controller, aiBrain.enemy, movementLocation, ()=> { });
         }
     }

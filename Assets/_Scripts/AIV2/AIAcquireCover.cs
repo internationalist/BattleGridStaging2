@@ -6,7 +6,6 @@ public class AIAcquireCover : MonoBehaviour
 {
     PlayerController controller;
     CommandTemplate commandTmpl;
-    Vector3 movementLocation;
     private float startTime;
     public float delay;
     AIBrain aiBrain;
@@ -25,53 +24,64 @@ public class AIAcquireCover : MonoBehaviour
     {
 
 
-        if (!acquiringCover
-        && Time.time - startTime > delay
-        && controller != null
-        && !controller.IsDead
-        && aiBrain.enemy != null
-        && !aiBrain.enemy.IsDead)
+        if (IsActive())
         {
-            var distanceToEnemy = Vector3.Distance(transform.position, aiBrain.enemy.transform.position);
-            if(distanceToEnemy > commandTmpl.damageParameters.optimalRange || !controller.InCover)
+            AcquireCover();
+        }
+    }
+
+    private void AcquireCover()
+    {
+        var distanceToEnemy = Vector3.Distance(transform.position, aiBrain.enemy.transform.position);
+        if (distanceToEnemy > commandTmpl.damageParameters.optimalRange || !controller.InCover)
+        {
+            DockPoint dock = null;
+            startTime = Time.time;
+            List<CoverFramework> coversBYClosest = new List<CoverFramework>(GameManager.I.covers);
+            coversBYClosest.Sort((CoverFramework thisOne, CoverFramework other) =>
             {
-                DockPoint dock = null;
-                startTime = Time.time;
-                List<CoverFramework> coversBYClosest = new List<CoverFramework>(GameManager.I.covers);
-                coversBYClosest.Sort((CoverFramework thisOne, CoverFramework other) =>
+                var distanceFromThisOne = Vector3.Distance(transform.position, thisOne.transform.position);
+                var distanceFromOther = Vector3.Distance(transform.position, other.transform.position);
+                if (distanceFromOther == distanceFromThisOne)
                 {
-                    var distanceFromThisOne = Vector3.Distance(transform.position, thisOne.transform.position);
-                    var distanceFromOther = Vector3.Distance(transform.position, other.transform.position);
-                    if (distanceFromOther == distanceFromThisOne)
-                    {
-                        return 0;
-                    }
-                    else if (distanceFromThisOne > distanceFromOther)
-                    {
-                        return 1;
-                    }
-                    else
-                    {
-                        return -1;
-                    }
-                });
-                for (int i = 0; i < coversBYClosest.Count; i++)
+                    return 0;
+                }
+                else if (distanceFromThisOne > distanceFromOther)
                 {
-                    dock = aiBrain.EvaluateCover(controller, aiBrain.enemy, coversBYClosest[i]);
-                    if (dock != null)
-                    {
-                        Debug.LogFormat("{0}: Moving to cover position {1}", name, dock.position);
-                        acquiringCover = true;
-                        AIManager.TriggerMoveCommand(controller,
-                                                   aiBrain.enemy,
-                                                   dock.position,
-                                                   () => {
-                                                       acquiringCover = false;
-                                                   });
-                        break;
-                    }
+                    return 1;
+                }
+                else
+                {
+                    return -1;
+                }
+            });
+            for (int i = 0; i < coversBYClosest.Count; i++)
+            {
+                dock = aiBrain.EvaluateCover(controller, aiBrain.enemy, coversBYClosest[i]);
+                if (dock != null)
+                {
+                    Debug.LogFormat("{0}: Moving to cover position {1}", name, dock.position);
+                    acquiringCover = true;
+                    AIManager.TriggerMoveCommand(controller,
+                                               aiBrain.enemy,
+                                               dock.position,
+                                               () =>
+                                               {
+                                                   acquiringCover = false;
+                                               });
+                    break;
                 }
             }
         }
+    }
+
+    private bool IsActive()
+    {
+        return !acquiringCover
+                && Time.time - startTime > delay
+                && controller != null
+                && !controller.IsDead
+                && aiBrain.enemy != null
+                && !aiBrain.enemy.IsDead;
     }
 }
