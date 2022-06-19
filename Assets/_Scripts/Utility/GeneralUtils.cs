@@ -487,9 +487,9 @@ public static class GeneralUtils {
         }
     }
 
-    private static void PrintDictionary(Dictionary<int, Vector2> occupancyMap)
+    public static void PrintDictionary(Dictionary<string, Vector2> occupancyMap)
     {
-        foreach (KeyValuePair<int, Vector2> entry in occupancyMap)
+        foreach (KeyValuePair<string, Vector2> entry in occupancyMap)
         {
             Debug.LogFormat("{0}::{1}", entry.Key, entry.Value);
         }
