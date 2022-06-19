@@ -56921,6 +56921,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemy: {fileID: 0}
+  foes: []
 --- !u!114 &3064799275050755884
 MonoBehaviour:
   m_ObjectHideFlags: 0
