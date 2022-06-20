@@ -104,6 +104,7 @@ public class AIBrain : MonoBehaviour
                             var distanceToEnemy = Vector3.Distance(chosenDockPoint.position, enemy.transform.position);
                             CommandTemplate commandTmpl = pc.GetWeaponTemplateForCommand(GeneralUtils.ATTACKSLOT);
 
+                            /* weapon range check */
                             if (distanceToEnemy > commandTmpl.damageParameters.optimalRange)
                             {
                                 continue;

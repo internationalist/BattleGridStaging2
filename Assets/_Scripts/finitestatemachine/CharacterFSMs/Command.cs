@@ -124,7 +124,7 @@ public abstract class Command : BaseFSMController
 
     protected virtual void Activate(Transform enemyTransform, Vector3? destination)
     {
-        commandStartTimeInSecs = Time.realtimeSinceStartup;
+        commandStartTimeInSecs = Time.time;
         //GameManager.I.readOnly = true;
         currentState.EnterState(this);
     }
@@ -176,7 +176,7 @@ public abstract class Command : BaseFSMController
     {
         if(timeOutInSecs > 0 && commandStartTimeInSecs > -1f)
         {
-            float timeSinceCommandStart = Time.realtimeSinceStartup - commandStartTimeInSecs;
+            float timeSinceCommandStart = Time.time - commandStartTimeInSecs;
             if (timeSinceCommandStart > timeOutInSecs)
             {
                 Debug.LogFormat("{0} Timeout exceeded with {1} seconds. Terminating command", timeOutInSecs, timeSinceCommandStart);

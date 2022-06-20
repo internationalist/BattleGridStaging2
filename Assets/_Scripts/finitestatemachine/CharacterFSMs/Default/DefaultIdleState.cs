@@ -67,7 +67,7 @@ public class DefaultIdleState : BaseState
         }
     }
 
-    private static void ResetIdleAnims(IdleFSM cmd)
+    public static void ResetIdleAnims(Command cmd)
     {
         cmd.anim.ResetTrigger("Idle");
         cmd.anim.ResetTrigger("Alert_Idle");
@@ -103,7 +103,7 @@ public class DefaultIdleState : BaseState
         {
             if (CoverFramework.TYPE.full.Equals(pc.cover.coverType))
             {
-                GeneralUtils.SetAnimationTrigger(command.anim, "Alert_Idle");
+                GeneralUtils.SetAnimationTrigger(command.anim, "Idle");
             }
             else
             {
@@ -112,7 +112,7 @@ public class DefaultIdleState : BaseState
         }
         else
         {
-            GeneralUtils.SetAnimationTrigger(command.anim, "Alert_Idle");
+            GeneralUtils.SetAnimationTrigger(command.anim, "Idle");
         }
     }
 

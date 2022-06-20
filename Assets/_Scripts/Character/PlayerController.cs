@@ -75,8 +75,10 @@ public class PlayerController : MonoBehaviour
     
     private bool commandInQueue;
 
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public Command getCurrentCommand() { return currentCommand;}
 
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public void setCurrentCommand(Command value)
     {
         //Debug.LogFormat("{0}::setCurrentCommand Starting", name);
@@ -322,11 +324,18 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        if(currentCommand.Equals(defaultCommand) && !commandInQueue)
+        if(getCurrentCommand().Equals(defaultCommand) && !commandInQueue)
         {//check command queue for content.
             CommandQueue.CommandQueueElement? queueElementOptional = commandQueue.Peek();
-            if(queueElementOptional.HasValue)
+
+            if (queueElementOptional.HasValue)
             {
+                if(queueElementOptional.Value.slot == GeneralUtils.ATTACKSLOT && this.ID=="2")
+                {
+                    Debug.LogFormat("{0} switching commands to {1} from {2}",
+                        name,
+                        queueElementOptional.Value.slot, currentCommand.GetType());
+                }
                 CommandQueue.CommandQueueElement element = queueElementOptional.Value;
                 StartCoroutine(DelayedCommandActivate(element));
             } else
@@ -429,8 +438,8 @@ public class PlayerController : MonoBehaviour
                                     Vector3? destination,
                                     Command.OnCompleteCallback onComplete)
     {
-        if((currentCommand.commandType == Command.type.move
-            || currentCommand.commandType == Command.type.idle)
+        if((currentCommand.commandType == Command.type.move)
+            //|| currentCommand.commandType == Command.type.idle)
             && slot == GeneralUtils.MOVESLOT)//if current and requested commanmd is of move type. Immediately execute new move command.
         {
             ActivateCommand(slot, enemyTransform, destination, onComplete);

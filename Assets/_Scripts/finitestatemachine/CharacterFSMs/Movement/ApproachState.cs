@@ -10,6 +10,7 @@ public class ApproachState : BaseState
     public override void EnterState(BaseFSMController controller)
     {
         command = (MovementFSM)controller;
+        DefaultIdleState.ResetIdleAnims(command);
         //Debug.LogFormat("{0}: Approaching destination {1}", command.playerController.name, command.Destination.Value);
         command.anim.CrossFade("Idle", 0.2f);
         command.nav.SetDestination(command.Destination.Value);
@@ -17,7 +18,7 @@ public class ApproachState : BaseState
                          command.Destination.Value);
         expectedTimeToComplete = distance / command.nav.speed;
         //Debug.LogFormat("Time to complete move is {0}", expectedTimeToComplete);
-        startTime = Time.realtimeSinceStartup;
+        startTime = Time.time;
     }
 
     public override void Update(BaseFSMController controller)
@@ -40,7 +41,7 @@ public class ApproachState : BaseState
             } else
             {
                 //Verify if navigation hung
-                float runningFor = Time.realtimeSinceStartup - startTime;
+                float runningFor = Time.time - startTime;
                 if(runningFor > (expectedTimeToComplete + expectedTimeToComplete*(timeOverFlowPercent)/100))
                 {
                     Debug.LogFormat("Navigation possibly hung. Ending move. Running For {0}, Expected time to complete {1}"

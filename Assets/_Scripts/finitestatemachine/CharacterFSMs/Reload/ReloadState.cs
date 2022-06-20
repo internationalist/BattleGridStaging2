@@ -15,7 +15,7 @@ public class ReloadState : BaseState
                 if (currentAnimState.IsName("HiCover_L"))
                 {
                     command.anim.SetTrigger("Cover_ReloadL");
-                } else if(currentAnimState.IsName("Alert_Idle"))
+                } else if(currentAnimState.IsName("Idle"))
                 {
                     command.anim.SetTrigger("Reload");
                 }

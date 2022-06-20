@@ -40,7 +40,7 @@ public class IdleState : BaseState
         {
             if (CoverFramework.TYPE.full.Equals(pc.cover.coverType))
             {
-                GeneralUtils.SetAnimationTrigger(command.anim, "Alert_Idle");
+                GeneralUtils.SetAnimationTrigger(command.anim, "Idle");
             }
             else
             {
@@ -49,7 +49,7 @@ public class IdleState : BaseState
         }
         else
         {
-            GeneralUtils.SetAnimationTrigger(command.anim, "Alert_Idle");
+            GeneralUtils.SetAnimationTrigger(command.anim, "Idle");
         }
     }
 }

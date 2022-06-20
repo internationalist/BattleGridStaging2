@@ -8,6 +8,9 @@ public class AIAcquireCover : MonoBehaviour
     CommandTemplate commandTmpl;
     private float startTime;
     public float delay;
+    public float acquireCoverDelay;
+    public float movementDelay;
+    float backupDelay;
     AIBrain aiBrain;
     bool acquiringCover;
     // Start is called before the first frame update
@@ -71,6 +74,11 @@ public class AIAcquireCover : MonoBehaviour
                                                });
                     break;
                 }
+            }
+            if(dock == null)
+            {
+                Debug.Log("No suitable cover found");
+                startTime = AIUtils.ApproachEnemy(controller, aiBrain.enemy, commandTmpl);
             }
         }
     }
