@@ -24,7 +24,6 @@ public class AIMovement : MonoBehaviour
         if (IsActive())
         {
             startTime = AIUtils.ApproachEnemy(controller, aiBrain.enemy, commandTmpl);
-            //ApproachEnemy();
         }
     }
 
