@@ -32,7 +32,7 @@ MonoBehaviour:
   maxRuns: 1
   timeOutInSecs: 5
   damageParameters:
-    optimalRange: 30
+    optimalRange: 20
     fallOff: 5
     baseDamage: 10
     criticalDamageMultiplier: 3

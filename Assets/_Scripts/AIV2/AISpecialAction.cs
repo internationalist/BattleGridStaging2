@@ -5,15 +5,17 @@ using UnityEngine;
 public class AISpecialAction : MonoBehaviour
 {
     PlayerController controller;
-    CommandTemplate commandTmpl;
+    //CommandTemplate commandTmpl;
     CommandDataInstance commandData;
     AIBrain aiBrain;
     [Range(0, 1)]
     [Header("AI probability of activating special attack")]
     public float fireChance;
-    [Header("Cool down delay")]
+    [Tooltip("Special action cool down time in seconds")]
     public float coolDownDelay;
     private float activationTime;
+
+    public bool canRun;
 
 
 
@@ -21,7 +23,7 @@ public class AISpecialAction : MonoBehaviour
     void Start()
     {
         controller = GetComponent<PlayerController>();
-        commandTmpl = controller.GetWeaponTemplateForCommand(GeneralUtils.ITEMSLOT);
+        //commandTmpl = controller.GetWeaponTemplateForCommand(GeneralUtils.ITEMSLOT);
         commandData = controller.commands[GeneralUtils.ATTACKSLOT].commandDataInstance;
         aiBrain = GetComponent<AIBrain>();
     }
@@ -29,10 +31,10 @@ public class AISpecialAction : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (IsActive())
+        if (canRun)
         {
             var distanceToEnemy = Vector3.Distance(transform.position, aiBrain.enemy.transform.position);
-            if (distanceToEnemy <= commandTmpl.damageParameters.optimalRange)
+            if (distanceToEnemy <= aiBrain.commandTmpl.damageParameters.optimalRange)
             {
                 activationTime = Time.time;
                 AIManager.TriggerSpecialAction(controller, aiBrain.enemy);
@@ -40,7 +42,7 @@ public class AISpecialAction : MonoBehaviour
         }
     }
 
-    private bool IsActive()
+    public bool IsActive()
     {
         return controller != null && !controller.IsDead //Player is alive
                     && aiBrain.enemy != null && !aiBrain.enemy.IsDead //Enemy is alive

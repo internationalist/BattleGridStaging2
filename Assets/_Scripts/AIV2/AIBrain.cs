@@ -12,7 +12,13 @@ public class AIBrain : MonoBehaviour
     public List<PlayerController> foes;
     List<PlayerController> friends;
     bool choosingEnemy;
-    
+    public CommandTemplate commandTmpl;
+
+    AISpecialAction specialAction;
+    [Tooltip("The ai Brain runs a pass after this time in seconds")]
+    public float aiCycleDelay;
+    float lastRunTime;
+
     #endregion
 
     #region Unity events
@@ -20,15 +26,23 @@ public class AIBrain : MonoBehaviour
     {
         player = GetComponent<PlayerController>();
         allPlayers = FindObjectsOfType<PlayerController>();
+        specialAction = GetComponent<AISpecialAction>();
         ChooseEnemy();
+        commandTmpl = player.GetWeaponTemplateForCommand(GeneralUtils.ITEMSLOT);
     }
 
     private void Update()
     {
-        if(enemy.IsDead && !choosingEnemy)
+        if(Time.time - lastRunTime > aiCycleDelay)
         {
-            ChooseEnemy();
+            lastRunTime = Time.time;
+            if (enemy.IsDead && !choosingEnemy)
+            {
+                ChooseEnemy();
+            }
+            LaunchSpecialAction();
         }
+
     }
 
 
@@ -59,6 +73,19 @@ public class AIBrain : MonoBehaviour
     #endregion
 
     #region AI Brain Stuff
+
+    void LaunchSpecialAction()
+    {
+        if(specialAction.IsActive())
+        {
+            specialAction.canRun = true;
+        } else
+        {
+            specialAction.canRun = false;
+        }
+    }
+
+
 
     #endregion
 

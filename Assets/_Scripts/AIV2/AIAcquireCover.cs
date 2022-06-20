@@ -8,9 +8,6 @@ public class AIAcquireCover : MonoBehaviour
     CommandTemplate commandTmpl;
     private float startTime;
     public float delay;
-    public float acquireCoverDelay;
-    public float movementDelay;
-    float backupDelay;
     AIBrain aiBrain;
     bool acquiringCover;
     // Start is called before the first frame update
