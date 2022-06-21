@@ -22,10 +22,15 @@ public static class AIManager {
             () => { });
     }
 
-    public static void TriggerSpecialAction(PlayerController controller, PlayerController enemy)
+    public static void TriggerSpecialAction(PlayerController controller,
+                                            PlayerController enemy,
+                                            Command.OnCompleteCallback callBack)
     {
-        TriggerCommand(Command.type.specialaction, controller, enemy, Vector3.zero,
-            () => { });
+        TriggerCommand(Command.type.specialaction,
+                       controller,
+                       enemy,
+                       Vector3.zero,
+                       callBack);
     }
 
     public static void TriggerReload(PlayerController controller, PlayerController enemy)

@@ -15,6 +15,7 @@ public class AIBrain : MonoBehaviour
     public CommandTemplate commandTmpl;
 
     AISpecialAction specialAction;
+    public bool isSpecialActionComplete;
     [Tooltip("The ai Brain runs a pass after this time in seconds")]
     public float aiCycleDelay;
     float lastRunTime;
@@ -28,7 +29,7 @@ public class AIBrain : MonoBehaviour
         allPlayers = FindObjectsOfType<PlayerController>();
         specialAction = GetComponent<AISpecialAction>();
         ChooseEnemy();
-        commandTmpl = player.GetWeaponTemplateForCommand(GeneralUtils.ITEMSLOT);
+        commandTmpl = player.GetWeaponTemplateForCommand(GeneralUtils.ATTACKSLOT);
     }
 
     private void Update()
@@ -41,6 +42,11 @@ public class AIBrain : MonoBehaviour
                 ChooseEnemy();
             }
             LaunchSpecialAction();
+            if(isSpecialActionComplete)
+            {
+                isSpecialActionComplete = false;
+                commandTmpl = player.GetWeaponTemplateForCommand(GeneralUtils.ATTACKSLOT);
+            }
         }
 
     }
@@ -79,6 +85,7 @@ public class AIBrain : MonoBehaviour
         if(specialAction.IsActive())
         {
             specialAction.canRun = true;
+            commandTmpl = player.GetWeaponTemplateForCommand(GeneralUtils.ITEMSLOT);
         } else
         {
             specialAction.canRun = false;
@@ -129,7 +136,7 @@ public class AIBrain : MonoBehaviour
                             chosenDockPoint = dockPointClone[i];
                             //Check if within firing range or not.
                             var distanceToEnemy = Vector3.Distance(chosenDockPoint.position, enemy.transform.position);
-                            CommandTemplate commandTmpl = pc.GetWeaponTemplateForCommand(GeneralUtils.ATTACKSLOT);
+                            //CommandTemplate commandTmpl = pc.GetWeaponTemplateForCommand(GeneralUtils.ATTACKSLOT);
 
                             /* weapon range check */
                             if (distanceToEnemy > commandTmpl.damageParameters.optimalRange)

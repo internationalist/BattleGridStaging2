@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0.99999905, b: 0.99999905, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1429,7 +1429,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3036999833263446631, guid: 27a07bec43008744fab097b628591cfa, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 10
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 3036999833263446631, guid: 27a07bec43008744fab097b628591cfa, type: 3}
       propertyPath: m_LocalPosition.y
@@ -2095,6 +2095,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3064799275050755884, guid: c42b0729f71d76741958c27d3bf91ae6, type: 3}
+      propertyPath: delay
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3064799275050755884, guid: c42b0729f71d76741958c27d3bf91ae6, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6515731884704741384, guid: c42b0729f71d76741958c27d3bf91ae6, type: 3}
       propertyPath: m_Name
       value: pbr_soldier_ai-1
@@ -2152,6 +2160,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1793320060}
     - target: {fileID: 6515731884704742386, guid: c42b0729f71d76741958c27d3bf91ae6, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6515731884704742386, guid: c42b0729f71d76741958c27d3bf91ae6, type: 3}
+      propertyPath: fireChance
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6515731884704742386, guid: c42b0729f71d76741958c27d3bf91ae6, type: 3}
       propertyPath: coolDownDelay
       value: 5
       objectReference: {fileID: 0}
@@ -2162,6 +2178,10 @@ PrefabInstance:
     - target: {fileID: 6515731884704742389, guid: c42b0729f71d76741958c27d3bf91ae6, type: 3}
       propertyPath: aiCycleDelay
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6515731884704742390, guid: c42b0729f71d76741958c27d3bf91ae6, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8542869097345520150, guid: c42b0729f71d76741958c27d3bf91ae6, type: 3}
       propertyPath: m_ConnectedAnchor.x
@@ -2948,7 +2968,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6515731884704741385, guid: c42b0729f71d76741958c27d3bf91ae6, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6515731884704741385, guid: c42b0729f71d76741958c27d3bf91ae6, type: 3}
       propertyPath: m_LocalPosition.y
@@ -3010,8 +3030,20 @@ PrefabInstance:
       propertyPath: fireChance
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6515731884704742386, guid: c42b0729f71d76741958c27d3bf91ae6, type: 3}
+      propertyPath: coolDownDelay
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 6515731884704742388, guid: c42b0729f71d76741958c27d3bf91ae6, type: 3}
       propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6515731884704742389, guid: c42b0729f71d76741958c27d3bf91ae6, type: 3}
+      propertyPath: aiCycleDelay
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6515731884704742390, guid: c42b0729f71d76741958c27d3bf91ae6, type: 3}
+      propertyPath: delay
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6515731884704742390, guid: c42b0729f71d76741958c27d3bf91ae6, type: 3}
@@ -3064,15 +3096,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8542869097668152417, guid: c42b0729f71d76741958c27d3bf91ae6, type: 3}
       propertyPath: m_ConnectedAnchor.x
-      value: -0.3892374
+      value: -0.38923746
       objectReference: {fileID: 0}
     - target: {fileID: 8542869097668152417, guid: c42b0729f71d76741958c27d3bf91ae6, type: 3}
       propertyPath: m_ConnectedAnchor.y
-      value: 0.005202612
+      value: 0.005202565
       objectReference: {fileID: 0}
     - target: {fileID: 8542869097668152417, guid: c42b0729f71d76741958c27d3bf91ae6, type: 3}
       propertyPath: m_ConnectedAnchor.z
-      value: 0.0015482819
+      value: 0.0015487673
       objectReference: {fileID: 0}
     - target: {fileID: 8542869097729179726, guid: c42b0729f71d76741958c27d3bf91ae6, type: 3}
       propertyPath: m_ConnectedAnchor.x
@@ -3112,11 +3144,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8542869098438491229, guid: c42b0729f71d76741958c27d3bf91ae6, type: 3}
       propertyPath: m_ConnectedAnchor.y
-      value: 0.0056953756
+      value: 0.0056952564
       objectReference: {fileID: 0}
     - target: {fileID: 8542869098438491229, guid: c42b0729f71d76741958c27d3bf91ae6, type: 3}
       propertyPath: m_ConnectedAnchor.z
-      value: 0
+      value: -0.00000044703484
       objectReference: {fileID: 0}
     - target: {fileID: 8542869098565756415, guid: c42b0729f71d76741958c27d3bf91ae6, type: 3}
       propertyPath: m_ConnectedAnchor.x
@@ -3261,7 +3293,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-1304
+  m_Name: pb_Mesh-1372
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -3487,7 +3519,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6370047644347148170, guid: 675abeea81ef0304ba0909aa99d716be, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 13
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 6370047644347148170, guid: 675abeea81ef0304ba0909aa99d716be, type: 3}
       propertyPath: m_LocalPosition.y

@@ -5,8 +5,7 @@ using UnityEngine;
 public class AISpecialAction : MonoBehaviour
 {
     PlayerController controller;
-    //CommandTemplate commandTmpl;
-    CommandDataInstance commandData;
+    CommandTemplate commandTmpl;
     AIBrain aiBrain;
     [Range(0, 1)]
     [Header("AI probability of activating special attack")]
@@ -23,8 +22,7 @@ public class AISpecialAction : MonoBehaviour
     void Start()
     {
         controller = GetComponent<PlayerController>();
-        //commandTmpl = controller.GetWeaponTemplateForCommand(GeneralUtils.ITEMSLOT);
-        commandData = controller.commands[GeneralUtils.ATTACKSLOT].commandDataInstance;
+        commandTmpl = controller.GetWeaponTemplateForCommand(GeneralUtils.ITEMSLOT);
         aiBrain = GetComponent<AIBrain>();
     }
 
@@ -34,10 +32,12 @@ public class AISpecialAction : MonoBehaviour
         if (canRun)
         {
             var distanceToEnemy = Vector3.Distance(transform.position, aiBrain.enemy.transform.position);
-            if (distanceToEnemy <= aiBrain.commandTmpl.damageParameters.optimalRange)
+            if (distanceToEnemy <= commandTmpl.damageParameters.optimalRange)
             {
                 activationTime = Time.time;
-                AIManager.TriggerSpecialAction(controller, aiBrain.enemy);
+                AIManager.TriggerSpecialAction(controller,
+                                               aiBrain.enemy,
+                                               ()=> { aiBrain.isSpecialActionComplete = true; });
             }
         }
     }

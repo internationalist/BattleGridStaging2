@@ -5,7 +5,7 @@ using UnityEngine;
 public class AIAcquireCover : MonoBehaviour
 {
     PlayerController controller;
-    CommandTemplate commandTmpl;
+    //CommandTemplate commandTmpl;
     private float startTime;
     public float delay;
     AIBrain aiBrain;
@@ -14,7 +14,6 @@ public class AIAcquireCover : MonoBehaviour
     void Start()
     {
         controller = GetComponent<PlayerController>();
-        commandTmpl = controller.GetWeaponTemplateForCommand(GeneralUtils.ATTACKSLOT);
         startTime = Time.time;
         aiBrain = GetComponent<AIBrain>();
     }
@@ -33,7 +32,7 @@ public class AIAcquireCover : MonoBehaviour
     private void AcquireCover()
     {
         var distanceToEnemy = Vector3.Distance(transform.position, aiBrain.enemy.transform.position);
-        if (distanceToEnemy > commandTmpl.damageParameters.optimalRange || !controller.InCover)
+        if (distanceToEnemy > aiBrain.commandTmpl.damageParameters.optimalRange || !controller.InCover)
         {
             DockPoint dock = null;
             startTime = Time.time;
@@ -75,7 +74,13 @@ public class AIAcquireCover : MonoBehaviour
             if(dock == null)
             {
                 Debug.Log("No suitable cover found");
-                startTime = AIUtils.ApproachEnemy(controller, aiBrain.enemy, commandTmpl);
+                startTime = AIUtils.ApproachEnemy(controller,
+                                                  aiBrain.enemy,
+                                                  aiBrain.commandTmpl,
+                                                () =>
+                                                {
+                                                     acquiringCover = false;
+                                                });
             }
         }
     }

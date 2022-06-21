@@ -330,12 +330,6 @@ public class PlayerController : MonoBehaviour
 
             if (queueElementOptional.HasValue)
             {
-                if(queueElementOptional.Value.slot == GeneralUtils.ATTACKSLOT && this.ID=="2")
-                {
-                    Debug.LogFormat("{0} switching commands to {1} from {2}",
-                        name,
-                        queueElementOptional.Value.slot, currentCommand.GetType());
-                }
                 CommandQueue.CommandQueueElement element = queueElementOptional.Value;
                 StartCoroutine(DelayedCommandActivate(element));
             } else
@@ -373,7 +367,12 @@ public class PlayerController : MonoBehaviour
             PlayerController enemy = element.enemyTransform.GetComponent<PlayerController>();
             if(enemy != null && !enemy.isDead && !isDead)
             {
-                ActivateCommand(element.slot, element.enemyTransform, element.destination, element.onComplete);
+                var destination = element.destination;
+                if(element.destination == Vector3.zero)
+                {
+                    destination = element.enemyTransform.position;
+                }
+                ActivateCommand(element.slot, element.enemyTransform, destination, element.onComplete);
                 commandQueue.Dequeue();
             } else if(enemy == null || enemy.isDead) //Get rid of any commands that point to dead enemy
             {
@@ -462,7 +461,7 @@ public class PlayerController : MonoBehaviour
         {
             CommandQueue.CommandQueueElement commandQueueElement = new CommandQueue.CommandQueueElement(slot,
                                         enemyTransform,
-                                        destination,
+                                        Vector3.zero,
                                         onComplete);
 
             if (!currentCommand.Equals(commands[slot]) && !commandQueue.Contains(commandQueueElement))

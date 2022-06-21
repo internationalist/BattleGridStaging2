@@ -66,13 +66,21 @@ public class TurnForMoveState : BaseState
         if (timeCount >= .8f)
         {
             command.playerTransform.rotation = toRotation;
-            command.anim.ResetTrigger("Turn_Left");
-            command.anim.ResetTrigger("Turn_Right");
+            ResetAnims(command);
             player.TransitionToState(player.StateMap[nextState.ToString()]);
-        } else
+        }
+        else
         {
             command.playerTransform.rotation = Quaternion.Slerp(command.playerTransform.rotation, toRotation, timeCount);
         }
+    }
+
+    private static void ResetAnims(Command command)
+    {
+        command.anim.ResetTrigger("Turn_Left");
+        command.anim.ResetTrigger("Turn_Right");
+        command.anim.ResetTrigger("Crouched_Turn_L");
+        command.anim.ResetTrigger("Crouched_Turn_R");
     }
 
     private void ActivateTurnAnimation(Command command, string defaultAnim, string crouchedAnim)
@@ -103,5 +111,7 @@ public class TurnForMoveState : BaseState
         Command command = (Command)controller;
         command.anim.ResetTrigger("Turn_Left");
         command.anim.ResetTrigger("Turn_Right");
+        command.anim.ResetTrigger("Crouched_Turn_L");
+        command.anim.ResetTrigger("Crouched_Turn_R");
     }
 }
