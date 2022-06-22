@@ -11,7 +11,7 @@ public static class AIUtils
     {
         float startTime = Time.time;
         var distanceToEnemy = Vector3.Distance(controller.transform.position, enemy.transform.position);
-        if (distanceToEnemy > commandTmpl.damageParameters.optimalRange)
+        if (Mathf.Round(distanceToEnemy) > commandTmpl.damageParameters.optimalRange)
         {
             var movementDistance = distanceToEnemy - commandTmpl.damageParameters.optimalRange;
             Vector3 dirOfMovement = (enemy.transform.position - controller.transform.position).normalized;
