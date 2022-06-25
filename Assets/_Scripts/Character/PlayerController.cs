@@ -378,6 +378,10 @@ public class PlayerController : MonoBehaviour
             {
                 commandQueue.Dequeue();
             }
+        } else
+        {
+            ActivateCommand(element.slot, null, element.destination, element.onComplete);
+            commandQueue.Dequeue();
         }
 
         commandInQueue = false;
