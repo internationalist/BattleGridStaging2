@@ -19,7 +19,7 @@ public class AIBrain : MonoBehaviour
     [Tooltip("The ai Brain runs a pass after this time in seconds")]
     public float aiCycleDelay;
     float lastRunTime;
-    Vector3 movementLocation;
+    public Vector3 movementLocation;
 
     #endregion
 

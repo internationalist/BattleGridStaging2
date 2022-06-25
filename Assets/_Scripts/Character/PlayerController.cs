@@ -333,7 +333,16 @@ public class PlayerController : MonoBehaviour
             if (queueElementOptional.HasValue)
             {
                 CommandQueue.CommandQueueElement element = queueElementOptional.Value;
-                StartCoroutine(DelayedCommandActivate(element));
+                if(isAgent)
+                {
+                    StartCoroutine(DelayedCommandActivate(element));
+                } else
+                {
+                    commandInQueue = true;
+                    ConsumeCommand(element);
+                    commandInQueue = false;
+                }
+
             } else
             {
                 defaultCommand.Update();
@@ -364,29 +373,35 @@ public class PlayerController : MonoBehaviour
     {
         commandInQueue = true;
         yield return new WaitForSeconds(.5f);
-        if(element.enemyTransform != null)
+        ConsumeCommand(element);
+        commandInQueue = false;
+    }
+
+    private void ConsumeCommand(CommandQueue.CommandQueueElement element)
+    {
+        if (element.enemyTransform != null)
         {
             PlayerController enemy = element.enemyTransform.GetComponent<PlayerController>();
-            if(enemy != null && !enemy.isDead && !isDead)
+            if (enemy != null && !enemy.isDead && !isDead)
             {
                 var destination = element.destination;
-                if(element.destination == Vector3.zero)
+                if (element.destination == Vector3.zero)
                 {
                     destination = element.enemyTransform.position;
                 }
                 ActivateCommand(element.slot, element.enemyTransform, destination, element.onComplete);
                 commandQueue.Dequeue();
-            } else if(enemy == null || enemy.isDead) //Get rid of any commands that point to dead enemy
+            }
+            else if (enemy == null || enemy.isDead) //Get rid of any commands that point to dead enemy
             {
                 commandQueue.Dequeue();
             }
-        } else
+        }
+        else
         {
             ActivateCommand(element.slot, null, element.destination, element.onComplete);
             commandQueue.Dequeue();
         }
-
-        commandInQueue = false;
     }
     #endregion
 
