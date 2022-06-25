@@ -21,5 +21,10 @@ public static class AIUtils
         return startTime;
     }
 
-
+    public static void ApproachLocation(PlayerController controller,
+                                      Vector3 movementLocation,
+                                      Command.OnCompleteCallback callBack)
+    {
+        AIManager.TriggerMoveCommand(controller, movementLocation, callBack);
+    }
 }

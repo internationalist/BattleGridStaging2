@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0.99999905, b: 0.99999905, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1985,7 +1985,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 973063781272057715, guid: 3a09bcde966418e458aad6c358d0b655, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 5.792826
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 973063781272057715, guid: 3a09bcde966418e458aad6c358d0b655, type: 3}
       propertyPath: m_LocalPosition.y
@@ -5834,7 +5834,7 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 973063781272057610, guid: 3a09bcde966418e458aad6c358d0b655, type: 3}
   m_PrefabInstance: {fileID: 612734285}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1978394710
+--- !u!114 &1978394711
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5843,26 +5843,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1978394709}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2f562942d8268504584217a368fb1822, type: 3}
+  m_Script: {fileID: 11500000, guid: 43bc75d32ee80eb44bebe3a92d810064, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1978394720
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1978394709}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 31538fbf6dc33b4479237b48ab8444b8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemy: {fileID: 0}
-  foes: []
-  commandTmpl: {fileID: 0}
-  isSpecialActionComplete: 0
-  aiCycleDelay: 0
+  movementLocation: {x: 6, y: 0, z: 12}
 --- !u!1001 &1981870598
 PrefabInstance:
   m_ObjectHideFlags: 0
