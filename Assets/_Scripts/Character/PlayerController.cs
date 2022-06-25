@@ -75,6 +75,8 @@ public class PlayerController : MonoBehaviour
     
     private bool commandInQueue;
 
+    AIBrain aiBrain;
+
     [MethodImpl(MethodImplOptions.Synchronized)]
     public Command getCurrentCommand() { return currentCommand;}
 
@@ -291,7 +293,7 @@ public class PlayerController : MonoBehaviour
         anim = GetComponent<Animator>();
         marker = transform.Find("Marker").gameObject;
         commands = new Dictionary<int, Command>();
-
+        aiBrain = GetComponent<AIBrain>();
 
         for (int k = 0; k < commandList.Count; ++k)
         {
@@ -389,6 +391,11 @@ public class PlayerController : MonoBehaviour
     #endregion
 
     #region Commands
+
+    public void SetMoveLocation(Vector3 movementLocation)
+    {
+        aiBrain.SetMovementLocation(movementLocation);
+    }
 
     public CommandTemplate GetWeaponTemplateForCommand(int slot)
     {

@@ -70,6 +70,7 @@ public class PointAndClickController : MonoBehaviour
                 //TODO implement player controls to move over here
                 //Move command.
                 //GameManager.ActivateCommand(null, GameManager._currentPlayer.playerMetaData.moveLocation);
+                GameManager._currentPlayer.SetMoveLocation(GameManager._currentPlayer.playerMetaData.moveLocation);
             }
             else if (GameManager.playerSelected && "Enemy".Equals(hit.transform.gameObject.tag)
                 && !GameManager._currentPlayer.getCurrentCommand().isActivated)

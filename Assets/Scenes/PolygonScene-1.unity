@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0.99999905, b: 0.99999905, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1981,7 +1981,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 973063781272057610, guid: 3a09bcde966418e458aad6c358d0b655, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 973063781272057715, guid: 3a09bcde966418e458aad6c358d0b655, type: 3}
       propertyPath: m_RootOrder
@@ -2178,7 +2178,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6515731884704741384, guid: c42b0729f71d76741958c27d3bf91ae6, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6515731884704741385, guid: c42b0729f71d76741958c27d3bf91ae6, type: 3}
       propertyPath: m_RootOrder
@@ -3033,7 +3033,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6515731884704741384, guid: c42b0729f71d76741958c27d3bf91ae6, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6515731884704741385, guid: c42b0729f71d76741958c27d3bf91ae6, type: 3}
       propertyPath: m_RootOrder
@@ -3105,11 +3105,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6515731884704742386, guid: c42b0729f71d76741958c27d3bf91ae6, type: 3}
       propertyPath: fireChance
-      value: 1
+      value: 0.508
       objectReference: {fileID: 0}
     - target: {fileID: 6515731884704742386, guid: c42b0729f71d76741958c27d3bf91ae6, type: 3}
       propertyPath: coolDownDelay
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6515731884704742388, guid: c42b0729f71d76741958c27d3bf91ae6, type: 3}
       propertyPath: m_Enabled
@@ -3173,27 +3173,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8542869097668152417, guid: c42b0729f71d76741958c27d3bf91ae6, type: 3}
       propertyPath: m_ConnectedAnchor.x
-      value: -0.38923746
+      value: -0.3892374
       objectReference: {fileID: 0}
     - target: {fileID: 8542869097668152417, guid: c42b0729f71d76741958c27d3bf91ae6, type: 3}
       propertyPath: m_ConnectedAnchor.y
-      value: 0.005202565
+      value: 0.005202612
       objectReference: {fileID: 0}
     - target: {fileID: 8542869097668152417, guid: c42b0729f71d76741958c27d3bf91ae6, type: 3}
       propertyPath: m_ConnectedAnchor.z
-      value: 0.0015487673
+      value: 0.0015482819
       objectReference: {fileID: 0}
     - target: {fileID: 8542869097729179726, guid: c42b0729f71d76741958c27d3bf91ae6, type: 3}
       propertyPath: m_ConnectedAnchor.x
-      value: -0.36993656
+      value: -0.36993653
       objectReference: {fileID: 0}
     - target: {fileID: 8542869097729179726, guid: c42b0729f71d76741958c27d3bf91ae6, type: 3}
       propertyPath: m_ConnectedAnchor.y
-      value: -0.016411576
+      value: -0.016411694
       objectReference: {fileID: 0}
     - target: {fileID: 8542869097729179726, guid: c42b0729f71d76741958c27d3bf91ae6, type: 3}
       propertyPath: m_ConnectedAnchor.z
-      value: -0.000000011728844
+      value: 0.000000047875798
       objectReference: {fileID: 0}
     - target: {fileID: 8542869098230576086, guid: c42b0729f71d76741958c27d3bf91ae6, type: 3}
       propertyPath: m_ConnectedAnchor.x
@@ -3221,11 +3221,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8542869098438491229, guid: c42b0729f71d76741958c27d3bf91ae6, type: 3}
       propertyPath: m_ConnectedAnchor.y
-      value: 0.0056952564
+      value: 0.0056953756
       objectReference: {fileID: 0}
     - target: {fileID: 8542869098438491229, guid: c42b0729f71d76741958c27d3bf91ae6, type: 3}
       propertyPath: m_ConnectedAnchor.z
-      value: -0.00000044703484
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8542869098565756415, guid: c42b0729f71d76741958c27d3bf91ae6, type: 3}
       propertyPath: m_ConnectedAnchor.x
@@ -3257,11 +3257,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8542869098960512165, guid: c42b0729f71d76741958c27d3bf91ae6, type: 3}
       propertyPath: m_ConnectedAnchor.y
-      value: 0.008685304
+      value: 0.008685184
       objectReference: {fileID: 0}
     - target: {fileID: 8542869098960512165, guid: c42b0729f71d76741958c27d3bf91ae6, type: 3}
       propertyPath: m_ConnectedAnchor.z
-      value: -0.00429281
+      value: -0.0042928625
       objectReference: {fileID: 0}
     - target: {fileID: 8542869099048884285, guid: c42b0729f71d76741958c27d3bf91ae6, type: 3}
       propertyPath: m_ConnectedAnchor.x
@@ -5846,6 +5846,23 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 973063781272057610, guid: 3a09bcde966418e458aad6c358d0b655, type: 3}
   m_PrefabInstance: {fileID: 612734285}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1978394710
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1978394709}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df5e5c47721c55e48961590b38b6874a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemy: {fileID: 0}
+  foes: []
+  commandTmpl: {fileID: 0}
+  isSpecialActionComplete: 0
+  aiCycleDelay: 1
 --- !u!114 &1978394711
 MonoBehaviour:
   m_ObjectHideFlags: 0

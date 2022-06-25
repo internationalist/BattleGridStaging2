@@ -88,7 +88,7 @@ public class GameManager : MonoBehaviour
         
         if(playerController != null)
         {
-//            Debug.LogFormat("current player is {0}", _currentPlayer);
+            Debug.LogFormat("current player is {0}", _currentPlayer);
             if(_currentPlayer == null || _currentPlayer.ID != playerController.ID) //only play selection sound if a new character is selected.
             {
                 AudioManager.ShowSelctionUI();

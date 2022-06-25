@@ -56922,6 +56922,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemy: {fileID: 0}
   foes: []
+  commandTmpl: {fileID: 0}
+  isSpecialActionComplete: 0
   aiCycleDelay: 1
 --- !u!114 &3064799275050755884
 MonoBehaviour:
@@ -56935,9 +56937,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94763db6f66422441964101d196e5470, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  delay: 1
-  acquireCoverDelay: 0
-  movementDelay: 0
+  delay: 0.5
 --- !u!114 &6515731884704742390
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -56976,7 +56976,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fireChance: 1
-  coolDownDelay: 20
+  coolDownDelay: 3
   canRun: 0
 --- !u!114 &6515731884704742391
 MonoBehaviour:

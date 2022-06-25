@@ -56,7 +56,9 @@ public class AIAcquireCover : MonoBehaviour
             });
             for (int i = 0; i < coversBYClosest.Count; i++)
             {
-                dock = aiBrain.EvaluateCover(controller, aiBrain.enemy, coversBYClosest[i]);
+                dock = AIUtils.EvaluateCover(thisPlayer: controller,
+                                             enemy: aiBrain.enemy, thisCover : coversBYClosest[i],
+                                             foes : aiBrain.foes, commandMetaData : aiBrain.commandTmpl);
                 if (dock != null)
                 {
                     Debug.LogFormat("{0}: Moving to cover position {1}", name, dock.position);
