@@ -150,7 +150,9 @@ MonoBehaviour:
   ricochetEffects:
   - {fileID: 1342903106951141758, guid: e617e429c78cc1147a86d7f25764a7e5, type: 3}
   - {fileID: 3088086561818561513, guid: 86991083bf70246cab4905f681be4c36, type: 3}
-  damageReductionPct: 0.7
+  ID: 0
+  OFFSET: 1
+  damageReductionPct: 1
   coverType: 1
   coverRenderer:
   - {fileID: 6846454080690976820}
@@ -169,7 +171,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.005177, y: 2.0119061, z: 0.82586235}
+  m_Size: {x: 1.005177, y: 2.16, z: 0.82586235}
   m_Center: {x: 1.0176625, y: 2.8189874, z: -0.83836365}
 --- !u!1 &1626206264130538068
 GameObject:

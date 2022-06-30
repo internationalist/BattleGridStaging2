@@ -464,7 +464,6 @@ public class PlayerController : MonoBehaviour
                                     Command.OnCompleteCallback onComplete)
     {
         if((currentCommand.commandType == Command.type.move)
-            //|| currentCommand.commandType == Command.type.idle)
             && slot == GeneralUtils.MOVESLOT)//if current and requested commanmd is of move type. Immediately execute new move command.
         {
             ActivateCommand(slot, enemyTransform, destination, onComplete);

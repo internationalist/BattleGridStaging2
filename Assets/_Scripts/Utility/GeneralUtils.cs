@@ -343,6 +343,8 @@ public static class GeneralUtils {
         {
             foreach (RaycastHit hit in hits)
             {
+                CoverFramework cf = hit.transform.GetComponent<CoverFramework>();
+                Debug.LogFormat("{0} Evaluating {1}", command.playerController.name, cf.ID);
                 if (Mathf.Round(dirForCover.magnitude)
                     >= Mathf.Round(Vector3.Distance(command.playerController.transform.position, hit.point)))
                 {

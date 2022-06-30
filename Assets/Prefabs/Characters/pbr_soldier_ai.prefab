@@ -56852,7 +56852,7 @@ MonoBehaviour:
   isSelected: 0
   playerMetaData:
     hp: 0
-    maxHP: 200
+    maxHP: 100
     maxActionPoints: 10
     distanceToMove: 0
     movementRange: 10
@@ -56925,6 +56925,7 @@ MonoBehaviour:
   commandTmpl: {fileID: 0}
   isSpecialActionComplete: 0
   aiCycleDelay: 1
+  movementLocation: {x: 0, y: 0, z: 0}
 --- !u!114 &3064799275050755884
 MonoBehaviour:
   m_ObjectHideFlags: 0
